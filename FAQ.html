@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- मॉडिफिकेशन 1: SEO टैग्स को नए, सुरक्षित ब्रांड नाम और विवरण के साथ अपडेट किया गया है। -->
+    <title>FAQ - FamToolApp</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <meta name="description" content="Find answers to frequently asked questions about FamToolApp, including installation, features, security, and account management.">
+    <meta name="keywords" content="faq, frequently asked questions, famtoolapp, support, help, parental guidance">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- सीएसएस स्टाइल में कोई बदलाव नहीं किया गया है --- */
+        :root {
+            --color-purple-400: #a78bfa;
+            --color-purple-500: #8b5cf6;
+            --color-purple-600: #7c3aed;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --bg-dark: #0a0a1a;
+            --border-color: rgba(167, 223, 255, 0.1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--color-gray-300);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            box-sizing: border-box;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-white);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+        .logo span { color: var(--color-purple-400); }
+        .nav-desktop { display: none; }
+        @media (min-width: 1200px) {
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .nav-desktop a {
+            color: var(--color-gray-300);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 1rem 1.5rem;
+        }
+        .nav-desktop a:hover { color: var(--color-purple-400); }
+        .nav-desktop a.active-link {
+            color: var(--color-purple-400);
+            font-weight: 600;
+        }
+        #mobile-menu-button {
+            padding: 0.5rem;
+            color: var(--color-white);
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+        }
+        @media (min-width: 1200px) {
+            #mobile-menu-button { display: none; }
+        }
+        #mobile-menu { display: none; background-color: rgba(17, 24, 39, 0.95); }
+        #mobile-menu.is-open { display: block; }
+        #mobile-menu a {
+            display: block;
+            text-align: center;
+            padding: 0.75rem 0;
+            color: var(--color-white);
+            border-top: 1px solid var(--color-gray-800);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        #mobile-menu a.active-link { background-color: var(--color-purple-600); }
+        main { padding-top: 5rem; }
+        .hero-section {
+            position: relative;
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, var(--color-black), var(--bg-dark));
+            text-align: center;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.05;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        .hero-content h1 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: var(--color-white);
+            line-height: 1.2;
+        }
+        .hero-content p {
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-400);
+        }
+        .section { padding: 3rem 0; }
+        .faq-wrapper {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        .search-bar-wrapper { margin-bottom: 3rem; }
+        .search-bar { position: relative; }
+        #faq-search {
+            width: 100%;
+            padding: 1rem 3.5rem 1rem 3rem;
+            background-color: rgba(17, 24, 39, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            color: var(--color-white);
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s;
+        }
+        #faq-search::placeholder { color: var(--color-gray-500); }
+        #faq-search:focus {
+            border-color: var(--color-purple-500);
+            box-shadow: 0 0 0 2px var(--color-purple-500);
+        }
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        #faq-search-btn {
+            position: absolute;
+            top: 50%;
+            right: 0.5rem;
+            transform: translateY(-50%);
+            color: var(--color-gray-400);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+        #faq-search-btn:hover { color: var(--color-purple-400); }
+        .faq-item {
+            background: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-white);
+        }
+        .faq-question span {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        .faq-arrow {
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding: 0 1.5rem;
+            color: var(--color-gray-400);
+            line-height: 1.6;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        #no-results-message {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid var(--border-color);
+        }
+        #no-results-message h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+        #no-results-message p {
+            color: var(--color-gray-400);
+            margin-bottom: 1.5rem;
+        }
+        #no-results-message a {
+            display: inline-block;
+            background-color: var(--color-purple-600);
+            color: var(--color-white);
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        #no-results-message a:hover { background-color: #7c3aed; }
+        .hidden { display: none; }
+        .footer {
+            background-color: var(--color-black);
+            padding: 3rem 0;
+            color: var(--color-gray-400);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+        .footer-grid h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+        .footer-grid ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-grid ul li { margin-bottom: 0.5rem; }
+        .footer-grid a {
+            color: var(--color-gray-400);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-grid a:hover { color: var(--color-purple-400); }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--color-gray-800);
+            color: var(--color-gray-400);
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            background-color: var(--color-purple-500);
+            color: var(--color-white);
+        }
+        .social-icon svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-gray-800);
+            text-align: center;
+        }
+        .dropdown { position: relative; display: inline-block; padding: 1rem 0; }
+        .dropbtn { background: none; border: none; cursor: pointer; color: var(--color-gray-300); font-weight: 500; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 0 1.5rem; transition: color 0.3s; }
+        .dropbtn:hover { color: var(--color-purple-400); }
+        .dropdown-content { display: none; position: absolute; background-color: rgba(0, 0, 0, 0.95); min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 100; border-radius: 0.5rem; border: 1px solid var(--color-gray-800); margin-top: -1rem; left: 50%; transform: translateX(-50%); padding-top: 1rem; }
+        .dropdown-content a { color: var(--color-gray-300); padding: 12px 16px; text-decoration: none; display: block; text-align: left; white-space: nowrap; }
+        .dropdown-content a:hover { background-color: var(--color-purple-600); color: var(--color-white); }
+        .dropdown:hover .dropdown-content { display: block; }
+        @media (min-width: 768px) {
+            .container { max-width: 768px; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { font-size: 1.25rem; }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                text-align: left;
+            }
+            .social-icons { justify-content: flex-start; }
+            .footer-bottom { text-align: center; }
+        }
+        @media (min-width: 1024px) {
+            .container { max-width: 1024px; }
+            .logo { font-size: 1.875rem; }
+            #mobile-menu-button { display: none; }
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            #mobile-menu { display: none !important; }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (min-width: 1280px) { .container { max-width: 1280px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- मॉडिफिकेशन 2: लोगो का टेक्स्ट नए ब्रांड नाम "FamToolApp" से बदल दिया गया है। -->
+                <a href="index.html" class="logo"><span>Fam</span>ToolApp</a>
+                <nav class="nav-desktop">
+                    <a href="index.html">Home</a>
+                    <a href="Features.html">Features</a>
+                    <a href="Installation-Guide.html">Install Guide</a>
+                    <a href="Contact-Us.html">Contact</a>
+                    <div class="dropdown">
+                        <button class="dropbtn">More &#9662;</button>
+                        <div class="dropdown-content">
+                            <a href="Privacy-Policy.html">Privacy Policy</a>
+                            <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                            <a href="About-Us.html">About Us</a>
+                            <a href="FAQ.html" class="active-link">FAQ</a>
+                        </div>
+                    </div>
+                </nav>
+                <button id="mobile-menu-button">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            <div id="mobile-menu">
+                <a href="index.html">Home</a>
+                <a href="Features.html">Features</a>
+                <a href="Installation-Guide.html">Install Guide</a>
+                <a href="Privacy-Policy.html">Privacy Policy</a>
+                <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                <a href="Contact-Us.html">Contact</a>
+                <a href="About-Us.html">About Us</a>
+                <a href="FAQ.html"class="active-link">FAQ</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container hero-content">
+                <h1>Frequently Asked Questions</h1>
+                <!-- मॉडिफिकेशन 3: उपशीर्षक में ब्रांड का नाम बदला गया है। -->
+                <p>Have questions? We've got answers. Find the information you need about FamToolApp below.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container faq-wrapper">
+                <div class="search-bar-wrapper">
+                    <div class="search-bar">
+                        <div class="search-icon">
+                            <svg width="24" height="24" class="text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input type="text" id="faq-search" placeholder="Search for a question...">
+                        <button id="faq-search-btn" aria-label="Search">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- मॉडिफिकेशन 4: सभी प्रश्नों और उत्तरों की भाषा को सुरक्षित बनाया गया है। -->
+                <div id="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is FamToolApp completely free to use?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, all core features of FamToolApp are completely free. We believe every parent should have access to essential tools for their child's digital safety without any financial burden. We may offer optional premium features in the future, but our core safety services will always remain free.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Why is it recommended to adjust Google Play Protect settings?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>FamToolApp uses advanced safety features that require specific permissions to function correctly. Because it's a powerful guidance tool not available on the Play Store, Google Play Protect may sometimes flag it. Adjusting the settings temporarily during installation ensures that the app can be installed and set up correctly without interference.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is my login and dashboard secure?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely. Your security is paramount. All data is protected by end-to-end encryption. The only way to access the activity data is by logging into your parent dashboard with your unique email and password. No one else, including our staff, can view your data.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I manage multiple devices from one account?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, you can add and manage multiple children's devices under a single parent account. Simply repeat the installation process on each new device using your existing login credentials. You can then switch between devices from your dashboard.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What happens if the target phone reboots or loses internet?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The app is designed to automatically restart after the phone reboots. If the internet connection is lost, the app will continue to collect data locally. Once the internet connection is restored, it will upload all the collected data to your dashboard.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do I need to allow all permissions for the app to work?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. For the app to function correctly and provide all safety features, it is crucial to grant all requested permissions during the setup process. Failing to do so will result in certain features not working or the app failing to report data. Our system may even close the account if the setup is incomplete.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What should I do if the app stops working after a few days?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>This can sometimes happen if the phone's operating system or a battery-saving app closes FamToolApp. Please ensure that you have followed all installation steps, especially disabling battery optimization for our app on the target device. If the problem persists, please contact our support team.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I uninstall the app and delete all data?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. You can delete the child's profile from your parent dashboard. When you do this, our system automatically and instantly deletes all associated data from our servers in real-time. You can then uninstall the application from the child's device.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How can I contact support?</span>
+                            <svg class="faq-arrow" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>If you have any issues or questions that are not answered here, you can reach our support team by visiting the "Contact" page on our website or by sending an email directly to our support address mentioned there.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="no-results-message" class="hidden">
+                    <h3>No results found</h3>
+                    <p>We couldn't find an answer to your question. Please try a different search term or contact our support team for assistance.</p>
+                    <a href="Contact-Us.html">Contact Support</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- मॉडिफिकेशन 5: फुटर में ब्रांड का नाम बदला गया है। -->
+                <div>
+                    <h4>FamToolApp</h4>
+                    <p>Providing parents with the tools they need to ensure their children's digital safety.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="Installation-Guide.html">Install Guide</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="Privacy-Policy.html">Privacy Policy</a></li>
+                        <li><a href="Terms-and-Conditions.html">Terms and Conditions</a></li>
+                        <li><a href="Contact-Us.html">Contact</a></li>
+                        <li><a href="#YOUR_SITEMAP_URL">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/famtoolapp/" class="social-icon" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="https://x.com/famtoolapp" class="social-icon" aria-label="X/Twitter"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                        <a href="https://www.instagram.com/famtoolapp" class="social-icon" aria-label="Instagram"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44c0-.795-.645-1.44-1.441-1.44z"/></svg></a>
+                        <a href="https://www.youtube.com/@famtoolapp" class="social-icon" aria-label="YouTube"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M21.582 6.186a2.694 2.694 0 0 0-1.886-1.886C17.93 4 12 4 12 4s-5.93 0-7.696.299a2.694 2.694 0 0 0-1.886 1.886C2 7.95 2 12 2 12s0 4.05.318 5.814a2.694 2.694 0 0 0 1.886 1.886C6.07 20 12 20 12 20s5.93 0 7.696-.299a2.694 2.694 0 0 0 1.886-1.886C22 16.05 22 12 22 12s0-4.05-.418-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FamToolApp. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('is-open');
+            });
+
+            const faqContainer = document.getElementById('faq-container');
+            faqContainer.addEventListener('click', function(e) {
+                const questionButton = e.target.closest('.faq-question');
+                if (!questionButton) return;
+
+                const faqItem = questionButton.parentElement;
+                
+                if (faqItem.classList.contains('open')) {
+                    faqItem.classList.remove('open');
+                } else {
+                    faqContainer.querySelectorAll('.faq-item.open').forEach(openItem => {
+                        openItem.classList.remove('open');
+                    });
+                    faqItem.classList.add('open');
+                }
+            });
+
+            const searchInput = document.getElementById('faq-search');
+            const searchButton = document.getElementById('faq-search-btn');
+            const faqItems = faqContainer.querySelectorAll('.faq-item');
+            const noResultsMessage = document.getElementById('no-results-message');
+
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                let visibleItems = 0;
+
+                faqItems.forEach(item => {
+                    const questionText = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answerText = item.querySelector('.faq-answer p').textContent.toLowerCase();
+
+                    if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        visibleItems++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (visibleItems === 0 && searchTerm.length > 0) {
+                    noResultsMessage.classList.remove('hidden');
+                } else {
+                    noResultsMessage.classList.add('hidden');
+                }
+            }
+            
+            searchInput.addEventListener('input', performSearch);
+            searchButton.addEventListener('click', performSearch);
+        });
+    </script>
+</body>
+</html>

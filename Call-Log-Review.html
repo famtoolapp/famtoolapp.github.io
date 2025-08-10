@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Call Log Review Feature - FamToolApp</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <meta name="description" content="Review your child's call history with FamToolApp. See incoming, outgoing, and missed calls, including contact names, numbers, and call durations for their safety.">
+    <meta name="keywords" content="call log review, call history, parental guidance, famtoolapp, child safety">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-purple-400: #a78bfa;
+            --color-purple-500: #8b5cf6;
+            --color-purple-600: #7c3aed;
+            --color-green-400: #4ade80;
+            --color-blue-400: #60a5fa;
+            --color-red-500: #ef4444;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-800: #1f2937;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --bg-dark: #0a0a1a;
+            --surface-color: rgba(17, 24, 39, 0.5);
+            --border-color: rgba(167, 223, 255, 0.1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--color-gray-300);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            box-sizing: border-box;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transition: all 0.3s ease-in-out;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-white);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+        .logo span { color: var(--color-purple-400); }
+        .nav-desktop { display: none; }
+        @media (min-width: 1200px) {
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .nav-desktop a {
+            color: var(--color-gray-300);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 1rem 1.5rem;
+        }
+        .nav-desktop a:hover { color: var(--color-purple-400); }
+        .nav-desktop a.active-link {
+            color: var(--color-purple-400);
+            font-weight: 600;
+        }
+        #mobile-menu-button {
+            padding: 0.5rem;
+            color: var(--color-white);
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+        }
+        @media (min-width: 1200px) {
+            #mobile-menu-button { display: none; }
+        }
+        #mobile-menu { display: none; background-color: rgba(17, 24, 39, 0.95); }
+        #mobile-menu.is-open { display: block; }
+        #mobile-menu a {
+            display: block;
+            text-align: center;
+            padding: 0.75rem 0;
+            color: var(--color-white);
+            border-top: 1px solid var(--color-gray-800);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        #mobile-menu a:hover { background-color: var(--color-purple-600); }
+        #mobile-menu a.active-link { background-color: var(--color-purple-600); }
+        main { padding-top: 5rem; }
+        .hero-section {
+            position: relative;
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, var(--color-black), var(--bg-dark));
+            text-align: center;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.05;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        .hero-content h1 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: var(--color-white);
+            line-height: 1.2;
+        }
+        .hero-content h1 span { color: var(--color-purple-400); }
+        .hero-content p {
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-400);
+        }
+        .section { padding: 3rem 0; }
+        .section-dark { background-color: rgba(0,0,0,0.2); }
+        .grid {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+        .feature-description h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+        .feature-description p {
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-400);
+            line-height: 1.6;
+        }
+        .feature-description .cta-button {
+            margin-top: 2rem;
+            display: inline-block;
+            background-color: var(--color-purple-600);
+            color: var(--color-white);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .feature-description .cta-button:hover { background-color: #7c3aed; }
+        
+        /* --- नया कोड-आधारित कॉल लॉग विज़ुअलाइज़ेशन स्टाइल --- */
+        .feature-visualization-call-log {
+            background: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.15);
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .call-log-header {
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .call-log-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--color-white);
+            font-weight: 600;
+        }
+        .call-log-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .call-log-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        .call-log-item:nth-child(1) { animation-delay: 0.2s; }
+        .call-log-item:nth-child(2) { animation-delay: 0.4s; }
+        .call-log-item:nth-child(3) { animation-delay: 0.6s; }
+        .call-log-item:nth-child(4) { animation-delay: 0.8s; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .call-icon {
+            flex-shrink: 0;
+        }
+        .call-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        .icon-incoming { color: var(--color-green-400); }
+        .icon-outgoing { color: var(--color-blue-400); transform: rotate(90deg); }
+        .icon-missed { color: var(--color-red-500); }
+        .call-details {
+            flex-grow: 1;
+        }
+        .call-details p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-white);
+        }
+        .call-details span {
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+        }
+        .call-time {
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+            white-space: nowrap;
+        }
+        /* --- अंत नया विज़ुअलाइज़ेशन स्टाइल --- */
+        
+        .benefits-section .section-title {
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto 3rem auto;
+        }
+        .card {
+            background: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+        .card-icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1rem auto;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 9999px;
+            background: linear-gradient(145deg, var(--color-purple-500), var(--color-purple-600));
+        }
+        .card-icon-wrapper svg {
+            width: 2rem;
+            height: 2rem;
+            color: var(--color-white);
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+        .card p {
+            margin-top: 0.5rem;
+            color: var(--color-gray-400);
+        }
+        .footer {
+            background-color: var(--color-black);
+            padding: 3rem 0;
+            color: var(--color-gray-400);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+        .footer-grid h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+        .footer-grid ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-grid ul li { margin-bottom: 0.5rem; }
+        .footer-grid a {
+            color: var(--color-gray-400);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-grid a:hover { color: var(--color-purple-400); }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--color-gray-800);
+            color: var(--color-gray-400);
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            background-color: var(--color-purple-500);
+            color: var(--color-white);
+        }
+        .social-icon svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-gray-800);
+            text-align: center;
+        }
+        .dropdown { position: relative; display: inline-block; padding: 1rem 0; }
+        .dropbtn { background: none; border: none; cursor: pointer; color: var(--color-gray-300); font-weight: 500; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 0 1.5rem; transition: color 0.3s; }
+        .dropbtn:hover { color: var(--color-purple-400); }
+        .dropdown-content { display: none; position: absolute; background-color: rgba(0, 0, 0, 0.95); min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 100; border-radius: 0.5rem; border: 1px solid var(--color-gray-800); margin-top: -1rem; left: 50%; transform: translateX(-50%); padding-top: 1rem; }
+        .dropdown-content a { color: var(--color-gray-300); padding: 12px 16px; text-decoration: none; display: block; text-align: left; white-space: nowrap; }
+        .dropdown-content a:hover { background-color: var(--color-purple-600); color: var(--color-white); }
+        .dropdown:hover .dropdown-content { display: block; }
+        @media (min-width: 768px) {
+            .container { max-width: 768px; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { font-size: 1.25rem; }
+            .benefits-section .grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                text-align: left;
+            }
+            .social-icons { justify-content: flex-start; }
+            .footer-bottom { text-align: center; }
+        }
+        @media (min-width: 1024px) {
+            .container { max-width: 1024px; }
+            .logo { font-size: 1.875rem; }
+            #mobile-menu-button { display: none; }
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            #mobile-menu { display: none !important; }
+            .grid-lg-2 { grid-template-columns: repeat(2, 1fr); }
+            .benefits-section .grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+            .feature-description { text-align: left; }
+        }
+        @media (min-width: 1280px) { .container { max-width: 1280px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo"><span>Fam</span>ToolApp</a>
+                <nav class="nav-desktop">
+                   <a href="index.html">Home</a>
+                    <a href="Features.html" class="active-link">Features</a>
+                    <a href="Installation-Guide.html">Install Guide</a>
+                    <a href="Contact-Us.html">Contact</a>
+                    <div class="dropdown">
+                        <button class="dropbtn">More &#9662;</button>
+                        <div class="dropdown-content">
+                            <a href="Privacy-Policy.html">Privacy Policy</a>
+                            <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                            <a href="About-Us.html">About Us</a>
+                            <a href="FAQ.html">FAQ</a>
+                        </div>
+                    </div>
+                </nav>
+                <button id="mobile-menu-button">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            <div id="mobile-menu">
+                <a href="index.html">Home</a>
+                <a href="Features.html" class="active-link">Features</a>
+                <a href="Installation-Guide.html">Install Guide</a>
+                <a href="Privacy-Policy.html">Privacy Policy</a>
+                <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                <a href="Contact-Us.html">Contact</a>
+                <a href="About-Us.html">About Us</a>
+                <a href="FAQ.html">FAQ</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container hero-content">
+                <h1>Call Log <span>Review</span></h1>
+                <p>Get a complete overview of your child's call history. See incoming, outgoing, and missed calls to ensure they are communicating safely.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-lg-2">
+                    <div class="feature-description">
+                        <h2>A Clear Picture of Every Conversation</h2>
+                        <p>Understanding who your child communicates with is essential for their safety. FamToolApp's Call Log Review feature provides a detailed record of all phone calls, including contact names, phone numbers, call duration, and the exact time and date of each call. This empowers you to identify any communication with unknown or suspicious contacts and start important conversations about phone safety.</p>
+                        <a href="index.html" class="cta-button">Start Protecting Now</a>
+                    </div>
+                    
+                    <!-- इमेज टैग को नए कोड-आधारित विज़ुअलाइज़ेशन से बदला गया है -->
+                    <div class="feature-visualization-call-log">
+                        <div class="call-log-header">
+                            <h3>Recent Calls</h3>
+                        </div>
+                        <div class="call-log-list">
+                            <div class="call-log-item">
+                                <div class="call-icon icon-incoming">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+                                </div>
+                                <div class="call-details">
+                                    <p>Sarah</p>
+                                    <span>Incoming (2m 15s)</span>
+                                </div>
+                                <div class="call-time">10:45 AM</div>
+                            </div>
+                            <div class="call-log-item">
+                                <div class="call-icon icon-outgoing">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+                                </div>
+                                <div class="call-details">
+                                    <p>+1-987-658-3210</p>
+                                    <span>Outgoing (5m 30s)</span>
+                                </div>
+                                <div class="call-time">10:32 AM</div>
+                            </div>
+                            <div class="call-log-item">
+                                <div class="call-icon icon-missed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+                                </div>
+                                <div class="call-details">
+                                    <p>David</p>
+                                    <span>Missed Call</span>
+                                </div>
+                                <div class="call-time">9:15 AM</div>
+                            </div>
+                             <div class="call-log-item">
+                                <div class="call-icon icon-incoming">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+                                </div>
+                                <div class="call-details">
+                                    <p>Mom</p>
+                                    <span>Incoming (10m 5s)</span>
+                                </div>
+                                <div class="call-time">Yesterday</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section section-dark benefits-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Key Benefits of Call Log Review</h2>
+                    <p>Gain crucial insights to ensure you have the complete context to guide your child safely.</p>
+                </div>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon-wrapper">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                        </div>
+                        <h3>Identify Unknown Contacts</h3>
+                        <p>Easily see if your child is in contact with strangers or unapproved numbers. Protect them from potential scams and inappropriate conversations.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon-wrapper">
+                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3>Understand Communication Patterns</h3>
+                        <p>Review call durations and frequency to understand your child's communication habits and identify any concerning patterns or changes in behavior.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon-wrapper">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <h3>A Complete Record</h3>
+                        <p>Access a full history of all calls, including those that may have been deleted from the phone's native call log, ensuring you always have the full story.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>FamToolApp</h4>
+                    <p>Providing parents with the tools they need to ensure their children's digital safety.</p>
+                </div>
+                <div>
+                   <h4>Quick Links</h4>
+                    <ul>
+                        
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="Installation-Guide.html">Install Guide</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                     <ul>
+                        
+                        <li><a href="Privacy-Policy.html">Privacy Policy</a></li>
+                        <li><a href="Terms-and-Conditions.html">Terms and Conditions</a></li>
+                        <li><a href="Contact-Us.html">Contact</a></li>
+                        <li><a href="#YOUR_SITEMAP_URL">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/famtoolapp/" class="social-icon" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="https://x.com/famtoolapp" class="social-icon" aria-label="X/Twitter"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                        <a href="https://www.instagram.com/famtoolapp" class="social-icon" aria-label="Instagram"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44c0-.795-.645-1.44-1.441-1.44z"/></svg></a>
+                        <a href="https://www.youtube.com/@famtoolapp" class="social-icon" aria-label="YouTube"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M21.582 6.186a2.694 2.694 0 0 0-1.886-1.886C17.93 4 12 4 12 4s-5.93 0-7.696.299a2.694 2.694 0 0 0-1.886 1.886C2 7.95 2 12 2 12s0 4.05.318 5.814a2.694 2.694 0 0 0 1.886 1.886C6.07 20 12 20 12 20s5.93 0 7.696-.299a2.694 2.694 0 0 0 1.886-1.886C22 16.05 22 12 22 12s0-4.05-.418-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FamToolApp. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('is-open');
+            });
+        });
+    </script>
+</body>
+</html>

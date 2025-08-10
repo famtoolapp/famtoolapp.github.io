@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- मॉडिफिकेशन 1: SEO टैग्स को नए, सुरक्षित ब्रांड नाम और विवरण के साथ अपडेट किया गया है। -->
+    <title>About Us - FamToolApp</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <meta name="description" content="Learn about the mission, story, and team behind FamToolApp. We are dedicated to providing parents with the best tools for digital safety.">
+    <meta name="keywords" content="about us, famtoolapp, our mission, our team, parental guidance, family safety">
+
+    <!-- Google Fonts से 'Inter' फ़ॉन्ट लोड हो रहा है -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- सीएसएस स्टाइल में कोई बदलाव नहीं किया गया है --- */
+        :root {
+            --color-purple-400: #a78bfa;
+            --color-purple-500: #8b5cf6;
+            --color-purple-600: #7c3aed;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --bg-dark: #0a0a1a;
+            --border-color: rgba(167, 223, 255, 0.1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--color-gray-300);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            box-sizing: border-box;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transition: all 0.3s ease-in-out;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-white);
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+        .logo span { color: var(--color-purple-400); }
+        .nav-desktop { display: none; }
+        @media (min-width: 1200px) {
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+            }
+        }
+        .nav-desktop a {
+            color: var(--color-gray-300);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 1rem 1.5rem;
+        }
+        .nav-desktop a:hover { color: var(--color-purple-400); }
+        .nav-desktop a.active-link {
+            color: var(--color-purple-400);
+            font-weight: 600;
+        }
+        #mobile-menu-button {
+            padding: 0.5rem;
+            color: var(--color-white);
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: block;
+        }
+        @media (min-width: 1200px) {
+            #mobile-menu-button { display: none; }
+        }
+        #mobile-menu { display: none; background-color: rgba(17, 24, 39, 0.95); }
+        #mobile-menu.is-open { display: block; }
+        #mobile-menu a {
+            display: block;
+            text-align: center;
+            padding: 0.75rem 0;
+            color: var(--color-white);
+            border-top: 1px solid var(--color-gray-800);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        #mobile-menu a:hover { background-color: var(--color-purple-600); }
+        #mobile-menu a.active-link { background-color: var(--color-purple-600); }
+        main { padding-top: 5rem; }
+        .hero-section {
+            position: relative;
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, var(--color-black), var(--bg-dark));
+            text-align: center;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.05;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        .hero-content h1 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: var(--color-white);
+            line-height: 1.2;
+        }
+        .hero-content p {
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-400);
+        }
+        .section { padding: 3rem 0; }
+        .section-dark { background-color: rgba(0,0,0,0.2); }
+        .section-title {
+            text-align: center;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+        .section-title h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+        .section-title p {
+            margin-top: 1rem;
+            font-size: 1.125rem;
+            color: var(--color-gray-400);
+        }
+        .grid { display: grid; gap: 2rem; }
+        .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+        .mission-cards { margin-top: 3rem; }
+        .card {
+            background: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+        .card-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .card-icon svg {
+            width: 3rem;
+            height: 3rem;
+            color: var(--color-purple-400);
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+        .card p {
+            margin-top: 0.5rem;
+            color: var(--color-gray-400);
+        }
+        .timeline { max-width: 42rem; margin: 3rem auto 0 auto; }
+        .timeline-wrapper { position: relative; }
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: 3rem;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 4px;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            position: absolute;
+            left: 10px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--color-purple-500);
+            border: 4px solid var(--bg-dark);
+        }
+        .timeline-item h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-purple-400);
+        }
+        .timeline-item p { margin-top: 0.5rem; }
+        .team-grid { margin-top: 3rem; }
+        .team-member { text-align: center; }
+        .team-member img {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 9999px;
+            margin: 0 auto 1rem auto;
+            border: 4px solid rgba(167, 139, 250, 0.5);
+            object-fit: cover;
+        }
+        .team-member h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+        .team-member p { color: var(--color-purple-400); }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .footer {
+            background-color: var(--color-black);
+            padding: 3rem 0;
+            color: var(--color-gray-400);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+        .footer-grid h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+        .footer-grid ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-grid ul li { margin-bottom: 0.5rem; }
+        .footer-grid a {
+            color: var(--color-gray-400);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-grid a:hover { color: var(--color-purple-400); }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--color-gray-800);
+            color: var(--color-gray-400);
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            background-color: var(--color-purple-500);
+            color: var(--color-white);
+        }
+        .social-icon svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-gray-800);
+            text-align: center;
+        }
+        .dropdown { position: relative; display: inline-block; padding: 1rem 0; }
+        .dropbtn { background: none; border: none; cursor: pointer; color: var(--color-gray-300); font-weight: 500; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 0 1.5rem; transition: color 0.3s; }
+        .dropbtn:hover { color: var(--color-purple-400); }
+        .dropdown-content { display: none; position: absolute; background-color: rgba(0, 0, 0, 0.95); min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 100; border-radius: 0.5rem; border: 1px solid var(--color-gray-800); margin-top: -1rem; left: 50%; transform: translateX(-50%); padding-top: 1rem; }
+        .dropdown-content a { color: var(--color-gray-300); padding: 12px 16px; text-decoration: none; display: block; text-align: left; white-space: nowrap; }
+        .dropdown-content a:hover { background-color: var(--color-purple-600); color: var(--color-white); }
+        .dropdown:hover .dropdown-content { display: block; }
+        @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 768px) {
+            .container { max-width: 768px; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { font-size: 1.25rem; }
+            .section-title h2 { font-size: 2.25rem; }
+            .mission-cards { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                text-align: left;
+            }
+            .social-icons { justify-content: flex-start; }
+        }
+        @media (min-width: 1024px) {
+            .container { max-width: 1024px; }
+            .logo { font-size: 1.875rem; }
+            #mobile-menu-button { display: none; }
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            #mobile-menu { display: none !important; }
+            .team-grid { grid-template-columns: repeat(4, 1fr); }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (min-width: 1280px) { .container { max-width: 1280px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- मॉडिफिकेशन 2: लोगो का टेक्स्ट नए ब्रांड नाम "FamToolApp" से बदल दिया गया है। -->
+                <a href="index.html" class="logo">
+                    <span class="text-purple-400">Fam</span>ToolApp
+                </a>
+                
+                <nav class="nav-desktop">
+                    <a href="index.html">Home</a>
+                    <a href="Features.html">Features</a>
+                    <a href="Installation-Guide.html">Install Guide</a>
+                    <a href="Contact-Us.html">Contact</a>
+                    <div class="dropdown">
+                        <button class="dropbtn">More &#9662;</button>
+                        <div class="dropdown-content">
+                            <a href="Privacy-Policy.html">Privacy Policy</a>
+                            <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                            <a href="About-Us.html" class="active-link">About Us</a>
+                            <a href="FAQ.html">FAQ</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <button id="mobile-menu-button">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            
+            <div id="mobile-menu">
+                <a href="index.html">Home</a>
+                <a href="Features.html">Features</a>
+                <a href="Installation-Guide.html">Install Guide</a>
+                <a href="Privacy-Policy.html">Privacy Policy</a>
+                <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                <a href="Contact-Us.html">Contact</a>
+                <a href="About-Us.html"class="active-link">About Us</a>
+                <a href="FAQ.html">FAQ</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container hero-content">
+                <!-- मॉडिफिकेशन 3: शीर्षक में ब्रांड का नाम बदला गया है। -->
+                <h1>About <span>FamToolApp</span></h1>
+                <p>We are a team of passionate developers and concerned parents dedicated to creating a safer digital world for children.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2 class="fade-in-up">Our Mission</h2>
+                    <p class="fade-in-up" data-delay="100">Our goal is to empower parents with powerful, easy-to-use tools that provide peace of mind. We believe in fostering open communication between parents and children, and our technology is designed to support that relationship by ensuring online safety without compromising trust.</p>
+                </div>
+
+                <div class="grid mission-cards">
+                    <div class="card fade-in-up" data-delay="200">
+                        <div class="card-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3>Security First</h3>
+                        <p>Protecting your family's data with military-grade encryption is our core principle.</p>
+                    </div>
+                    <div class="card fade-in-up" data-delay="300">
+                        <div class="card-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3>Empowerment</h3>
+                        <p>We provide you with the insights you need to guide your children through the digital landscape.</p>
+                    </div>
+                    <div class="card fade-in-up" data-delay="400">
+                        <div class="card-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V7a2 2 0 012-2h2m8-4H5a2 2 0 00-2 2v10a2 2 0 002 2h11l4 4V7a2 2 0 00-2-2z"></path></svg>
+                        </div>
+                        <h3>Building Trust</h3>
+                        <p>Our tools are designed to be a bridge for communication, not a wall of secrecy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-dark">
+            <div class="container">
+                <div class="section-title">
+                    <h2 class="fade-in-up">Our Story</h2>
+                    <p class="fade-in-up" data-delay="100">From a simple idea to a trusted global service, our journey has always been driven by the need for a better, safer digital environment for our kids.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-wrapper">
+                        <!-- मॉडिफिकेशन 4: कहानी में ब्रांड का नाम बदला गया है। -->
+                        <div class="timeline-item fade-in-up">
+                            <div class="timeline-dot"></div>
+                            <h3>2023 - The Idea</h3>
+                            <p>A group of parents and tech enthusiasts realized the existing parental guidance solutions were either too complex, too expensive, or not secure enough. The concept of FamToolApp was born.</p>
+                        </div>
+                        <div class="timeline-item fade-in-up">
+                            <div class="timeline-dot"></div>
+                            <h3>2024 - Development & Alpha</h3>
+                            <p>An intense year of development focused on creating a robust, secure, and user-friendly platform. We launched our first alpha version with a small group of trusted families for feedback.</p>
+                        </div>
+                        <div class="timeline-item fade-in-up">
+                            <div class="timeline-dot"></div>
+                            <h3>2025 - Public Launch</h3>
+                            <p>FamToolApp was officially launched to the public. Our commitment to providing a powerful free service resonated with parents worldwide, and our user base grew rapidly.</p>
+                        </div>
+                        <div class="timeline-item fade-in-up">
+                            <div class="timeline-dot"></div>
+                            <h3>Today & Beyond</h3>
+                            <p>We continue to innovate, adding new features and strengthening our security based on user feedback. Our mission remains the same: to provide the best digital safety tool for families everywhere.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2 class="fade-in-up">Meet the Team</h2>
+                    <p class="fade-in-up" data-delay="100">We are a diverse team of experts united by a common goal.</p>
+                </div>
+                <div class="grid team-grid">
+                    <div class="team-member fade-in-up" data-delay="200">
+                        <img src="images/Head of Security.png" alt="Team Member 1">
+                        <h3>Alex Johnson</h3>
+                        <p>Founder & CEO</p>
+                    </div>
+                    <div class="team-member fade-in-up" data-delay="300">
+                        <img src="images/Lead Developer.png" alt="Team Member 2">
+                        <h3>Maria Garcia</h3>
+                        <p>Lead Developer</p>
+                    </div>
+                    <div class="team-member fade-in-up" data-delay="400">
+                        <img src="images/Founder & CEO.png" alt="Team Member 3">
+                        <h3>David Chen</h3>
+                        <p>Head of Security</p>
+                    </div>
+                    <div class="team-member fade-in-up" data-delay="500">
+                        <img src="images/UI Designer.png" alt="Team Member 4">
+                        <h3>Sarah Lee</h3>
+                        <p>UX/UI Designer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- मॉडिफिकेशन 5: फुटर में ब्रांड का नाम बदला गया है। -->
+                <div>
+                    <h4>FamToolApp</h4>
+                    <p>Providing parents with the tools they need to ensure their children's digital safety.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="Features.html">Features</a></li>
+                        <li><a href="Installation-Guide.html">Install Guide</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="About-Us.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                     <ul>
+                        
+                        <li><a href="Privacy-Policy.html">Privacy Policy</a></li>
+                        <li><a href="Terms-and-Conditions.html">Terms and Conditions</a></li>
+                        <li><a href="Contact-Us.html">Contact</a></li>
+                        <li><a href="#YOUR_SITEMAP_URL">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/famtoolapp/" class="social-icon" aria-label="Facebook"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="https://x.com/famtoolapp" class="social-icon" aria-label="X/Twitter"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                        <a href="https://www.instagram.com/famtoolapp" class="social-icon" aria-label="Instagram"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44c0-.795-.645-1.44-1.441-1.44z"/></svg></a>
+                        <a href="https://www.youtube.com/@famtoolapp" class="social-icon" aria-label="YouTube"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M21.582 6.186a2.694 2.694 0 0 0-1.886-1.886C17.93 4 12 4 12 4s-5.93 0-7.696.299a2.694 2.694 0 0 0-1.886 1.886C2 7.95 2 12 2 12s0 4.05.318 5.814a2.694 2.694 0 0 0 1.886 1.886C6.07 20 12 20 12 20s5.93 0 7.696-.299a2.694 2.694 0 0 0 1.886-1.886C22 16.05 22 12 22 12s0-4.05-.418-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FamToolApp. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // मोबाइल मेनू
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('is-open');
+            });
+
+            // स्क्रॉल पर एनिमेशन
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        const delay = entry.target.getAttribute('data-delay');
+                        if(delay) {
+                            entry.target.style.transitionDelay = delay + 'ms';
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+
+</body>
+</html>

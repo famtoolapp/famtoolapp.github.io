@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Download & Install Guide - FamToolApp</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <meta name="description" content="Follow our clear guide to download, install, and configure FamToolApp on the target device for child safety and parental guidance.">
+    <meta name="keywords" content="download famtoolapp, install guide, parental guidance apk, family safety app">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- सीएसएस स्टाइल में कोई बदलाव नहीं किया गया है --- */
+        :root {
+            --color-purple-400: #a78bfa;
+            --color-purple-500: #8b5cf6;
+            --color-purple-600: #7c3aed;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --bg-dark: #0a0a1a;
+        }
+        html { box-sizing: border-box; scroll-behavior: smooth; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: #e0e0e0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin: 0; }
+        a { text-decoration: none; }
+        .container { width: 100%; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+        @media (min-width: 640px) { .container { max-width: 640px; } }
+        @media (min-width: 768px) { .container { max-width: 768px; } }
+        @media (min-width: 1024px) { .container { max-width: 1024px; } }
+        @media (min-width: 1280px) { .container { max-width: 1280px; } }
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: all 0.3s ease; }
+        .header.scrolled { background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; padding-bottom: 1rem; }
+        .logo { font-size: 1.5rem; line-height: 2rem; font-weight: 900; color: var(--color-white); letter-spacing: 0.05em; flex-shrink: 0; }
+        @media (min-width: 1024px) { .logo { font-size: 1.875rem; line-height: 2.25rem; } }
+        .logo span { color: var(--color-purple-400); }
+        .main-nav { display: none; }
+        @media (min-width: 1200px) { .main-nav { display: flex; align-items: center; } }
+        .main-nav a { margin-left: 1.5rem; color: var(--color-gray-300); font-weight: 500; transition: color 0.3s; white-space: nowrap; }
+        .main-nav a:hover { color: var(--color-purple-400); }
+        #mobile-menu-button { display: block; color: var(--color-white); background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        @media (min-width: 1200px) { #mobile-menu-button { display: none; } }
+        #mobile-menu { display: none; background-color: rgba(0, 0, 0, 0.95); position: absolute; top: 100%; left: 0; width: 100%; }
+        #mobile-menu.show { display: block; }
+        #mobile-menu a { display: block; text-align: center; padding: 1rem 0; color: var(--color-white); transition: background-color 0.3s; border-top: 1px solid var(--color-gray-800); }
+        #mobile-menu a:hover { background-color: var(--color-purple-600); }
+        .btn-3d { position: relative; display: inline-block; background: linear-gradient(145deg, var(--color-purple-500), #6366f1); color: white; border: none; border-radius: 9999px; padding: 1rem 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transform-style: preserve-3d; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, opacity 0.3s ease; box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2), 0 0 0 2px var(--bg-dark), 0 0 0 4px var(--color-purple-500); white-space: nowrap; }
+        .btn-3d:hover:not(:disabled) { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3), 0 0 0 2px var(--bg-dark), 0 0 0 4px var(--color-purple-400); }
+        .btn-3d:disabled { background: var(--color-gray-800); color: var(--color-gray-500); cursor: not-allowed; box-shadow: none; opacity: 0.5; }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        .svg-icon { width: 1.5rem; height: 1.5rem; stroke-width: 2; }
+        .page-header-bg { min-height: 60vh; display: flex; align-items: center; justify-content: center; padding-top: 5rem; background: linear-gradient(-45deg, #0a0a1a, #1a0a1a, #0a1a1a, #1a1a0a); background-size: 400% 400%; animation: gradientBG 15s ease infinite; position: relative; overflow: hidden; text-align: center; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .page-header-bg::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.5; }
+        .page-title { font-size: 3rem; line-height: 1.1; font-weight: 900; color: var(--color-white); }
+        @media (min-width: 768px) { .page-title { font-size: 4.5rem; } }
+        .page-title span { color: var(--color-purple-400); }
+        .section-subtitle { font-size: 1.125rem; line-height: 1.75rem; color: var(--color-gray-400); margin-top: 1rem; max-width: 42rem; margin-left: auto; margin-right: auto; }
+        .download-section { padding: 5rem 0; }
+        @media (min-width: 640px) { .download-section { padding: 6rem 0; } }
+        .guide-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .guide-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .guide-header .icon {
+            color: var(--color-purple-400);
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 1rem;
+        }
+        .guide-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin: 0;
+        }
+        .guide-content p {
+            color: var(--color-gray-400);
+            line-height: 1.7;
+            font-size: 1.125rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+        }
+        .guide-content strong { color: var(--color-gray-300); }
+        .how-to-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 0.75rem;
+        }
+        @media (min-width: 768px) { .how-to-section { flex-direction: row; } }
+        .how-to-image {
+            flex-shrink: 0;
+            width: 150px;
+        }
+        .how-to-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0.5rem;
+        }
+        .how-to-steps {
+            text-align: left;
+            color: var(--color-gray-400);
+        }
+        .how-to-steps h3 {
+            font-size: 1.25rem;
+            color: var(--color-white);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .how-to-steps ol {
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+        .how-to-steps li { margin-bottom: 0.5rem; }
+        .disclaimer-card {
+            background: rgba(255, 229, 153, 0.1);
+            border: 1px solid #FBBF24;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        .disclaimer-icon {
+            color: #FBBF24;
+            width: 2.5rem;
+            height: 2.5rem;
+            flex-shrink: 0;
+        }
+        .disclaimer-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FCD34D;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        .disclaimer-text {
+            color: var(--color-gray-300);
+            line-height: 1.6;
+        }
+        .download-area {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+        }
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .checkbox-container label {
+            color: var(--color-gray-300);
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        @media (min-width: 640px) { .checkbox-container label { font-size: 1rem; } }
+        #agreement-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--color-purple-500);
+            cursor: pointer;
+        }
+        .footer { background-color: var(--color-black); padding-top: 4rem; padding-bottom: 2rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 2rem; text-align: center; }
+        @media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); text-align: left;} }
+        @media (min-width: 1024px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+        .footer-title { font-size: 1.25rem; line-height: 1.75rem; font-weight: 700; color: var(--color-white); margin-bottom: 1rem; }
+        .footer-links { padding: 0; list-style: none; margin: 0;}
+        .footer-links li { margin-top: 0.75rem; }
+        .footer-links a { color: var(--color-gray-400); transition: color 0.3s; }
+        .footer-links a:hover { color: var(--color-purple-400); }
+        .footer-socials { display: flex; justify-content: center; gap: 1rem; }
+        @media (min-width: 640px) { .footer-socials { justify-content: flex-start; } }
+        .footer-socials a { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 50%; background-color: var(--color-gray-800); color: var(--color-gray-400); transition: all 0.3s ease; }
+        .footer-socials a:hover { background-color: var(--color-purple-500); color: var(--color-white); transform: translateY(-3px); }
+        .footer-copyright { border-top: 1px solid var(--color-gray-800); margin-top: 3rem; padding-top: 1.5rem; text-align: center; color: var(--color-gray-400); }
+        .dropdown { position: relative; display: inline-block; padding: 1rem 0; }
+        .dropbtn { background: none; border: none; cursor: pointer; color: var(--color-gray-300); font-weight: 500; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 0 1.5rem; transition: color 0.3s; }
+        .dropbtn:hover { color: var(--color-purple-400); }
+        .dropdown-content { display: none; position: absolute; background-color: rgba(0, 0, 0, 0.95); min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 100; border-radius: 0.5rem; border: 1px solid var(--color-gray-800); margin-top: -1rem; left: 50%; transform: translateX(-50%); padding-top: 1rem; }
+        .dropdown-content a { color: var(--color-gray-300); padding: 12px 16px; text-decoration: none; display: block; text-align: left; white-space: nowrap; }
+        .dropdown-content a:hover { background-color: var(--color-purple-600); color: var(--color-white); }
+        .dropdown:hover .dropdown-content { display: block; }
+    </style>
+</head>
+<body>
+
+    <header id="header" class="header scrolled">
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo"><span>Fam</span>ToolApp</a>
+                <nav class="main-nav">
+                    <a href="index.html">Home</a>
+                    <a href="Features.html">Features</a>
+                    <a href="Installation-Guide.html">Install Guide</a>
+                    <a href="Contact-Us.html">Contact</a>
+                    <div class="dropdown">
+                        <button class="dropbtn">More &#9662;</button>
+                        <div class="dropdown-content">
+                            <a href="Privacy-Policy.html">Privacy Policy</a>
+                            <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                            <a href="About-Us.html">About Us</a>
+                            <a href="FAQ.html">FAQ</a>
+                        </div>
+                    </div>
+                </nav>
+                <button id="mobile-menu-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="svg-icon"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div id="mobile-menu">
+                <a href="index.html">Home</a>
+                <a href="Features.html">Features</a>
+                <a href="Installation-Guide.html">Install Guide</a>
+                <a href="Privacy-Policy.html">Privacy Policy</a>
+                <a href="Terms-and-Conditions.html">Terms and Conditions</a>
+                <a href="Contact-Us.html">Contact</a>
+                <a href="About-Us.html">About Us</a>
+                <a href="FAQ.html">FAQ</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header-bg">
+            <div class="container">
+                <h1 class="page-title fade-in-up">Download & <span>Install</span></h1>
+                <p class="section-subtitle fade-in-up" style="transition-delay: 150ms;">Please follow the instructions below carefully to download and install the app.</p>
+            </div>
+        </section>
+
+        <section class="download-section">
+            <div class="container">
+                <div class="guide-card fade-in-up">
+                    <div class="guide-header">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>
+                        <h2>A Note on Play Protect</h2>
+                    </div>
+                    <div class="guide-content">
+                        <p>
+                            <strong>This is an important step for a smooth installation.</strong> Our app includes advanced safety features that require specific permissions to work correctly. Google's security system (Play Protect) may sometimes flag powerful apps like ours.
+                            <br><br>
+                            Our app is 100% safe for its intended purpose. To ensure a successful installation, we recommend temporarily adjusting Play Protect settings. You can do this easily by following the steps below.
+                        </p>
+                        <div class="how-to-section">
+                            <div class="how-to-image">
+                                <img src="https://placehold.co/150x150/1f2937/a78bfa?text=Play+Store" alt="Play Store Icon">
+                            </div>
+                            <div class="how-to-steps">
+                                <h3>How to Adjust Play Protect:</h3>
+                                <ol>
+                                    <li>Open the <strong>Play Store</strong> app on the child's phone.</li>
+                                    <li>Tap the profile icon in the top right corner.</li>
+                                    <li>Select <strong>Play Protect</strong> from the menu.</li>
+                                    <li>Tap the Settings (⚙️) icon and turn off <strong>"Scan apps with Play Protect"</strong>.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disclaimer-card fade-in-up">
+                    <div class="disclaimer-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="disclaimer-title">Responsible Usage and Legal Agreement</h3>
+                        <p class="disclaimer-text">This application is designed for legal and ethical purposes, such as parental guidance for your own underage children. Installing this application on a device without the owner's knowledge and consent may be illegal. You must ensure that the individual is aware their activities are being reviewed for safety. By downloading, you agree to comply with all applicable laws in your country.</p>
+                    </div>
+                </div>
+
+                <div class="download-area fade-in-up">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="agreement-checkbox">
+                        <label for="agreement-checkbox">I have read and agree to the Responsible Usage policy.</label>
+                    </div>
+                    <a id="download-link" href="YOUR_APK_DOWNLOAD_LINK.apk" download>
+                        <button id="download-button" class="btn-3d" disabled>Download App</button>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div id="about-footer" class="fade-in-up"><h4 class="footer-title">FamToolApp</h4><p>Providing parents with the tools they need to ensure their children's digital safety.</p></div>
+                <div class="fade-in-up" style="transition-delay: 150ms;"><h4 class="footer-title">Quick Links</h4><ul class="footer-links">
+                    <li><a href="Features.html">Features</a></li>
+                    <li><a href="Installation-Guide.html">Install Guide</a></li>
+                    <li><a href="FAQ.html">FAQ</a></li>
+                    <li><a href="About-Us.html">About Us</a></li>
+                </ul></div>
+                <div class="fade-in-up" style="transition-delay: 300ms;"><h4 class="footer-title">Resources</h4><ul class="footer-links"><li id="privacy-footer"><a href="Privacy-Policy.html">Privacy Policy</a></li>
+                    <li><a href="Terms-and-Conditions.html">Terms and Conditions</a></li>
+                    <li><a href="Contact-Us.html">Contact</a></li><li><a href="#YOUR_SITEMAP_URL">Sitemap</a></li></ul></div>
+                <div class="fade-in-up" style="transition-delay: 450ms;">
+                    <h4 class="footer-title">Follow Us</h4>
+                    <div class="footer-socials">
+                        <a href="https://www.facebook.com/famtoolapp/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <a href="https://x.com/famtoolapp" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                        <a href="https://www.instagram.com/famtoolapp" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44c0-.795-.645-1.44-1.441-1.44z"/></svg></a>
+                        <a href="https://www.youtube.com/@famtoolapp" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.582 6.186a2.694 2.694 0 0 0-1.886-1.886C17.93 4 12 4 12 4s-5.93 0-7.696.299a2.694 2.694 0 0 0-1.886 1.886C2 7.95 2 12 2 12s0 4.05.318 5.814a2.694 2.694 0 0 0 1.886 1.886C6.07 20 12 20 12 20s5.93 0 7.696-.299a2.694 2.694 0 0 0 1.886-1.886C22 16.05 22 12 22 12s0-4.05-.418-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright"><p>&copy; 2024 FamToolApp. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('show'); });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            const fadeUpElements = document.querySelectorAll('.fade-in-up');
+            fadeUpElements.forEach(el => observer.observe(el));
+
+            const agreementCheckbox = document.getElementById('agreement-checkbox');
+            const downloadButton = document.getElementById('download-button');
+            const downloadLink = document.getElementById('download-link');
+
+            agreementCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    downloadButton.disabled = false;
+                } else {
+                    downloadButton.disabled = true;
+                }
+            });
+
+            downloadLink.addEventListener('click', function(e) {
+                if (!agreementCheckbox.checked) {
+                    e.preventDefault();
+                    alert('Please agree to the Responsible Usage policy before downloading.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
