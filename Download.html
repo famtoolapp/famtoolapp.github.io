@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="rating" content="General">
     
-    <title>Download & Install Guide - FamToolApp</title>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <meta name="description" content="Follow our clear guide to download, install, and configure FamToolApp on the target device for child safety and parental guidance.">
-    <meta name="keywords" content="download famtoolapp, install guide, parental guidance apk, family safety app">
+
+    <!-- ===== START: SEO and Schema for Download.html ===== -->
+    <title>Download FamToolApp for Android | Latest Version</title>
+    <meta name="description" content="Download the latest version of the FamToolApp APK for your Android device. Start protecting your family today with our free parental control app.">
+    <link rel="canonical" href="https://famtoolapp.com/Download.html" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DownloadAction",
+  "name": "Download FamToolApp",
+  "description": "Download the official FamToolApp APK for Android.",
+  "url": "https://famtoolapp.com/Download.html",
+  "result": {
+    "@type": "SoftwareApplication",
+    "name": "FamToolApp",
+    "operatingSystem": "Android"
+  }
+}
+</script>
+<!-- ===== END: SEO and Schema for Download.html ===== -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- सीएसएस स्टाइल में कोई बदलाव नहीं किया गया है --- */
+        /* --- सीएसएस स्टाइल में कोई बड़ा बदलाव नहीं किया गया है, केवल कैप्चा के लिए स्टाइल जोड़ी गई है --- */
         :root {
             --color-purple-400: #a78bfa;
             --color-purple-500: #8b5cf6;
@@ -69,128 +89,29 @@
         .section-subtitle { font-size: 1.125rem; line-height: 1.75rem; color: var(--color-gray-400); margin-top: 1rem; max-width: 42rem; margin-left: auto; margin-right: auto; }
         .download-section { padding: 5rem 0; }
         @media (min-width: 640px) { .download-section { padding: 6rem 0; } }
-        .guide-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-        }
-        .guide-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        .guide-header .icon {
-            color: var(--color-purple-400);
-            width: 4rem;
-            height: 4rem;
-            margin-bottom: 1rem;
-        }
-        .guide-header h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--color-white);
-            margin: 0;
-        }
-        .guide-content p {
-            color: var(--color-gray-400);
-            line-height: 1.7;
-            font-size: 1.125rem;
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 2.5rem auto;
-        }
+        .guide-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2.5rem; margin-bottom: 2.5rem; }
+        .guide-header { text-align: center; margin-bottom: 2.5rem; }
+        .guide-header .icon { color: var(--color-purple-400); width: 4rem; height: 4rem; margin-bottom: 1rem; }
+        .guide-header h2 { font-size: 1.75rem; font-weight: 700; color: var(--color-white); margin: 0; }
+        .guide-content p { color: var(--color-gray-400); line-height: 1.7; font-size: 1.125rem; text-align: center; max-width: 700px; margin: 0 auto 2.5rem auto; }
         .guide-content strong { color: var(--color-gray-300); }
-        .how-to-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 2rem;
-            background: rgba(0,0,0,0.2);
-            border-radius: 0.75rem;
-        }
+        .how-to-section { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 2rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; }
         @media (min-width: 768px) { .how-to-section { flex-direction: row; } }
-        .how-to-image {
-            flex-shrink: 0;
-            width: 150px;
-        }
-        .how-to-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 0.5rem;
-        }
-        .how-to-steps {
-            text-align: left;
-            color: var(--color-gray-400);
-        }
-        .how-to-steps h3 {
-            font-size: 1.25rem;
-            color: var(--color-white);
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-        .how-to-steps ol {
-            padding-left: 1.5rem;
-            margin: 0;
-        }
+        .how-to-image { flex-shrink: 0; width: 150px; }
+        .how-to-image img { width: 100%; height: auto; display: block; border-radius: 0.5rem; }
+        .how-to-steps { text-align: left; color: var(--color-gray-400); }
+        .how-to-steps h3 { font-size: 1.25rem; color: var(--color-white); margin-top: 0; margin-bottom: 1rem; }
+        .how-to-steps ol { padding-left: 1.5rem; margin: 0; }
         .how-to-steps li { margin-bottom: 0.5rem; }
-        .disclaimer-card {
-            background: rgba(255, 229, 153, 0.1);
-            border: 1px solid #FBBF24;
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-top: 3rem;
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-        .disclaimer-icon {
-            color: #FBBF24;
-            width: 2.5rem;
-            height: 2.5rem;
-            flex-shrink: 0;
-        }
-        .disclaimer-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #FCD34D;
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-        }
-        .disclaimer-text {
-            color: var(--color-gray-300);
-            line-height: 1.6;
-        }
-        .download-area {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 1rem;
-        }
-        .checkbox-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        .checkbox-container label {
-            color: var(--color-gray-300);
-            cursor: pointer;
-            font-size: 0.875rem;
-        }
+        .disclaimer-card { background: rgba(255, 229, 153, 0.1); border: 1px solid #FBBF24; border-radius: 1rem; padding: 2rem; margin-top: 3rem; display: flex; gap: 1.5rem; align-items: flex-start; }
+        .disclaimer-icon { color: #FBBF24; width: 2.5rem; height: 2.5rem; flex-shrink: 0; }
+        .disclaimer-title { font-size: 1.25rem; font-weight: 700; color: #FCD34D; margin-top: 0; margin-bottom: 0.5rem; }
+        .disclaimer-text { color: var(--color-gray-300); line-height: 1.6; }
+        .download-area { text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255, 255, 255, 0.05); border-radius: 1rem; }
+        .checkbox-container { display: flex; justify-content: center; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .checkbox-container label { color: var(--color-gray-300); cursor: pointer; font-size: 0.875rem; }
         @media (min-width: 640px) { .checkbox-container label { font-size: 1rem; } }
-        #agreement-checkbox {
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: var(--color-purple-500);
-            cursor: pointer;
-        }
+        #agreement-checkbox { width: 1.25rem; height: 1.25rem; accent-color: var(--color-purple-500); cursor: pointer; }
         .footer { background-color: var(--color-black); padding-top: 4rem; padding-bottom: 2rem; }
         .footer-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 2rem; text-align: center; }
         @media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); text-align: left;} }
@@ -212,6 +133,73 @@
         .dropdown-content a { color: var(--color-gray-300); padding: 12px 16px; text-decoration: none; display: block; text-align: left; white-space: nowrap; }
         .dropdown-content a:hover { background-color: var(--color-purple-600); color: var(--color-white); }
         .dropdown:hover .dropdown-content { display: block; }
+
+        /* ===== START: CAPTCHA के लिए नई CSS स्टाइल ===== */
+        #captcha-container {
+            display: none; /* इसे शुरू में छिपा कर रखें */
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 0.75rem;
+            border: 1px solid var(--color-gray-800);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        #captcha-code {
+            background-color: var(--bg-dark);
+            color: var(--color-purple-400);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-decoration: line-through;
+            text-decoration-color: var(--color-gray-500);
+            user-select: none; /* उपयोगकर्ता को कोड कॉपी करने से रोकता है */
+            border: 1px solid var(--color-gray-800);
+        }
+        #captcha-refresh {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-gray-400);
+            transition: color 0.3s, transform 0.3s;
+        }
+        #captcha-refresh:hover {
+            color: var(--color-white);
+            transform: rotate(180deg);
+        }
+        #captcha-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--color-gray-800);
+            background-color: var(--bg-dark);
+            color: var(--color-white);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s;
+        }
+        #captcha-input:focus {
+            outline: none;
+            border-color: var(--color-purple-500);
+        }
+        #captcha-error {
+            color: #f87171; /* लाल रंग */
+            font-size: 0.875rem;
+            height: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        /* ===== END: CAPTCHA के लिए नई CSS स्टाइल ===== */
     </style>
 </head>
 <body>
@@ -305,9 +293,23 @@
                         <input type="checkbox" id="agreement-checkbox">
                         <label for="agreement-checkbox">I have read and agree to the Responsible Usage policy.</label>
                     </div>
-                    <a id="download-link" href="child/child.apk" download>
-                        <button id="download-button" class="btn-3d" disabled>Download App</button>
-                    </a>
+                    
+                    <!-- ===== START: CAPTCHA के लिए नया HTML ===== -->
+                    <div id="captcha-container">
+                        <label for="captcha-input" style="color: var(--color-gray-300); margin-bottom: 0.5rem; display: block;">To prevent bots, please enter the code below:</label>
+                        <div class="captcha-box">
+                            <div id="captcha-code"></div>
+                            <button id="captcha-refresh" title="Refresh Code">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-4.991-2.695v4.992h-4.992m0 0l-3.181-3.183a8.25 8.25 0 0111.664 0l3.181 3.183" />
+                                </svg>
+                            </button>
+                        </div>
+                        <input type="text" id="captcha-input" placeholder="Enter code here..." autocomplete="off">
+                        <div id="captcha-error"></div>
+                        <button id="download-button" class="btn-3d">Verify & Download</button>
+                    </div>
+                    <!-- ===== END: CAPTCHA के लिए नया HTML ===== -->
                 </div>
             </div>
         </section>
@@ -342,6 +344,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- पुराना कोड जैसा है वैसा ही रहेगा ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('show'); });
@@ -356,24 +359,76 @@
             const fadeUpElements = document.querySelectorAll('.fade-in-up');
             fadeUpElements.forEach(el => observer.observe(el));
 
+            // ===== START: CAPTCHA और डाउनलोड के लिए नया जावास्क्रिप्ट लॉजिक =====
+            
+            // --- सभी जरूरी HTML एलिमेंट्स को चुनें ---
             const agreementCheckbox = document.getElementById('agreement-checkbox');
+            const captchaContainer = document.getElementById('captcha-container');
+            const captchaCodeEl = document.getElementById('captcha-code');
+            const captchaInput = document.getElementById('captcha-input');
             const downloadButton = document.getElementById('download-button');
-            const downloadLink = document.getElementById('download-link');
+            const captchaRefreshBtn = document.getElementById('captcha-refresh');
+            const captchaErrorEl = document.getElementById('captcha-error');
 
+            let currentCaptcha = '';
+            const downloadUrl = 'child/child.apk'; // आपकी APK फाइल का पाथ
+
+            // --- एक रैंडम कैप्चा कोड बनाने के लिए फंक्शन ---
+            function generateCaptcha() {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < 6; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                currentCaptcha = result;
+                captchaCodeEl.textContent = currentCaptcha;
+                captchaInput.value = ''; // इनपुट फील्ड को खाली करें
+                captchaErrorEl.textContent = ''; // एरर मैसेज को हटा दें
+            }
+
+            // --- जब उपयोगकर्ता "I agree" चेकबॉक्स पर क्लिक करे ---
             agreementCheckbox.addEventListener('change', function() {
                 if (this.checked) {
-                    downloadButton.disabled = false;
+                    captchaContainer.style.display = 'block'; // कैप्चा सेक्शन दिखाएं
+                    generateCaptcha(); // पहला कैप्चा कोड बनाएं
                 } else {
-                    downloadButton.disabled = true;
+                    captchaContainer.style.display = 'none'; // कैप्चा सेक्शन छिपाएं
                 }
             });
 
-            downloadLink.addEventListener('click', function(e) {
-                if (!agreementCheckbox.checked) {
-                    e.preventDefault();
-                    alert('Please agree to the Responsible Usage policy before downloading.');
+            // --- जब उपयोगकर्ता रिफ्रेश बटन पर क्लिक करे ---
+            captchaRefreshBtn.addEventListener('click', generateCaptcha);
+
+            // --- जब उपयोगकर्ता "Verify & Download" बटन पर क्लिक करे ---
+            downloadButton.addEventListener('click', function() {
+                // उपयोगकर्ता के इनपुट और कैप्चा कोड की तुलना करें (case-insensitive)
+                if (captchaInput.value.toLowerCase() === currentCaptcha.toLowerCase()) {
+                    // अगर कोड सही है
+                    captchaErrorEl.textContent = 'Verification successful! Starting download...';
+                    captchaErrorEl.style.color = '#4ade80'; // हरा रंग
+
+                    // डाउनलोड शुरू करने के लिए एक अदृश्य लिंक बनाएं और उस पर क्लिक करें
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = downloadUrl.split('/').pop(); // फ़ाइल का नाम सेट करें
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // कुछ सेकंड बाद बटन को फिर से डिसेबल कर दें
+                    setTimeout(() => {
+                        agreementCheckbox.checked = false;
+                        captchaContainer.style.display = 'none';
+                    }, 3000);
+
+                } else {
+                    // अगर कोड गलत है
+                    captchaErrorEl.textContent = 'Incorrect code. Please try again.';
+                    captchaErrorEl.style.color = '#f87171'; // लाल रंग
+                    generateCaptcha(); // एक नया कैप्चा कोड बनाएं
                 }
             });
+            // ===== END: CAPTCHA और डाउनलोड के लिए नया जावास्क्रिप्ट लॉजिक =====
         });
     </script>
 </body>
