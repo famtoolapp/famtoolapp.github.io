@@ -98,7 +98,6 @@
         .how-to-section { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 2rem; background: rgba(0,0,0,0.2); border-radius: 0.75rem; }
         @media (min-width: 768px) { .how-to-section { flex-direction: row; } }
         .how-to-image { flex-shrink: 0; width: 150px; }
-        .how-to-image img { width: 100%; height: auto; display: block; border-radius: 0.5rem; }
         .how-to-steps { text-align: left; color: var(--color-gray-400); }
         .how-to-steps h3 { font-size: 1.25rem; color: var(--color-white); margin-top: 0; margin-bottom: 1rem; }
         .how-to-steps ol { padding-left: 1.5rem; margin: 0; }
@@ -263,7 +262,26 @@
                         </p>
                         <div class="how-to-section">
                             <div class="how-to-image">
-                                <img src="https://placehold.co/150x150/1f2937/a78bfa?text=Play+Store" alt="Play Store Icon">
+                                <!-- SVG Play Store Icon - रियलिस्टिक दिखने के लिए कोड से बनाया गया -->
+                                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="border-radius: 0.5rem; width: 150px; height: 150px;">
+                                    <defs>
+                                        <linearGradient id="playIconBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#2d3748"/>
+                                            <stop offset="100%" stop-color="#1a202c"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect width="100" height="100" rx="22" fill="url(#playIconBg)"/>
+                                    <g transform="translate(5, 5) scale(0.9)">
+                                        <!-- Left part (Blue-ish) -->
+                                        <path d="M 11.3,3.23 C 10.51,3.79 3.3,8.33 3.3,8.33 L 3.3,81.67 L 11.3,86.77 C 12.09,86.21 44.96,64.28 44.96,64.28 L 44.96,25.72 Z" fill="#6366f1"/>
+                                        <!-- Top part (Green-ish) -->
+                                        <path d="M 15.3,0.73 L 11.3,3.23 L 44.96,25.72 L 50.1,22.72 Z" fill="#34d399"/>
+                                        <!-- Bottom part (Yellow-ish) -->
+                                        <path d="M 15.3,89.27 L 11.3,86.77 L 44.96,64.28 L 50.1,67.28 Z" fill="#fbbf24"/>
+                                        <!-- Right part (Red-ish) -->
+                                        <path d="M 50.1,22.72 L 44.96,25.72 L 44.96,64.28 L 50.1,67.28 L 86.7,45 Z" fill="#ec4899"/>
+                                    </g>
+                                </svg>
                             </div>
                             <div class="how-to-steps">
                                 <h3>How to Adjust Play Protect:</h3>
