@@ -793,7 +793,7 @@
                 <p style="line-height: 1.6;">
                     To solve this, you need to reset the app's most powerful permission: the Accessibility Service.
                     <br><br>
-                    1. Go to your child's phone **Settings &rarr; Accessibility &rarr; Installed/Downloaded Apps**.
+                    1. Go to your child's phone **Settings → Accessibility → Installed/Downloaded Apps**.
                     <br>
                     2. Find **"FamToolApp"** or **"Child Accessibility Service"**.
                     <br>
@@ -1452,6 +1452,51 @@
         function openComingSoonModal(featureName) { 
             comingSoonTitle.textContent = `${featureName} - Coming Soon`; 
             openModal(comingSoonModal);
+        }
+        
+        // ===== START: BUG FIX / बग का समाधान यहाँ से शुरू =====
+        // हिंदी कमेंट: समस्या यह थी कि 'हेल्प डेस्क' बटन के लिए कोई क्लिक इवेंट लिस्नर नहीं था।
+        // नीचे दिया गया कोड ब्लॉक नई फ़ाइल में मौजूद नहीं था, जिस वजह से बटन क्लिक करने पर कुछ नहीं हो रहा था।
+        // मैंने इस लिस्नर को वापस जोड़ दिया है ताकि बटन क्लिक होने पर चैट मोडल खुल सके।
+        liveChatBtn.addEventListener('click', () => {
+            if (liveChatBtn.disabled) return;
+            const { userId, childKey } = selectedChildInfo;
+            if (!userId) return;
+            openModal(chatModal);
+            setupChat(userId, childKey);
+        });
+        // ===== END: BUG FIX / बग का समाधान यहाँ समाप्त =====
+        
+        function setupChat(userId, childKey) {
+            const chatMessagesArea = document.getElementById('chat-messages-area');
+            const chatSendBtn = document.getElementById('chat-send-btn');
+            const chatMessageInput = document.getElementById('chat-message-input');
+            const sendMessage = () => {
+                const messageText = chatMessageInput.value.trim();
+                if (messageText) {
+                    const messagesRef = ref(db, `chats/${userId}/${childKey}/messages`);
+                    push(messagesRef, { text: messageText, sender: 'user', timestamp: serverTimestamp() })
+                    .then(() => {
+                        push(messagesRef, { text: 'Your request is in the queue! 🚀\nWe have received your query and will reply within 24 hours.', sender: 'auto-reply', timestamp: serverTimestamp() });
+                    }).catch(error => console.error("Error sending message:", error));
+                    chatMessageInput.value = '';
+                }
+            };
+            chatSendBtn.onclick = sendMessage;
+            chatMessageInput.onkeypress = (e) => { if (e.key === 'Enter') { e.preventDefault(); sendMessage(); } };
+            const chatQuery = query(ref(db, `chats/${userId}/${childKey}/messages`));
+            if (activeChatListener) off(activeChatListener.ref);
+            activeChatListener = { ref: chatQuery };
+            onValue(chatQuery, (snapshot) => {
+                chatMessagesArea.innerHTML = '';
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        const message = childSnapshot.val(); const bubble = document.createElement('div'); bubble.classList.add('chat-bubble', message.sender); const time = message.timestamp ? new Date(message.timestamp).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : ''; bubble.innerHTML = `${message.text.replace(/\n/g, '<br>')}<span class="chat-time">${time}</span>`;
+                        chatMessagesArea.appendChild(bubble);
+                    });
+                     chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
+                } else { chatMessagesArea.innerHTML = '<p style="text-align:center; padding: 2rem;">No messages yet. Start the conversation!</p>';}
+            });
         }
         
         modalDataDisplayArea.addEventListener('click', (e) => {
