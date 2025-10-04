@@ -42,6 +42,10 @@
             --border-color: rgba(167, 223, 255, 0.2);
             --glow-color: rgba(167, 223, 255, 0.15);
             --shadow-color: rgba(0, 0, 0, 0.4);
+            --warning-bg: rgba(255, 179, 0, 0.1);
+            --warning-border: #FFB300;
+            --error-bg: rgba(244, 67, 54, 0.1);
+            --error-border: #F44336;
         }
 
         * {
@@ -87,6 +91,11 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes button-click-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
 
         .dashboard-container {
             display: flex;
@@ -183,7 +192,6 @@
         #delete-account-btn { background: var(--accent-red); border-color: var(--accent-red); }
         #delete-account-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3); }
 
-        /* हिंदी कमेंट: यह नया स्टाइल जानकारी (i) बटन के लिए है। */
         .info-btn {
             background: transparent;
             border: 1px solid var(--border-color);
@@ -408,7 +416,6 @@
         }
         .map-link:hover { background: var(--accent-purple); }
 
-        /* --- Device Status Card --- */
         .status-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -481,7 +488,6 @@
         }
         .chat-input-area button:hover { background-color: var(--accent-purple); }
 
-        #details-view { display: none; }
         #overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 999; }
         .loader { width: 50px; height: 50px; border-radius: 50%; margin: 40px auto; border: 5px solid var(--secondary-surface); border-top-color: var(--accent-teal); animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -512,6 +518,75 @@
         }
         .page-footer a:hover { color: var(--accent-blue); }
         
+        /* New Verification Section Styles */
+        #verification-container {
+            display: none; /* Hidden by default */
+            width: 100%;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+        .notice-box {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid;
+            background-color: var(--card-surface);
+        }
+        .notice-box h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .notice-box p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .notice-box.error {
+            background-color: var(--error-bg);
+            border-color: var(--error-border);
+            color: var(--accent-pink);
+        }
+        .notice-box.warning {
+            background-color: var(--warning-bg);
+            border-color: var(--warning-border);
+            color: var(--warning-border);
+        }
+        .notice-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .notice-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #resend-verification-btn {
+            background-color: var(--accent-red);
+            color: white;
+        }
+        #resend-verification-btn.clicked {
+            animation: button-click-animation 0.3s ease;
+        }
+        .download-section {
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-surface);
+        }
+        .download-section h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+        .download-section p {
+             line-height: 1.6;
+             margin-bottom: 1.5rem;
+        }
+
         @media (max-width: 992px) {
             .sidebar {
                 position: fixed;
@@ -615,7 +690,32 @@
                     <button id="logout-btn" class="action-btn"><span>Logout</span></button>
                     <button id="delete-account-btn" class="action-btn"><span>Delete Account</span></button>
                 </div>
-                </header>
+            </header>
+            
+            <!-- New Verification Container -->
+            <div id="verification-container">
+                <div class="notice-box error">
+                    <h4>Please check your mailbox (<span id="verification-email">your.email@example.com</span>)</h4>
+                    <p>Please check the email received to validate your account, otherwise it will be automatically deleted. (Check your spam if you don't receive the email.)</p>
+                    <div class="notice-actions">
+                        <button id="resend-verification-btn" class="notice-btn">RESEND EMAIL FOR VALIDATE MY ACCOUNT</button>
+                    </div>
+                </div>
+                <div class="notice-box warning" id="info-notice-box">
+                    <h4>Important Information - Regular Connection Required</h4>
+                    <p>For customers using the free offer, without connecting to the site <strong>7 days from the last login</strong>, the target phone will be automatically deleted.<br>For customers using the Basic, Premium or Ultra offer, without connecting to the site <strong>for a month from the last login</strong>, the target phone will be automatically deleted.</p>
+                </div>
+                <div class="download-section" id="download-notice-box">
+                    <h4>ADD A PHONE TO YOUR ACCOUNT</h4>
+                    <p>Add a phone to your account, for that you just need to download and install the application on the phone you want to follow.</p>
+                     <p>&#9432; Please read and follow all steps correctly before downloading and installing the application. If this is not done, the application may not work properly.</p>
+                    <div class="notice-actions">
+                       <a href="Installation-Guide.html" class="notice-btn"style="background-color: #5DADE2; color: white; text-decoration: none;">&#9432; HELP FOR INSTALLATION</a>
+					  
+                        <a href="Download.html" class="notice-btn" style="background-color: var(--accent-green); color: white; text-decoration: none;">&#10515; DOWNLOAD APPLICATION</a>
+                    </div>
+                </div>
+            </div>
 
             <div id="details-view">
                  <div class="category-buttons">
@@ -708,23 +808,6 @@
                         </button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="signup-success-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Account Created! Please Verify Your Email.</h3>
-            </div>
-            <div class="modal-body">
-                <p style="margin-bottom: 1rem; line-height: 1.6;">
-                    We have sent a verification link to your email address.
-                </p>
-                <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                    Please click the link in that email to finish signing up. After verification, you can log in.
-                </p>
-                <button class="ok-btn">Okay</button>
             </div>
         </div>
     </div>
@@ -842,7 +925,7 @@
         const auth = getAuth(app);
         const db = getDatabase(app);
 
-        // ... (DOM Element variables remain the same)
+        // DOM Element variables
         const authContainer = document.getElementById('auth-container');
         const dashboard = document.getElementById('dashboard');
         const userList = document.getElementById('user-list');
@@ -862,7 +945,6 @@
         const signupTabBtn = document.getElementById('signup-tab-btn');
         const submitAuthBtn = document.getElementById('submit-auth-btn');
         const submitAuthBtnText = document.getElementById('submit-auth-btn-text');
-        const signupSuccessModal = document.getElementById('signup-success-modal');
         const forgotPasswordLink = document.getElementById('forgot-password-link');
         const comingSoonModal = document.getElementById('coming-soon-modal');
         const comingSoonTitle = document.getElementById('coming-soon-title');
@@ -879,8 +961,14 @@
         const deleteAccountModal = document.getElementById('delete-account-modal');
         const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
         const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
-        // हिंदी कमेंट: एक्सेसिबिलिटी जानकारी वाले नए मॉडल का वेरिएबल।
         const infoAccessibilityModal = document.getElementById('info-accessibility-modal');
+        
+        // Verification Elements
+        const verificationContainer = document.getElementById('verification-container');
+        const verificationEmailSpan = document.getElementById('verification-email');
+        const resendVerificationBtn = document.getElementById('resend-verification-btn');
+        const infoNoticeBox = document.getElementById('info-notice-box');
+        const downloadNoticeBox = document.getElementById('download-notice-box');
 
 
         let authMode = 'login';
@@ -895,7 +983,6 @@
         const KEYLOGGER_BATCH_SIZE = 50;
         let isKeyloggerLoading = false;
         
-        // हिंदी कमेंट: ये फ्लैग्स सुनिश्चित करते हैं कि कमांड दो बार न भेजे जाएँ।
         let isPhotoCommandRunning = false;
         let isVideoCommandRunning = false;
         let isAudioCommandRunning = false;
@@ -910,6 +997,7 @@
             errorMessage.textContent = ''; 
             forgotPasswordLink.style.display = 'block'; 
         });
+
         signupTabBtn.addEventListener('click', () => { 
             authMode = 'signup'; 
             signupTabBtn.classList.add('active'); 
@@ -920,37 +1008,60 @@
         });
         
         submitAuthBtn.addEventListener('click', () => {
-            const email = emailInput.value; const password = passwordInput.value; errorMessage.textContent = '';
-            if (!email || !password) { errorMessage.textContent = 'Please enter both email and password.'; return; }
+            const email = emailInput.value; 
+            const password = passwordInput.value; 
+            errorMessage.textContent = '';
+            if (!email || !password) { 
+                errorMessage.textContent = 'Please enter both email and password.'; 
+                return; 
+            }
             
+            submitAuthBtn.disabled = true;
+            submitAuthBtnText.textContent = 'Processing...';
+
             if (authMode === 'login') {
                 signInWithEmailAndPassword(auth, email, password)
-                  .then((userCredential) => {
-                      const user = userCredential.user;
-                      const cutoffDate = new Date('2025-08-20T00:00:00Z'); 
-                      const creationDate = new Date(user.metadata.creationTime);
-                     
-                      if (creationDate >= cutoffDate) {
-                          if (!user.emailVerified) {
-                              errorMessage.textContent = "Please verify your email to log in. Check your inbox.";
-                          }
-                      } 
-                  })
                   .catch(error => { 
                       errorMessage.textContent = getFriendlyAuthError(error.code); 
+                  })
+                  .finally(() => {
+                      submitAuthBtn.disabled = false;
+                      submitAuthBtnText.textContent = 'Login';
                   });
-            } else {
+            } else { // Signup mode
                 createUserWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         sendEmailVerification(auth.currentUser)
                             .then(() => {
-                                openModal(signupSuccessModal);
-                                signOut(auth);
+                                // User is automatically logged in by onAuthStateChanged
+                                console.log("Verification email sent.");
                             });
                     })
                     .catch(error => { 
                         errorMessage.textContent = getFriendlyAuthError(error.code); 
+                    })
+                    .finally(() => {
+                         submitAuthBtn.disabled = false;
+                         submitAuthBtnText.textContent = 'Sign Up';
                     });
+            }
+        });
+        
+        resendVerificationBtn.addEventListener('click', () => {
+            const user = auth.currentUser;
+            if (user) {
+                resendVerificationBtn.classList.add('clicked');
+                sendEmailVerification(user)
+                    .then(() => {
+                        showToast('A new verification email has been sent to your inbox.');
+                    })
+                    .catch(error => {
+                        showToast(getFriendlyAuthError(error.code));
+                    });
+                
+                setTimeout(() => {
+                    resendVerificationBtn.classList.remove('clicked');
+                }, 400);
             }
         });
 
@@ -975,20 +1086,22 @@
 
         onAuthStateChanged(auth, user => {
             if (user) {
-                const cutoffDate = new Date('2025-08-20T00:00:00Z');
-                const creationDate = new Date(user.metadata.creationTime);
+                authContainer.style.display = 'none'; 
+                dashboard.style.display = 'flex';
+                
+                const verificationStatusRef = ref(db, `user/${user.uid}/profile/emailVerified`);
+                set(verificationStatusRef, user.emailVerified);
 
-                if (user.emailVerified || creationDate < cutoffDate) {
-                    authContainer.style.display = 'none'; 
-                    dashboard.style.display = 'flex';
-                    loadUserDevices(user.uid);
-                } else {
-                    authContainer.style.display = 'flex'; 
-                    dashboard.style.display = 'none'; 
-                }
+                // Manage the UI based on verification status and device presence
+                manageVerificationUI(user);
+
+                // Load devices into the sidebar
+                loadUserDevices(user.uid);
+
             } else {
                 authContainer.style.display = 'flex'; 
                 dashboard.style.display = 'none'; 
+                verificationContainer.style.display = 'none';
                 userList.innerHTML = ''; 
                 detailsView.style.display = 'none'; 
                 mainContentTitle.textContent = 'Select a Device'; 
@@ -998,6 +1111,43 @@
                 if(activeChatListener) off(activeChatListener.ref);
             }
         });
+
+        function manageVerificationUI(user) {
+            if (user.emailVerified) {
+                // Scenario 1: Verified user. Hide all notices.
+                verificationContainer.style.display = 'none';
+            } else {
+                // Scenario 2: Not verified. Check for child devices.
+                const userDevicesRef = ref(db, `user/${user.uid}`);
+                get(userDevicesRef).then((snapshot) => {
+                    const data = snapshot.val();
+                    const hasChildDevices = data && Object.keys(data).some(key => key !== 'profile');
+
+                    // Show the main container and the red email notice by default
+                    verificationContainer.style.display = 'block';
+                    verificationEmailSpan.textContent = user.email;
+                    document.querySelector('#verification-container .notice-box.error').style.display = 'block';
+
+                    if (hasChildDevices) {
+                        // Scenario 2b: Not verified, BUT has devices.
+                        // Hide info and download boxes.
+                        infoNoticeBox.style.display = 'none';
+                        downloadNoticeBox.style.display = 'none';
+                    } else {
+                        // Scenario 2a: Not verified AND no devices.
+                        // Show all three boxes.
+                        infoNoticeBox.style.display = 'block';
+                        downloadNoticeBox.style.display = 'block';
+                    }
+                }).catch(error => {
+                    console.error("Error checking for child devices:", error);
+                    // Fallback: show all notices if DB check fails for an unverified user
+                    verificationContainer.style.display = 'block';
+                    infoNoticeBox.style.display = 'block';
+                    downloadNoticeBox.style.display = 'block';
+                });
+            }
+        }
 
         deleteAccountBtn.addEventListener('click', () => {
             openModal(deleteAccountModal);
@@ -1030,50 +1180,63 @@
             onValue(usersRef, (snapshot) => {
                 userList.innerHTML = '';
                 const data = snapshot.val();
-                if (data) {
+                if (data && Object.keys(data).some(key => key !== 'profile')) { // Check for child keys besides profile
                     Object.keys(data).forEach(childKey => {
-                        const childData = data[childKey]; const userName = childData?.data?.nameChild || childKey; const deviceName = childData?.data?.nameDevice || 'Unknown Device'; const listItem = document.createElement('li'); listItem.className = 'user-list-item'; listItem.dataset.userid = userId; listItem.dataset.childkey = childKey; listItem.dataset.username = userName; listItem.dataset.devicename = deviceName; listItem.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><div><div class="user-name">${userName}</div><div class="device-name">${deviceName}</div></div>`;
+                        if (childKey === 'profile') return; // Skip the profile node
+                        const childData = data[childKey]; 
+                        const userName = childData?.data?.nameChild || childKey; 
+                        const deviceName = childData?.data?.nameDevice || 'Unknown Device'; 
+                        const listItem = document.createElement('li'); 
+                        listItem.className = 'user-list-item'; 
+                        listItem.dataset.userid = userId; 
+                        listItem.dataset.childkey = childKey; 
+                        listItem.dataset.username = userName; 
+                        listItem.dataset.devicename = deviceName; 
+                        listItem.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><div><div class="user-name">${userName}</div><div class="device-name">${deviceName}</div></div>`;
                         userList.appendChild(listItem);
                     });
-                } else { userList.innerHTML = '<li>No devices found.</li>'; }
+                } else { 
+                    userList.innerHTML = '<li>No devices found.</li>'; 
+                }
             });
         }
         
         userList.addEventListener('click', (e) => {
             const listItem = e.target.closest('.user-list-item');
             if (listItem) {
-                document.querySelectorAll('.user-list-item.active').forEach(item => item.classList.remove('active')); listItem.classList.add('active');
-                selectedChildInfo = { userId: listItem.dataset.userid, childKey: listItem.dataset.childkey, userName: listItem.dataset.username, deviceName: listItem.dataset.devicename };
-                mainContentTitle.textContent = `${selectedChildInfo.userName}`; detailsView.style.display = 'block'; liveChatBtn.disabled = false;
+                document.querySelectorAll('.user-list-item.active').forEach(item => item.classList.remove('active')); 
+                listItem.classList.add('active');
+                selectedChildInfo = { 
+                    userId: listItem.dataset.userid, 
+                    childKey: listItem.dataset.childkey, 
+                    userName: listItem.dataset.username, 
+                    deviceName: listItem.dataset.devicename 
+                };
+                mainContentTitle.textContent = `${selectedChildInfo.userName}`; 
+                detailsView.style.display = 'block'; 
+                liveChatBtn.disabled = false;
                 
                 setupNotificationListener(selectedChildInfo.userId, selectedChildInfo.childKey);
                 
-                // ===============================================================
-                // ### नया कोड (भाग 1) यहाँ जोड़ा गया है ###
-                // ===============================================================
-                // तर्क: यह कोड फायरबेस से ऐप की वर्तमान स्थिति (छिपा हुआ है या नहीं) को सुनता है
-                // और हमारे नए बटन पर स्टेटस टेक्स्ट को अपडेट करता है।
                 const appVisibilityRef = ref(db, `user/${selectedChildInfo.userId}/${selectedChildInfo.childKey}/data/showApp`);
                 onValue(appVisibilityRef, (snapshot) => {
-                    // फायरबेस से मान प्राप्त करें (true या false)
                     const isVisible = snapshot.val();
                     const statusElement = document.getElementById('app-visibility-status');
                     const buttonElement = document.querySelector('[data-category="toggleAppVisibility"]');
 
                     if (statusElement && buttonElement) {
-                        // स्टेटस टेक्स्ट को अपडेट करें
                         statusElement.textContent = isVisible ? 'Status: Visible' : 'Status: Hidden';
-                        // स्थिति के आधार पर बटन का बॉर्डर रंग बदलें
                         buttonElement.style.borderColor = isVisible ? 'var(--accent-green)' : 'var(--accent-red)';
                     }
                 });
-                // ===============================================================
 
-                if (window.innerWidth <= 992) { sidebar.classList.remove('open'); overlay.style.display = 'none'; }
+                if (window.innerWidth <= 992) { 
+                    sidebar.classList.remove('open'); 
+                    overlay.style.display = 'none'; 
+                }
             }
         });
 
-        // हिंदी कमेंट: इस फंक्शन को अपडेट किया गया है ताकि यह कमांड फ्लैग को भी रीसेट करे।
         function startCountdown(button, durationInSeconds = 30, category = null) {
             button.disabled = true;
             button.classList.add('counting-down');
@@ -1091,7 +1254,6 @@
                     span.textContent = originalText;
                     button.disabled = false;
                     button.classList.remove('counting-down');
-                    // हिंदी कमेंट: काउंटडाउन खत्म होने पर संबंधित कमांड फ्लैग को false पर सेट करें।
                     if (category === 'video') isVideoCommandRunning = false;
                     if (category === 'audio') isAudioCommandRunning = false;
                 }
@@ -1126,7 +1288,7 @@
                     span.textContent = 'Command Sent!';
                     if (category) {
                         incrementUsageCount(category, currentLimitInfo);
-                        startCountdown(button, 30, category); // हिंदी कमेंट: फ्लैग रीसेट के लिए कैटेगरी पास करें
+                        startCountdown(button, 30, category);
                     } else {
                         setTimeout(() => {
                             span.textContent = originalText;
@@ -1152,37 +1314,25 @@
             const button = e.target.closest('.category-btn');
             if (button) {
                 const category = button.dataset.category;
-
-                // ===============================================================
-                // ### नया कोड (भाग 2) यहाँ जोड़ा गया है ###
-                // ===============================================================
-                // तर्क: जब उपयोगकर्ता Hide/Show App बटन पर क्लिक करता है, तो यह कोड चलता है।
                 if (category === 'toggleAppVisibility') {
                     const { userId, childKey } = selectedChildInfo;
                     if (!userId || !childKey) return;
-
-                    // फायरबेस में सही पथ का संदर्भ लें
                     const appVisibilityRef = ref(db, `user/${userId}/${childKey}/data/showApp`);
-
-                    // पहले फायरबेस से वर्तमान मान प्राप्त करें
                     get(appVisibilityRef).then((snapshot) => {
-                        const currentVisibility = snapshot.val();
-                        // मान को उल्टा करें (अगर true है तो false, और अगर false है तो true)
-                        const newVisibility = !currentVisibility; 
-                        
-                        // फायरबेस पर नया मान सेट करें
+                        const newVisibility = !snapshot.val(); 
                         set(appVisibilityRef, newVisibility).then(() => {
-                            // उपयोगकर्ता को सूचित करें कि कमांड भेज दिया गया है
                             showToast(`Command sent to ${newVisibility ? 'show' : 'hide'} the app.`);
                         }).catch(error => {
                             showToast('Error sending command: ' + error.message);
                         });
                     });
-                    return; // अन्य क्लिक हैंडलर्स को चलने से रोकने के लिए
+                    return; 
                 }
-                // ===============================================================
-
-                if (category === 'coming-soon') { openComingSoonModal(button.dataset.featureName); } else { openDataModal(category); }
+                if (category === 'coming-soon') { 
+                    openComingSoonModal(button.dataset.featureName); 
+                } else { 
+                    openDataModal(category); 
+                }
             }
         });
         
@@ -1190,7 +1340,6 @@
             const nameMap = {
                 'keylogger': 'Keystroke', 'location': 'Location', 'photo': 'Photos', 'sms': 'SMS', 'notifications': 'Notifications', 'devicestatus': 'Device Status', 'calllogs': 'Call Logs',
                 'video': 'Videos', 'audio': 'Audio Recordings',
-                // हिंदी कमेंट: 'health' कैटेगरी के लिए एक सुरक्षित और पठनीय (readable) नाम यहाँ जोड़ा गया है।
                 'health': 'App Health'
             };
             return nameMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
@@ -1205,21 +1354,13 @@
                 return; 
             }
             
-            // हिंदी कमेंट: फोटो, वीडियो, और ऑडियो के लिए अब get() की जगह onValue() का इस्तेमाल होगा ताकि डेटा रियल-टाइम में अपडेट हो।
-            if (category === 'photo') {
-                renderPhotosFromDatabase(userId, childKey); 
-                return; 
-            }
-            if (category === 'video') {
-                renderVideosFromDatabase(userId, childKey);
-                return;
-            }
-            if (category === 'audio') {
-                renderAudiosFromDatabase(userId, childKey);
-                return;
-            }
+            if (category === 'photo') { renderPhotosFromDatabase(userId, childKey); return; }
+            if (category === 'video') { renderVideosFromDatabase(userId, childKey); return; }
+            if (category === 'audio') { renderAudiosFromDatabase(userId, childKey); return; }
 
-            const dataPath = `user/${userId}/${childKey}/${getCategoryPath(category)}`; const dataRef = ref(db, dataPath); activeDataListener = { ref: dataRef };
+            const dataPath = `user/${userId}/${childKey}/${getCategoryPath(category)}`; 
+            const dataRef = ref(db, dataPath); 
+            activeDataListener = { ref: dataRef };
             
             onValue(dataRef, (snapshot) => { 
                 const receivedData = snapshot.val();
@@ -1240,16 +1381,13 @@
         function setupKeyloggerDisplay(data) {
             modalDataDisplayArea.removeEventListener('scroll', handleKeyloggerScroll);
             modalDataDisplayArea.innerHTML = '';
-
             if (!data || Object.keys(data).length === 0) {
                 modalDataDisplayArea.innerHTML = '<p>No data available in this category.</p>';
                 return;
             }
-
             fullKeyloggerData = Object.values(data).reverse();
             renderedKeyloggerCount = 0;
             modalDataDisplayArea.innerHTML = '<div class="data-list" id="keylogger-list"></div>';
-
             renderKeyloggerBatch();
             modalDataDisplayArea.addEventListener('scroll', handleKeyloggerScroll);
         }
@@ -1324,11 +1462,8 @@
                     contentHTML = `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><div class="data-card-title">Current Device Status</div></div><div class="data-card-body"><div class="status-item" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 1.5rem;"><div style="width:100%; display:flex; justify-content: space-between;"><span class="status-item-label">Battery</span><span class="status-item-value">${status.batteryLevel || 'N/A'}%</span></div><div class="battery-level"><div class="battery-level-fill" style="width: ${status.batteryLevel || 0}%;"></div></div></div><div class="status-grid"><div class="status-item"><span class="status-item-label">Internet</span><span class="status-item-value ${status.internetOn ? 'on' : 'off'}">${status.internetOn ? 'On' : 'Off'}</span></div><div class="status-item"><span class="status-item-label">Network Type</span><span class="status-item-value">${status.networkType || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM Operator</span><span class="status-item-value">${status.simOperator || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 1</span><span class="status-item-value">${status.sim1Number || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 2</span><span class="status-item-value">${status.sim2Number || 'N/A'}</span></div></div></div><div class="data-card-footer">Last updated: ${new Date(status.lastUpdated).toLocaleString() || 'N/A'}</div></div>`;
                     break;
                 
-                // हिंदी कमेंट: 'health' डेटा को दिखाने वाले ब्लॉक को नए और बेहतर डिज़ाइन के साथ अपडेट कर दिया गया है।
                 case 'health':
                     const healthData = data;
-                    
-                    // हिंदी कमेंट: यह फंक्शन परमिशन की स्थिति के अनुसार एक क्लीन दिखने वाला HTML आइटम बनाता है।
                     const createHealthItem = (label, isEnabled) => {
                         const icon = isEnabled ? '✅' : '❌';
                         return `<div class="status-item">
@@ -1363,7 +1498,6 @@
             modalDataDisplayArea.innerHTML = contentHTML;
         }
 
-        // हिंदी कमेंट: बग फिक्स - अब यह फंक्शन get() के बजाय onValue() का उपयोग करता है।
         function renderPhotosFromDatabase(userId, childKey) {
             const headerHTML = `<div class="data-header">
                 <div class="header-actions">
@@ -1400,7 +1534,6 @@
             });
         }
         
-        // हिंदी कमेंट: बग फिक्स - अब यह फंक्शन get() के बजाय onValue() का उपयोग करता है। इसमें नया जानकारी (i) बटन भी जोड़ा गया है।
         function renderVideosFromDatabase(userId, childKey) {
             get(ref(db, `user/${userId}/${childKey}/limits/video`)).then(snapshot => {
                 const videoLimitData = snapshot.val() || { count: 4, usage: 0, date: '1970-01-01' };
@@ -1457,7 +1590,6 @@
             });
         }
 
-        // हिंदी कमेंट: बग फिक्स - अब यह फंक्शन get() के बजाय onValue() का उपयोग करता है। इसमें नया जानकारी (i) बटन भी जोड़ा गया है।
         function renderAudiosFromDatabase(userId, childKey) {
             get(ref(db, `user/${userId}/${childKey}/limits/audio`)).then(snapshot => {
                 const audioLimitData = snapshot.val() || { count: 5, usage: 0, date: '1970-01-01' };
@@ -1523,7 +1655,6 @@
                 case 'devicestatus': return 'DeviceStatus';
                 case 'video': return 'video/data';
                 case 'audio': return 'audio/data';
-                // हिंदी कमेंट: 'health' कैटेगरी के लिए Firebase का सही पाथ यहाँ जोड़ा गया है।
                 case 'health': return 'AppHealthStatus'; 
                 default: return '';
             }
@@ -1536,7 +1667,6 @@
 
         function closeModal(modalElement) {
             if (!modalElement) return;
-            // हिंदी कमेंट: डेटा लिसनर को बंद करना जब मॉडल बंद हो जाए।
             if(modalElement.id === 'data-modal' && activeDataListener) {
                 off(activeDataListener.ref);
                 activeDataListener = null;
@@ -1558,10 +1688,6 @@
             openModal(comingSoonModal);
         }
         
-        // ===== START: BUG FIX / बग का समाधान यहाँ से शुरू =====
-        // हिंदी कमेंट: समस्या यह थी कि 'हेल्प डेस्क' बटन के लिए कोई क्लिक इवेंट लिस्नर नहीं था।
-        // नीचे दिया गया कोड ब्लॉक नई फ़ाइल में मौजूद नहीं था, जिस वजह से बटन क्लिक करने पर कुछ नहीं हो रहा था।
-        // मैंने इस लिस्नर को वापस जोड़ दिया है ताकि बटन क्लिक होने पर चैट मोडल खुल सके।
         liveChatBtn.addEventListener('click', () => {
             if (liveChatBtn.disabled) return;
             const { userId, childKey } = selectedChildInfo;
@@ -1569,7 +1695,6 @@
             openModal(chatModal);
             setupChat(userId, childKey);
         });
-        // ===== END: BUG FIX / बग का समाधान यहाँ समाप्त =====
         
         function setupChat(userId, childKey) {
             const chatMessagesArea = document.getElementById('chat-messages-area');
@@ -1604,13 +1729,12 @@
         }
         
         modalDataDisplayArea.addEventListener('click', (e) => {
-            const button = e.target.closest('button'); // More generic selector
+            const button = e.target.closest('button');
             if (!button || button.disabled) return;
 
             const { userId, childKey } = selectedChildInfo;
             const command = button.dataset.command;
             
-            // हिंदी कमेंट: एक्सेसिबिलिटी जानकारी वाला पॉप-अप दिखाने का लॉजिक।
             if(command === 'show-info') {
                 openModal(infoAccessibilityModal);
                 return;
@@ -1623,7 +1747,6 @@
                 if(span) span.textContent = 'Refreshing...';
                 button.disabled = true;
                 
-                // हिंदी कमेंट: अब onValue() के कारण, यह फंक्शन सिर्फ एक बार डेटा फिर से लोड करेगा और लिसनर को फिर से अटैच करेगा।
                 if (category === 'photo') renderPhotosFromDatabase(userId, childKey);
                 if (category === 'video') renderVideosFromDatabase(userId, childKey);
                 if (category === 'audio') renderAudiosFromDatabase(userId, childKey);
@@ -1733,6 +1856,8 @@
                     return 'This email is already registered. Please use the Login tab.'; 
                 case 'auth/weak-password': 
                     return 'Your password is too weak. It should be at least 6 characters long.'; 
+                case 'auth/too-many-requests':
+                    return 'Access temporarily disabled due to many failed login attempts. You can reset your password or try again later.';
                 default: 
                     return 'An authentication error occurred. Please try again later.'; 
             } 
@@ -1769,3 +1894,4 @@
     </script>
 </body>
 </html>
+
