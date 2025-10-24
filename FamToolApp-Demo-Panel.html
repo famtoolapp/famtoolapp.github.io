@@ -364,6 +364,7 @@
             align-items: center;
             justify-content: center;
             padding: 0 1rem;
+            transition: bottom 0.3s ease; /* Added transition */
         }
         
         .page-footer a {
@@ -373,6 +374,60 @@
             transition: color 0.3s;
         }
         .page-footer a:hover { color: var(--accent-blue); }
+        
+        /* --- START: ADVERTISEMENT STYLES --- */
+        
+        /* Mobile Bottom Banner Container */
+        #mobile-banner-container {
+            display: none; /* Hidden by default on desktop */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1003; /* Above footer */
+            background: var(--bg-main);
+            text-align: center;
+            min-height: 60px; /* 50px ad + 10px padding */
+            padding-top: 5px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Modal Ad Styles */
+        .modal-ad-separator {
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+        .modal-ad-title {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-ad-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .ad-slot-1, .ad-slot-3 {
+            background: rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-slot-1 {
+            width: 300px;
+            min-height: 250px;
+        }
+        .ad-slot-3 {
+            min-width: 300px;
+            min-height: 250px; /* Give it a min-height too */
+            flex-grow: 1;
+        }
+        
+        /* --- END: ADVERTISEMENT STYLES --- */
         
         @media (max-width: 992px) {
             .sidebar {
@@ -393,8 +448,40 @@
             .category-buttons { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
             .category-btn { min-height: 130px; }
         }
+        
+        /* --- START: ADVERTISEMENT MEDIA QUERIES --- */
+        @media (max-width: 767px) {
+            #mobile-banner-container {
+                display: block; /* Show mobile banner */
+            }
+            
+            /* Push footer up to sit above the ad banner */
+            .page-footer {
+                bottom: 60px; /* Height of the ad banner */
+            }
+            
+            /* Adjust main content padding to prevent ad from overlapping content when scrolled to bottom */
+            .main-content {
+                padding-bottom: 70px; /* 60px ad + 10px buffer */
+            }
+            
+            /* Adjust modal overlay to not go under the ad */
+            .modal-overlay {
+                padding-bottom: 60px;
+            }
+
+            /* Adjust sidebar padding for mobile ad */
+            .sidebar {
+                 padding-bottom: 135px; /* 75px original + 60px ad */
+            }
+        }
+        /* --- END: ADVERTISEMENT MEDIA QUERIES --- */
+        
         @media (max-width: 576px) {
-            .main-content { padding: 1rem; }
+            .main-content { 
+                padding: 1rem; 
+                padding-bottom: 70px; /* Ensure mobile padding is maintained */
+            }
             .main-header h1 { font-size: 1.8rem; }
             .category-buttons { grid-template-columns: repeat(2, 1fr); }
             .modal-content { padding: 1rem; }
@@ -545,7 +632,38 @@
                 <h3 id="modal-title">Data</h3>
                 <button class="modal-close-btn">×</button>
             </div>
-            <div class="modal-body" id="modal-data-display-area">
+            <div class="modal-body">
+                <!-- Dynamic data will be injected here -->
+                <div id="modal-data-display-area">
+                </div>
+                
+                <!-- START: Static Ad Container -->
+                <div class="modal-ad-separator"></div>
+                <p class="modal-ad-title">Advertisement</p>
+                <div class="modal-ad-container">
+                    
+                    <!-- Ad 1: 300x250 -->
+                    <div class="ad-slot-1">
+                        <script type="text/javascript">
+                            atOptions = {
+                                'key' : 'a66b2c51a89fd14484b5ef78706451ba',
+                                'format' : 'iframe',
+                                'height' : 250,
+                                'width' : 300,
+                                'params' : {}
+                            };
+                        </script>
+                        <script type="text/javascript" src="//aheadpains.com/a66b2c51a89fd14484b5ef78706451ba/invoke.js"></script>
+                    </div>
+
+                    <!-- Ad 3: Native Ad -->
+                    <div class="ad-slot-3">
+                        <script async="async" data-cfasync="false" src="//aheadpains.com/b3c6ab513f4054077cec979f5e31b8cf/invoke.js"></script>
+                        <div id="container-b3c6ab513f4054077cec979f5e31b8cf"></div>
+                    </div>
+                </div>
+                <!-- END: Static Ad Container -->
+                
             </div>
         </div>
     </div>
@@ -581,6 +699,21 @@
         © Copyright FamToolApp. All Rights Reserved by FamToolApp
     </footer>
 
+    <!-- START: Mobile Banner Ad (Fixed Bottom) -->
+    <div id="mobile-banner-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '3fdc31da6152751e5c6f9e26dadb6d23',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//aheadpains.com/3fdc31da6152751e5c6f9e26dadb6d23/invoke.js"></script>
+    </div>
+    <!-- END: Mobile Banner Ad -->
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const categoryButtonsContainer = document.querySelector('.category-buttons');
@@ -613,6 +746,9 @@
             document.body.addEventListener('click', function(e) {
                 const target = e.target;
                 if (target.classList.contains('modal-overlay') || target.closest('.modal-close-btn') || target.closest('.ok-btn')) {
+                    // Do not close if clicking inside an ad area (though this is less critical now)
+                    if(e.target.closest('.modal-ad-container')) return;
+                    
                     const modalToClose = target.closest('.modal-overlay');
                     closeModal(modalToClose);
                 }
@@ -671,6 +807,10 @@
                     modalTitle.textContent = getSafeCategoryName(category);
                     displayDemoData(category);
                     openModal(dataModal);
+                    
+                    // NOTE: The ad scripts are already in the DOM.
+                    // If they need to be re-initialized, you might need ad-provider-specific JS calls here.
+                    // For now, we assume they load when the modal becomes visible.
                 }
             });
 
@@ -940,3 +1080,4 @@
     </script>
 </body>
 </html>
+
