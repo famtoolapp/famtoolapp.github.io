@@ -6,13 +6,11 @@
     <meta name="robots" content="index, follow">
     <meta name="rating" content="General">
 
-    <title>Login / Sign Up - FamToolApp Account</title>
+    <title>Dashboard - FamToolApp Account</title>
     <meta name="description" content="Log in or create your FamToolApp account to access secure parental control features for safe child monitoring.">
     <meta name="keywords" content="FamToolApp login, parental control account, create FamToolApp account, सुरक्षित पैरेंटल अकाउंट, child safety account, family monitoring login">
     <link rel="canonical" href="https://famtoolapp.com/login-signup.html" />
-	
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1774946133841643"
-     crossorigin="anonymous"></script>
+
 
 <script type="application/ld+json">
 {
@@ -49,6 +47,7 @@
             --warning-border: #FFB300;
             --error-bg: rgba(244, 67, 54, 0.1);
             --error-border: #F44336;
+            --navbar-height: 70px;
         }
 
         * {
@@ -100,102 +99,303 @@
             100% { transform: scale(1); }
         }
         
-        /* Ad Styles Start */
+        /* --- ADVERTISEMENT STYLES (MODIFIED) --- */
         .ad-container {
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-        }
-        .ad-300x250 {
-            width: 300px;
-            height: 250px;
-            margin: 2rem auto;
-        }
-        .ad-320x50 {
             width: 100%;
-            max-width: 320px;
-            height: 50px;
-            min-height: 50px;
-            margin: 1.5rem auto; /* Ensures it's centered in data lists */
-        }
-        /* Make sure it fits in grids too */
-        .data-grid .ad-container {
-            grid-column: 1 / -1; /* Span full width in grid */
             margin: 1.5rem auto;
         }
-        /* Ad Styles End */
+        .ad-300x250 {
+            max-width: 300px; /* Max-width for desktop */
+            width: 100%;
+            height: 250px;
+        }
+        .ad-320x50 {
+            max-width: 320px; /* Max-width for mobile */
+            width: 100%;
+            height: 50px;
+            min-height: 50px;
+        }
+        .data-grid .ad-container {
+            grid-column: 1 / -1; /* Span full width in grid */
+        }
+        /* --- ADVERTISEMENT STYLES END --- */
 
+
+        /* --- NAVBAR STYLES (MODIFIED) --- */
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            background: var(--primary-surface);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .navbar-brand {
+             display: flex;
+             align-items: center;
+             gap: 10px;
+             font-size: 1.5rem;
+             font-weight: 600;
+             color: #fff;
+             text-decoration: none; /* Added for home link */
+        }
+        .navbar-brand svg {
+            stroke: var(--accent-blue);
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* New Notification Bell Styles */
+        .notification-bell-btn {
+            position: relative;
+            background: var(--secondary-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .notification-bell-btn:hover {
+            background: var(--accent-teal);
+            color: #fff;
+        }
+        .notification-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent-red);
+            color: #fff;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-main);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+        .notification-count.visible {
+            transform: scale(1);
+        }
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(var(--navbar-height) - 10px);
+            right: 1.5rem;
+            width: 320px;
+            max-height: 400px;
+            background: var(--primary-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            z-index: 1000;
+        }
+        .notification-dropdown.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .notification-dropdown-header {
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .notification-dropdown-list {
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .notification-item {
+            padding: 1rem;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .notification-item:hover {
+            background-color: var(--secondary-surface);
+        }
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        .notification-item p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .notification-item-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Desktop Nav Links */
+        .desktop-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--secondary-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Dropdown Menu */
+        .mobile-nav-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(var(--navbar-height) - 10px);
+            right: 1.5rem;
+            width: 280px;
+            background: var(--primary-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            z-index: 1000;
+        }
+        .mobile-nav-dropdown.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .mobile-nav-dropdown .action-btn {
+            width: calc(100% - 2rem);
+            margin: 1rem;
+            padding: 14px;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        /* --- NAVBAR STYLES END --- */
+
+
+        /* --- DASHBOARD CONTAINER (MODIFIED) --- */
+        /* No sidebar, so container is simpler */
         .dashboard-container {
             display: flex;
-            height: calc(100vh - 45px);
+            height: 100vh;
+            padding-top: var(--navbar-height);
             transition: all 0.4s ease-in-out;
         }
 
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0; 
-            background: var(--primary-surface);
-            backdrop-filter: blur(16px);
+        /* --- SIDEBAR (REMOVED) --- */
+        /* All .sidebar, .sidebar-header, etc. styles removed */
+
+        .main-content { 
+            flex-grow: 1; 
+            overflow-y: auto; 
+            height: 100%; 
+            position: relative;
+        }
+        
+        .content-view { 
+            display: none; 
+            padding: 3rem; 
+            animation: fadeIn 0.5s ease; 
+        }
+        .content-view.active { display: block; }
+
+
+        /* --- CHILD LIST STYLES (NEW) --- */
+        #child-list-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .child-card {
+            background: var(--secondary-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            border-right: 1px solid var(--border-color);
-            transition: transform 0.4s ease-in-out, width 0.4s ease-in-out, padding 0.4s ease-in-out;
-            z-index: 1000;
-            box-shadow: inset 0 0 40px rgba(10,15,26,0.5);
-            overflow: hidden; 
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 1rem;
         }
-        .dashboard-container.sidebar-hidden .sidebar {
-            width: 0;
-            padding: 2rem 0;
-            transform: translateX(0);
+        .child-card:hover {
+            transform: translateY(-8px);
+            background: rgba(167, 223, 255, 0.1);
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border-color: var(--accent-blue);
         }
-        .sidebar > * {
-            transition: opacity 0.3s ease-in-out;
-            min-width: 236px;
+        .child-card svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--accent-blue);
         }
-        .dashboard-container.sidebar-hidden .sidebar > * {
-            opacity: 0;
-            visibility: hidden;
+        .child-card .user-name {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #fff;
         }
+        .child-card .device-name {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+        .no-devices-placeholder {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        /* --- CHILD LIST STYLES END --- */
 
-        .sidebar-header { margin-bottom: 2.5rem; display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
-        .sidebar-header h2 { color: #fff; font-size: 1.6rem; font-weight: 600; white-space: nowrap; }
-        .sidebar-header svg { stroke: var(--accent-blue); flex-shrink: 0;}
-        
-        .user-list { list-style-type: none; overflow-y: auto; flex-grow: 1; }
-        .user-list-item {
-            padding: 1rem; border-radius: 10px; cursor: pointer;
-            transition: all 0.3s ease; margin-bottom: 1rem;
-            display: flex; align-items: center; gap: 15px;
-            background: var(--secondary-surface); border: 1px solid var(--border-color);
-            white-space: nowrap;
-        }
-        .user-list-item:hover { transform: translateY(-3px); background: rgba(167, 223, 255, 0.1); box-shadow: 0 5px 15px var(--shadow-color); }
-        .user-list-item.active { background: var(--accent-blue); color: var(--bg-main); border-color: var(--accent-blue); box-shadow: 0 0 20px var(--glow-color); }
-        .user-list-item.active .user-name, .user-list-item.active .device-name { color: var(--bg-main); }
-        .user-list-item.active svg { stroke: var(--bg-main); }
-        .user-list-item .user-name { font-weight: 500; font-size: 1.1rem; }
-        .user-list-item .device-name { font-size: 0.85rem; opacity: 0.8; }
-        
-        .sidebar-footer { margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-color); flex-shrink: 0; }
-        #live-chat-btn {
-            background: linear-gradient(45deg, var(--accent-purple), var(--accent-teal));
-            color: white; padding: 14px; border: none; border-radius: 10px; width: 100%;
-            cursor: pointer; font-size: 1rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px;
-            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        #live-chat-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4); }
-        #live-chat-btn:disabled { background: var(--text-secondary); cursor: not-allowed; box-shadow: none; transform: none; }
 
-        .main-content { flex-grow: 1; padding: 3rem; overflow-y: auto; height: 100%; transition: margin-left 0.4s ease-in-out; }
         .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; animation: fadeInUp 0.5s ease-out; gap: 1rem; }
         .main-header-left { display: flex; align-items: center; gap: 1.5rem; }
         .main-header h1 { font-size: 2.5rem; color: #fff; font-weight: 700; }
         
         .header-actions { display: flex; gap: 1rem; }
-
         .header-btn {
             background: var(--secondary-surface); border: 1px solid var(--border-color);
             color: var(--text-primary); cursor: pointer; border-radius: 8px;
@@ -203,23 +403,37 @@
             transition: all 0.3s ease;
         }
         .header-btn:hover { background: var(--accent-teal); color: #fff; border-color: var(--accent-teal); }
-        .header-btn svg { transition: transform 0.4s ease; }
         
-        #toggle-sidebar-btn { display: flex; }
-        #menu-btn { display: none; }
-        .dashboard-container.sidebar-hidden #toggle-sidebar-btn svg { transform: rotate(180deg); }
+        /* Removed toggle-sidebar-btn styles */
+        #menu-btn { display: none; } /* Re-purposed as mobile-menu-btn */
 
         .action-btn {
             background: var(--secondary-surface); color: white; padding: 12px 20px; border: 1px solid var(--border-color);
             border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.3s ease;
             position: relative; 
             overflow: hidden; 
+            display: flex; /* Added */
+            align-items: center; /* Added */
+            justify-content: center; /* Added */
+            gap: 10px; /* Added */
         }
         #logout-btn { background: var(--accent-teal); }
         #logout-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 169, 165, 0.3); }
 
         #delete-account-btn { background: var(--accent-red); border-color: var(--accent-red); }
         #delete-account-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3); }
+
+        /* Help Desk Button (Live Chat) */
+        #live-chat-btn {
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-teal));
+            color: white; padding: 12px 20px; /* Adjusted padding */
+            border: none; border-radius: 10px;
+            cursor: pointer; font-size: 1rem; font-weight: 600;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        #live-chat-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4); }
+        #live-chat-btn:disabled { background: var(--text-secondary); cursor: not-allowed; box-shadow: none; transform: none; }
+
 
         .info-btn {
             background: transparent;
@@ -237,7 +451,6 @@
             border-color: var(--accent-blue);
         }
 
-        #details-view { display: none; animation: fadeIn 0.8s ease; }
         .category-buttons {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -330,7 +543,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(10, 15, 26, 0.6); backdrop-filter: blur(10px);
             display: none; justify-content: center; align-items: center;
-            z-index: 1001; padding: 20px; 
+            z-index: 2000; padding: 20px; 
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -341,7 +554,7 @@
         }
         .modal-content {
             background: var(--primary-surface); border: 1px solid var(--border-color);
-            padding: 2rem; border-radius: 16px; width: 100%; max-width: 900px;
+            padding: 2rem; border-radius: 16px; width: 100%; max-width: 500px;
             box-shadow: 0 10px 40px var(--shadow-color);
             display: flex; flex-direction: column; max-height: 90vh;
             transform: translateY(20px);
@@ -549,7 +762,6 @@
         
         /* New Verification Section Styles */
         #verification-container {
-            display: none; /* Hidden by default */
             width: 100%;
             margin-bottom: 2rem;
             animation: fadeIn 0.5s ease-out;
@@ -615,37 +827,40 @@
              line-height: 1.6;
              margin-bottom: 1.5rem;
         }
+        .page-header {
+             display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
+        }
+        
+        /* Back-btn removed */
+        
+        .page-title {
+            font-size: 2.2rem; font-weight: 700; color: #fff;
+        }
 
+        /* --- MEDIA QUERIES (MODIFIED) --- */
         @media (max-width: 992px) {
-            .sidebar {
-                position: fixed;
-                left: 0;
-                top: 0;
-                height: 100%;
-                transform: translateX(-100%);
-                box-shadow: 10px 0 30px rgba(0,0,0,0.5);
-                padding-bottom: 75px;
+            .top-navbar { padding: 0 1rem; }
+            /* Hide desktop links */
+            .desktop-nav-links {
+                display: none;
             }
-            .sidebar.open { transform: translateX(0); }
-            .dashboard-container.sidebar-hidden .sidebar { transform: translateX(-100%); }
-            #toggle-sidebar-btn { display: none; }
-            #menu-btn { display: flex; }
-            .main-content { padding: 1.5rem; }
-            .main-header h1 { font-size: 2rem; }
+            /* Show mobile menu button */
+            .mobile-menu-btn {
+                display: flex;
+            }
+            /* Removed all sidebar-related media queries */
+            
+            .content-view { padding: 1.5rem; }
+            .main-header h1, .page-title { font-size: 2rem; }
             .category-buttons { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
             .category-btn { min-height: 130px; }
         }
+        
         @media (max-width: 576px) {
-            .main-content { padding: 1rem; }
-            .main-header h1 { font-size: 1.8rem; }
+            .content-view { padding: 1rem; }
+            .main-header h1, .page-title { font-size: 1.8rem; }
             .category-buttons { grid-template-columns: repeat(2, 1fr); }
             .auth-card { padding: 2rem; max-width: 90vw; }
-            .modal-content {
-                padding: 1rem;
-            }
-            .modal-body {
-                padding: 0 0.25rem 0.5rem 0.25rem;
-            }
             .data-header {
                 flex-direction: column;
                 align-items: stretch;
@@ -653,11 +868,24 @@
             .limit-display {
                 text-align: center;
             }
+            #child-list-container {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
         }
         @media (max-width: 420px) {
             .page-footer {
                 font-size: 0.75rem;
                 padding: 0 0.5rem;
+            }
+            .navbar-brand { font-size: 1.2rem; }
+            .action-btn { padding: 10px 14px; font-size: 0.9rem; }
+            .notification-dropdown {
+                width: calc(100vw - 2rem);
+                right: 1rem;
+            }
+            .mobile-nav-dropdown {
+                 width: calc(100vw - 2rem);
+                 right: 1rem;
             }
         }
     </style>
@@ -686,166 +914,176 @@
         </div>
     </div>
 
-    <div id="dashboard" class="dashboard-container" style="display: none;">
-        <div id="overlay"></div>
-        <aside class="sidebar">
-            <div>
-                <div class="sidebar-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    <h2>Your Children</h2>
-                </div>
-                <ul id="user-list" class="user-list"></ul>
+    <div id="app-container" style="display: none;">
+        
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                 <a href="#" class="navbar-brand" id="home-brand-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>FamToolApp</span>
+                </a>
             </div>
-            <div class="sidebar-footer">
-                <button id="live-chat-btn" disabled>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                    <span>Help Desk</span>
+            <div class="navbar-right">
+                <button id="notification-bell-btn" class="notification-bell-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <div id="notification-count" class="notification-count">0</div>
+                </button>
+                
+                <div class="desktop-nav-links">
+                    <button id="live-chat-btn" class="action-btn" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        <span>Help Desk</span>
+                    </button>
+                    <button id="delete-account-btn" class="action-btn"><span>Delete Account</span></button>
+                    <button id="logout-btn" class="action-btn"><span>Logout</span></button>
+                </div>
+
+                <button id="mobile-menu-btn" class="mobile-menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
             </div>
-        </aside>
 
-        <main class="main-content">
-            <header class="main-header">
-                <div class="main-header-left">
-                    <button id="toggle-sidebar-btn" class="header-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
-                    </button>
-                    <button id="menu-btn" class="header-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                    </button>
-                    <h1 id="main-content-title">Select Child</h1>
+            <div id="notification-dropdown" class="notification-dropdown">
+                <div class="notification-dropdown-header">Notifications</div>
+                <div id="notification-dropdown-list" class="notification-dropdown-list">
+                    </div>
+            </div>
+
+            <div id="mobile-nav-dropdown" class="mobile-nav-dropdown">
                 </div>
-                <div class="header-actions">
-                    <button id="logout-btn" class="action-btn"><span>Logout</span></button>
-                    <button id="delete-account-btn" class="action-btn"><span>Delete Account</span></button>
-                </div>
-            </header>
+        </nav>
+
+        <div id="dashboard" class="dashboard-container">
+            <div id="overlay"></div>
             
-            <!-- New Verification Container -->
-            <div id="verification-container">
-                <div class="notice-box error">
-                    <h4>Please check your mailbox (<span id="verification-email">your.email@example.com</span>)</h4>
-                    <p>Please check the email received to validate your account, otherwise it will be automatically deleted. (Check your spam if you don't receive the email.)</p>
-                    <div class="notice-actions">
-                        <button id="resend-verification-btn" class="notice-btn">RESEND EMAIL FOR VALIDATE MY ACCOUNT</button>
-                    </div>
-                </div>
-                <div class="notice-box warning" id="info-notice-box">
-                    <h4>Important Information - Regular Connection Required</h4>
-                    <p>For customers using the free offer, without connecting to the site <strong>7 days from the last login</strong>, the target phone will be automatically deleted.<br>For customers using the Basic, Premium or Ultra offer, without connecting to the site <strong>for a month from the last login</strong>, the target phone will be automatically deleted.</p>
-                </div>
-                <div class="download-section" id="download-notice-box">
-                    <h4>ADD A PHONE TO YOUR ACCOUNT</h4>
-                    <p>Add a phone to your account, for that you just need to download and install the application on the phone you want to follow.</p>
-                     <p>&#9432; Please read and follow all steps correctly before downloading and installing the application. If this is not done, the application may not work properly.</p>
-                    <div class="notice-actions">
-                       <a href="Installation-Guide.html" class="notice-btn"style="background-color: #5DADE2; color: white; text-decoration: none;">&#9432; HELP FOR INSTALLATION</a>
-					  
-                        <a href="Download.html" class="notice-btn" style="background-color: var(--accent-green); color: white; text-decoration: none;">&#10515; DOWNLOAD APPLICATION</a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="details-view">
-                 <div class="category-buttons">
-                    <button class="category-btn" data-category="devicestatus">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ce93d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                        <span>Device Status</span>
-                    </button>
-
-                    <button class="category-btn" data-category="health">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e57373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                        <span>App Health</span>
-                    </button>
+            <main class="main-content">
+                
+                <div id="dashboard-view" class="content-view">
+                    <header class="main-header">
+                        <h1 id="main-content-title">Select Child</h1>
+                    </header>
                     
-                    <button class="category-btn" data-category="location">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        <span>Live Location</span>
-                    </button>
-                    <button class="category-btn" data-category="photo">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                        <span>Photos</span>
-                    </button>
-                    <button class="category-btn" data-category="video">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff7043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-                        <span>Videos</span>
-                    </button>
-                    <button class="category-btn" data-category="audio">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#26a69a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                        <span>Audio Recordings</span>
-                    </button>
-                    <button class="category-btn" data-category="keylogger">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffab40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"/></svg>
-                        <span>Keystroke</span>
-                    </button>
-                    <button class="category-btn" data-category="sms">
-                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                        <span>SMS</span>
-                    </button>
-                    <button class="category-btn" data-category="calllogs">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64b5f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81 .7A2 2 0 0 1 22 16.92z"></path></svg>
-                        <span>Call Logs</span>
-                    </button>
-                    <button class="category-btn" data-category="notifications">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                        <span>Notifications</span>
-                    </button>
-					
-                    <button class="category-btn" data-category="toggleAppVisibility">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                        <span>Hide/Show App</span>
-                        <small id="app-visibility-status" style="margin-top: 8px; font-weight: bold; color: var(--accent-blue);">Status: Loading...</small>
-                    </button>
-                    <button class="category-btn" data-category="coming-soon" data-feature-name="Screenshot">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.09 10.59a2.23 2.23 0 0 0-2.2-2.2H5.12a2.23 2.23 0 0 0-2.2 2.2v8.84a2.23 2.23 0 0 0 2.2 2.2h13.78a2.23 2.23 0 0 0 2.2-2.2v-8.84zM6.88 4.71h10.24"></path><line x1="12" y1="2.11" x2="12" y2="4.71"></line></svg>
-                        <span>Screenshot</span>
-                    </button>
-                    <button class="category-btn" data-category="coming-soon" data-feature-name="File Manager">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                        <span>File Manager</span>
-                    </button>
-                 </div>
+                    <div id="child-list-container">
+                        </div>
 
-                <!-- Real Ad Container 300x250 Start -->
-                <div id="dashboard-ad-container" class="ad-container ad-300x250">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : 'a66b2c51a89fd14484b5ef78706451ba',
-                            'format' : 'iframe',
-                            'height' : 250,
-                            'width' : 300,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//www.highperformanceformat.com/a66b2c51a89fd14484b5ef78706451ba/invoke.js"></script>
+                    <div id="verification-container" style="display: none;"> <div class="notice-box error">
+                            <h4>Please check your mailbox (<span id="verification-email">your.email@example.com</span>)</h4>
+                            <p>Please check the email received to validate your account, otherwise it will be automatically deleted. (Check your spam if you don't receive the email.)</p>
+                            <div class="notice-actions">
+                                <button id="resend-verification-btn" class="notice-btn">RESEND EMAIL FOR VALIDATE MY ACCOUNT</button>
+                            </div>
+                        </div>
+                        <div class="notice-box warning" id="info-notice-box">
+                            <h4>Important Information - Regular Connection Required</h4>
+                            <p>For customers using the free offer, without connecting to the site <strong>7 days from the last login</strong>, the target phone will be automatically deleted.<br>For customers using the Basic, Premium or Ultra offer, without connecting to the site <strong>for a month from the last login</strong>, the target phone will be automatically deleted.</p>
+                        </div>
+                        <div class="download-section" id="download-notice-box">
+                            <h4>ADD A PHONE TO YOUR ACCOUNT</h4>
+                            <p>Add a phone to your account, for that you just need to download and install the application on the phone you want to follow.</p>
+                            <p>ⓘ Please read and follow all steps correctly before downloading and installing the application. If this is not done, the application may not work properly.</p>
+                            <div class="notice-actions">
+                            <a href="Installation-Guide.html" class="notice-btn"style="background-color: #5DADE2; color: white; text-decoration: none;">ⓘ HELP FOR INSTALLATION</a>
+                            
+                                <a href="Download.html" class="notice-btn" style="background-color: var(--accent-green); color: white; text-decoration: none;">⤓ DOWNLOAD APPLICATION</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="details-view" style="display: none;">
+                        <div class="category-buttons">
+                           <button class="category-btn" data-category="devicestatus">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ce93d8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                                <span>Device Status</span>
+                            </button>
+
+                            <button class="category-btn" data-category="health">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e57373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span>App Health</span>
+                            </button>
+                            
+                            <button class="category-btn" data-category="location">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>Live Location</span>
+                            </button>
+                            <button class="category-btn" data-category="photo">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                <span>Photos</span>
+                            </button>
+                            <button class="category-btn" data-category="video">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff7043" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                                <span>Videos</span>
+                            </button>
+                            <button class="category-btn" data-category="audio">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#26a69a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                                <span>Audio Recordings</span>
+                            </button>
+                            <button class="category-btn" data-category="keylogger">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffab40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"/></svg>
+                                <span>Keystroke</span>
+                            </button>
+                            <button class="category-btn" data-category="sms">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                <span>SMS</span>
+                            </button>
+                            <button class="category-btn" data-category="calllogs">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64b5f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81 .7A2 2 0 0 1 22 16.92z"></path></svg>
+                                <span>Call Logs</span>
+                            </button>
+                            <button class="category-btn" data-category="notifications">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                                <span>Notifications</span>
+                            </button>
+                            
+                            <button class="category-btn" data-category="toggleAppVisibility">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                <span>Hide/Show App</span>
+                                <small id="app-visibility-status" style="margin-top: 8px; font-weight: bold; color: var(--accent-blue);">Status: Loading...</small>
+                            </button>
+                             <button class="category-btn" data-category="coming-soon" data-feature-name="Screenshot">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.09 10.59a2.23 2.23 0 0 0-2.2-2.2H5.12a2.23 2.23 0 0 0-2.2 2.2v8.84a2.23 2.23 0 0 0 2.2 2.2h13.78a2.23 2.23 0 0 0 2.2-2.2v-8.84zM6.88 4.71h10.24"></path><line x1="12" y1="2.11" x2="12" y2="4.71"></line></svg>
+                                <span>Screenshot</span>
+                            </button>
+                            <button class="category-btn" data-category="coming-soon" data-feature-name="File Manager">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                <span>File Manager</span>
+                            </button>
+                        </div>
+
+                        <div id="dashboard-ad-container" class="ad-container ad-300x250">
+                            <script type="text/javascript">
+                                atOptions = {
+                                    'key' : 'a66b2c51a89fd14484b5ef78706451ba',
+                                    'format' : 'iframe',
+                                    'height' : 250,
+                                    'width' : 300,
+                                    'params' : {}
+                                };
+                            </script>
+                            <script type="text/javascript" src="//www.highperformanceformat.com/a66b2c51a89fd14484b5ef78706451ba/invoke.js"></script>
+                        </div>
+                    </div>
                 </div>
-                <!-- Real Ad Container 300x250 End -->
 
-            </div>
-        </main>
-    </div>
-
-    <div id="data-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Data</h3>
-                <button class="modal-close-btn">×</button>
-            </div>
-            <div class="modal-body" id="modal-data-display-area">
+                 <div id="data-page-view" class="content-view">
+                    <header class="page-header">
+                        <h1 id="data-page-title" class="page-title">Data</h1>
+                    </header>
+                    <div id="data-page-content">
+                        </div>
                 </div>
+            </main>
         </div>
     </div>
     
     <div id="chat-modal" class="modal-overlay">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 900px;">
             <div class="modal-header">
                 <h3 id="chat-modal-title">Help Desk</h3>
                 <button class="modal-close-btn">×</button>
             </div>
             <div class="modal-body" style="padding: 0;">
                 <div class="live-chat-area">
-                    <div class="chat-messages" id="chat-messages-area">
-                        </div>
+                    <div class="chat-messages" id="chat-messages-area"></div>
                     <div class="chat-input-area">
                         <input type="text" id="chat-message-input" placeholder="Type a message...">
                         <button id="chat-send-btn">
@@ -858,7 +1096,7 @@
     </div>
     
     <div id="delete-account-modal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h3>Delete Account</h3>
                 <button class="modal-close-btn">×</button>
@@ -881,13 +1119,11 @@
        <div class="modal-content">
             <div class="modal-header">
                 <h3 id="coming-soon-title">Feature Coming Soon</h3>
+                 <button class="modal-close-btn">×</button>
             </div>
             <div class="modal-body">
-                <p style="margin-bottom: 1rem; line-height: 1.6;">
-                    We are working hard to bring you this new feature.
-                </p>
-                <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                    You will be able to use it as soon as it's ready. Thank you for your patience!
+                <p style="margin-bottom: 1.5rem; line-height: 1.6; text-align: center;">
+                    We are working hard to bring you this new feature. Thank you for your patience!
                 </p>
                 <button class="ok-btn">Okay</button>
             </div>
@@ -898,7 +1134,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Notification from FamToolApp</h3>
-            </div>
+                 <button class="modal-close-btn">×</button> </div>
             <div class="modal-body">
                 <p id="admin-notification-text" style="font-size: 1.1rem; line-height: 1.6;"></p>
                 <button id="admin-notification-ok-btn" class="ok-btn">Okay</button>
@@ -907,9 +1143,10 @@
     </div>
 
     <div id="info-notification-modal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h3 id="info-modal-title">Notification</h3>
+                 <button class="modal-close-btn">×</button>
             </div>
             <div class="modal-body">
                 <p id="info-modal-text" style="font-size: 1.1rem; line-height: 1.6; text-align: center;"></p>
@@ -953,7 +1190,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, sendEmailVerification, deleteUser } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-        import { getDatabase, ref, onValue, set, get, update, query, orderByChild, equalTo, push, serverTimestamp, off } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+        import { getDatabase, ref, onValue, set, get, update, query, orderByChild, equalTo, push, serverTimestamp, off, limitToLast } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
         
         const firebaseConfig = {
           apiKey: "AIzaSyBZ-E4_1bI4YN-1pt6xyMNXq1tOAvx0GY0",
@@ -970,19 +1207,22 @@
         const auth = getAuth(app);
         const db = getDatabase(app);
 
-        // DOM Element variables
+        // --- DOM Element variables (MODIFIED) ---
         const authContainer = document.getElementById('auth-container');
+        const appContainer = document.getElementById('app-container');
         const dashboard = document.getElementById('dashboard');
-        const userList = document.getElementById('user-list');
+        const childListContainer = document.getElementById('child-list-container'); // Changed from userList
         const mainContentTitle = document.getElementById('main-content-title');
         const detailsView = document.getElementById('details-view');
         const categoryButtonsContainer = document.querySelector('.category-buttons');
-        const menuBtn = document.getElementById('menu-btn');
-        const sidebar = document.querySelector('.sidebar');
+        
         const overlay = document.getElementById('overlay');
-        const dataModal = document.getElementById('data-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDataDisplayArea = document.getElementById('modal-data-display-area');
+        
+        const dataPageView = document.getElementById('data-page-view');
+        const dataPageTitle = document.getElementById('data-page-title');
+        const dataPageContent = document.getElementById('data-page-content');
+        const dashboardView = document.getElementById('dashboard-view');
+
         const errorMessage = document.getElementById('error-message');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
@@ -994,27 +1234,40 @@
         const comingSoonModal = document.getElementById('coming-soon-modal');
         const comingSoonTitle = document.getElementById('coming-soon-title');
         const offlineBanner = document.getElementById('offline-banner');
+        
         const adminNotificationModal = document.getElementById('admin-notification-modal');
         const adminNotificationText = document.getElementById('admin-notification-text');
         const adminNotificationOkBtn = document.getElementById('admin-notification-ok-btn');
+        
         const liveChatBtn = document.getElementById('live-chat-btn');
         const chatModal = document.getElementById('chat-modal');
-        const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+        
         const infoNotificationModal = document.getElementById('info-notification-modal');
         const infoModalText = document.getElementById('info-modal-text');
+        
         const deleteAccountBtn = document.getElementById('delete-account-btn');
         const deleteAccountModal = document.getElementById('delete-account-modal');
         const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
         const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+        
         const infoAccessibilityModal = document.getElementById('info-accessibility-modal');
         
-        // Verification Elements
         const verificationContainer = document.getElementById('verification-container');
         const verificationEmailSpan = document.getElementById('verification-email');
         const resendVerificationBtn = document.getElementById('resend-verification-btn');
         const infoNoticeBox = document.getElementById('info-notice-box');
         const downloadNoticeBox = document.getElementById('download-notice-box');
+        
+        const homeBrandLink = document.getElementById('home-brand-link');
 
+        // New Navbar elements
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNavDropdown = document.getElementById('mobile-nav-dropdown');
+        const desktopNavLinks = document.querySelector('.desktop-nav-links');
+        const notificationBellBtn = document.getElementById('notification-bell-btn');
+        const notificationCount = document.getElementById('notification-count');
+        const notificationDropdown = document.getElementById('notification-dropdown');
+        const notificationDropdownList = document.getElementById('notification-dropdown-list');
 
         let authMode = 'login';
         let activeDataListener = null;
@@ -1022,24 +1275,29 @@
         let activeChatListener = null;
         let selectedChildInfo = {};
         let currentNotificationRef = null;
-
-        let fullKeyloggerData = [];
-        let renderedKeyloggerCount = 0;
-        const KEYLOGGER_BATCH_SIZE = 50;
-        let isKeyloggerLoading = false;
+        
+        // --- LAZY LOADING VARIABLES (NEW) ---
+        let fullKeyloggerData = [], renderedKeyloggerCount = 0, isKeyloggerLoading = false;
+        let fullSmsData = [], renderedSmsCount = 0, isSmsLoading = false;
+        let fullCallLogData = [], renderedCallLogCount = 0, isCallLogLoading = false;
+        let fullNotificationData = [], renderedNotificationCount = 0, isNotificationLoading = false;
+        
+        const DATA_BATCH_SIZE = 50; // Universal batch size
         
         let isPhotoCommandRunning = false;
         let isVideoCommandRunning = false;
         let isAudioCommandRunning = false;
         
-        // --- AD FUNCTIONS START ---
+        // --- AD FUNCTIONS (MODIFIED) ---
         function getAdPlaceholderHtml(uniqueId) {
+            // Use ad-320x50 for list-based data
             return `<div id="${uniqueId}" class="ad-container ad-320x50"></div>`;
         }
         
         function loadBannerAd(containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
+            if (container.querySelector('iframe')) return; // Don't reload if already loaded
 
             container.innerHTML = ''; 
 
@@ -1064,8 +1322,161 @@
         }
         // --- AD FUNCTIONS END ---
 
-        toggleSidebarBtn.addEventListener('click', () => dashboard.classList.toggle('sidebar-hidden'));
+        // --- NAVIGATION AND VIEW FUNCTIONS (NEW/MODIFIED) ---
         
+        function showView(viewId, pushState = true, stateData = {}) {
+            document.querySelectorAll('.content-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            const activeView = document.getElementById(viewId);
+            if(activeView) {
+                activeView.classList.add('active');
+            }
+            
+            // Detach scroll listeners when leaving data view
+            if (viewId !== 'data-page-view') {
+                detachScrollListeners();
+            }
+
+            if (pushState) {
+                const state = { view: viewId, ...stateData };
+                let hash = `#${viewId}`;
+                if (state.childKey) hash = `#${state.childKey}`;
+                if (state.category) hash = `#${state.childKey}/${state.category}`;
+                
+                // Only push if state is different
+                if (JSON.stringify(history.state) !== JSON.stringify(state)) {
+                    history.pushState(state, "", hash);
+                }
+            }
+        }
+        
+        // Handle Browser Back/Forward
+        window.addEventListener('popstate', (event) => {
+            if (event.state) {
+                handleStateChange(event.state);
+            } else {
+                // This handles going back to the very first page (no state)
+                handleStateChange({ view: 'dashboard-view' });
+            }
+        });
+
+        function handleStateChange(state) {
+            if (!state) state = { view: 'dashboard-view' };
+
+            switch (state.view) {
+                case 'data-page-view':
+                    if (state.childKey && state.category) {
+                        // Ensure correct child is selected (in case of deep link)
+                        selectedChildInfo = { ...selectedChildInfo, childKey: state.childKey };
+                        openDataPage(state.category, false); // false = don't push state
+                    } else {
+                        // Fallback to dashboard
+                        showDashboardHome(false);
+                    }
+                    break;
+                case 'details-view':
+                    if (state.childKey) {
+                        selectedChildInfo = { ...selectedChildInfo, childKey: state.childKey };
+                        showFeatureDashboard(false); // false = don't push state
+                    } else {
+                        showDashboardHome(false);
+                    }
+                    break;
+                case 'dashboard-view':
+                default:
+                    showDashboardHome(false); // false = don't push state
+                    break;
+            }
+        }
+
+        // Show main child list
+        function showDashboardHome(pushState = true) {
+            mainContentTitle.textContent = 'Select Child';
+            childListContainer.style.display = 'grid';
+            verificationContainer.style.display = 'block'; // Let manageVerificationUI handle this
+            detailsView.style.display = 'none';
+            if (auth.currentUser) manageVerificationUI(auth.currentUser); // Re-check verification UI
+            
+            showView('dashboard-view', pushState, { view: 'dashboard-view' });
+        }
+
+        // Show features for a selected child
+        function showFeatureDashboard(pushState = true) {
+            if (!selectedChildInfo.childKey) {
+                showDashboardHome();
+                return;
+            }
+            mainContentTitle.textContent = selectedChildInfo.userName || 'Dashboard';
+            childListContainer.style.display = 'none';
+            verificationContainer.style.display = 'none';
+            detailsView.style.display = 'block';
+            
+            showView('dashboard-view', pushState, { view: 'details-view', childKey: selectedChildInfo.childKey });
+        }
+        
+        // Open the final data page (SMS, Photos, etc.)
+        function openDataPage(category, pushState = true) { 
+            dataPageTitle.textContent = getSafeCategoryName(category);
+            // Pass pushState to showView
+            showView('data-page-view', pushState, { 
+                view: 'data-page-view', 
+                childKey: selectedChildInfo.childKey, 
+                category: category 
+            });
+            displayCategoryData(category);
+        }
+
+        // Home brand link click handler
+        homeBrandLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showDashboardHome(true); // Always push state when clicking home
+        });
+        
+        // --- END NAVIGATION FUNCTIONS ---
+
+
+        // --- NAVBAR/MENU LOGIC (NEW) ---
+        function setupMobileMenu() {
+            // Clone desktop links into mobile dropdown
+            const linksToClone = desktopNavLinks.querySelectorAll('.action-btn');
+            linksToClone.forEach(link => {
+                mobileNavDropdown.appendChild(link.cloneNode(true));
+            });
+            
+            // Re-bind listeners for cloned buttons
+            const mobileChatBtn = mobileNavDropdown.querySelector('#live-chat-btn');
+            const mobileDeleteBtn = mobileNavDropdown.querySelector('#delete-account-btn');
+            const mobileLogoutBtn = mobileNavDropdown.querySelector('#logout-btn');
+
+            if (mobileChatBtn) mobileChatBtn.addEventListener('click', () => openChatModal());
+            if (mobileDeleteBtn) mobileDeleteBtn.addEventListener('click', () => openModal(deleteAccountModal));
+            if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', () => signOut(auth));
+        }
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNavDropdown.classList.toggle('visible');
+            notificationDropdown.classList.remove('visible'); // Close other dropdown
+        });
+        
+        notificationBellBtn.addEventListener('click', () => {
+            notificationDropdown.classList.toggle('visible');
+            mobileNavDropdown.classList.remove('visible'); // Close other dropdown
+        });
+
+        // Close dropdowns if clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !mobileNavDropdown.contains(e.target)) {
+                mobileNavDropdown.classList.remove('visible');
+            }
+            if (!notificationBellBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+                notificationDropdown.classList.remove('visible');
+            }
+        });
+        
+        // --- END NAVBAR LOGIC ---
+
+
         loginTabBtn.addEventListener('click', () => { 
             authMode = 'login'; 
             loginTabBtn.classList.add('active'); 
@@ -1110,7 +1521,6 @@
                     .then((userCredential) => {
                         sendEmailVerification(auth.currentUser)
                             .then(() => {
-                                // User is automatically logged in by onAuthStateChanged
                                 console.log("Verification email sent.");
                             });
                     })
@@ -1164,75 +1574,79 @@
         onAuthStateChanged(auth, user => {
             if (user) {
                 authContainer.style.display = 'none'; 
-                dashboard.style.display = 'flex';
+                appContainer.style.display = 'block';
+                setupMobileMenu(); // Setup mobile menu on login
                 
                 const verificationStatusRef = ref(db, `user/${user.uid}/profile/emailVerified`);
                 set(verificationStatusRef, user.emailVerified);
-
-                // Manage the UI based on verification status and device presence
-                manageVerificationUI(user);
-
-                // Load devices into the sidebar
+                
                 loadUserDevices(user.uid);
+                
+                // Check initial URL hash
+                if (location.hash) {
+                    const hash = location.hash.substring(1);
+                    const parts = hash.split('/');
+                    const childKey = parts[0];
+                    const category = parts[1];
+                    
+                    if (category) {
+                        // Deep link to a data page
+                        selectedChildInfo = { userId: user.uid, childKey: childKey };
+                        openDataPage(category, false); // Don't push state, just load
+                    } else if (childKey) {
+                        // Deep link to a child's feature page
+                        selectedChildInfo = { userId: user.uid, childKey: childKey };
+                        showFeatureDashboard(false); // Don't push state, just load
+                    } else {
+                        showDashboardHome(false);
+                    }
+                } else {
+                    showDashboardHome(false); // Show main dashboard
+                }
 
             } else {
                 authContainer.style.display = 'flex'; 
-                dashboard.style.display = 'none'; 
-                verificationContainer.style.display = 'none';
-                userList.innerHTML = ''; 
+                appContainer.style.display = 'none';
+                childListContainer.innerHTML = ''; 
                 detailsView.style.display = 'none'; 
                 mainContentTitle.textContent = 'Select a Device'; 
                 liveChatBtn.disabled = true;
                 if(activeDataListener) off(activeDataListener.ref);
                 if(activeNotificationListener) off(activeNotificationListener.ref);
                 if(activeChatListener) off(activeChatListener.ref);
+                // Reset history to root
+                history.replaceState(null, "", " ");
             }
         });
 
         function manageVerificationUI(user) {
-            if (user.emailVerified) {
-                // Scenario 1: Verified user. Hide all notices.
-                verificationContainer.style.display = 'none';
-            } else {
-                // Scenario 2: Not verified. Check for child devices.
-                const userDevicesRef = ref(db, `user/${user.uid}`);
-                get(userDevicesRef).then((snapshot) => {
-                    const data = snapshot.val();
-                    const hasChildDevices = data && Object.keys(data).some(key => key !== 'profile');
+            const userDevicesRef = ref(db, `user/${user.uid}`);
+            get(userDevicesRef).then((snapshot) => {
+                const data = snapshot.val();
+                const hasChildDevices = data && Object.keys(data).some(key => key !== 'profile');
 
-                    // Show the main container and the red email notice by default
-                    verificationContainer.style.display = 'block';
+                if (user.emailVerified) {
+                    verificationContainer.style.display = 'none';
+                } else {
+                    verificationContainer.style.display = 'block'; // Make sure it's visible
                     verificationEmailSpan.textContent = user.email;
                     document.querySelector('#verification-container .notice-box.error').style.display = 'block';
 
                     if (hasChildDevices) {
-                        // Scenario 2b: Not verified, BUT has devices.
-                        // Hide info and download boxes.
+                        // User has devices but is not verified
                         infoNoticeBox.style.display = 'none';
                         downloadNoticeBox.style.display = 'none';
                     } else {
-                        // Scenario 2a: Not verified AND no devices.
-                        // Show all three boxes.
+                        // New user, not verified, no devices
                         infoNoticeBox.style.display = 'block';
                         downloadNoticeBox.style.display = 'block';
                     }
-                }).catch(error => {
-                    console.error("Error checking for child devices:", error);
-                    // Fallback: show all notices if DB check fails for an unverified user
-                    verificationContainer.style.display = 'block';
-                    infoNoticeBox.style.display = 'block';
-                    downloadNoticeBox.style.display = 'block';
-                });
-            }
+                }
+            });
         }
 
-        deleteAccountBtn.addEventListener('click', () => {
-            openModal(deleteAccountModal);
-        });
-
-        cancelDeleteBtn.addEventListener('click', () => {
-            closeModal(deleteAccountModal);
-        });
+        deleteAccountBtn.addEventListener('click', () => openModal(deleteAccountModal));
+        cancelDeleteBtn.addEventListener('click', () => closeModal(deleteAccountModal));
 
         confirmDeleteBtn.addEventListener('click', () => {
             const user = auth.currentUser;
@@ -1252,67 +1666,84 @@
             }
         });
 
+        // --- LOAD USER DEVICES (MODIFIED) ---
         function loadUserDevices(userId) {
             const usersRef = ref(db, `user/${userId}`);
             onValue(usersRef, (snapshot) => {
-                userList.innerHTML = '';
+                childListContainer.innerHTML = ''; // Clear the container
                 const data = snapshot.val();
-                if (data && Object.keys(data).some(key => key !== 'profile')) { // Check for child keys besides profile
+                let hasDevices = false;
+                if (data) {
                     Object.keys(data).forEach(childKey => {
-                        if (childKey === 'profile') return; // Skip the profile node
+                        if (childKey === 'profile') return;
+                        hasDevices = true;
                         const childData = data[childKey]; 
                         const userName = childData?.data?.nameChild || childKey; 
                         const deviceName = childData?.data?.nameDevice || 'Unknown Device'; 
-                        const listItem = document.createElement('li'); 
-                        listItem.className = 'user-list-item'; 
-                        listItem.dataset.userid = userId; 
-                        listItem.dataset.childkey = childKey; 
-                        listItem.dataset.username = userName; 
-                        listItem.dataset.devicename = deviceName; 
-                        listItem.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><div><div class="user-name">${userName}</div><div class="device-name">${deviceName}</div></div>`;
-                        userList.appendChild(listItem);
+                        
+                        // New Card HTML
+                        const card = document.createElement('div');
+                        card.className = 'child-card'; 
+                        card.dataset.userid = userId; 
+                        card.dataset.childkey = childKey; 
+                        card.dataset.username = userName; 
+                        card.dataset.devicename = deviceName; 
+                        card.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            <div>
+                                <div class="user-name">${userName}</div>
+                                <div class="device-name">${deviceName}</div>
+                            </div>`;
+                        childListContainer.appendChild(card);
                     });
-                } else { 
-                    userList.innerHTML = '<li>No devices found.</li>'; 
+                } 
+                if (!hasDevices) { 
+                    childListContainer.innerHTML = '<div class="no-devices-placeholder">No devices found. Please follow the instructions below to add a device.</div>'; 
                 }
             });
         }
         
-        userList.addEventListener('click', (e) => {
-            const listItem = e.target.closest('.user-list-item');
-            if (listItem) {
-                document.querySelectorAll('.user-list-item.active').forEach(item => item.classList.remove('active')); 
-                listItem.classList.add('active');
+        // --- CHILD CLICK LISTENER (MODIFIED) ---
+        childListContainer.addEventListener('click', (e) => {
+            const card = e.target.closest('.child-card');
+            if (card) {
                 selectedChildInfo = { 
-                    userId: listItem.dataset.userid, 
-                    childKey: listItem.dataset.childkey, 
-                    userName: listItem.dataset.username, 
-                    deviceName: listItem.dataset.devicename 
+                    userId: card.dataset.userid, 
+                    childKey: card.dataset.childkey, 
+                    userName: card.dataset.username, 
+                    deviceName: card.dataset.devicename 
                 };
-                mainContentTitle.textContent = `${selectedChildInfo.userName}`; 
-                detailsView.style.display = 'block'; 
+                
                 liveChatBtn.disabled = false;
-                
+                // Also enable cloned mobile chat button
+                const mobileChatBtn = mobileNavDropdown.querySelector('#live-chat-btn');
+                if(mobileChatBtn) mobileChatBtn.disabled = false;
+
+                // Setup listeners for this child
                 setupNotificationListener(selectedChildInfo.userId, selectedChildInfo.childKey);
+                setupAppVisibilityListener(selectedChildInfo.userId, selectedChildInfo.childKey);
                 
-                const appVisibilityRef = ref(db, `user/${selectedChildInfo.userId}/${selectedChildInfo.childKey}/data/showApp`);
-                onValue(appVisibilityRef, (snapshot) => {
-                    const isVisible = snapshot.val();
-                    const statusElement = document.getElementById('app-visibility-status');
-                    const buttonElement = document.querySelector('[data-category="toggleAppVisibility"]');
-
-                    if (statusElement && buttonElement) {
-                        statusElement.textContent = isVisible ? 'Status: Visible' : 'Status: Hidden';
-                        buttonElement.style.borderColor = isVisible ? 'var(--accent-green)' : 'var(--accent-red)';
-                    }
-                });
-
-                if (window.innerWidth <= 992) { 
-                    sidebar.classList.remove('open'); 
-                    overlay.style.display = 'none'; 
-                }
+                // Show the feature dashboard
+                showFeatureDashboard(true); // true = push state
             }
         });
+        
+        // Setup visibility listener
+        function setupAppVisibilityListener(userId, childKey) {
+            const appVisibilityRef = ref(db, `user/${userId}/${childKey}/data/showApp`);
+            onValue(appVisibilityRef, (snapshot) => {
+                const isVisible = snapshot.val();
+                const statusElement = document.getElementById('app-visibility-status');
+                const buttonElement = document.querySelector('[data-category="toggleAppVisibility"]');
+
+                if (statusElement && buttonElement) {
+                    statusElement.textContent = isVisible ? 'Status: Visible' : 'Status: Hidden';
+                    buttonElement.style.borderColor = isVisible ? 'var(--accent-green)' : 'var(--accent-red)';
+                }
+            });
+        }
+
+        // --- END CHILD CLICK ---
 
         function startCountdown(button, durationInSeconds = 30, category = null) {
             button.disabled = true;
@@ -1408,7 +1839,7 @@
                 if (category === 'coming-soon') { 
                     openComingSoonModal(button.dataset.featureName); 
                 } else { 
-                    openDataModal(category); 
+                    openDataPage(category, true); // true = push state
                 }
             }
         });
@@ -1421,13 +1852,19 @@
             };
             return nameMap[category] || category.charAt(0).toUpperCase() + category.slice(1);
         }
-
+        
+        const mainContent = document.querySelector('.main-content');
+        
+        // --- DATA DISPLAY & LAZY LOADING (MODIFIED) ---
+        
         function displayCategoryData(category) {
             if (activeDataListener) off(activeDataListener.ref);
-            modalDataDisplayArea.innerHTML = '<div class="loader"></div>'; 
+            detachScrollListeners(); // Remove all scroll listeners
+            dataPageContent.innerHTML = '<div class="loader"></div>'; 
+            
             const { userId, childKey } = selectedChildInfo;
             if (!userId || !childKey) { 
-                modalDataDisplayArea.innerHTML = '<p>Please select a device first.</p>'; 
+                dataPageContent.innerHTML = '<p>Please select a device first.</p>'; 
                 return; 
             }
             
@@ -1441,42 +1878,63 @@
             
             onValue(dataRef, (snapshot) => { 
                 const receivedData = snapshot.val();
-                if (category === 'keylogger') {
-                    setupKeyloggerDisplay(receivedData);
-                } else {
-                    renderDataAsCards(category, receivedData); 
+                
+                // Route to lazy-loading functions
+                switch(category) {
+                    case 'keylogger':
+                        setupKeyloggerDisplay(receivedData);
+                        break;
+                    case 'sms':
+                        setupSmsDisplay(receivedData);
+                        break;
+                    case 'calllogs':
+                        setupCallLogDisplay(receivedData);
+                        break;
+                    case 'notifications':
+                        setupNotificationDisplay(receivedData);
+                        break;
+                    default:
+                        // Render non-lazy-loaded data
+                        renderDataAsCards(category, receivedData); 
                 }
-            }, (error) => { console.error("Firebase read failed: " + error.code); modalDataDisplayArea.innerHTML = `<p>Error fetching data.</p>`; });
+            }, (error) => { console.error("Firebase read failed: " + error.code); dataPageContent.innerHTML = `<p>Error fetching data.</p>`; });
+        }
+        
+        // Detach all lazy load scroll listeners
+        function detachScrollListeners() {
+            mainContent.removeEventListener('scroll', handleKeyloggerScroll);
+            mainContent.removeEventListener('scroll', handleSmsScroll);
+            mainContent.removeEventListener('scroll', handleCallLogScroll);
+            mainContent.removeEventListener('scroll', handleNotificationScroll);
         }
 
+        // --- Keylogger Lazy Load ---
         function handleKeyloggerScroll() {
-            if (modalDataDisplayArea.scrollTop + modalDataDisplayArea.clientHeight >= modalDataDisplayArea.scrollHeight - 20) {
+            if (mainContent.scrollTop + mainContent.clientHeight >= mainContent.scrollHeight - 20) {
                 renderKeyloggerBatch();
             }
         }
-
         function setupKeyloggerDisplay(data) {
-            modalDataDisplayArea.removeEventListener('scroll', handleKeyloggerScroll);
-            modalDataDisplayArea.innerHTML = '';
+            dataPageContent.innerHTML = '';
             if (!data || Object.keys(data).length === 0) {
-                modalDataDisplayArea.innerHTML = '<p>No data available in this category.</p>';
+                dataPageContent.innerHTML = '<p>No data available in this category.</p>';
                 return;
             }
             fullKeyloggerData = Object.values(data).reverse();
             renderedKeyloggerCount = 0;
-            modalDataDisplayArea.innerHTML = '<div class="data-list" id="keylogger-list"></div>';
-            renderKeyloggerBatch();
-            modalDataDisplayArea.addEventListener('scroll', handleKeyloggerScroll);
+            isKeyloggerLoading = false;
+            dataPageContent.innerHTML = '<div class="data-list" id="keylogger-list"></div>';
+            renderKeyloggerBatch(); // Render first batch
+            mainContent.addEventListener('scroll', handleKeyloggerScroll);
         }
-
         function renderKeyloggerBatch() {
             if (isKeyloggerLoading || renderedKeyloggerCount >= fullKeyloggerData.length) return;
             isKeyloggerLoading = true;
             
-            const keyloggerList = document.getElementById('keylogger-list');
-            if (!keyloggerList) { isKeyloggerLoading = false; return; }
+            const listEl = document.getElementById('keylogger-list');
+            if (!listEl) { isKeyloggerLoading = false; return; }
 
-            const end = renderedKeyloggerCount + KEYLOGGER_BATCH_SIZE;
+            const end = Math.min(renderedKeyloggerCount + DATA_BATCH_SIZE, fullKeyloggerData.length);
             const batch = fullKeyloggerData.slice(renderedKeyloggerCount, end);
 
             let contentHTML = '';
@@ -1496,25 +1954,202 @@
                     adIdsToLoad.push(adId);
                 }
             });
-
-            keyloggerList.insertAdjacentHTML('beforeend', contentHTML);
-
-            setTimeout(() => {
-                adIdsToLoad.forEach(id => loadBannerAd(id));
-            }, 100);
-
+            listEl.insertAdjacentHTML('beforeend', contentHTML);
+            setTimeout(() => adIdsToLoad.forEach(id => loadBannerAd(id)), 100);
             renderedKeyloggerCount = end;
             isKeyloggerLoading = false;
         }
-
-        function renderDataAsCards(category, data) {
-            let contentHTML = '';
-            let adIdsToLoad = [];
+        
+        // --- SMS Lazy Load (New) ---
+        function handleSmsScroll() {
+            if (mainContent.scrollTop + mainContent.clientHeight >= mainContent.scrollHeight - 20) {
+                renderSmsBatch();
+            }
+        }
+        function setupSmsDisplay(data) {
+            dataPageContent.innerHTML = '';
             if (!data || Object.keys(data).length === 0) {
-                modalDataDisplayArea.innerHTML = '<p>No data available.</p>';
+                dataPageContent.innerHTML = '<p>No data available in this category.</p>';
                 return;
             }
-            const dataArray = (category !== 'devicestatus' && category !== 'location' && category !== 'health') ? Object.values(data).reverse() : [];
+            fullSmsData = Object.values(data).reverse();
+            renderedSmsCount = 0;
+            isSmsLoading = false;
+            dataPageContent.innerHTML = '<div class="data-list" id="sms-list"></div>';
+            renderSmsBatch();
+            mainContent.addEventListener('scroll', handleSmsScroll);
+        }
+        function renderSmsBatch() {
+            if (isSmsLoading || renderedSmsCount >= fullSmsData.length) return;
+            isSmsLoading = true;
+
+            const listEl = document.getElementById('sms-list');
+            if (!listEl) { isSmsLoading = false; return; }
+
+            const end = Math.min(renderedSmsCount + DATA_BATCH_SIZE, fullSmsData.length);
+            const batch = fullSmsData.slice(renderedSmsCount, end);
+            
+            let contentHTML = '';
+            let adIdsToLoad = [];
+            batch.forEach((sms, index) => {
+                const globalIndex = renderedSmsCount + index;
+                if (sms) { 
+                    const isOutgoing = sms.type === 2; 
+                    const title = !isOutgoing ? `From: ${sms.smsAddress || 'Unknown'}` : `To: ${sms.smsAddress || 'Unknown'}`; 
+                    const iconColor = !isOutgoing ? 'var(--accent-blue)' : 'var(--accent-teal)'; 
+                    contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div><div class="data-card-title">${title}</div></div><div class="data-card-body">${sms.smsBody || ''}</div><div class="data-card-footer">${sms.dateTime || ''}</div></div>`; 
+                }
+                if ((globalIndex + 1) % 5 === 0) {
+                    const adId = `ad-banner-sms-${globalIndex}`;
+                    contentHTML += getAdPlaceholderHtml(adId);
+                    adIdsToLoad.push(adId);
+                }
+            });
+            listEl.insertAdjacentHTML('beforeend', contentHTML);
+            setTimeout(() => adIdsToLoad.forEach(id => loadBannerAd(id)), 100);
+            renderedSmsCount = end;
+            isSmsLoading = false;
+        }
+        
+        // --- Call Log Lazy Load (New) ---
+        function handleCallLogScroll() {
+            if (mainContent.scrollTop + mainContent.clientHeight >= mainContent.scrollHeight - 20) {
+                renderCallLogBatch();
+            }
+        }
+        function setupCallLogDisplay(data) {
+            dataPageContent.innerHTML = '';
+            if (!data || Object.keys(data).length === 0) {
+                dataPageContent.innerHTML = '<p>No data available in this category.</p>';
+                return;
+            }
+            fullCallLogData = Object.values(data).reverse();
+            renderedCallLogCount = 0;
+            isCallLogLoading = false;
+            dataPageContent.innerHTML = '<div class="data-list" id="calllog-list"></div>';
+            renderCallLogBatch();
+            mainContent.addEventListener('scroll', handleCallLogScroll);
+        }
+        function renderCallLogBatch() {
+            if (isCallLogLoading || renderedCallLogCount >= fullCallLogData.length) return;
+            isCallLogLoading = true;
+
+            const listEl = document.getElementById('calllog-list');
+            if (!listEl) { isCallLogLoading = false; return; }
+
+            const end = Math.min(renderedCallLogCount + DATA_BATCH_SIZE, fullCallLogData.length);
+            const batch = fullCallLogData.slice(renderedCallLogCount, end);
+
+            let contentHTML = '';
+            let adIdsToLoad = [];
+            batch.forEach((call, index) => {
+                const globalIndex = renderedCallLogCount + index;
+                if (call) {
+                    let icon, title;
+                    switch (String(call.type).toUpperCase()) {
+                        case 'INCOMING': icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>`; title = `Incoming Call`; break;
+                        case 'OUTGOING': icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`; title = `Outgoing Call`; break;
+                        default: icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`; title = `Missed Call`; break;
+                    }
+                    contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${icon}</div><div class="data-card-title">${title}</div></div><div class="data-card-body"><strong>Number:</strong> ${call.phoneNumber || 'N/A'}<br><strong>Duration:</strong> ${call.duration || '0'}s</div><div class="data-card-footer">${new Date(call.date).toLocaleString()}</div></div>`;
+                }
+                if ((globalIndex + 1) % 5 === 0) {
+                    const adId = `ad-banner-calllog-${globalIndex}`;
+                    contentHTML += getAdPlaceholderHtml(adId);
+                    adIdsToLoad.push(adId);
+                }
+            });
+            listEl.insertAdjacentHTML('beforeend', contentHTML);
+            setTimeout(() => adIdsToLoad.forEach(id => loadBannerAd(id)), 100);
+            renderedCallLogCount = end;
+            isCallLogLoading = false;
+        }
+
+        // --- Notification Lazy Load (New) ---
+        function handleNotificationScroll() {
+            if (mainContent.scrollTop + mainContent.clientHeight >= mainContent.scrollHeight - 20) {
+                renderNotificationBatch();
+            }
+        }
+        function setupNotificationDisplay(data) {
+            dataPageContent.innerHTML = '';
+            if (!data || Object.keys(data).length === 0) {
+                dataPageContent.innerHTML = '<p>No data available in this category.</p>';
+                return;
+            }
+            fullNotificationData = Object.values(data).reverse();
+            renderedNotificationCount = 0;
+            isNotificationLoading = false;
+            dataPageContent.innerHTML = '<div class="data-grid" id="notification-list"></div>'; // Use data-grid
+            renderNotificationBatch();
+            mainContent.addEventListener('scroll', handleNotificationScroll);
+        }
+        function renderNotificationBatch() {
+            if (isNotificationLoading || renderedNotificationCount >= fullNotificationData.length) return;
+            isNotificationLoading = true;
+            
+            const listEl = document.getElementById('notification-list');
+            if (!listEl) { isNotificationLoading = false; return; }
+
+            const end = Math.min(renderedNotificationCount + DATA_BATCH_SIZE, fullNotificationData.length);
+            const batch = fullNotificationData.slice(renderedNotificationCount, end);
+
+            let contentHTML = '';
+            let adIdsToLoad = [];
+            batch.forEach((notif, index) => {
+                const globalIndex = renderedNotificationCount + index;
+                 if (notif) { 
+                    let appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`; 
+                    const fullText = `${notif.title || ''} ${notif.text || ''}`.toLowerCase(); 
+                    if (fullText.includes('whatsapp')) { appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M19.78 4.22a10.4 10.4 0 0 0-14.9 0 10.4 10.4 0 0 0 0 14.9l-1.38 5.02 5.13-1.35a10.4 10.4 0 0 0 14.9 0 10.4 10.4 0 0 0 0-14.9zM12 20.9a8.8 8.8 0 0 1-4.5-1.2L4 21l1.3-3.5a8.8 8.8 0 1 1 6.7 3.4zM16.4 13.6c-.2-.1-.8-.4-1-.4s-.3-.1-.4.1-.4.4-.5.5-.2.1-.4 0c-.2-.1-1-1-1.8-1.8-.7-.6-1.1-1.4-.9-1.6s.2-.3.3-.4c.1-.1.2-.2.3-.3.1-.1 0-.2 0-.3s-1-2.3-1.3-3.2c-.3-.8-.6-1-.8-1s-.4-.1-.6-.1h-.3c-.2 0-.5.1-.7.3-.2.2-.8.8-1 2s-1.2 2.3-.9 3.3c.3 1 1.1 2.4 2.5 3.8 1.4 1.4 2.8 2.2 4.3 2.7 1.5.5 2.8.4 3.8.3.9-.1 2.3-1 2.6-1.9.3-.9.3-1.7.2-1.9s-.3-.3-.5-.4z"/></svg>`; } 
+                    contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${appIcon}</div><div class="data-card-title">${notif.title || 'Notification'}</div></div><div class="data-card-body">${notif.text || ''}</div><div class="data-card-footer">${notif.dateTime || ''}</div></div>`; 
+                }
+                if ((globalIndex + 1) % 5 === 0) {
+                    const adId = `ad-banner-notification-${globalIndex}`;
+                    // Use 300x250 ad for grid layouts
+                    contentHTML += `<div id="${adId}" class="ad-container ad-300x250"></div>`;
+                    adIdsToLoad.push(adId);
+                }
+            });
+            listEl.insertAdjacentHTML('beforeend', contentHTML);
+            // Different ad load function for 300x250
+            setTimeout(() => adIdsToLoad.forEach(id => loadGridAd(id)), 100);
+            renderedNotificationCount = end;
+            isNotificationLoading = false;
+        }
+
+        // Special ad loader for 300x250 grid ads
+        function loadGridAd(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            if (container.querySelector('iframe')) return;
+
+            container.innerHTML = '';
+            const script1 = document.createElement('script');
+            script1.type = 'text/javascript';
+            script1.text = `
+                atOptions = {
+                    'key' : 'a66b2c51a89fd14484b5ef78706451ba',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            `;
+            const script2 = document.createElement('script');
+            script2.type = 'text/javascript';
+            script2.src = '//www.highperformanceformat.com/a66b2c51a89fd14484b5ef78706451ba/invoke.js';
+            container.appendChild(script1);
+            container.appendChild(script2);
+        }
+
+        // --- Non-Lazy-Loaded Data ---
+        function renderDataAsCards(category, data) {
+            let contentHTML = '';
+            if (!data || Object.keys(data).length === 0) {
+                dataPageContent.innerHTML = '<p>No data available.</p>';
+                return;
+            }
             
             switch(category) {
                 case 'location':
@@ -1522,60 +2157,7 @@
                     if (loc.latitude && loc.longitude) { mapLink = `<a href="https://maps.google.com/?q=${loc.latitude},${loc.longitude}" target="_blank" class="map-link"><span>View on Google Maps</span></a>`;}
                     contentHTML = `<div class="data-card location-card"><div class="data-card-body"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-9-6-9-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><div><strong>Address:</strong><br>${loc.address || 'N/A'}</div></div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><strong>Time:</strong><br>${loc.dateTime || 'N/A'}</div></div>${mapLink}</div></div>`;
                     break;
-                case 'sms':
-                    contentHTML = '<div class="data-list">';
-                    dataArray.forEach((sms, index) => { 
-                        if (sms) { 
-                            const isOutgoing = sms.type === 2; 
-                            const title = !isOutgoing ? `From: ${sms.smsAddress || 'Unknown'}` : `To: ${sms.smsAddress || 'Unknown'}`; 
-                            const iconColor = !isOutgoing ? 'var(--accent-blue)' : 'var(--accent-teal)'; 
-                            contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div><div class="data-card-title">${title}</div></div><div class="data-card-body">${sms.smsBody || ''}</div><div class="data-card-footer">${sms.dateTime || ''}</div></div>`; 
-                        }
-                        if ((index + 1) % 5 === 0) {
-                            const adId = `ad-banner-${category}-${index}`;
-                            contentHTML += getAdPlaceholderHtml(adId);
-                            adIdsToLoad.push(adId);
-                        }
-                    });
-                    contentHTML += '</div>';
-                    break;
-                case 'notifications':
-                    contentHTML = '<div class="data-grid">';
-                     dataArray.forEach((notif, index) => { 
-                        if (notif) { 
-                            let appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`; 
-                            const fullText = `${notif.title || ''} ${notif.text || ''}`.toLowerCase(); 
-                            if (fullText.includes('whatsapp')) { appIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#25D366"><path d="M19.78 4.22a10.4 10.4 0 0 0-14.9 0 10.4 10.4 0 0 0 0 14.9l-1.38 5.02 5.13-1.35a10.4 10.4 0 0 0 14.9 0 10.4 10.4 0 0 0 0-14.9zM12 20.9a8.8 8.8 0 0 1-4.5-1.2L4 21l1.3-3.5a8.8 8.8 0 1 1 6.7 3.4zM16.4 13.6c-.2-.1-.8-.4-1-.4s-.3-.1-.4.1-.4.4-.5.5-.2.1-.4 0c-.2-.1-1-1-1.8-1.8-.7-.6-1.1-1.4-.9-1.6s.2-.3.3-.4c.1-.1.2-.2.3-.3.1-.1 0-.2 0-.3s-1-2.3-1.3-3.2c-.3-.8-.6-1-.8-1s-.4-.1-.6-.1h-.3c-.2 0-.5.1-.7.3-.2.2-.8.8-1 2s-1.2 2.3-.9 3.3c.3 1 1.1 2.4 2.5 3.8 1.4 1.4 2.8 2.2 4.3 2.7 1.5.5 2.8.4 3.8.3.9-.1 2.3-1 2.6-1.9.3-.9.3-1.7.2-1.9s-.3-.3-.5-.4z"/></svg>`; } 
-                            contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${appIcon}</div><div class="data-card-title">${notif.title || 'Notification'}</div></div><div class="data-card-body">${notif.text || ''}</div><div class="data-card-footer">${notif.dateTime || ''}</div></div>`; 
-                        }
-                        if ((index + 1) % 5 === 0) {
-                            const adId = `ad-banner-${category}-${index}`;
-                            contentHTML += getAdPlaceholderHtml(adId);
-                            adIdsToLoad.push(adId);
-                        }
-                    });
-                    contentHTML += '</div>';
-                    break;
-                case 'calllogs':
-                    contentHTML = '<div class="data-list">';
-                    dataArray.forEach((call, index) => {
-                        if (call) {
-                            let icon, title;
-                            switch (String(call.type).toUpperCase()) {
-                                case 'INCOMING': icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>`; title = `Incoming Call`; break;
-                                case 'OUTGOING': icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`; title = `Outgoing Call`; break;
-                                default: icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`; title = `Missed Call`; break;
-                            }
-                            contentHTML += `<div class="data-card"><div class="data-card-header"><div class="data-card-icon">${icon}</div><div class="data-card-title">${title}</div></div><div class="data-card-body"><strong>Number:</strong> ${call.phoneNumber || 'N/A'}<br><strong>Duration:</strong> ${call.duration || '0'}s</div><div class="data-card-footer">${new Date(call.date).toLocaleString()}</div></div>`;
-                        }
-                        if ((index + 1) % 5 === 0) {
-                            const adId = `ad-banner-${category}-${index}`;
-                            contentHTML += getAdPlaceholderHtml(adId);
-                            adIdsToLoad.push(adId);
-                        }
-                    });
-                    contentHTML += '</div>';
-                    break;
+                
                 case 'devicestatus':
                     const status = data;
                     contentHTML = `<div class="data-card"><div class="data-card-header"><div class="data-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><div class="data-card-title">Current Device Status</div></div><div class="data-card-body"><div class="status-item" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 1.5rem;"><div style="width:100%; display:flex; justify-content: space-between;"><span class="status-item-label">Battery</span><span class="status-item-value">${status.batteryLevel || 'N/A'}%</span></div><div class="battery-level"><div class="battery-level-fill" style="width: ${status.batteryLevel || 0}%;"></div></div></div><div class="status-grid"><div class="status-item"><span class="status-item-label">Internet</span><span class="status-item-value ${status.internetOn ? 'on' : 'off'}">${status.internetOn ? 'On' : 'Off'}</span></div><div class="status-item"><span class="status-item-label">Network Type</span><span class="status-item-value">${status.networkType || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM Operator</span><span class="status-item-value">${status.simOperator || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 1</span><span class="status-item-value">${status.sim1Number || 'N/A'}</span></div><div class="status-item"><span class="status-item-label">SIM 2</span><span class="status-item-value">${status.sim2Number || 'N/A'}</span></div></div></div><div class="data-card-footer">Last updated: ${new Date(status.lastUpdated).toLocaleString() || 'N/A'}</div></div>`;
@@ -1614,14 +2196,10 @@
                                 </div>`;
                     break;
             }
-            modalDataDisplayArea.innerHTML = contentHTML;
-
-            if (adIdsToLoad.length > 0) {
-                setTimeout(() => {
-                    adIdsToLoad.forEach(id => loadBannerAd(id));
-                }, 100);
-            }
+            dataPageContent.innerHTML = contentHTML;
         }
+        
+        // --- END DATA DISPLAY ---
 
         function renderPhotosFromDatabase(userId, childKey) {
             const headerHTML = `<div class="data-header">
@@ -1631,7 +2209,7 @@
                     <button class="action-btn" data-command="refresh" data-category="photo"><span>Refresh</span></button>
                 </div>
             </div>`;
-            modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader" id="loader-placeholder"></div>';
+            dataPageContent.innerHTML = headerHTML + '<div class="loader" id="loader-placeholder"></div>';
             
             const photoDataRef = ref(db, `user/${userId}/${childKey}/photo/data`);
             
@@ -1655,18 +2233,16 @@
                         }
                         if ((index + 1) % 5 === 0) {
                            const adId = `ad-banner-photo-${index}`;
-                           photoGridHTML += getAdPlaceholderHtml(adId);
+                           photoGridHTML += `<div id="${adId}" class="ad-container ad-300x250"></div>`;
                            adIdsToLoad.push(adId);
                         }
                     });
                     photoGridHTML += '</div>';
                 }
-                document.getElementById('modal-data-display-area').innerHTML = headerHTML + photoGridHTML;
+                document.getElementById('data-page-content').innerHTML = headerHTML + photoGridHTML;
 
                 if (adIdsToLoad.length > 0) {
-                    setTimeout(() => {
-                        adIdsToLoad.forEach(id => loadBannerAd(id));
-                    }, 100);
+                    setTimeout(() => adIdsToLoad.forEach(id => loadGridAd(id)), 100);
                 }
             });
         }
@@ -1690,7 +2266,7 @@
                         <button class="action-btn" data-command="refresh" data-category="video"><span>Refresh</span></button>
                     </div>
                 </div>`;
-                modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader" id="loader-placeholder"></div>';
+                dataPageContent.innerHTML = headerHTML + '<div class="loader" id="loader-placeholder"></div>';
                 
                 const videoDataRef = ref(db, `user/${userId}/${childKey}/video/data`);
                 if (activeDataListener) off(activeDataListener.ref);
@@ -1722,18 +2298,16 @@
                             }
                             if ((index + 1) % 5 === 0) {
                                 const adId = `ad-banner-video-${index}`;
-                                videoGridHTML += getAdPlaceholderHtml(adId);
+                                videoGridHTML += `<div id="${adId}" class="ad-container ad-300x250"></div>`;
                                 adIdsToLoad.push(adId);
                             }
                         });
                         videoGridHTML += '</div>';
                     }
-                    document.getElementById('modal-data-display-area').innerHTML = headerHTML + videoGridHTML;
+                    document.getElementById('data-page-content').innerHTML = headerHTML + videoGridHTML;
 
                     if (adIdsToLoad.length > 0) {
-                        setTimeout(() => {
-                            adIdsToLoad.forEach(id => loadBannerAd(id));
-                        }, 100);
+                        setTimeout(() => adIdsToLoad.forEach(id => loadGridAd(id)), 100);
                     }
                 });
             });
@@ -1757,7 +2331,7 @@
                         <button class="action-btn" data-command="refresh" data-category="audio"><span>Refresh</span></button>
                     </div>
                 </div>`;
-                modalDataDisplayArea.innerHTML = headerHTML + '<div class="loader"></div>';
+                dataPageContent.innerHTML = headerHTML + '<div class="loader"></div>';
                 
                 const audioDataRef = ref(db, `user/${userId}/${childKey}/audio/data`);
                 if (activeDataListener) off(activeDataListener.ref);
@@ -1794,12 +2368,10 @@
                         });
                         audioListHTML += '</div>';
                     }
-                    document.getElementById('modal-data-display-area').innerHTML = headerHTML + audioListHTML;
+                    document.getElementById('data-page-content').innerHTML = headerHTML + audioListHTML;
                     
                     if (adIdsToLoad.length > 0) {
-                        setTimeout(() => {
-                            adIdsToLoad.forEach(id => loadBannerAd(id));
-                        }, 100);
+                        setTimeout(() => adIdsToLoad.forEach(id => loadBannerAd(id)), 100);
                     }
                 });
             });
@@ -1828,34 +2400,28 @@
 
         function closeModal(modalElement) {
             if (!modalElement) return;
-            if(modalElement.id === 'data-modal' && activeDataListener) {
-                off(activeDataListener.ref);
-                activeDataListener = null;
-            }
             modalElement.classList.remove('visible');
             setTimeout(() => {
                 modalElement.style.display = 'none';
             }, 300);
         }
         
-        function openDataModal(category) { 
-            modalTitle.textContent = `${getSafeCategoryName(category)}`; 
-            openModal(dataModal);
-            displayCategoryData(category); 
-        }
+        // Back button function removed
 
         function openComingSoonModal(featureName) { 
             comingSoonTitle.textContent = `${featureName} - Coming Soon`; 
             openModal(comingSoonModal);
         }
         
-        liveChatBtn.addEventListener('click', () => {
+        function openChatModal() {
             if (liveChatBtn.disabled) return;
             const { userId, childKey } = selectedChildInfo;
             if (!userId) return;
             openModal(chatModal);
             setupChat(userId, childKey);
-        });
+        }
+        
+        liveChatBtn.addEventListener('click', openChatModal);
         
         function setupChat(userId, childKey) {
             const chatMessagesArea = document.getElementById('chat-messages-area');
@@ -1889,7 +2455,7 @@
             });
         }
         
-        modalDataDisplayArea.addEventListener('click', (e) => {
+        dataPageContent.addEventListener('click', (e) => {
             const button = e.target.closest('button');
             if (!button || button.disabled) return;
 
@@ -1976,32 +2542,33 @@
                     break;
             }
         });
-
-        menuBtn.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none'; });
-        overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.style.display = 'none'; });
         
+        // Removed menuBtn and overlay click listeners for sidebar
+
         document.body.addEventListener('click', function(e) {
             const target = e.target;
-            if (target === adminNotificationOkBtn) {
-                if (currentNotificationRef) {
-                    update(currentNotificationRef, { read: true })
-                        .then(() => {
-                            console.log("Notification marked as read.");
-                            closeModal(adminNotificationModal);
-                        })
-                        .catch((error) => {
-                            console.error("Error marking notification as read:", error);
-                            closeModal(adminNotificationModal);
-                        });
-                } else {
-                    closeModal(adminNotificationModal);
-                }
-                return;
-            }
-
+            
+            // Close modals
+            const modalToClose = target.closest('.modal-overlay');
             if (target.classList.contains('modal-overlay') || target.closest('.modal-close-btn') || target.closest('.ok-btn')) {
-                const modalToClose = target.closest('.modal-overlay');
-                closeModal(modalToClose);
+                // Special handling for admin modal "OK"
+                if (target === adminNotificationOkBtn) {
+                     if (currentNotificationRef) {
+                        update(currentNotificationRef, { read: true })
+                            .then(() => {
+                                console.log("Notification marked as read.");
+                                closeModal(adminNotificationModal);
+                            })
+                            .catch((error) => {
+                                console.error("Error marking notification as read:", error);
+                                closeModal(adminNotificationModal);
+                            });
+                    } else {
+                        closeModal(adminNotificationModal);
+                    }
+                } else {
+                    closeModal(modalToClose);
+                }
             }
         });
 
@@ -2034,25 +2601,74 @@
         window.addEventListener('offline', updateOnlineStatus);
         updateOnlineStatus();
         
+        // --- NOTIFICATION LISTENER (MODIFIED) ---
         function setupNotificationListener(userId, childKey) {
             if (activeNotificationListener) off(activeNotificationListener.ref);
+            
             const notificationsPath = `user/${userId}/${childKey}/adminNotifications`;
-            const notificationsQuery = query(ref(db, notificationsPath), orderByChild('read'), equalTo(false));
-            activeNotificationListener = { ref: notificationsQuery };
-            onValue(notificationsQuery, (snapshot) => {
+            
+            // Listener 1: For the Bell Count (only unread)
+            const unreadQuery = query(ref(db, notificationsPath), orderByChild('read'), equalTo(false));
+            activeNotificationListener = { ref: unreadQuery }; // Store one ref to detach later
+
+            onValue(unreadQuery, (snapshot) => {
+                const unreadCount = snapshot.size;
+                if (unreadCount > 0) {
+                    notificationCount.textContent = unreadCount;
+                    notificationCount.classList.add('visible');
+                    
+                    // Show popup for the first unread message
+                    if (!adminNotificationModal.classList.contains('visible')) {
+                        const firstUnread = Object.entries(snapshot.val())[0];
+                        const key = firstUnread[0];
+                        const data = firstUnread[1];
+                        
+                        adminNotificationText.textContent = data.message; 
+                        openModal(adminNotificationModal);
+                        currentNotificationRef = ref(db, `${notificationsPath}/${key}`); 
+                    }
+                } else {
+                    notificationCount.classList.remove('visible');
+                }
+            });
+
+            // Listener 2: For the Dropdown (all messages, limit to last 10)
+            const allNotificationsQuery = query(ref(db, notificationsPath), limitToLast(10));
+            onValue(allNotificationsQuery, (snapshot) => {
+                notificationDropdownList.innerHTML = '';
                 if (snapshot.exists()) {
-                    snapshot.forEach((childSnapshot) => {
-                        const notificationData = childSnapshot.val();
-                        if (notificationData.read === false || notificationData.read === undefined) {
-                            adminNotificationText.textContent = notificationData.message; 
-                            openModal(adminNotificationModal);
-                            currentNotificationRef = childSnapshot.ref; 
-                        }
+                    const allNotifications = [];
+                    snapshot.forEach(child => {
+                        allNotifications.push({ key: child.key, ...child.val() });
                     });
+                    
+                    allNotifications.reverse().forEach(notif => {
+                        const item = document.createElement('a');
+                        item.href = '#';
+                        item.className = 'notification-item';
+                        item.style.fontWeight = notif.read ? 'normal' : 'bold';
+                        item.dataset.key = notif.key;
+                        item.dataset.message = notif.message;
+                        item.innerHTML = `
+                            <p>${notif.message.substring(0, 100)}${notif.message.length > 100 ? '...' : ''}</p>
+                            <div class="notification-item-time">${new Date(notif.timestamp || Date.now()).toLocaleString()}</div>
+                        `;
+                        
+                        item.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            adminNotificationText.textContent = notif.message;
+                            currentNotificationRef = ref(db, `${notificationsPath}/${notif.key}`);
+                            openModal(adminNotificationModal);
+                            notificationDropdown.classList.remove('visible');
+                        });
+                        
+                        notificationDropdownList.appendChild(item);
+                    });
+                } else {
+                    notificationDropdownList.innerHTML = '<p style="padding: 1rem; text-align: center; color: var(--text-secondary);">No notifications found.</p>';
                 }
             });
         }
     </script>
 </body>
 </html>
-
