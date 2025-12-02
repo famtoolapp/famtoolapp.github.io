@@ -327,6 +327,7 @@
         .main-content { 
             flex-grow: 1; 
             overflow-y: auto; 
+            /* फूटर हटाने के बाद height: 100% ही सही है क्योंकि अब फूटर जगह नहीं घेर रहा है */
             height: 100%; 
             position: relative;
         }
@@ -653,7 +654,6 @@
             text-decoration: none;
             border-radius: 8px;
             font-weight: 500;
-            transition: all 0.3s;
             white-space: nowrap;
         }
         .map-link:hover { background: var(--accent-purple); }
@@ -734,31 +734,7 @@
         .loader { width: 50px; height: 50px; border-radius: 50%; margin: 40px auto; border: 5px solid var(--secondary-surface); border-top-color: var(--accent-teal); animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        .page-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--primary-surface);
-            backdrop-filter: blur(10px);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            z-index: 1002;
-            border-top: 1px solid var(--border-color);
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 1rem;
-        }
-        
-        .page-footer a {
-            color: var(--accent-teal);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        .page-footer a:hover { color: var(--accent-blue); }
+        /* --- REMOVED .page-footer STYLES (Line 388-410) --- */
         
         /* New Verification Section Styles */
         #verification-container {
@@ -873,10 +849,8 @@
             }
         }
         @media (max-width: 420px) {
-            .page-footer {
-                font-size: 0.75rem;
-                padding: 0 0.5rem;
-            }
+            /* ** REMOVED .page-footer STYLES from media query ** */
+            
             .navbar-brand { font-size: 1.2rem; }
             .action-btn { padding: 10px 14px; font-size: 0.9rem; }
             .notification-dropdown {
@@ -1183,9 +1157,7 @@
         </div>
     </div>
     
-    <footer class="page-footer">
-        © Copyright FamToolApp. All Rights Reserved by FamToolApp
-    </footer>
+    <!-- ** फूटर को यहाँ से पूरी तरह हटा दिया गया है ** -->
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
@@ -1614,8 +1586,15 @@
                 if(activeDataListener) off(activeDataListener.ref);
                 if(activeNotificationListener) off(activeNotificationListener.ref);
                 if(activeChatListener) off(activeChatListener.ref);
-                // Reset history to root
-                history.replaceState(null, "", " ");
+                
+                // FIX: Added try/catch block to handle SecurityError in iframe environments
+                try {
+                    // Reset history to root
+                    history.replaceState(null, "", " ");
+                } catch (e) {
+                    // Ignore SecurityError when running in restricted environments (like blob: URLs)
+                    console.warn("History API block detected:", e.message);
+                }
             }
         });
 
@@ -2502,7 +2481,7 @@
                     isVideoCommandRunning = true;
                     category = 'video';
                     
-                    get(ref(db, `user/${userId}/${childKey}/limits/${category}`)).then((snapshot) => {
+                    get(ref(db, `user/${userId}/${childKey}/limits/video`)).then((snapshot) => {
                         const limitInfo = snapshot.val() || { count: 4, usage: 0, date: '1970-01-01' };
                         const today = new Date().toISOString().slice(0, 10);
                         const usage = limitInfo.date === today ? limitInfo.usage : 0;
@@ -2524,7 +2503,7 @@
                     isAudioCommandRunning = true;
                     category = 'audio';
 
-                    get(ref(db, `user/${userId}/${childKey}/limits/${category}`)).then((snapshot) => {
+                    get(ref(db, `user/${userId}/${childKey}/limits/audio`)).then((snapshot) => {
                         const limitInfo = snapshot.val() || { count: 5, usage: 0, date: '1970-01-01' };
                         const today = new Date().toISOString().slice(0, 10);
                         const usage = limitInfo.date === today ? limitInfo.usage : 0;
