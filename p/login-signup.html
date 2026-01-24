@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="rating" content="General">
+
+    <title>Dashboard - FamToolApp Account</title>
+    <meta name="description" content="Log in or create your FamToolApp account to access secure parental control features for safe child monitoring.">
+    <meta name="keywords" content="FamToolApp login, parental control account, create FamToolApp account, सुरक्षित पैरेंटल अकाउंट, child safety account, family monitoring login">
+    <link rel="canonical" href="https://famtoolapp.com/login-signup.html" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Login / Signup - FamToolApp",
+      "description": "Access your FamToolApp account to use safe parental control features.",
+      "url": "https://famtoolapp.com/login-signup.html"
+    }
+    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <style>
+        /* Modern Compact Limits Dashboard */
+        .limits-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .limit-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #f1f2f6;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .limit-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .limit-card h4 { 
+            margin: 0 0 6px 0; 
+            font-size: 11px; 
+            color: #636e72; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            letter-spacing: 0.5px;
+        }
+
+        .limit-balance { 
+            font-size: 24px; 
+            font-weight: 800; 
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .limit-used { 
+            font-size: 10px; 
+            color: #7f8c8d; 
+            font-weight: 500; 
+            background: #f1f2f6; 
+            padding: 3px 8px; 
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* Specific Colors & Accents */
+        .limit-card.video .limit-balance { color: #FF4757; }
+        .limit-card.video::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: #FF4757; }
+        
+        .limit-card.audio .limit-balance { color: #1E90FF; }
+        .limit-card.audio::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: #1E90FF; }
+        
+        .limit-card.photo .limit-balance { color: #2ED573; }
+        .limit-card.photo::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: #2ED573; }
+
+        /* Media Query for Mobile to ensure they sit side-by-side if possible, or scroll nicely */
+        @media (max-width: 480px) {
+            .limits-dashboard {
+                display: flex; /* Switch to horizontal scroll on very small screens to prevent squishing */
+                overflow-x: auto;
+                padding-bottom: 10px;
+                scrollbar-width: none; /* Firefox */
+            }
+            .limits-dashboard::-webkit-scrollbar { display: none; } /* Chrome */
+            
+            .limit-card {
+                min-width: 110px; /* Small enough to see multiple */
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <div class="aurora-background"></div>
+    </div>
+    
+    <div id="offline-banner">No Internet Connection. Please check your network.</div>
+
+    <div id="auth-container">
+        <div class="auth-card">
+            <h2>Parent Panel</h2>
+            <div class="auth-tabs">
+                <button id="login-tab-btn" class="auth-tab-btn active">Login</button>
+                <button id="signup-tab-btn" class="auth-tab-btn">Sign Up</button>
+            </div>
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <a href="#" id="forgot-password-link" style="display: block; text-align: right; color: var(--accent-blue); text-decoration: none; margin-bottom: 1rem;">Forgot Password?</a>
+            <button id="submit-auth-btn">
+                <span id="submit-auth-btn-text">Login</span>
+            </button>
+            <p id="error-message"></p>
+        </div>
+    </div>
+
+    <div id="app-container" style="display: none;">
+        
+        <nav class="top-navbar">
+            <div class="navbar-left">
+                 <a href="#" class="navbar-brand" id="home-brand-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>FamToolApp</span>
+                </a>
+            </div>
+            <div class="navbar-right">
+                
+                <div class="desktop-nav-links">
+                    <button id="live-chat-btn" class="action-btn" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        <span>Help Desk</span>
+                    </button>
+                    <a href="Download.html" class="action-btn"><span>Download APK</span></a>
+                    <button id="delete-account-btn" class="action-btn"><span>Delete Account</span></button>
+                    <button id="logout-btn" class="action-btn"><span>Logout</span></button>
+                </div>
+
+                <div class="notification-bell-wrapper">
+                    <button id="notification-bell-btn" class="notification-bell-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    </button>
+                    <span id="notification-counter" class="notification-counter">0</span>
+                </div>
+
+
+
+                <button id="mobile-menu-btn" class="mobile-menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <div id="mobile-nav-dropdown" class="mobile-nav-dropdown">
+                </div>
+        </nav>
+
+        <div id="notification-list-container" class="notification-list-container">
+            <div class="notification-list-header">
+                <h4>Notifications</h4>
+                <button id="clear-all-notifications-btn" class="clear-all-btn">Clear All</button>
+            </div>
+            <ul id="notification-list" class="notification-list">
+    
+            </ul>
+        </div>
+
+        <div id="dashboard" class="dashboard-container">
+            <div id="overlay"></div>
+            
+            <main class="main-content">
+                
+                <div id="dashboard-view" class="content-view">
+                    <header class="main-header">
+                        <h1 id="main-content-title">Select Child</h1>
+                    </header>
+                    
+                    <div id="child-list-container">
+                        </div>
+
+                    <div id="verification-container" style="display: none;"> <div class="notice-box error">
+                            <h4>Please check your mailbox (<span id="verification-email">your.email@example.com</span>)</h4>
+                            <p>Please check the email received to validate your account, otherwise it will be automatically deleted. (Check your spam if you don't receive the email.)</p>
+                            <div class="notice-actions">
+                                <button id="resend-verification-btn" class="notice-btn">RESEND EMAIL FOR VALIDATE MY ACCOUNT</button>
+                            </div>
+                        </div>
+                        <div class="download-section notice-box" id="download-notice-box" style="text-align: center; margin: 1rem 0; border: 1px solid var(--accent-blue);">
+                            <h4>ADD A PHONE TO YOUR ACCOUNT</h4>
+                            <p>Add a phone to your account, for that you just need to download and install the application on the phone you want to follow.</p>
+                            <p>ⓘ Please read and follow all steps correctly before downloading and installing the application. If this is not done, the application may not work properly.</p>
+                            <div class="notice-actions" style="justify-content: center;">
+                            <a href="Installation-Guide.html" class="notice-btn" style="background-color: #5DADE2; color: white; text-decoration: none;">ⓘ HELP FOR INSTALLATION</a>
+                            
+                                <a href="Download.html" class="notice-btn" style="background-color: var(--accent-green); color: white; text-decoration: none;">⤓ DOWNLOAD APPLICATION</a>
+                            </div>
+                        </div>
+                        <div class="notice-box warning" id="info-notice-box">
+                            <h4>Important Information - Regular Connection Required</h4>
+                            <p>For customers using the free offer, without connecting to the site <strong>7 days from the last login</strong>, the target phone will be automatically deleted.<br>For customers using the Basic, Premium or Ultra offer, without connecting to the site <strong>for a month from the last login</strong>, the target phone will be automatically deleted.</p>
+                        </div>
+                    </div>
+
+                    <div id="details-view" style="display: none;">
+                        
+                        <!-- NEW LIMITS DASHBOARD -->
+                        <div id="limits-dashboard-scroll" class="limits-dashboard">
+                            <div class="limit-card video">
+                                <h4>Video Left</h4>
+                                <div class="limit-balance" id="dash-balance-video">--</div>
+                                <div class="limit-used" id="dash-used-video">Used: -- / --</div>
+                            </div>
+                            <div class="limit-card audio">
+                                <h4>Audio Left</h4>
+                                <div class="limit-balance" id="dash-balance-audio">--</div>
+                                <div class="limit-used" id="dash-used-audio">Used: -- / --</div>
+                            </div>
+                            <div class="limit-card photo">
+                                <h4>Photos Left</h4>
+                                <div class="limit-balance" id="dash-balance-photo">--</div>
+                                <div class="limit-used" id="dash-used-photo">Used: -- / --</div>
+                            </div>
+                        </div>
+
+                        <div class="category-buttons">
+                            <!-- Device Status -->
+                            <button class="category-btn" data-category="deviceStatus">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M5 2h14a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" stroke="#00b894" stroke-width="2"/><path d="M12 18h.01" stroke="#00b894" stroke-width="3"/></svg>
+                                <span>Device Status</span>
+                            </button>
+                            
+                            <!-- Live Location (Already Visible in Screenshot, but enforcing style) -->
+                            <button class="category-btn" data-category="location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#38bdf8" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="#38bdf8" stroke-width="2"/></svg>
+                                <span>Live Location</span>
+                            </button>
+
+                            <!-- Photos -->
+                            <button class="category-btn" data-category="photo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="#2ecc71" stroke-width="2"/><circle cx="12" cy="13" r="4" stroke="#2ecc71" stroke-width="2"/></svg>
+                                <span>Photos</span>
+                            </button>
+
+                            <!-- Videos -->
+                            <button class="category-btn" data-category="video">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><polygon points="23 7 16 12 23 17 23 7" stroke="#e74c3c" stroke-width="2"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2" stroke="#e74c3c" stroke-width="2"/></svg>
+                                <span>Videos</span>
+                            </button>
+
+                            <!-- Audio -->
+                            <button class="category-btn" data-category="audio">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="#00CEC9" stroke-width="2"/><path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="#00CEC9" stroke-width="2"/><line x1="12" y1="19" x2="12" y2="23" stroke="#00CEC9" stroke-width="2"/><line x1="8" y1="23" x2="16" y2="23" stroke="#00CEC9" stroke-width="2"/></svg>
+                                <span>Audio Recordings</span>
+                            </button>
+
+                            <!-- User Logs -->
+                            <button class="category-btn" data-category="userlog">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#fdcb6e" stroke-width="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8" stroke="#fdcb6e" stroke-width="2"/></svg>
+                                <span>User Logs</span>
+                            </button>
+
+                            <!-- SMS -->
+                            <button class="category-btn" data-category="sms">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#a29bfe" stroke-width="2"/></svg>
+                                <span>SMS</span>
+                            </button>
+
+                            <!-- Notifications (Missing in screenshot) -->
+                            <button class="category-btn" data-category="notifications">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="#e84393" stroke-width="2"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="#e84393" stroke-width="2"/></svg>
+                                <span>Notifications</span>
+                            </button>
+
+                            <!-- Call Logs (Missing in screenshot) -->
+                            <button class="category-btn" data-category="calllogs">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#0984e3" stroke-width="2"/></svg>
+                                <span>Call Logs</span>
+                            </button>
+
+                            <!-- App Visibility (Missing in screenshot) -->
+                            <button class="category-btn" data-category="toggleAppVisibility">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="#dfe6e9" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="#dfe6e9" stroke-width="2"/></svg>
+                                <span id="app-visibility-status">Application Hide/Unhide</span>
+                            </button>
+
+                            <!-- Screen Recorder -->
+                            <button class="category-btn" data-category="coming-soon" data-feature-name="Screen Recorder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" class="feature-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="#636e72" stroke-width="2"/><circle cx="12" cy="12" r="1" stroke="#636e72" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="#636e72" stroke-width="2"/><line x1="12" y1="3" x2="12" y2="21" stroke="#636e72" stroke-width="2"/></svg>
+                                <span>Screen Recorder</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="data-page-view" class="content-view">
+                    <header class="page-header">
+                        <h1 id="data-page-title" class="page-title">Data</h1>
+                    </header>
+                    <div id="data-page-content">
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="coming-soon-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="coming-soon-title">Coming Soon</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This feature is currently under development and will be available in a future update. Stay tuned!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="info-notification-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Information</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="info-modal-text"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary ok-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-account-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Delete Account</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to permanently delete your account and all associated data? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-delete-btn" class="modal-btn modal-btn-secondary">Cancel</button>
+                <button id="confirm-delete-btn" class="modal-btn modal-btn-danger">Delete My Account</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup-notification-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Notification</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4 id="popup-notif-title" style="margin-bottom: 10px; color: var(--accent-blue);"></h4>
+                <p id="popup-notif-message"></p>
+                <div style="font-size: 0.8rem; color: #888; margin-top: 10px; text-align: right;" id="popup-notif-time"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="popup-notif-ok-btn" class="modal-btn modal-btn-secondary ok-btn">Okay</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h3 id="chat-modal-title">Help Desk</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <div class="live-chat-area">
+                    <div class="chat-messages" id="chat-messages-area"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-message-input" placeholder="Type a message...">
+                        <button id="chat-send-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
