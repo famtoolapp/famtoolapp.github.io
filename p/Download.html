@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Download FamToolApp</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="download.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <h1 class="stylish-logo"><span>Fam</span>ToolApp</h1>
+
+        <div class="warning-box">
+            <div class="warning-box-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+            </div>
+            <div>
+                <h3 class="warning-box-title">Important: Disable Play Protect</h3>
+                <p class="warning-box-text">For a successful installation, you must <strong>disable Google Play Protect</strong> on the target device. Our app's advanced features require permissions that Play Protect may block. Our app is 100% safe.<br><strong>How to disable:</strong> Open Play Store → Tap Profile Icon → Play Protect → Tap Settings (⚙️) → Turn off "Scan apps with Play Protect".</p>
+            </div>
+        </div>
+
+
+        <div class="text-section">
+            <div class="checkbox-container">
+                <input type="checkbox" id="consent-checkbox">
+                <label for="consent-checkbox" style="font-size: 0.9rem;">This application is designed to monitor the phones of your children, employees or your own phone.</label>
+            </div>
+            <p>You must own the phone or have the appropriate consent to monitor it. You must inform the phone users that they are being monitored by this application, otherwise it may result in a violation of federal and state laws. Please refer to your local laws to make sure your particular monitoring activities are legal in your country. By installing the application or using the service you certify that you act in accordance to the law and you take full responsibility for the use of the product.</p>
+        </div>
+
+        <div class="checkbox-container">
+            <input type="checkbox" id="agreement-checkbox">
+            <label for="agreement-checkbox">I agree to the <a href="Terms-and-Conditions.html">Terms of Use</a> and <a href="Privacy-Policy.html">Privacy Policy</a>.</label>
+        </div>
+
+        <div id="captcha-section">
+            <div id="captcha-code"></div>
+            <input type="text" id="captcha-input" placeholder="Enter the above code here">
+            <button id="captcha-refresh">Can't read the image? click here to refresh.</button>
+            <div id="captcha-error"></div>
+        </div>
+
+        <button id="download-button">Download APK</button>
+
+        <div class="version-info">
+            <p>Version: 10.1100011</p>
+            <p>Update: 2026/01/24</p>
+			<p>Fixed delay issue — recordings now reach the user panel faster (delay may still depend on internet speed).</p>
+
+            <!-- <p>Version: 5.50005</p>
+            <p>Update: 2025/9/04</p>
+			<p>🎉 New Update Available!
+We’ve added Voice Recording and Video Recording features for a better monitoring experience.
+Update now and explore the latest improvements!</p> -->
+        </div>
+    </div>
+
+    <script src="download.js"></script>
+
+</body>
+</html>
+
