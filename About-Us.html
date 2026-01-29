@@ -340,7 +340,112 @@
         .dropdown-content a { color: var(--color-gray-300); padding: 12px 16px; text-decoration: none; display: block; text-align: left; white-space: nowrap; }
         .dropdown-content a:hover { background-color: var(--color-purple-600); color: var(--color-white); }
         .dropdown:hover .dropdown-content { display: block; }
-        @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+        /* Verified Badge Styles */
+        .verified-badge-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .verified-badge-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .verified-badge-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.9));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(139, 92, 246, 0.5);
+            border-radius: 50%;
+            padding: 1.5rem;
+            text-align: center;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(139, 92, 246, 0.25);
+        }
+        .verified-badge-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            border-color: var(--color-purple-400);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5), 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+        .verified-badge-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: #4ade80;
+        }
+        .verified-badge-icon svg {
+            width: 32px;
+            height: 32px;
+            filter: drop-shadow(0 2px 4px rgba(74, 222, 128, 0.3));
+        }
+        .verified-badge-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .verified-badge-img {
+            width: 80px;
+            height: auto;
+            border-radius: 0.5rem;
+            object-fit: contain;
+            background: #fff;
+            padding: 0.25rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        .verified-badge-card h3 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.02em;
+        }
+        .verified-badge-card p {
+            display: none;
+        }
+        .verified-badge-cta {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.625rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--color-purple-500), var(--color-purple-600));
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+        .verified-badge-card:hover .verified-badge-cta {
+            background: linear-gradient(135deg, var(--color-purple-400), var(--color-purple-500));
+        }
+        @media (min-width: 640px) { 
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .verified-badge-card {
+                width: 200px;
+                height: 200px;
+                padding: 1.75rem;
+            }
+            .verified-badge-img {
+                width: 90px;
+            }
+            .verified-badge-icon svg {
+                width: 36px;
+                height: 36px;
+            }
+            .verified-badge-card h3 {
+                font-size: 0.8125rem;
+            }
+            .verified-badge-cta {
+                font-size: 0.6875rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
         @media (min-width: 768px) {
             .container { max-width: 768px; }
             .hero-content h1 { font-size: 3rem; }
@@ -485,6 +590,33 @@
                             <p>We continue to innovate, adding new features and strengthening our security based on user feedback. Our mission remains the same: to provide the best digital safety tool for families everywhere.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Badge Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2 class="fade-in-up">Verified & Trusted</h2>
+                    <p class="fade-in-up" data-delay="100">FamToolApp is officially verified and listed on trusted platforms, ensuring authenticity and reliability for our users.</p>
+                </div>
+                <div class="verified-badge-container fade-in-up" data-delay="200">
+                    <a href="https://saasbrowser.com/en/saas/1219952/famtoolapp" target="_blank" rel="noopener noreferrer" class="verified-badge-link">
+                        <div class="verified-badge-card">
+                            <div class="verified-badge-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="40" height="40">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <div class="verified-badge-content">
+                                <img src="https://files.saasbrowser.com/o73ionzw7e7oy11t83jhfpaza5t3" alt="FamToolApp - SaaS Browser Verified" class="verified-badge-img" loading="lazy">
+                                <h3>SaaS Browser Verified</h3>
+                                <p>Listed & Verified on SaaS Browser</p>
+                                <span class="verified-badge-cta">View on SaaS Browser →</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
