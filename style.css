@@ -398,8 +398,8 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
 .notification-list-container {
     position: absolute;
     top: calc(var(--navbar-height) - 10px);
-    right: 20px;
-    width: 360px;
+    right: 15px;
+    width: 320px; /* Reduced from 360px */
     max-width: 90vw;
     background: #1e293b;
     border-radius: 12px;
@@ -410,6 +410,13 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     visibility: hidden;
     transform: translateY(20px) scale(0.95);
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+@media (max-width: 480px) {
+    .notification-list-container {
+        right: 5%;
+        width: 90%;
+    }
 }
 
 .notification-list-container.visible {
@@ -448,12 +455,12 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 400px;
+    max-height: 350px; /* Reduced height */
     overflow-y: auto;
 }
 
 .notification-list li {
-    padding: 1rem;
+    padding: 12px 15px; /* Reduced padding */
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s;
 }
@@ -562,3 +569,25 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
 }
 .play-btn-card:hover { background: rgba(255,255,255,0.05); }
+/* Enhanced Notification Card Compact Styles */
+.notification-card-enhanced {
+    padding: 12px;
+    gap: 8px;
+}
+.notification-title-enhanced {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+.notification-text-enhanced {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+.notification-image-enhanced {
+    max-width: 100%;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+

