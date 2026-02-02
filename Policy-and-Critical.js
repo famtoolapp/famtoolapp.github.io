@@ -37,13 +37,7 @@ const translations = {
         step6_list1: "1. Open 'App Info' for FamToolApp",
         step6_list2: "2. Tap the 3-dots menu (Top Right)",
         step6_list3: "3. Select 'Allow restricted settings'",
-        graphic_allow_restricted: "Allow restricted settings",
-
-        // Step 7 Translations
-        step7_title: "Mandatory: Verify Gmail",
-        important_notice: "IMPORTANT:",
-        step7_desc: "If you do not verify your Gmail address, your account may be PERMANENTLY DELETED at any time. It is mandatory to complete verification to keep your account active.",
-        graphic_verify: "VERIFY EMAIL NOW"
+        graphic_allow_restricted: "Allow restricted settings"
     },
     hi: {
         title: "इंस्टॉलेशन नीति और महत्वपूर्ण गाइड",
@@ -82,13 +76,7 @@ const translations = {
         step6_list1: "1. FamToolApp की 'App Info' में जाएं",
         step6_list2: "2. ऊपर दाईं ओर 3-डॉट्स मेनू दबाएं",
         step6_list3: "3. 'Allow restricted settings' चुनें",
-        graphic_allow_restricted: "Allow restricted settings",
-
-        // Step 7 Translations (Hindi)
-        step7_title: "अनिवार्य: जीमेल सत्यापन (Gmail Verification)",
-        important_notice: "महत्वपूर्ण:",
-        step7_desc: "अगर कोई यूजर अपने जीमेल को वेरीफाइड नहीं करता है तो हम उसका अकाउंट कभी भी परमानेंटली डिलीट कर सकते हैं। इसलिए आपको जीमेल को वेरीफाइड करना जरूरी है।",
-        graphic_verify: "अभी ईमेल सत्यापित करें"
+        graphic_allow_restricted: "Allow restricted settings"
     }
 };
 
