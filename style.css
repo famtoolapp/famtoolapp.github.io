@@ -238,7 +238,194 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     .auth-card h2 { font-size: 1.5rem; }
     .status-grid { grid-template-columns: 1fr; }
 }
-/* --- CRITICAL FIXES START --- */
+/* ...existing code... */
+
+/* Pricing Modal Styles */
+/* Pricing Modal Styles - Modern & Responsive */
+.pricing-modal-content {
+    max-width: 900px;
+    width: 95%;
+    padding: 2rem;
+    overflow-y: auto;
+    max-height: 90vh; /* Limits height, enables scrolling */
+}
+
+/* Ensure modal header stays at top */
+.modal-header {
+    position: sticky;
+    top: 0;
+    background: var(--bg-main);
+    z-index: 10;
+    padding-bottom: 1rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pricing-grid {
+    display: flex;
+    flex-wrap: wrap;       /* Allows wrapping on smaller screens */
+    gap: 20px;
+    justify-content: center;
+    padding-bottom: 60px;  /* Space for bottom content */
+}
+
+.plan-card {
+    background: var(--glass-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    flex: 1;
+    min-width: 260px;      /* Ensures cards don't get too thin */
+    max-width: 320px;      /* Caps width */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Featured 'Gold' Plan Styling */
+.plan-card.featured {
+    border-color: #f1c40f;
+    background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), var(--glass-surface));
+    transform: scale(1.05); /* Slightly bigger */
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(241, 196, 15, 0.2);
+}
+
+.plan-card:hover {
+    transform: translateY(-8px) scale(1.05); /* Unified hover effect */
+    border-color: var(--accent-teal);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.plan-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.plan-header .price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-teal);
+    margin-bottom: 1.5rem;
+}
+
+.plan-card.featured .price {
+    color: #f1c40f; /* Gold color for price */
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    text-align: left;
+    padding: 0 1rem;
+    flex-grow: 1; /* Pushes button down */
+}
+
+.plan-features li {
+    margin-bottom: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.plan-features li svg {
+    flex-shrink: 0;
+    stroke: var(--accent-green);
+}
+
+/* Payment Gateway Toggle (India/International) */
+.payment-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: sticky; /* Make toggle stick under header if needed */
+    z-index: 5;
+}
+
+.payment-toggle {
+    display: flex;
+    background: rgba(255,255,255,0.1);
+    border-radius: 30px;
+    padding: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.toggle-option {
+    padding: 10px 24px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: 0.3s;
+    user-select: none;
+}
+
+.toggle-option.active {
+    background: var(--accent-teal);
+    color: #0f172a;
+    box-shadow: 0 2px 10px rgba(45, 212, 191, 0.3);
+}
+
+/* Purchase Button */
+.plan-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    margin-top: auto; /* Pushes to bottom */
+}
+
+/* Button Colors */
+.btn-silver { background: #95a5a6; color: white; }
+.btn-gold { background: linear-gradient(to right, #f1c40f, #f39c12); color: #000; }
+.btn-diamond { background: linear-gradient(to right, #3498db, #2980b9); color: white; }
+
+.plan-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Mobile Responsiveness for Pricing */
+@media (max-width: 768px) {
+    .pricing-modal-content {
+        padding: 1rem;
+        width: 100%;
+        height: 100%; /* Full screen on mobile */
+        max-height: 100vh;
+        border-radius: 0; /* Remove corners */
+    }
+
+    .plan-card.featured {
+        transform: scale(1); /* Reset scaling on mobile to fit flow */
+    }
+    
+    .plan-card:hover {
+        transform: translateY(-5px); /* Smaller hover effect */
+    }
+
+    .pricing-grid {
+        flex-direction: column; /* Stack vertically */
+        align-items: center;
+    }
+
+    .plan-card {
+        width: 100%;
+        max-width: 100%; /* Fill width */
+    }
+}
+
 
 /* 1. Navbar Fixes for Overlap */
 .navbar-right {
@@ -591,3 +778,9 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     margin-top: 8px;
 }
 
+
+/* Billing Cycle Selector */
+.cycle-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; margin-bottom: 5px; }
+.cycle-btn:hover { border-color: var(--accent-teal); color: white; }
+.cycle-btn.active { background: rgba(45, 212, 191, 0.15); border-color: var(--accent-teal); color: var(--accent-teal); font-weight: 500; }
+.cycle-btn .badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: rgba(46, 204, 113, 0.2); color: #2ecc71; margin-left: 4px; display: inline-block; }

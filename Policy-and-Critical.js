@@ -37,7 +37,11 @@ const translations = {
         step6_list1: "1. Open 'App Info' for FamToolApp",
         step6_list2: "2. Tap the 3-dots menu (Top Right)",
         step6_list3: "3. Select 'Allow restricted settings'",
-        graphic_allow_restricted: "Allow restricted settings"
+        graphic_allow_restricted: "Allow restricted settings",
+
+        // Refund Policy
+        refund_title: "Refund Policy: Installation Responsibility",
+        refund_desc: "Please note: If the application is not installed correctly according to these instructions (including permissions & battery settings), <b style='color: #ef4444;'>NO REFUND</b> will be issued. It is the user's responsibility to ensure the app is properly configured on the target device."
     },
     hi: {
         title: "इंस्टॉलेशन नीति और महत्वपूर्ण गाइड",
@@ -76,7 +80,11 @@ const translations = {
         step6_list1: "1. FamToolApp की 'App Info' में जाएं",
         step6_list2: "2. ऊपर दाईं ओर 3-डॉट्स मेनू दबाएं",
         step6_list3: "3. 'Allow restricted settings' चुनें",
-        graphic_allow_restricted: "Allow restricted settings"
+        graphic_allow_restricted: "Allow restricted settings",
+
+        // Refund Policy
+        refund_title: "रिफंड पॉलिसी: इंस्टॉलेशन की जिम्मेदारी",
+        refund_desc: "कृपया ध्यान दें: यदि इन निर्देशों (अनुमतियां और बैटरी सेटिंग्स सहित) के अनुसार एप्लिकेशन को सही ढंग से इंस्टॉल नहीं किया गया है, तो <b style='color: #ef4444;'>कोई रिफंड (No Refund)</b> नहीं दिया जाएगा। यह उपयोगकर्ता की जिम्मेदारी है कि ऐप को सही तरीके से सेट किया जाए।"
     }
 };
 
