@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1774946133841643" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -175,53 +176,71 @@
         }
         .feature-description .cta-button:hover { background-color: #7c3aed; }
         
-        /* --- नया कोड-आधारित SMS विज़ुअलाइज़ेशन स्टाइल --- */
-        .feature-visualization-sms {
-            background: #030712;
+        /* --- नया कोड-आधारित विज़ुअलाइज़ेशन स्टाइल (Standardized Grid) --- */
+        .feature-visualization {
+            background: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 1rem;
-            padding: 1rem;
+            padding: 2rem;
             box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
             min-height: 450px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            justify-content: center;
         }
-        .sms-chat-container {
+        .status-header {
             display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .status-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--color-white);
+            font-weight: 600;
+        }
+        .status-header .timestamp {
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .status-item {
+            background-color: rgba(0,0,0,0.2);
             padding: 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        .sms-bubble {
-            padding: 0.75rem 1rem;
-            border-radius: 1.25rem;
-            max-width: 75%;
-            line-height: 1.5;
-            opacity: 0;
-            animation: popIn 0.5s ease-out forwards;
+        .status-item-icon {
+            flex-shrink: 0;
         }
-        .sms-bubble.received {
-            background-color: #374151;
+        .status-item-icon svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            color: var(--color-purple-400);
+        }
+        .status-item-info p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+        }
+        .status-item-info strong {
+            font-size: 1rem;
             color: var(--color-white);
-            align-self: flex-start;
-            border-bottom-left-radius: 0.25rem;
+            font-weight: 600;
         }
-        .sms-bubble.sent {
-            background-color: var(--color-purple-500);
-            color: var(--color-white);
-            align-self: flex-end;
-            border-bottom-right-radius: 0.25rem;
-        }
-        .sms-bubble:nth-child(1) { animation-delay: 0.2s; }
-        .sms-bubble:nth-child(2) { animation-delay: 0.7s; }
-        .sms-bubble:nth-child(3) { animation-delay: 1.2s; }
-        .sms-bubble:nth-child(4) { animation-delay: 1.7s; }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.8) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
+        .status-on { color: var(--color-green-400); }
+        .status-off { color: var(--color-red-500); }
         /* --- अंत नया विज़ुअलाइज़ेशन स्टाइल --- */
         
         .benefits-section .section-title {
@@ -414,19 +433,48 @@
                     </div>
                     
                     <!-- इमेज टैग को नए कोड-आधारित विज़ुअलाइज़ेशन से बदला गया है -->
-                    <div class="feature-visualization-sms">
-                        <div class="sms-chat-container">
-                            <div class="sms-bubble received">
-                                Hey, are you coming to the park later?
+                    <div class="feature-visualization">
+                        <div class="status-header">
+                            <h3>Inbox Overview</h3>
+                            <span class="timestamp">Updated just now</span>
+                        </div>
+
+                        <div class="status-grid">
+                            <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>New Message</p>
+                                    <strong>From: Alex (2m ago)</strong>
+                                </div>
                             </div>
-                            <div class="sms-bubble sent">
-                                Yeah! I'll be there around 5 PM.
+                            <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>Last Sent</p>
+                                    <strong>To: Mom (1h ago)</strong>
+                                </div>
                             </div>
-                            <div class="sms-bubble received">
-                                Awesome! See you then. Don't forget the frisbee!
+                            <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>Top Contact</p>
+                                    <strong>Sarah (15 Texts)</strong>
+                                </div>
                             </div>
-                             <div class="sms-bubble sent">
-                                Wouldn't forget it! 😄
+                             <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="color: var(--color-red-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>Deleted Texts</p>
+                                    <strong><span class="status-off">1 Recovered</span></strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -462,6 +510,32 @@
                         <h3>Date & Time Stamps</h3>
                         <p>Know exactly when each message was sent or received. Timestamps provide crucial context for all conversations.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--color-black);">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto; color: var(--color-gray-300);">
+                    <h2 style="color: var(--color-white); font-size: 2rem; margin-bottom: 2rem;">Why SMS Monitoring is Essential for Child Safety</h2>
+                    <p style="margin-bottom: 2rem; line-height: 1.8;">Text messaging is the primary way teenagers communicate today, but it's also a common channel for cyberbullying, inappropriate content sharing ("sexting"), and contact from potential predators. FamToolApp's <strong>SMS Review</strong> feature brings light to these private conversations, ensuring parents can intervene before a digital conversation turns into a real-world problem.</p>
+                    
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Beyond the Text Bubble: Detecting Cyberbullying</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Cyberbullying can be devastating to a child's mental health. Often, victims suffer in silence, afraid to tell their parents. By reviewing SMS messages, you can identify:</p>
+                    <ul style="margin-bottom: 2rem; padding-left: 1.5rem; line-height: 1.8;">
+                        <li style="margin-bottom: 1rem;"><strong style="color: var(--color-white);">Hateful Language:</strong> Quickly spot insults, threats, or demeaning comments directed at your child.</li>
+                        <li style="margin-bottom: 1rem;"><strong style="color: var(--color-white);">Exclusion:</strong> Notice if your child is being deliberately left out of group chats or made the target of rumors.</li>
+                        <li><strong style="color: var(--color-white);">Distress Signals:</strong> Look for replies from your child that indicate they are upset, scared, or anxious.</li>
+                    </ul>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">The Hidden Conversation: Recovering Deleted Texts</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Sophisticated apps like FamToolApp offer a significant advantage over simple manual checking: the ability to see messages that have been deleted. If a child is hiding something—whether it's a conversation about buying illicit substances or inappropriate photos—they will likely delete the thread immediately. FamToolApp captures these messages in real-time or as they sync, preserving the evidence even after it vanishes from the device screen.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Identifying Risky Contacts</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Not all dangers come from peers. Scammers and predators often use SMS to initiate contact. SMS monitoring allows you to verify if unknown numbers are sending fishing links or grooming messages. Reviewing the content of messages helps you distinguish between a wrong number and a malicious attempt to gain your child's trust.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Building Trust Through Transparency</h3>
+                    <p style="line-height: 1.8;">The goal of SMS monitoring isn't to be a spy, but to be a safety net. We recommend being open with your child about the use of monitoring tools. Explain that you review their messages not to invade their privacy, but to ensure they are not being bullied or exploited. This transparency can encourage them to come to you first when they encounter something troubling online.</p>
                 </div>
             </div>
         </section>

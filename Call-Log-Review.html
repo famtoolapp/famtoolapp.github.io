@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1774946133841643" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -180,79 +181,71 @@
         }
         .feature-description .cta-button:hover { background-color: #7c3aed; }
         
-        /* --- नया कोड-आधारित कॉल लॉग विज़ुअलाइज़ेशन स्टाइल --- */
-        .feature-visualization-call-log {
+        /* --- नया कोड-आधारित विज़ुअलाइज़ेशन स्टाइल (Standardized Grid) --- */
+        .feature-visualization {
             background: var(--surface-color);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 1rem;
-            padding: 1.5rem;
+            padding: 2rem;
             box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.15);
-            min-height: 450px;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
+            min-height: 450px;
+            justify-content: center;
         }
-        .call-log-header {
-            text-align: center;
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-color);
         }
-        .call-log-header h3 {
+        .status-header h3 {
             margin: 0;
             font-size: 1.25rem;
             color: var(--color-white);
             font-weight: 600;
         }
-        .call-log-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
+        .status-header .timestamp {
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
         }
-        .call-log-item {
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .status-item {
+            background-color: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             gap: 1rem;
-            opacity: 0;
-            animation: fadeIn 0.6s ease-out forwards;
         }
-        .call-log-item:nth-child(1) { animation-delay: 0.2s; }
-        .call-log-item:nth-child(2) { animation-delay: 0.4s; }
-        .call-log-item:nth-child(3) { animation-delay: 0.6s; }
-        .call-log-item:nth-child(4) { animation-delay: 0.8s; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .call-icon {
+        .status-item-icon {
             flex-shrink: 0;
         }
-        .call-icon svg {
-            width: 24px;
-            height: 24px;
+        .status-item-icon svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            color: var(--color-purple-400);
         }
-        .icon-incoming { color: var(--color-green-400); }
-        .icon-outgoing { color: var(--color-blue-400); transform: rotate(90deg); }
-        .icon-missed { color: var(--color-red-500); }
-        .call-details {
-            flex-grow: 1;
-        }
-        .call-details p {
+        .status-item-info p {
             margin: 0;
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+        }
+        .status-item-info strong {
             font-size: 1rem;
-            font-weight: 500;
             color: var(--color-white);
+            font-weight: 600;
         }
-        .call-details span {
-            font-size: 0.875rem;
-            color: var(--color-gray-400);
-        }
-        .call-time {
-            font-size: 0.875rem;
-            color: var(--color-gray-400);
-            white-space: nowrap;
-        }
+        .status-on { color: var(--color-green-400); }
+        .status-off { color: var(--color-red-500); }
         /* --- अंत नया विज़ुअलाइज़ेशन स्टाइल --- */
         
         .benefits-section .section-title {
@@ -445,50 +438,48 @@
                     </div>
                     
                     <!-- इमेज टैग को नए कोड-आधारित विज़ुअलाइज़ेशन से बदला गया है -->
-                    <div class="feature-visualization-call-log">
-                        <div class="call-log-header">
-                            <h3>Recent Calls</h3>
+                    <div class="feature-visualization">
+                        <div class="status-header">
+                            <h3>Call Activity</h3>
+                            <span class="timestamp">Updated just now</span>
                         </div>
-                        <div class="call-log-list">
-                            <div class="call-log-item">
-                                <div class="call-icon icon-incoming">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+
+                        <div class="status-grid">
+                            <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="color: var(--color-green-400);"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
                                 </div>
-                                <div class="call-details">
-                                    <p>Sarah</p>
-                                    <span>Incoming (2m 15s)</span>
+                                <div class="status-item-info">
+                                    <p>Last Incoming</p>
+                                    <strong>Mom (2m ago)</strong>
                                 </div>
-                                <div class="call-time">10:45 AM</div>
                             </div>
-                            <div class="call-log-item">
-                                <div class="call-icon icon-outgoing">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+                            <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="color: var(--color-blue-400); transform: rotate(90deg);"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
                                 </div>
-                                <div class="call-details">
-                                    <p>+1-987-658-3210</p>
-                                    <span>Outgoing (5m 30s)</span>
+                                <div class="status-item-info">
+                                    <p>Last Outgoing</p>
+                                    <strong>Sarah (15m)</strong>
                                 </div>
-                                <div class="call-time">10:32 AM</div>
                             </div>
-                            <div class="call-log-item">
-                                <div class="call-icon icon-missed">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+                             <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="color: var(--color-red-500);"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
                                 </div>
-                                <div class="call-details">
-                                    <p>David</p>
-                                    <span>Missed Call</span>
+                                <div class="status-item-info">
+                                    <p>Recent Missed</p>
+                                    <strong>Unknown Number</strong>
                                 </div>
-                                <div class="call-time">9:15 AM</div>
                             </div>
-                             <div class="call-log-item">
-                                <div class="call-icon icon-incoming">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0v-11.25m0 11.25h11.25" /></svg>
+                             <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
                                 </div>
-                                <div class="call-details">
-                                    <p>Mom</p>
-                                    <span>Incoming (10m 5s)</span>
+                                <div class="status-item-info">
+                                    <p>Safe Contacts</p>
+                                    <strong><span class="status-on">Verified</span></strong>
                                 </div>
-                                <div class="call-time">Yesterday</div>
                             </div>
                         </div>
                     </div>
@@ -524,6 +515,32 @@
                         <h3>A Complete Record</h3>
                         <p>Access a full history of all calls, including those that may have been deleted from the phone's native call log, ensuring you always have the full story.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--color-black);">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto; color: var(--color-gray-300);">
+                    <h2 style="color: var(--color-white); font-size: 2rem; margin-bottom: 2rem;">Why Call Log Monitoring is Critical for Modern Parenting</h2>
+                    <p style="margin-bottom: 2rem; line-height: 1.8;">In today's hyper-connected world, a smartphone is more than just a communication device; it's a gateway to the entire world, including its dangers. For parents, knowing who their child is talking to is just as important as knowing where they are physically. FamToolApp's <strong>Call Log Review</strong> feature isn't just about recording numbers; it's about providing the context parents need to protect their children from cyberbullying, online predators, and scam artists.</p>
+                    
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Detecting Hidden Dangers</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Children, especially teenagers, can be secretive. They might not tell you if they are being harassed by a bully or groomed by a stranger. By reviewing call logs, you can spot irregularities that might indicate a problem:</p>
+                    <ul style="margin-bottom: 2rem; padding-left: 1.5rem; line-height: 1.8;">
+                        <li style="margin-bottom: 1rem;"><strong style="color: var(--color-white);">Unknown Numbers:</strong> Frequent calls from unsaved or strange numbers can be a red flag for spam, scams, or predatory behavior.</li>
+                        <li style="margin-bottom: 1rem;"><strong style="color: var(--color-white);">Late Night Activity:</strong> Calls occurring late at night or during school hours often signal behavioral issues or sleep disruption.</li>
+                        <li><strong style="color: var(--color-white);">Long Duration Calls:</strong> Unusually long conversations with new acquaintances warrant a gentle conversation about who your child is connecting with.</li>
+                    </ul>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Recovering "Lost" History</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">One of the most powerful aspects of FamToolApp is its ability to report call history that may have been deleted from the device itself. Kids often delete call records to hide activity, whether it's an innocent crush or something more serious. Our system ensures that the dashboard reflects the true history of device usage, giving you a complete and unedited timeline of events. This transparency is vital for building a complete picture of your child's digital life.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Constructive Conversations, Not Just Surveillance</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">We believe that safety tools work best when paired with open dialogue. Use the data from the Call Log Review to start conversations, not accusations. If you see a number you don't recognize, ask your child about it calmly. "I noticed a long call from a new number, who was that?" is a better approach than immediate punishment. This feature allows you to be an involved digital guardian, guiding your child towards safer communication habits.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">How to Analyze the Data</h3>
+                    <p style="line-height: 1.8;">When you access the FamToolApp dashboard, look for patterns rather than just individual calls. Is there a specific number that calls only when you are not around? Are there international numbers? These patterns help you identify the specific type of threat—whether it's a peer issue, a stranger danger issue, or simply a distraction issue affecting their studies.</p>
                 </div>
             </div>
         </section>

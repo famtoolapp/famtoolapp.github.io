@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1774946133841643" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -232,15 +233,72 @@
             background-color: #7c3aed;
         }
 
-        .feature-image img {
-            width: 100%;
-            border-radius: 1rem;
-            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.2);
-            background: rgba(17, 24, 39, 0.5);
+        /* --- नया कोड-आधारित विज़ुअलाइज़ेशन स्टाइल (Standardized Grid) --- */
+        .feature-visualization {
+            background: var(--surface-color);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-height: 450px;
+            justify-content: center;
         }
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .status-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--color-white);
+            font-weight: 600;
+        }
+        .status-header .timestamp {
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .status-item {
+            background-color: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .status-item-icon {
+            flex-shrink: 0;
+        }
+        .status-item-icon svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            color: var(--color-purple-400);
+        }
+        .status-item-info p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--color-gray-400);
+        }
+        .status-item-info strong {
+            font-size: 1rem;
+            color: var(--color-white);
+            font-weight: 600;
+        }
+        .status-on { color: var(--color-green-400); }
+        .status-off { color: var(--color-red-500); }
+        /* --- अंत नया विज़ुअलाइज़ेशन स्टाइल --- */
 
         .benefits-section .section-title {
             text-align: center;
@@ -448,8 +506,50 @@
                         <p>In today's fast-paced world, knowing your child is safe is more important than ever. FamToolApp's Live Location feature provides you with a reliable and accurate way to see your child's location on a detailed map, directly from your parent dashboard. Whether they are at school, a friend's house, or on their way home, you can check in anytime, anywhere.</p>
                         <a href="https://famtoolapp.com" class="cta-button">Start Guiding Now</a>
                     </div>
-                    <div class="feature-image">
-                        <img src="images/Live Location.png" alt="Live map showing child's location">
+                    <div class="feature-visualization">
+                        <div class="status-header">
+                            <h3>Live Location</h3>
+                            <span class="timestamp">Updated 1m ago</span>
+                        </div>
+
+                        <div class="status-grid">
+                            <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>Current Location</p>
+                                    <strong>School Campus</strong>
+                                </div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>Geofence Status</p>
+                                    <strong><span class="status-on">Inside Safe Zone</span></strong>
+                                </div>
+                            </div>
+                             <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>Movement Speed</p>
+                                    <strong>0 km/h (Stationary)</strong>
+                                </div>
+                            </div>
+                             <div class="status-item">
+                                <div class="status-item-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <div class="status-item-info">
+                                    <p>Since</p>
+                                    <strong>8:30 AM (4h ago)</strong>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -483,6 +583,27 @@
                         <h3>Safe & Unsafe Zones (Geofencing)</h3>
                         <p>Create virtual boundaries around important places like home and school. Receive instant alerts when your child enters or leaves these designated zones.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--color-black);">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto; color: var(--color-gray-300);">
+                    <h2 style="color: var(--color-white); font-size: 2rem; margin-bottom: 2rem;">More Than Just a Dot on a Map</h2>
+                    <p style="margin-bottom: 2rem; line-height: 1.8;">Knowing your child's physical location is one of the most fundamental aspects of parenting. In an age where children are increasingly independent, FamToolApp's <strong>Live Location Safety</strong> feature creates a secure bridge between their freedom and your peace of mind. It allows you to verify their safety without nagging phone calls or invasive questioning.</p>
+                    
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Geofencing: A Virtual Safety Net</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">One of our most powerful tools is Geofencing. This allows you to create digital boundaries around key locations like "Home," "School," or "Grandma's House." Instead of constantly checking the app, you receive an instant notification the moment your child enters or leaves these zones. This feature is perfect for knowing exactly when they arrive at school safely or when they've left football practice.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Understanding Daily Routines with Location History</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Children, especially teens, can sometimes be unpredictable. Our Location History feature logs their movements throughout the day, providing a timeline of where they have been. This historic data is invaluable for identifying unusual patterns—like a detour on the way home or a visit to an unapproved location—allowing you to address potential safety issues before they escalate.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Panic Situations and Lost Devices</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Beyond monitoring behavior, tracking is a critical emergency tool. If a child doesn't return home on time and isn't answering their phone, the live map provides immediate answers. Additionally, if the device itself is lost or stolen, FamToolApp's high-accuracy GPS tracking significantly increases the chances of recovery.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Balancing Safety with Independence</h3>
+                    <p style="line-height: 1.8;">We encourage parents to use location tracking as a tool for safety, not control. Discuss the feature with your child: "I use this to make sure you're safe when you're out with friends, so I don't have to worry." When children understand that the goal is their security rather than micromanagement, they are far more likely to keep their phone charged and location services enabled.</p>
                 </div>
             </div>
         </section>

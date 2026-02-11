@@ -241,13 +241,19 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
 /* ...existing code... */
 
 /* Pricing Modal Styles */
-/* Pricing Modal Styles - Modern & Responsive */
+/* Pricing Modal Styles - Modern & Responsive (Full Screen) */
 .pricing-modal-content {
-    max-width: 900px;
-    width: 95%;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
     padding: 2rem;
     overflow-y: auto;
-    max-height: 90vh; /* Limits height, enables scrolling */
+    border-radius: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-main); /* Ensure solid background */
 }
 
 /* Ensure modal header stays at top */
@@ -255,7 +261,7 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     position: sticky;
     top: 0;
     background: var(--bg-main);
-    z-index: 10;
+    z-index: 100; /* Higher z-index to stay above scrolled content */
     padding-bottom: 1rem;
     margin-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
@@ -263,52 +269,54 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
 
 .pricing-grid {
     display: flex;
-    flex-wrap: wrap;       /* Allows wrapping on smaller screens */
-    gap: 20px;
+    flex-wrap: wrap;       
+    gap: 15px; /* Tighter gap */
     justify-content: center;
-    padding-bottom: 60px;  /* Space for bottom content */
+    padding-bottom: 80px;  /* Extra space for safe scrolling on mobile */
+    width: 100%;           
 }
 
 .plan-card {
     background: var(--glass-surface);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 12px;
+    padding: 1.5rem; /* Reduced padding from 2rem */
     text-align: center;
-    flex: 1;
-    min-width: 260px;      /* Ensures cards don't get too thin */
-    max-width: 320px;      /* Caps width */
+    flex: 1 1 220px;       /* Smaller basis allows fitting 4 on ~1000px+ screens */
+    min-width: 220px;      /* Allow it to shrink a bit more */
+    max-width: 380px;      
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: transform 0.3s ease, border-color 0.3s;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; REMOVED to prevent button cutoff */
+    margin-bottom: 10px;   
 }
 
 /* Featured 'Gold' Plan Styling */
 .plan-card.featured {
     border-color: #f1c40f;
     background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), var(--glass-surface));
-    transform: scale(1.05); /* Slightly bigger */
+    transform: none; /* Removed default scaling to keep aligned with others */
     z-index: 2;
     box-shadow: 0 10px 30px rgba(241, 196, 15, 0.2);
 }
 
 .plan-card:hover {
-    transform: translateY(-8px) scale(1.05); /* Unified hover effect */
+    transform: translateY(-5px); 
     border-color: var(--accent-teal);
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .plan-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem; /* Compact font */
     color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .plan-header .price {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Compact font */
     font-weight: 800;
     color: var(--accent-teal);
     margin-bottom: 1.5rem;
@@ -320,19 +328,19 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
 
 .plan-features {
     list-style: none;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     text-align: left;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     flex-grow: 1; /* Pushes button down */
 }
 
 .plan-features li {
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem; /* Tighter list */
     color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.95rem;
+    font-size: 0.85rem; /* Smaller text */
 }
 
 .plan-features li svg {

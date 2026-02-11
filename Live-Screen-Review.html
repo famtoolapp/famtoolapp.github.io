@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1774946133841643" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Live Location Safety Feature - FamToolApp</title>
+    <title>Live Screen View Feature - FamToolApp</title>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
-    <meta name="description" content="Discover the real-time Live Location safety feature of FamToolApp. Keep your child safe by knowing their whereabouts with our advanced GPS feature.">
-    <meta name="keywords" content="live location, gps safety, child safety, parental guidance, famtoolapp">
+    <meta name="description" content="See your child's phone screen in real-time with FamToolApp's Live Screen View. Ensure they are viewing safe content and using apps responsibly.">
+    <meta name="keywords" content="live screen view, screen mirroring, parental control, child safety, famtoolapp">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -195,8 +196,8 @@
         }
         .feature-description .cta-button:hover { background-color: #7c3aed; }
 
-        /* --- नया कोड-आधारित लोकेशन विज़ुअलाइज़ेशन स्टाइल --- */
-        .feature-visualization-map {
+        /* --- नया कोड-आधारित स्क्रीन विज़ुअलाइज़ेशन स्टाइल --- */
+        .feature-visualization-screen {
             position: relative;
             background: #111827;
             border: 1px solid var(--border-color);
@@ -204,88 +205,89 @@
             padding: 1rem;
             box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.15);
             min-height: 450px;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
-        .map-background {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(167, 223, 255, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(167, 223, 255, 0.08) 1px, transparent 1px);
-            background-size: 30px 30px;
-            opacity: 0.5;
-        }
-        .map-pin {
-            width: 50px;
-            height: 50px;
+        .phone-mockup {
+            width: 220px;
+            height: 420px;
+            background-color: #000;
+            border: 8px solid #374151;
+            border-radius: 2rem;
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 20px;
+            background-color: #374151;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
             z-index: 10;
         }
-        .pin-circle {
-            width: 20px;
-            height: 20px;
-            background-color: var(--color-blue-400);
-            border: 3px solid var(--color-white);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
-        }
-        .pin-pulse {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(96, 165, 250, 0.3);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse-animation 2s infinite;
-        }
-        @keyframes pulse-animation {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.7; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-        }
-        .location-info-card {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            right: 1.5rem;
-            background: var(--surface-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            padding: 1rem;
-            z-index: 20;
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1f2937, #111827);
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            padding: 2rem 1rem;
+            box-sizing: border-box;
             gap: 1rem;
         }
-        .location-info-icon {
-            flex-shrink: 0;
-            color: var(--color-blue-400);
+        .mock-app-header {
+            height: 20px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            width: 60%;
         }
-        .location-info-text p {
-            margin: 0;
-            font-size: 0.875rem;
-            color: var(--color-gray-400);
+        .mock-chat-bubble {
+            background-color: var(--color-purple-500);
+            padding: 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            color: white;
+            align-self: flex-end;
+            max-width: 80%;
+            opacity: 0.8;
         }
-        .location-info-text strong {
-            font-size: 1rem;
-            color: var(--color-white);
-            font-weight: 600;
+        .mock-chat-bubble.received {
+            background-color: var(--color-gray-800);
+            align-self: flex-start;
         }
-        .location-info-time {
-            margin-left: auto;
-            font-size: 0.8rem;
-            color: var(--color-gray-400);
-            white-space: nowrap;
+        .live-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #ef4444;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            z-index: 20;
+            animation: blink 2s infinite;
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
         /* --- अंत नया विज़ुअलाइज़ेशन स्टाइल --- */
 
@@ -472,8 +474,8 @@
     <main>
         <section class="hero-section">
             <div class="container hero-content">
-                <h1>Live Location <span>Safety</span></h1>
-                <p>Gain peace of mind by knowing your child's whereabouts in real-time. Our advanced GPS feature ensures you are always connected to their safety.</p>
+                <h1>Live Screen <span>View</span></h1>
+                <p>See exactly what's happening on your child's screen in real-time. Ensure they are navigating the digital world safely with instant visibility.</p>
             </div>
         </section>
 
@@ -481,28 +483,23 @@
             <div class="container">
                 <div class="grid grid-lg-2">
                     <div class="feature-description">
-                        <h2>Always Know They Are Safe</h2>
-                        <p>In today's fast-paced world, knowing your child is safe is more important than ever. FamToolApp's Live Location feature provides you with a reliable and accurate way to see your child's location on a detailed map, directly from your parent dashboard. Whether they are at school, a friend's house, or on their way home, you can check in anytime, anywhere.</p>
-                        <a href="https://famtoolapp.com" class="cta-button">Start Guiding Now</a>
+                        <h2>Real-Time Digital Guidance</h2>
+                        <p>Sometimes, titles and app icons aren't enough to understand what your child is viewing. FamToolApp's Live Screen View feature mirrors your child's phone screen to your dashboard in real-time. Whether they are watching a video, browsing a website, or chatting with friends, you can see if the content is age-appropriate and safe, allowing for immediate intervention if necessary.</p>
+                        <a href="https://famtoolapp.com" class="cta-button">Start Protecting Now</a>
                     </div>
                     
                     <!-- इमेज टैग को नए कोड-आधारित विज़ुअलाइज़ेशन से बदला गया है -->
-                    <div class="feature-visualization-map">
-                        <div class="map-background"></div>
-                        <div class="map-pin">
-                            <div class="pin-pulse"></div>
-                            <div class="pin-circle"></div>
+                    <div class="feature-visualization-screen">
+                        <div class="live-indicator">
+                            <div class="live-dot"></div> LIVE
                         </div>
-                        <div class="location-info-card">
-                            <div class="location-info-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                            </div>
-                            <div class="location-info-text">
-                                <p>Current Location</p>
-                                <strong>Oceanside,California 92054,United States</strong>
-                            </div>
-                            <div class="location-info-time">
-                                <span>5s ago</span>
+                        <div class="phone-mockup">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen">
+                                <div class="mock-app-header"></div>
+                                <div class="mock-chat-bubble received">Hey, want to meet up?</div>
+                                <div class="mock-chat-bubble">No, I can't.</div>
+                                <div class="mock-chat-bubble received">Come on, it'll be fun...</div>
                             </div>
                         </div>
                     </div>
@@ -513,31 +510,52 @@
         <section class="section section-dark benefits-section">
             <div class="container">
                 <div class="section-title">
-                    <h2>Key Benefits of Location Safety</h2>
-                    <p>Our GPS feature is more than just a dot on a map. It's a comprehensive tool designed to give you actionable insights and enhanced security.</p>
+                    <h2>Key Benefits of Live Screen View</h2>
+                    <p>Get an unfiltered look at device activity to ensure digital wellbeing.</p>
                 </div>
                 <div class="grid">
                     <div class="card">
                         <div class="card-icon-wrapper">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                         </div>
-                        <h3>Real-Time GPS</h3>
-                        <p>See your child's exact location updated in near real-time. The high-accuracy GPS data ensures you have the most current information available.</p>
+                        <h3>Instant Visibility</h3>
+                        <p>See exactly what is on the screen at any moment. Perfect for random checks to ensure homework is being done or safe apps are being used.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon-wrapper">
-                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                         </div>
-                        <h3>Location History</h3>
-                        <p>Review the paths your child has taken. See a detailed history of their movements throughout the day, complete with timestamps.</p>
+                        <h3>Verify Hidden Activities</h3>
+                        <p>Spot if your child quickly switches apps when you walk in. Live View shows you the active screen, revealing what they are actually doing.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon-wrapper">
-                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m-6 3l6-3"></path></svg>
+                           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                         </div>
-                        <h3>Safe & Unsafe Zones (Geofencing)</h3>
-                        <p>Create virtual boundaries around important places like home and school. Receive instant alerts when your child enters or leaves these designated zones.</p>
+                        <h3>Detect Harmful Content</h3>
+                        <p>Identify inappropriate videos, images, or websites that might bypass standard filters. See the context of their digital interactions.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background-color: var(--color-black);">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto; color: var(--color-gray-300);">
+                    <h2 style="color: var(--color-white); font-size: 2rem; margin-bottom: 2rem;">Digital Shoulder Surfing: Being There When It Matters</h2>
+                    <p style="margin-bottom: 2rem; line-height: 1.8;">Think of Live Screen View as digitally standing over your child's shoulder, but without the confrontational aspect of physically taking their phone. It is the ultimate tool for transparency, allowing parents to verify that their children are navigating the digital world safely and responsibly.</p>
+                    
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Real-Time Intervention for Bullying and Predators</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Predators and bullies often operate in real-time chats on ephemeral apps like Snapchat or anonymous forums. Because these messages often vanish, reviewing logs later might be too late. Live Screen View allows you to see these interactions as they happen. If you see your child typing a distressed response or receiving a threatening message, you can intervene immediately to support them.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Checking for "Vault" Apps and Hidden Folders</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">Tech-savvy teens often use "Vault" apps—calculators or utility apps that are actually secret photo albums or chat rooms. These can be hard to detect just by looking at an app list. However, with Live Screen View, if you see your child open a "Calculator" app and then suddenly start browsing photos or chatting, you know exactly what is going on.</p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Managing "Doomscrolling" and Screen Addiction</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">It's not just about safety; it's also about health. Children can easily get sucked into hours of "doomscrolling" on short-video platforms. By checking the Live Screen, you can see if they have been stuck in a loop of mindless consumption for hours, giving you the cue to suggest a break or some outdoor activity. </p>
+
+                    <h3 style="color: var(--color-purple-400); font-size: 1.5rem; margin: 2.5rem 0 1rem;">Privacy and Usage</h3>
+                    <p style="line-height: 1.8;">We designed this feature to be low-latency and high-quality, ensuring you get a clear picture. However, we recommend using it as a spot-check tool rather than for constant surveillance. Use it when you have a specific concern or during designated "homework hours" to ensure focus.</p>
                 </div>
             </div>
         </section>
