@@ -170,9 +170,122 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
 .modal-content {
     background: var(--bg-main); border: 1px solid var(--border-color); padding: 2rem; border-radius: 16px; width: 100%; max-width: 500px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.6); transform: scale(0.9); transition: 0.3s; display: flex; flex-direction: column; max-height: 90vh;
+    overflow-y: auto; overscroll-behavior: contain; /* Enable scrolling inside modal */
+}
+@media (max-width: 768px) {
+    .modal-content.limit-reached-content {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+    .modal-content.limit-reached-content .limit-icon-container {
+        width: 60px; height: 60px; margin-bottom: 1rem;
+    }
+    .modal-content.limit-reached-content .limit-icon-container svg {
+        width: 30px; height: 30px;
+    }
+    .modal-content.limit-reached-content h3 {
+        font-size: 1.25rem !important;
+    }
+    .modal-content.limit-reached-content p {
+        font-size: 0.85rem !important; margin-bottom: 15px !important;
+    }
 }
 .modal-overlay.visible .modal-content { transform: scale(1); }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
+/* Feature Locked Styles */
+.category-btn.feature-locked {
+    position: relative;
+    opacity: 0.7;
+    filter: grayscale(80%) blur(0.5px);
+    cursor: not-allowed;
+    pointer-events: none; /* We will handle clicks via wrapper or listener interception */
+}
+
+/* We need to re-enable pointer events for the actual element so JS can catch the click to show the modal, 
+   but visually it looks disabled. Actually better: keep pointer events but style it "disabled-ish". */
+.category-btn.feature-locked {
+    pointer-events: auto !important; 
+    cursor: pointer !important;
+}
+
+.category-btn.feature-locked::after {
+    content: "🔒";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    z-index: 10;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    filter: none !important; /* Attempt to unblur the icon, but parent blur affects it. */
+}
+
+/* Better approach: Blur content inside, invalidating :after blur */
+.category-btn.feature-locked > * {
+    filter: blur(2px);
+    opacity: 0.5;
+}
+.category-btn.feature-locked::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 5;
+    border-radius: 16px;
+}
+.category-btn.feature-locked::after {
+    content: "🔒";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    z-index: 10;
+    filter: none;
+    opacity: 1;
+}
+
+/* Limit Reached Modal Professional Styling */
+.limit-reached-content {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.limit-icon-container {
+    width: 80px;
+    height: 80px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border: 2px solid rgba(239, 68, 68, 0.3);
+}
+.limit-icon-container svg {
+    width: 40px;
+    height: 40px;
+    stroke: #ef4444;
+}
+.limit-timer {
+    background: rgba(15, 23, 42, 0.6);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.limit-timer-label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 5px;
+    display: block;
+}
+.limit-timer-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: 0.5px;
+}
 .modal-close-btn { background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer; }
 .modal-close-btn:hover { color: var(--accent-red); }
 .modal-body { overflow-y: auto; text-align: left; }
@@ -592,25 +705,39 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
 
 .notification-list-container {
     position: absolute;
-    top: calc(var(--navbar-height) - 10px);
+    top: 70px; 
     right: 15px;
-    width: 320px; /* Reduced from 360px */
-    max-width: 90vw;
+    width: 380px;
+    max-width: 95vw; /* Responsive width for mobile */
+    max-height: 80vh; /* Prevent overflow on small screens */
+    overflow-y: auto; /* Enable internal scrolling */
     background: #1e293b;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 1001;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    z-index: 2000; /* Ensure it stays on top */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(20px) scale(0.95);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scrollbar styling for notification list */
+.notification-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+.notification-list-container::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 4px;
 }
 
 @media (max-width: 480px) {
     .notification-list-container {
-        right: 5%;
-        width: 90%;
+        top: 60px;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        width: 92%;
     }
 }
 
