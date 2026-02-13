@@ -27,7 +27,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
 
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=7">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
@@ -612,7 +612,12 @@
         <div class="modal-content" style="max-width: 900px;">
             <div class="modal-header">
                 <h3 id="chat-modal-title">Help Desk</h3>
-                <button class="modal-close-btn">&times;</button>
+                <div style="display: flex; align-items: center;">
+                    <button id="chat-expand-btn" class="modal-expand-btn" title="Toggle Full Screen">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                    </button>
+                    <button class="modal-close-btn">&times;</button>
+                </div>
             </div>
             <div class="modal-body" style="padding: 0;">
                 <div class="live-chat-area">
@@ -653,7 +658,9 @@
         </div>
     </div>
 
-    <script src="script.js?v=5" type="module"></script>
-    <script src="version-check.js?v=5" type="module"></script>
+    <script src="script.js?v=7" type="module"></script>
+    <script src="version-check.js?v=7" type="module"></script>
 </body>
 </html>
+
+
