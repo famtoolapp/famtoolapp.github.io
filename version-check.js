@@ -7,10 +7,16 @@
     const CHECK_INTERVAL = 30000; 
 
     // Get the current version from the script tag's query parameter (e.g., ?v=4)
-    // This assumes you include this script like: <script src="version-check.js?v=4"></script>
-    const currentScript = document.currentScript;
-    const currentVersionMatch = currentScript.src.match(/v=(\d+)/);
-    const currentVersion = currentVersionMatch ? parseInt(currentVersionMatch[1]) : null;
+    // Supports both standard script tags and ES modules
+    let currentVersion = null;
+    
+    try {
+        const scriptSrc = document.currentScript ? document.currentScript.src : import.meta.url;
+        const currentVersionMatch = scriptSrc.match(/v=(\d+)/);
+        currentVersion = currentVersionMatch ? parseInt(currentVersionMatch[1]) : null;
+    } catch (e) {
+        console.warn("Version Check: Could not determine script source.");
+    }
 
     if (!currentVersion) {
         console.warn("Version Check: Could not determine current version from script tag.");

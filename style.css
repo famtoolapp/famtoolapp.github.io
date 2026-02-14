@@ -990,3 +990,54 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     color: var(--text-primary);
 }
 
+/* Telegram Navbar Button - Official Style */
+.navbar-telegram-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #24A1DE; /* Official Telegram Color */
+    border-radius: 50%;
+    margin-right: 8px; /* Reduced gap to bring it closer to bell icon */
+    box-shadow: 0 2px 5px rgba(36, 161, 222, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s;
+    text-decoration: none;
+    animation: telegram-pulse 2s infinite; /* Heartbeat animation */
+}
+
+@keyframes telegram-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(36, 161, 222, 0.7);
+    }
+    70% {
+        transform: scale(1.05); /* Slight grow */
+        box-shadow: 0 0 0 10px rgba(36, 161, 222, 0); /* Ripple effect */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(36, 161, 222, 0);
+    }
+}
+
+.navbar-telegram-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    stroke: none;
+    margin-right: 0; 
+    margin-top: 0;
+}
+
+.navbar-telegram-btn:hover {
+    background-color: #0088cc;
+    animation: none; /* Stop animation on hover */
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(36, 161, 222, 0.8);
+}
+
+@media (max-width: 768px) {
+    /* Adjustments if needed but navbar flex should handle it */
+}
+
