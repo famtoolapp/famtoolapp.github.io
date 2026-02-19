@@ -458,7 +458,17 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
 
 .plan-features li svg {
     flex-shrink: 0;
-    stroke: var(--accent-green);
+    stroke: var(--accent-green) !important;
+}
+
+.plan-features li svg * {
+    stroke: var(--accent-green) !important;
+}
+
+/* Allow red color override for disabled features */
+.plan-features li svg[stroke="#ef4444"],
+.plan-features li svg[stroke="#ef4444"] * {
+    stroke: #ef4444 !important;
 }
 
 /* Payment Gateway Toggle (India/International) */
