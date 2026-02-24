@@ -1051,3 +1051,134 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-main); col
     /* Adjustments if needed but navbar flex should handle it */
 }
 
+/* --- SMS Command Page Styles --- */
+.sms-view-header {
+    margin-bottom: 20px;
+}
+
+.sms-header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sms-icon-container {
+    background: rgba(56, 189, 248, 0.15);
+    padding: 10px;
+    border-radius: 12px;
+    color: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sms-main-title {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.sms-sub-title {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.sms-card {
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    background: var(--primary-surface);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.sms-form-group {
+    margin-bottom: 25px;
+}
+
+.sms-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--accent-blue);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.sms-input-wrapper {
+    position: relative;
+}
+
+.sms-input-icon {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.sms-input {
+    width: 100%;
+    padding: 14px 14px 14px 44px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: inherit;
+}
+
+.sms-input:focus {
+    border-color: var(--accent-blue);
+    background-color: rgba(56, 189, 248, 0.05);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+}
+
+.sms-input textarea {
+    resize: vertical;
+}
+
+.sms-send-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+    color: #0f172a;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sms-send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
+}
+
+.sms-send-btn:active {
+    transform: scale(0.98);
+}
+
+.sms-note {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+
