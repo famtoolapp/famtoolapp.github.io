@@ -378,22 +378,6 @@
         .page-footer a:hover { color: var(--accent-blue); }
         
         /* --- START: ADVERTISEMENT STYLES --- */
-        
-        /* Mobile Bottom Banner Container */
-        #mobile-banner-container {
-            display: none; /* Hidden by default on desktop */
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1003; /* Above footer */
-            background: var(--bg-main);
-            text-align: center;
-            min-height: 110px; /* 100px ad + 10px padding */
-            padding-top: 5px;
-            border-top: 1px solid var(--border-color);
-            justify-content: center;
-        }
 
         /* Modal Ad Styles */
         .modal-ad-separator {
@@ -450,34 +434,7 @@
             .category-buttons { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
             .category-btn { min-height: 130px; }
         }
-        
-        /* --- START: ADVERTISEMENT MEDIA QUERIES --- */
-        @media (max-width: 767px) {
-            #mobile-banner-container {
-                  display: flex; /* Show mobile banner */
-              }
 
-              /* Push footer up to sit above the ad banner */
-              .page-footer {
-                  bottom: 110px; /* Height of the ad banner */
-              }
-
-              /* Adjust main content padding to prevent ad from overlapping content when scrolled to bottom */
-              .main-content {
-                  padding-bottom: 120px; /* 110px ad + 10px buffer */
-              }
-
-              /* Adjust modal overlay to not go under the ad */
-              .modal-overlay {
-                  padding-bottom: 110px;
-              }
-
-              /* Adjust sidebar padding for mobile ad */
-              .sidebar {
-                   padding-bottom: 185px; /* 75px original + 110px ad */
-              }
-          }
-        
         @media (max-width: 576px) {
             .main-content { 
                 padding: 1rem; 
@@ -693,14 +650,6 @@
     <footer class="page-footer">
         © Copyright FamToolApp. All Rights Reserved by FamToolApp
     </footer>
-
-    <!-- START: Mobile Banner Ad (Fixed Bottom) -->
-    <div id="mobile-banner-container">
-        <div class="admoloBanner"
-            data-publisher="eyJpdiI6InA1WlA1OGRZVVV4cHN3QjgySFYvclE9PSIsInZhbHVlIjoiZEhES0ZvUmdYR2M1L2dYbVJiNXpkdz09IiwibWFjIjoiNzI5MjY4MjAxMDhjNzM5MDdlOTBjMWYwNDk1OGVlNzY3NTJiMGI5N2M3NTkwYjE3ZGY5NGEzMDI2YjlkNjM0MCIsInRhZyI6IiJ9"
-            data-adsize="320x100"></div>
-    </div>
-    <!-- END: Mobile Banner Ad -->
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
