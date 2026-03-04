@@ -389,18 +389,11 @@
             z-index: 1003; /* Above footer */
             background: var(--bg-main);
             text-align: center;
-            min-height: 60px; /* 50px ad + 10px padding */
-            padding-top: 5px;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        /* Modal Ad Styles */
-        .modal-ad-separator {
-            border-top: 1px solid var(--border-color);
-            margin: 2rem 0;
-        }
-        .modal-ad-title {
-            text-align: center;
+              min-height: 110px; /* 100px ad + 10px padding */
+              padding-top: 5px;
+              border-top: 1px solid var(--border-color);
+              display: flex;
+              justify-content: center;
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
@@ -421,13 +414,12 @@
         }
         .ad-slot-1 {
             width: 300px;
-            min-height: 250px;
-        }
-        .ad-slot-3 {
-            min-width: 300px;
-            min-height: 250px; /* Give it a min-height too */
-            flex-grow: 1;
-        }
+              min-height: 300px;
+          }
+          .ad-slot-3 {
+              min-width: 320px;
+              min-height: 180px;
+          } 
         
         /* --- END: ADVERTISEMENT STYLES --- */
         
@@ -454,30 +446,29 @@
         /* --- START: ADVERTISEMENT MEDIA QUERIES --- */
         @media (max-width: 767px) {
             #mobile-banner-container {
-                display: block; /* Show mobile banner */
-            }
-            
-            /* Push footer up to sit above the ad banner */
-            .page-footer {
-                bottom: 60px; /* Height of the ad banner */
-            }
-            
-            /* Adjust main content padding to prevent ad from overlapping content when scrolled to bottom */
-            .main-content {
-                padding-bottom: 70px; /* 60px ad + 10px buffer */
-            }
-            
-            /* Adjust modal overlay to not go under the ad */
-            .modal-overlay {
-                padding-bottom: 60px;
-            }
+                  display: flex; /* Show mobile banner */
+              }
 
-            /* Adjust sidebar padding for mobile ad */
-            .sidebar {
-                 padding-bottom: 135px; /* 75px original + 60px ad */
-            }
-        }
-        /* --- END: ADVERTISEMENT MEDIA QUERIES --- */
+              /* Push footer up to sit above the ad banner */
+              .page-footer {
+                  bottom: 110px; /* Height of the ad banner */
+              }
+
+              /* Adjust main content padding to prevent ad from overlapping content when scrolled to bottom */
+              .main-content {
+                  padding-bottom: 120px; /* 110px ad + 10px buffer */
+              }
+
+              /* Adjust modal overlay to not go under the ad */
+              .modal-overlay {
+                  padding-bottom: 110px;
+              }
+
+              /* Adjust sidebar padding for mobile ad */
+              .sidebar {
+                   padding-bottom: 185px; /* 75px original + 110px ad */
+              }
+          }
         
         @media (max-width: 576px) {
             .main-content { 
