@@ -27,7 +27,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
 
-    <link rel="stylesheet" href="style.css?v=41">
+    <link rel="stylesheet" href="style.css?v=50">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
@@ -158,6 +158,200 @@
             height: 24px;
             stroke-width: 2.5px;
         }
+
+        /* Trial Countdown Banner */
+        #trial-countdown-banner {
+            display: none;
+            position: sticky;
+            top: 60px;
+            z-index: 45;
+            padding: 10px 16px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.5s ease, opacity 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        #trial-countdown-banner.level-safe {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+        }
+        #trial-countdown-banner.level-warn {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: #fff;
+        }
+        #trial-countdown-banner.level-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: #fff;
+            animation: bannerPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes bannerPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.75; }
+        }
+        #trial-countdown-banner .trial-timer {
+            font-family: 'Courier New', monospace;
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            margin: 0 6px;
+        }
+        #trial-countdown-banner .trial-upgrade-link {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        #trial-countdown-banner.level-safe .trial-upgrade-link {
+            background: #000;
+            color: #f59e0b;
+        }
+        #trial-countdown-banner.level-warn .trial-upgrade-link {
+            background: #fff;
+            color: #ea580c;
+        }
+        #trial-countdown-banner.level-danger .trial-upgrade-link {
+            background: #fff;
+            color: #dc2626;
+        }
+        #trial-countdown-banner .trial-upgrade-link:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 480px) {
+            #trial-countdown-banner { font-size: 0.78rem; padding: 8px 10px; }
+            #trial-countdown-banner .trial-timer { font-size: 0.9rem; }
+            #trial-countdown-banner .trial-upgrade-link { font-size: 0.7rem; padding: 3px 10px; }
+        }
+
+        /* ===== RENEWAL REMINDER POPUP ===== */
+        #renewal-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: renewalFadeIn 0.3s ease;
+        }
+        #renewal-popup-overlay.visible { display: flex; }
+        @keyframes renewalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes renewalSlideIn {
+            from { transform: translateY(-30px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .renewal-popup-box {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 440px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+            overflow: hidden;
+            animation: renewalSlideIn 0.4s ease;
+        }
+        .renewal-popup-header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            padding: 22px 24px;
+            text-align: center;
+        }
+        .renewal-popup-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .renewal-popup-header .renewal-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .renewal-popup-body {
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .renewal-popup-body .renewal-message {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+        .renewal-popup-body .renewal-date-box {
+            background: rgba(231,76,60,0.12);
+            border: 1px solid rgba(231,76,60,0.3);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 22px;
+        }
+        .renewal-date-box .date-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .renewal-date-box .date-value {
+            font-size: 1.4rem;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        .renewal-date-box .plan-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 3px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+        }
+        .renewal-popup-body .renewal-warning {
+            color: #999;
+            font-size: 0.82rem;
+            margin-bottom: 0;
+        }
+        .renewal-popup-footer {
+            display: flex;
+            gap: 10px;
+            padding: 0 24px 24px;
+        }
+        .renewal-popup-footer .btn-renew {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            transition: transform 0.2s;
+        }
+        .renewal-popup-footer .btn-renew:hover { transform: scale(1.03); }
+        .renewal-popup-footer .btn-later {
+            padding: 13px 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: transparent;
+            color: #999;
+            transition: background 0.2s;
+        }
+        .renewal-popup-footer .btn-later:hover { background: rgba(255,255,255,0.05); }
+        @media (max-width: 480px) {
+            .renewal-popup-box { width: 95%; }
+            .renewal-popup-header h3 { font-size: 1rem; }
+            .renewal-date-box .date-value { font-size: 1.1rem; }
+        }
     </style>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -253,6 +447,14 @@
             </ul>
         </div>
 
+        <!-- Trial Countdown Banner (Free Users Only) -->
+        <div id="trial-countdown-banner" onclick="document.getElementById('trial-banner-upgrade-btn').click()">
+            <span id="trial-banner-text">⏰ Free trial expires in </span>
+            <span class="trial-timer" id="trial-banner-timer">--:--:--</span>
+            <span id="trial-banner-suffix"> — Upgrade to keep your data!</span>
+            <a href="javascript:void(0)" id="trial-banner-upgrade-btn" class="trial-upgrade-link">Buy Plan</a>
+        </div>
+
         <div id="dashboard" class="dashboard-container">
             <div id="overlay"></div>
             
@@ -284,8 +486,8 @@
                             </div>
                         </div>
                         <div class="notice-box warning" id="info-notice-box">
-                            <h4>Important Information - Regular Connection Required</h4>
-                            <p>For customers using the free offer, without connecting to the site <strong>7 days from the last login</strong>, the target phone will be automatically deleted.<br>For customers using the Basic, Premium or Ultra offer, without connecting to the site <strong>for a month from the last login</strong>, the target phone will be automatically deleted.</p>
+                            <h4>Important Information - Free Trial & Subscription</h4>
+                            <p>The <strong>free trial expires after 12 hours</strong> from activation. If you do not purchase a subscription plan before the trial ends, your account and all associated data will be <strong>permanently deleted</strong>.<br>To avoid losing your account, please purchase a subscription plan within 12 hours of signing up.<br><br>For paid plan users (Basic, Gold, or Platinum), if you do not connect to the site <strong>for 7 days from the last login</strong>, the target phone will be automatically removed.</p>
                         </div>
                     </div>
 
@@ -518,9 +720,9 @@
                 <!-- Free Plan -->
                 <div class="plan-card">
                     <div class="plan-header">
-                        <h3>Free</h3>
-                        <div class="price">0<span class="period" style="font-size: 1rem; color: #94a3b8; font-weight: normal;">/mo</span></div>
-                        <div class="savings-text" style="height: 1.2em;"></div>
+                        <h3>12-Hour Trial</h3>
+                        <div class="price">₹0<span class="period" style="font-size: 1rem; color: #94a3b8; font-weight: normal;">/12 hrs</span></div>
+                        <div class="savings-text" style="height: 1.2em; font-size: 0.8rem; color: #ef4444;">One-time use only</div>
                     </div>
                     <ul class="plan-features">
                         <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> <b>1 Device Monitoring</b></li>
@@ -644,7 +846,7 @@
                 <div class="plan-card">
                     <div class="plan-header">
                         <h3>Basic</h3>
-                        <div class="price" id="price-basic">&#8377;299<span class="period" style="font-size: 1rem; color: #94a3b8; font-weight: normal;">/mo</span></div>
+                        <div class="price" id="price-basic">&#8377;299<span class="period" style="font-size: 1rem; color: #94a3b8; font-weight: normal;">/15 days</span></div>
                         <div class="savings-text" id="save-basic" style="font-size: 0.8rem; color: #2ecc71; height: 1.2em;"></div>
                     </div>
                     <ul class="plan-features">
@@ -840,8 +1042,31 @@
             </div>
         </div>
     </div>
-    <script src="script.js?v=41" type="module"></script>
-    <script src="version-check.js?v=41" type="module"></script>
+    <!-- Renewal Reminder Popup -->
+    <div id="renewal-popup-overlay">
+        <div class="renewal-popup-box">
+            <div class="renewal-popup-header">
+                <span class="renewal-icon">⏰</span>
+                <h3>Plan Expiring Soon!</h3>
+            </div>
+            <div class="renewal-popup-body">
+                <p class="renewal-message" id="renewal-popup-message">Your plan is expiring soon. Renew now to continue enjoying all premium features without interruption.</p>
+                <div class="renewal-date-box">
+                    <div class="date-label">Expiry Date</div>
+                    <div class="date-value" id="renewal-popup-date">--</div>
+                    <span class="plan-badge" id="renewal-popup-plan-badge">Plan</span>
+                </div>
+                <p class="renewal-warning">After expiry, your account will revert to Free plan and features will be locked.</p>
+            </div>
+            <div class="renewal-popup-footer">
+                <button class="btn-renew" id="renewal-popup-renew-btn">🔄 Renew Now</button>
+                <button class="btn-later" id="renewal-popup-later-btn">Later ✕</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=50" type="module"></script>
+    <script src="version-check.js?v=50" type="module"></script>
 </body>
 </html>
 
