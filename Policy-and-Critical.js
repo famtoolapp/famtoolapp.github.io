@@ -41,7 +41,15 @@ const translations = {
 
         // Refund Policy
         refund_title: "Refund Policy: Installation Responsibility",
-        refund_desc: "Please note: If the application is not installed correctly according to these instructions (including permissions & battery settings), <b style='color: #ef4444;'>NO REFUND</b> will be issued. It is the user's responsibility to ensure the app is properly configured on the target device."
+        refund_desc: "Please note: If the application is not installed correctly according to these instructions (including permissions & battery settings), <b style='color: #ef4444;'>NO REFUND</b> will be issued. It is the user's responsibility to ensure the app is properly configured on the target device.",
+
+        // Account Auto-Deletion Policy
+        deletion_title: "Account Auto-Deletion Policy",
+        deletion_desc: "FamToolApp enforces strict automated account management. Your account will be <b>permanently deleted without notification</b> under the following conditions:",
+        deletion_trial: "<b style='color: #ef4444;'>3-Hour Trial:</b> If no subscription plan is purchased within 3 hours of registration, the account and all data will be permanently deleted.",
+        deletion_inactive: "<b style='color: #ef4444;'>7-Day Inactivity:</b> If any user (free or paid) does not log into their account for 7 consecutive days, the account will be permanently deleted by our algorithm system — without any prior notification.",
+        deletion_uninstall: "<b style='color: #ef4444;'>App Uninstalled:</b> If the child/target device uninstalls the application and the parent/employer does not reinstall it, the account may be permanently deleted without notice.",
+        deletion_note: "No refunds, data recovery, or account restoration will be provided for accounts deleted under these policies."
     },
     hi: {
         title: "इंस्टॉलेशन नीति और महत्वपूर्ण गाइड",
@@ -84,7 +92,15 @@ const translations = {
 
         // Refund Policy
         refund_title: "रिफंड पॉलिसी: इंस्टॉलेशन की जिम्मेदारी",
-        refund_desc: "कृपया ध्यान दें: यदि इन निर्देशों (अनुमतियां और बैटरी सेटिंग्स सहित) के अनुसार एप्लिकेशन को सही ढंग से इंस्टॉल नहीं किया गया है, तो <b style='color: #ef4444;'>कोई रिफंड (No Refund)</b> नहीं दिया जाएगा। यह उपयोगकर्ता की जिम्मेदारी है कि ऐप को सही तरीके से सेट किया जाए।"
+        refund_desc: "कृपया ध्यान दें: यदि इन निर्देशों (अनुमतियां और बैटरी सेटिंग्स सहित) के अनुसार एप्लिकेशन को सही ढंग से इंस्टॉल नहीं किया गया है, तो <b style='color: #ef4444;'>कोई रिफंड (No Refund)</b> नहीं दिया जाएगा। यह उपयोगकर्ता की जिम्मेदारी है कि ऐप को सही तरीके से सेट किया जाए।",
+
+        // Account Auto-Deletion Policy
+        deletion_title: "अकाउंट ऑटो-डिलीशन पॉलिसी",
+        deletion_desc: "FamToolApp सख्त स्वचालित खाता प्रबंधन नीति लागू करता है। निम्नलिखित परिस्थितियों में आपका अकाउंट <b>बिना किसी सूचना के स्थायी रूप से डिलीट</b> कर दिया जाएगा:",
+        deletion_trial: "<b style='color: #ef4444;'>3 घंटे का ट्रायल:</b> यदि रजिस्ट्रेशन के 3 घंटे के भीतर कोई सब्सक्रिप्शन प्लान नहीं खरीदा जाता है, तो अकाउंट और सभी डेटा स्थायी रूप से डिलीट कर दिया जाएगा।",
+        deletion_inactive: "<b style='color: #ef4444;'>7 दिन की निष्क्रियता:</b> यदि कोई भी यूजर (फ्री या पेड) लगातार 7 दिनों तक अपने अकाउंट में लॉगिन नहीं करता है, तो हमारा एल्गोरिदम सिस्टम बिना किसी पूर्व सूचना के अकाउंट को स्थायी रूप से डिलीट कर देगा।",
+        deletion_uninstall: "<b style='color: #ef4444;'>ऐप अनइंस्टॉल:</b> यदि बच्चे/टारगेट डिवाइस से एप्लिकेशन अनइंस्टॉल कर दी जाती है और माता-पिता/नियोक्ता इसे दोबारा इंस्टॉल नहीं करते हैं, तो अकाउंट बिना सूचना के स्थायी रूप से डिलीट किया जा सकता है।",
+        deletion_note: "इन नीतियों के तहत डिलीट किए गए अकाउंट के लिए कोई रिफंड, डेटा रिकवरी या अकाउंट रिस्टोरेशन प्रदान नहीं किया जाएगा।"
     }
 };
 

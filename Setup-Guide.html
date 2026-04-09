@@ -55,6 +55,144 @@
             transition: color 0.3s; font-weight: 500;
         }
         .back-btn:hover { color: var(--accent-teal); }
+
+        /* Restricted Settings Visual Guide */
+        .restricted-visual-guide {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .rs-step-card {
+            background: rgba(15, 15, 30, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 18px;
+            position: relative;
+            text-align: center;
+        }
+        .rs-step-card .rs-step-num {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e74c3c;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .rs-step-card .rs-icon {
+            font-size: 2.2rem;
+            margin: 12px 0 8px;
+        }
+        .rs-step-card .rs-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ecf0f1;
+            margin-bottom: 6px;
+        }
+        .rs-step-card .rs-desc {
+            font-size: 0.78rem;
+            color: #95a5a6;
+            line-height: 1.4;
+        }
+        .rs-phone-mockup {
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 22px;
+            padding: 10px;
+            max-width: 260px;
+            margin: 15px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .rs-phone-screen {
+            background: #1a1a2e;
+            border-radius: 14px;
+            padding: 16px;
+            min-height: 180px;
+        }
+        .rs-popup-mock {
+            background: #2d2d3d;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .rs-popup-mock .rs-popup-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .rs-popup-mock .rs-popup-body {
+            font-size: 0.75rem;
+            color: #aaa;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .rs-popup-mock .rs-popup-btn {
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .rs-popup-mock .rs-popup-btn.grey {
+            background: #555;
+            color: #999;
+        }
+        .rs-popup-mock .rs-popup-btn.green {
+            background: #27ae60;
+            color: white;
+        }
+        .rs-menu-mock {
+            background: #2d2d3d;
+            border-radius: 8px;
+            padding: 0;
+            max-width: 200px;
+            margin: 10px auto;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .rs-menu-item {
+            padding: 10px 14px;
+            font-size: 0.8rem;
+            color: #ccc;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            text-align: left;
+        }
+        .rs-menu-item.highlight {
+            background: rgba(231,76,60,0.15);
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        .rs-menu-item:last-child { border-bottom: none; }
+        .rs-affected-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .rs-affected-chip {
+            background: rgba(231, 76, 60, 0.12);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        @media (max-width: 480px) {
+            .restricted-visual-guide {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -170,6 +308,112 @@
 
                     </div>
                 </div>
+
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-content">
+                        <h3>⚠️ Fix "Restricted Setting" on Android 13/14/15/16</h3>
+                        <p>On <strong>Android 13 and above</strong>, Google has added a security feature called <strong>"Restricted Settings"</strong>. When you try to enable <strong>SMS Permission, Accessibility Service,</strong> or <strong>Notification Listener</strong> for apps installed via APK (sideloaded), the phone shows a grey popup saying <em>"For your security, this setting is currently unavailable"</em>.</p>
+                        
+                        <div style="margin: 15px 0;">
+                            <p style="color: #e74c3c; font-weight: 600; margin-bottom: 8px;">🔒 This affects these critical permissions:</p>
+                            <div class="rs-affected-list">
+                                <span class="rs-affected-chip">📱 SMS Permission</span>
+                                <span class="rs-affected-chip">♿ Accessibility Service</span>
+                                <span class="rs-affected-chip">🔔 Notification Listener</span>
+                            </div>
+                        </div>
+
+                        <!-- What the popup looks like -->
+                        <div class="warning-box" style="margin-bottom: 20px;">
+                            <h4>What does the "Restricted Setting" popup look like?</h4>
+                            <div class="rs-phone-mockup">
+                                <div class="rs-phone-screen">
+                                    <div class="rs-popup-mock">
+                                        <div class="rs-popup-title">Restricted Setting</div>
+                                        <div class="rs-popup-body">For your security, this setting is currently unavailable.</div>
+                                        <span class="rs-popup-btn grey">OK</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="text-align: center; font-size: 0.85rem; color: #fb7185;">👆 If you see this popup, follow the steps below to fix it.</p>
+                        </div>
+
+                        <!-- Step-by-step visual guide -->
+                        <div class="note-box" style="margin-bottom: 15px;">
+                            <h4>✅ How to Fix (Step-by-Step)</h4>
+                        </div>
+
+                        <div class="restricted-visual-guide">
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">1</div>
+                                <div class="rs-icon">⚙️</div>
+                                <div class="rs-title">Open Phone Settings</div>
+                                <div class="rs-desc">Go to your phone's main <strong>Settings</strong> app.</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">2</div>
+                                <div class="rs-icon">📦</div>
+                                <div class="rs-title">Go to Apps</div>
+                                <div class="rs-desc">Find and tap <strong>"Apps"</strong> or <strong>"App Management"</strong>.</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">3</div>
+                                <div class="rs-icon">🔍</div>
+                                <div class="rs-title">Find the App</div>
+                                <div class="rs-desc">Scroll down and tap on <strong>"Settings Storage"</strong> (the installed app).</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">4</div>
+                                <div class="rs-icon">⋮</div>
+                                <div class="rs-title">Tap 3 Dots Menu</div>
+                                <div class="rs-desc">In the top-right corner, tap the <strong>three dots (⋮)</strong> menu icon.</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">5</div>
+                                <div class="rs-icon">🔓</div>
+                                <div class="rs-title">Allow Restricted Settings</div>
+                                <div class="rs-desc">Tap <strong>"Allow restricted settings"</strong> from the menu.</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">6</div>
+                                <div class="rs-icon">🔑</div>
+                                <div class="rs-title">Enter Phone Lock</div>
+                                <div class="rs-desc">Enter your <strong>PIN / Pattern / Password</strong> to confirm.</div>
+                            </div>
+                        </div>
+
+                        <!-- 3-dot menu mockup -->
+                        <div style="margin: 20px 0;">
+                            <p style="font-weight: 600; margin-bottom: 10px; color: #f8fafc;">📋 The 3-dot menu will look like this:</p>
+                            <div class="rs-phone-mockup">
+                                <div class="rs-phone-screen" style="min-height: auto;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <span style="color: #fff; font-weight: 600; font-size: 0.9rem;">← App info</span>
+                                        <span style="color: #fff; font-size: 1.4rem; cursor: pointer; font-weight: bold;">⋮</span>
+                                    </div>
+                                    <div class="rs-menu-mock">
+                                        <div class="rs-menu-item highlight">🔓 Allow restricted settings</div>
+                                        <div class="rs-menu-item">Uninstall updates</div>
+                                        <div class="rs-menu-item">Open by default</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- After fixing -->
+                        <div class="note-box">
+                            <h4>✅ After completing the above steps:</h4>
+                            <ul>
+                                <li>Go back and try enabling <strong>Accessibility Service</strong> → It will now work!</li>
+                                <li>Go back and try enabling <strong>Notification Listener</strong> → It will now work!</li>
+                                <li>The <strong>SMS Permission</strong> popup will now allow you to press "Allow".</li>
+                            </ul>
+                            <p style="margin-top: 10px; color: #2dd4bf;"><strong>💡 Tip:</strong> You only need to do this ONCE. After allowing restricted settings, all three permissions will work normally.</p>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <!-- HINDI CONTENT -->
@@ -266,6 +510,112 @@
                         <div class="perm-box">
                             <h4>6. Device Administrator (ऑप्शनल / ऐच्छिक)</h4>
                             <p>अगर आपके बच्चे के मोबाइल में एप्लीकेशन हाइड (Hide) नहीं होती है और आपको लगता है कि बच्चा ऐप को अनइंस्टॉल कर देगा, तो सेटअप के समय आप <strong>Device Administrator</strong> को भी एक्टिव कर सकते हैं। ऐसा करने से बच्चा आसानी से ऐप को अनइंस्टॉल नहीं कर पाएगा।</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-content">
+                        <h3>⚠️ "Restricted Setting" को ठीक करें (Android 13/14/15/16)</h3>
+                        <p><strong>Android 13 और उसके बाद के वर्शन</strong> में Google ने एक सिक्योरिटी फीचर जोड़ा है जिसे <strong>"Restricted Settings"</strong> कहते हैं। जब आप APK से इंस्टॉल की गई ऐप के लिए <strong>SMS परमिशन, Accessibility Service,</strong> या <strong>Notification Listener</strong> ऑन करने की कोशिश करते हैं, तो फोन एक ग्रे (Grey) पॉपअप दिखाता है जिसमें लिखा होता है — <em>"For your security, this setting is currently unavailable"</em>।</p>
+
+                        <div style="margin: 15px 0;">
+                            <p style="color: #e74c3c; font-weight: 600; margin-bottom: 8px;">🔒 इन ज़रूरी परमिशन्स पर असर पड़ता है:</p>
+                            <div class="rs-affected-list">
+                                <span class="rs-affected-chip">📱 SMS परमिशन</span>
+                                <span class="rs-affected-chip">♿ Accessibility सर्विस</span>
+                                <span class="rs-affected-chip">🔔 Notification लिसनर</span>
+                            </div>
+                        </div>
+
+                        <!-- Popup mockup -->
+                        <div class="warning-box" style="margin-bottom: 20px;">
+                            <h4>"Restricted Setting" का पॉपअप कैसा दिखता है?</h4>
+                            <div class="rs-phone-mockup">
+                                <div class="rs-phone-screen">
+                                    <div class="rs-popup-mock">
+                                        <div class="rs-popup-title">Restricted Setting</div>
+                                        <div class="rs-popup-body">For your security, this setting is currently unavailable.</div>
+                                        <span class="rs-popup-btn grey">OK</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="text-align: center; font-size: 0.85rem; color: #fb7185;">👆 अगर आपको यह पॉपअप दिखे, तो नीचे दिए गए स्टेप्स फॉलो करें।</p>
+                        </div>
+
+                        <!-- Step-by-step -->
+                        <div class="note-box" style="margin-bottom: 15px;">
+                            <h4>✅ ठीक कैसे करें (स्टेप-बाय-स्टेप)</h4>
+                        </div>
+
+                        <div class="restricted-visual-guide">
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">1</div>
+                                <div class="rs-icon">⚙️</div>
+                                <div class="rs-title">फोन Settings खोलें</div>
+                                <div class="rs-desc">अपने फोन की मुख्य <strong>Settings</strong> ऐप खोलें।</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">2</div>
+                                <div class="rs-icon">📦</div>
+                                <div class="rs-title">Apps में जाएं</div>
+                                <div class="rs-desc"><strong>"Apps"</strong> या <strong>"App Management"</strong> पर टैप करें।</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">3</div>
+                                <div class="rs-icon">🔍</div>
+                                <div class="rs-title">ऐप ढूंढें</div>
+                                <div class="rs-desc">नीचे स्क्रॉल करें और <strong>"Settings Storage"</strong> (इंस्टॉल की गई ऐप) पर टैप करें।</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">4</div>
+                                <div class="rs-icon">⋮</div>
+                                <div class="rs-title">3 डॉट्स मेनू दबाएं</div>
+                                <div class="rs-desc">ऊपर दाएं कोने में <strong>तीन डॉट्स (⋮)</strong> मेनू आइकन पर टैप करें।</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">5</div>
+                                <div class="rs-icon">🔓</div>
+                                <div class="rs-title">Allow Restricted Settings</div>
+                                <div class="rs-desc">मेनू से <strong>"Allow restricted settings"</strong> पर टैप करें।</div>
+                            </div>
+                            <div class="rs-step-card">
+                                <div class="rs-step-num">6</div>
+                                <div class="rs-icon">🔑</div>
+                                <div class="rs-title">फोन लॉक डालें</div>
+                                <div class="rs-desc">अपना <strong>PIN / पैटर्न / पासवर्ड</strong> डालकर कन्फर्म करें।</div>
+                            </div>
+                        </div>
+
+                        <!-- Menu mockup -->
+                        <div style="margin: 20px 0;">
+                            <p style="font-weight: 600; margin-bottom: 10px; color: #f8fafc;">📋 3-डॉट मेनू कुछ ऐसा दिखेगा:</p>
+                            <div class="rs-phone-mockup">
+                                <div class="rs-phone-screen" style="min-height: auto;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <span style="color: #fff; font-weight: 600; font-size: 0.9rem;">← App info</span>
+                                        <span style="color: #fff; font-size: 1.4rem; cursor: pointer; font-weight: bold;">⋮</span>
+                                    </div>
+                                    <div class="rs-menu-mock">
+                                        <div class="rs-menu-item highlight">🔓 Allow restricted settings</div>
+                                        <div class="rs-menu-item">Uninstall updates</div>
+                                        <div class="rs-menu-item">Open by default</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- After fixing -->
+                        <div class="note-box">
+                            <h4>✅ ऊपर के स्टेप्स पूरे करने के बाद:</h4>
+                            <ul>
+                                <li>वापस जाएं और <strong>Accessibility Service</strong> को ऑन करें → अब यह काम करेगी!</li>
+                                <li>वापस जाएं और <strong>Notification Listener</strong> को ऑन करें → अब यह काम करेगा!</li>
+                                <li><strong>SMS Permission</strong> अब "Allow" बटन दबाने पर मिल जाएगी।</li>
+                            </ul>
+                            <p style="margin-top: 10px; color: #2dd4bf;"><strong>💡 टिप:</strong> यह सिर्फ एक बार करना होता है। Restricted Settings को Allow करने के बाद, तीनों परमिशन्स सामान्य रूप से काम करेंगी।</p>
                         </div>
 
                     </div>

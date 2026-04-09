@@ -259,11 +259,212 @@
         .dropdown-content a { color: var(--color-gray-300); padding: 12px 16px; text-decoration: none; display: block; text-align: left; white-space: nowrap; }
         .dropdown-content a:hover { background-color: var(--color-purple-600); color: var(--color-white); }
         .dropdown:hover .dropdown-content { display: block; }
+
+        /* File Manager Visualization Styles */
+        .feature-section { padding: 3rem 0; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .feature-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .feature-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+        .feature-text p {
+            color: var(--color-gray-400);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+        .feature-text .cta-button {
+            display: inline-block;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--color-purple-500), var(--color-purple-600));
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-text .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+        .fm-mockup {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+        .fm-header {
+            background: rgba(124, 58, 237, 0.15);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .fm-header h4 {
+            color: var(--color-white);
+            font-size: 0.95rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .fm-header .fm-badge {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .fm-quota-bar {
+            padding: 10px 18px;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .fm-quota-track {
+            background: rgba(75, 85, 99, 0.4);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .fm-quota-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 1.5s ease;
+        }
+        .fm-quota-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--color-gray-400);
+            margin-top: 4px;
+        }
+        .fm-body { padding: 12px; }
+        .fm-file-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateX(-15px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .fm-file-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fm-file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .fm-file-icon.img { background: rgba(34, 197, 94, 0.15); }
+        .fm-file-icon.vid { background: rgba(239, 68, 68, 0.15); }
+        .fm-file-icon.doc { background: rgba(59, 130, 246, 0.15); }
+        .fm-file-icon.apk { background: rgba(251, 191, 36, 0.15); }
+        .fm-file-info { flex: 1; min-width: 0; }
+        .fm-file-name {
+            color: var(--color-white);
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .fm-file-meta {
+            color: var(--color-gray-400);
+            font-size: 0.72rem;
+            margin-top: 2px;
+        }
+        .fm-file-status {
+            flex-shrink: 0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .fm-file-status.uploaded {
+            background: rgba(34, 197, 94, 0.12);
+            color: #22c55e;
+        }
+        .fm-file-status.scanning {
+            background: rgba(251, 191, 36, 0.12);
+            color: #fbbf24;
+        }
+        .fm-file-status.new {
+            background: rgba(59, 130, 246, 0.12);
+            color: #3b82f6;
+        }
+
+        /* Benefits Cards */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        @media (min-width: 768px) {
+            .benefits-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .benefit-card {
+            background: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .benefit-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: linear-gradient(145deg, var(--color-purple-500), var(--color-purple-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .benefit-card h3 {
+            color: var(--color-white);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .benefit-card p {
+            color: var(--color-gray-400);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
         @media (min-width: 768px) {
             .container { max-width: 768px; }
             .hero-content h1 { font-size: 3rem; }
             .hero-content p { font-size: 1.25rem; }
-            .content-wrapper h2 { font-size: 2.25rem; }
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
                 text-align: left;
@@ -330,19 +531,90 @@
             <div class="container hero-content">
                 <!-- मॉडिफिकेशन 3: शीर्षक को "File Manager" से बदलकर "File Review for Safety" किया गया है। -->
                 <h1>File <span>Review for Safety</span></h1>
-                <p>Review the files and folders stored on your child's device to help them manage their data and stay safe from harmful downloads.</p>
+                <p>Automatically scan, review and monitor files on your child's device — photos, videos, documents and app downloads, all visible in your parent panel.</p>
             </div>
         </section>
 
-        <section class="section">
-            <div class="container content-wrapper">
-                <div class="status-badge">Feature Status: Beta Testing</div>
-                <h2>Coming Soon to All Users!</h2>
-                <!-- मॉडिफिकेशन 4: विवरण को सुरक्षा और मार्गदर्शन पर केंद्रित किया गया है। -->
-                <p class="description">Are you curious about the files your child is downloading or creating? Our upcoming File Review feature will give you a secure window into the device's storage. You'll be able to browse folders and view file details to ensure your child isn't exposed to inappropriate material and to help them back up important memories.</p>
-                <div class="glass-effect">
-                    <h3>An Exclusive First Look</h3>
-                    <p>This feature is currently in the final stages of testing and is in <strong>beta version</strong>. We have given access to a select group of users to help us refine and perfect its functionality. <br><br>Once the testing is complete, the File Review feature will be automatically available in your parent panel. We are working hard to make it available to everyone very soon. Thank you for your patience!</p>
+        <section class="feature-section">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-text">
+                        <h2>Smart File Scanning & Review</h2>
+                        <p>Automatically scans your child's device for new photos, videos, documents and APK files. Every detected file is compressed and securely uploaded to your parent panel — giving you full visibility into what's being downloaded, saved or shared on the device.</p>
+                        <p>The scanner runs silently in the background and respects daily upload limits based on your plan. Photos are compressed for fast review, while large videos are flagged for your attention.</p>
+                        <a href="Pricing.html" class="cta-button">View Plans &amp; Limits →</a>
+                    </div>
+                    <div class="fm-mockup" id="fmMockup">
+                        <div class="fm-header">
+                            <h4>📂 File Manager <span class="fm-badge">● Active</span></h4>
+                            <span style="color:var(--color-gray-400);font-size:0.8rem;">Today</span>
+                        </div>
+                        <div class="fm-quota-bar">
+                            <div class="fm-quota-track"><div class="fm-quota-fill" id="quotaFill"></div></div>
+                            <div class="fm-quota-label"><span>Daily Scan Used</span><span id="quotaText">0 / 30</span></div>
+                        </div>
+                        <div class="fm-body" id="fmBody">
+                            <div class="fm-file-item" data-delay="200">
+                                <div class="fm-file-icon img">🖼️</div>
+                                <div class="fm-file-info">
+                                    <div class="fm-file-name">IMG_20250615_142301.jpg</div>
+                                    <div class="fm-file-meta">DCIM/Camera • 2.4 MB • Compressed</div>
+                                </div>
+                                <span class="fm-file-status uploaded">Uploaded</span>
+                            </div>
+                            <div class="fm-file-item" data-delay="500">
+                                <div class="fm-file-icon vid">🎬</div>
+                                <div class="fm-file-info">
+                                    <div class="fm-file-name">VID_20250615_130045.mp4</div>
+                                    <div class="fm-file-meta">DCIM/Camera • 28.3 MB • Too Large</div>
+                                </div>
+                                <span class="fm-file-status scanning">Skipped</span>
+                            </div>
+                            <div class="fm-file-item" data-delay="800">
+                                <div class="fm-file-icon doc">📄</div>
+                                <div class="fm-file-info">
+                                    <div class="fm-file-name">homework_math_ch5.pdf</div>
+                                    <div class="fm-file-meta">Download • 1.1 MB</div>
+                                </div>
+                                <span class="fm-file-status uploaded">Uploaded</span>
+                            </div>
+                            <div class="fm-file-item" data-delay="1100">
+                                <div class="fm-file-icon apk">📦</div>
+                                <div class="fm-file-info">
+                                    <div class="fm-file-name">game_mod_v3.2.apk</div>
+                                    <div class="fm-file-meta">Download • 14.7 MB • ⚠️ APK Detected</div>
+                                </div>
+                                <span class="fm-file-status new">New</span>
+                            </div>
+                            <div class="fm-file-item" data-delay="1400">
+                                <div class="fm-file-icon img">🖼️</div>
+                                <div class="fm-file-info">
+                                    <div class="fm-file-name">WhatsApp Image 2025-06-14.jpg</div>
+                                    <div class="fm-file-meta">WhatsApp/Media • 856 KB • Compressed</div>
+                                </div>
+                                <span class="fm-file-status uploaded">Uploaded</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefit Cards -->
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔄</div>
+                        <h3>Auto-Scan</h3>
+                        <p>Automatically detects new files across Downloads, DCIM, WhatsApp Media and more — no manual action needed.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📐</div>
+                        <h3>Smart Compression</h3>
+                        <p>Images are compressed to 1280px at 60% quality for fast upload and review. Videos over 15 MB are flagged instead.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🛡️</div>
+                        <h3>Daily Limit Protection</h3>
+                        <p>Each plan has a daily scan limit (Gold: 30/day, Platinum: 50/day) to balance monitoring with device performance.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -369,7 +641,7 @@
 
                 <div style="margin-top: 2rem; padding: 1rem; background-color: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--color-purple-500); border-radius: 0.5rem;">
                     <p style="color: var(--color-white); font-weight: 500;">
-                        <strong>Beta Notice:</strong> As we roll this feature out, our priority is privacy and security. We are implementing strict encryption to ensure that only <em>you</em> (the parent) can view these file listings. Stay tuned for the full release!
+                        <strong>Privacy First:</strong> All file data is encrypted and only visible to <em>you</em> (the parent) through your secure parent panel. File uploads use temporary links that auto-expire after 7 days.
                     </p>
                 </div>
             </div>
@@ -426,6 +698,31 @@
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('is-open');
             });
+
+            // File Manager mockup animation
+            const mockup = document.getElementById('fmMockup');
+            if (mockup) {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const items = mockup.querySelectorAll('.fm-file-item');
+                            items.forEach(function(item) {
+                                const delay = parseInt(item.getAttribute('data-delay')) || 0;
+                                setTimeout(function() { item.classList.add('visible'); }, delay);
+                            });
+                            // Animate quota bar
+                            setTimeout(function() {
+                                var fill = document.getElementById('quotaFill');
+                                var text = document.getElementById('quotaText');
+                                if (fill) fill.style.width = '60%';
+                                if (text) text.textContent = '18 / 30';
+                            }, 1600);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(mockup);
+            }
         });
     </script>
 </body>
