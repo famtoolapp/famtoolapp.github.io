@@ -29,7 +29,7 @@
         try {
             // Fetch version.json with a timestamp to bypass browser cache
             // This forces the browser to specificially ask GitHub: "What is the file right now?"
-            const response = await fetch(`version.json?t=${new Date().getTime()}`);
+            const response = await fetch(`version.json?t=${new Date().getTime()}`, { cache: 'no-store' });
             
             if (!response.ok) {
                 console.warn("Version Check: Could not fetch version.json");
