@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
     <link rel="apple-touch-icon" href="images/favicon.png">
 
-    <link rel="stylesheet" href="style.css?v=70">
+    <link rel="stylesheet" href="style.css?v=80">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
@@ -240,10 +240,12 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(10, 10, 15, 0.88);
+            backdrop-filter: blur(8px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
+            padding: 20px;
             animation: renewalFadeIn 0.3s ease;
         }
         #renewal-popup-overlay.visible { display: flex; }
@@ -252,109 +254,140 @@
             to { opacity: 1; }
         }
         @keyframes renewalSlideIn {
-            from { transform: translateY(-30px) scale(0.95); opacity: 0; }
-            to { transform: translateY(0) scale(1); opacity: 1; }
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         .renewal-popup-box {
-            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            background: #1e293b;
+            border: 1px solid rgba(251, 191, 36, 0.25);
             border-radius: 16px;
             width: 90%;
-            max-width: 440px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
-            overflow: hidden;
+            max-width: 400px;
+            padding: 22px 20px;
+            box-shadow: 0 4px 30px rgba(251, 191, 36, 0.06);
             animation: renewalSlideIn 0.4s ease;
         }
         .renewal-popup-header {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            padding: 22px 24px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
         }
         .renewal-popup-header h3 {
             margin: 0;
-            color: white;
-            font-size: 1.2rem;
+            color: #fbbf24;
+            font-size: 1rem;
+            font-weight: 700;
         }
         .renewal-popup-header .renewal-icon {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 8px;
+            width: 44px;
+            height: 44px;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
         .renewal-popup-body {
-            padding: 28px 24px;
-            text-align: center;
+            padding: 0;
         }
         .renewal-popup-body .renewal-message {
-            color: #ccc;
-            font-size: 0.95rem;
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.12);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: #cbd5e1;
+            font-size: 0.82rem;
             line-height: 1.6;
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
         .renewal-popup-body .renewal-date-box {
-            background: rgba(231,76,60,0.12);
-            border: 1px solid rgba(231,76,60,0.3);
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.12);
             border-radius: 10px;
-            padding: 14px;
-            margin-bottom: 22px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .renewal-date-box .date-label {
-            font-size: 0.75rem;
-            color: #999;
+            font-size: 0.72rem;
+            color: #94a3b8;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         .renewal-date-box .date-value {
-            font-size: 1.4rem;
-            color: #e74c3c;
-            font-weight: bold;
-            margin-top: 4px;
+            font-size: 1rem;
+            color: #fbbf24;
+            font-weight: 700;
+            margin-top: 2px;
         }
         .renewal-date-box .plan-badge {
             display: inline-block;
-            margin-top: 8px;
-            padding: 3px 14px;
+            margin-left: auto;
+            padding: 3px 10px;
             border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
+            font-size: 0.65rem;
+            font-weight: 700;
             color: white;
+            background: rgba(251, 191, 36, 0.2);
         }
         .renewal-popup-body .renewal-warning {
-            color: #999;
-            font-size: 0.82rem;
-            margin-bottom: 0;
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.15);
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: #c8b080;
+            font-size: 0.76rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            text-align: right;
+            direction: rtl;
         }
         .renewal-popup-footer {
             display: flex;
-            gap: 10px;
-            padding: 0 24px 24px;
+            gap: 8px;
         }
         .renewal-popup-footer .btn-renew {
             flex: 1;
-            padding: 13px;
+            padding: 10px 14px;
             border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: bold;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
             cursor: pointer;
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            transition: transform 0.2s;
+            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+            transition: all 0.2s;
         }
-        .renewal-popup-footer .btn-renew:hover { transform: scale(1.03); }
+        .renewal-popup-footer .btn-renew:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.45);
+        }
         .renewal-popup-footer .btn-later {
-            padding: 13px 20px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 10px;
-            font-size: 0.9rem;
+            padding: 10px 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
             cursor: pointer;
-            background: transparent;
-            color: #999;
-            transition: background 0.2s;
+            background: rgba(255,255,255,0.05);
+            color: #94a3b8;
+            transition: all 0.2s;
         }
-        .renewal-popup-footer .btn-later:hover { background: rgba(255,255,255,0.05); }
+        .renewal-popup-footer .btn-later:hover {
+            border-color: rgba(255,255,255,0.2);
+            color: #e2e8f0;
+            background: rgba(255,255,255,0.08);
+        }
         @media (max-width: 480px) {
-            .renewal-popup-box { width: 95%; }
-            .renewal-popup-header h3 { font-size: 1rem; }
-            .renewal-date-box .date-value { font-size: 1.1rem; }
+            .renewal-popup-box { width: 100%; max-width: 100%; }
+            .renewal-popup-header h3 { font-size: 0.92rem; }
+            .renewal-popup-footer { flex-direction: column; }
         }
     </style>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -1063,27 +1096,29 @@
     <div id="renewal-popup-overlay">
         <div class="renewal-popup-box">
             <div class="renewal-popup-header">
-                <span class="renewal-icon">⏰</span>
-                <h3>Plan Expiring Soon!</h3>
+                <span class="renewal-icon">🔔</span>
+                <h3>Subscription Expiring Soon</h3>
             </div>
             <div class="renewal-popup-body">
                 <p class="renewal-message" id="renewal-popup-message">Your plan is expiring soon. Renew now to continue enjoying all premium features without interruption.</p>
                 <div class="renewal-date-box">
-                    <div class="date-label">Expiry Date</div>
-                    <div class="date-value" id="renewal-popup-date">--</div>
+                    <div>
+                        <div class="date-label">Expiry Date</div>
+                        <div class="date-value" id="renewal-popup-date">--</div>
+                    </div>
                     <span class="plan-badge" id="renewal-popup-plan-badge">Plan</span>
                 </div>
-                <p class="renewal-warning">After expiry, your account will revert to Free plan and features will be locked.</p>
+                <p class="renewal-warning">आपका प्लान जल्द ही समाप्त हो रहा है। सभी प्रीमियम सुविधाएं जारी रखने के लिए अभी रिन्यू करें।</p>
             </div>
             <div class="renewal-popup-footer">
-                <button class="btn-renew" id="renewal-popup-renew-btn">🔄 Renew Now</button>
-                <button class="btn-later" id="renewal-popup-later-btn">Later ✕</button>
+                <button class="btn-renew" id="renewal-popup-renew-btn">✨ Renew Now</button>
+                <button class="btn-later" id="renewal-popup-later-btn">Later</button>
             </div>
         </div>
     </div>
 
-    <script src="script.js?v=70" type="module"></script>
-    <script src="version-check.js?v=70" type="module"></script>
+    <script src="script.js?v=80" type="module"></script>
+    <script src="version-check.js?v=80" type="module"></script>
 </body>
 </html>
 
