@@ -771,8 +771,8 @@
         <div class="duration-toggle" style="margin-top: 2rem;">
             <button class="duration-btn active" data-duration="1">1 Month</button>
             <button class="duration-btn" data-duration="3">3 Months <span class="save-badge">Save 5%</span></button>
-            <button class="duration-btn" data-duration="6">6 Months <span class="save-badge">Save 10%</span></button>
-            <button class="duration-btn" data-duration="12">1 Year <span class="save-badge">Save 16%</span></button>
+            <button class="duration-btn" data-duration="6">6 Months <span class="save-badge">Save 5%</span></button>
+            <button class="duration-btn" data-duration="12">1 Year <span class="save-badge">Save 5%</span></button>
         </div>
     </div>
 
@@ -807,7 +807,7 @@
 
             <!-- Basic Plan -->
             <div class="price-card"
-                data-prices='{"1":{"price":"299","period":"/10 days","total":""},"3":{"price":"850","period":"/3 mo","total":"₹283/mo"},"6":{"price":"1,600","period":"/6 mo","total":"₹267/mo"},"12":{"price":"3,000","period":"/yr","total":"₹250/mo"}}'>
+                data-prices='{"1":{"price":"299","period":"/10 days","total":""},"3":{"price":"850","period":"/30 days (3 cycles)","total":""},"6":{"price":"1,700","period":"/60 days (6 cycles)","total":""},"12":{"price":"3,400","period":"/120 days (12 cycles)","total":""}}'>
                 <div class="plan-name">Basic Plan</div>
                 <div class="plan-price">&#8377;<span class="price-amount">299</span><span class="price-suffix">/10
                         days</span></div>
@@ -931,7 +931,7 @@
 
             <!-- Gold Plan -->
             <div class="price-card featured"
-                data-prices='{"1":{"price":"499","period":"/mo","total":""},"3":{"price":"1,400","period":"/3 mo","total":"₹467/mo"},"6":{"price":"2,700","period":"/6 mo","total":"₹450/mo"},"12":{"price":"5,000","period":"/yr","total":"₹417/mo"}}'>
+                data-prices='{"1":{"price":"499","period":"/mo","total":""},"3":{"price":"1,420","period":"/3 mo","total":"₹473/mo"},"6":{"price":"2,840","period":"/6 mo","total":"₹473/mo"},"12":{"price":"5,680","period":"/yr","total":"₹473/mo"}}'>
                 <div class="plan-name">Gold Plan</div>
                 <div class="plan-price">&#8377;<span class="price-amount">499</span><span
                         class="price-suffix">/mo</span></div>
@@ -1066,7 +1066,8 @@
 
             <!-- Platinum Plan -->
             <div class="price-card"
-                data-prices='{"1":{"price":"999","period":"/mo","total":""},"3":{"price":"2,850","period":"/3 mo","total":"₹950/mo"},"6":{"price":"5,400","period":"/6 mo","total":"₹900/mo"},"12":{"price":"11,000","period":"/yr","total":"₹917/mo"}}'>
+                data-prices='{"1":{"price":"999","period":"/mo","total":""},"3":{"price":"2,845","period":"/3 mo","total":"₹948/mo"},"6":{"price":"5,690","period":"/6 mo","total":"₹948/mo"},"12":{"price":"11,380","period":"/yr","total":"₹948/mo"}}'
+                data-devices='{"1":"1","3":"2","6":"3","12":"4"}'>
                 <div class="plan-name">Platinum</div>
                 <div class="plan-price">&#8377;<span class="price-amount">999</span><span
                         class="price-suffix">/mo</span></div>
@@ -1076,7 +1077,7 @@
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
                             <line x1="12" y1="18" x2="12.01" y2="18"></line>
-                        </svg> <b>3 Device Monitoring</b></li>
+                        </svg> <b class="device-count-text">1 Device Monitoring</b></li>
                     <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
                             <polyline points="20 6 9 17 4 12" />
@@ -1788,6 +1789,15 @@
                             if (periodEl) {
                                 periodEl.textContent = selected.total ? 'Effective: ' + selected.total : '';
                             }
+                        }
+
+                        // Dynamic device count (Platinum: 1M=1, 3M=2, 6M=3, 12M=4)
+                        const devicesAttr = card.getAttribute('data-devices');
+                        const devEl = card.querySelector('.device-count-text');
+                        if (devicesAttr && devEl) {
+                            const devices = JSON.parse(devicesAttr);
+                            const count = parseInt(devices[duration]) || 1;
+                            devEl.textContent = `${count} Device${count > 1 ? 's' : ''} Monitoring`;
                         }
                     });
                 });
